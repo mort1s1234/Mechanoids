@@ -50,7 +50,7 @@
 					</li>
 				</tools>
 				<killedLeavingsPlayerHostile>
-					<PsyfluxChip>1</PsyfluxChip>
+					<APM_PsyfluxChip>1</APM_PsyfluxChip>
 				</killedLeavingsPlayerHostile>
 		<race>
 					<body>APM_Celerus</body>
