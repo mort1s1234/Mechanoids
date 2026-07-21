@@ -88,8 +88,6 @@
 		</placeWorkers>
     </ThingDef>
 
-
-
 	<ThingDef ParentName="APM_MechCommandCasket_Base">
 		<defName>APM_MechCommandCasket</defName>
 		<label>mech command casket</label>
@@ -238,10 +236,6 @@
 				<textpath_Shield>UI/Gizmos/APM_ShieldMech</textpath_Shield>
 				<textpath_ShieldCooldown>UI/Gizmos/APM_ShieldMechCooldown</textpath_ShieldCooldown>
 				<labelShort>Casket</labelShort>
-				
-				<!-- everything above has the default values -->
-				<HediffToGive>APM_MechCommandCasketBoost</HediffToGive>
-				<TicksToCheckForHediff>60</TicksToCheckForHediff>
 			</li>
 		</comps>
 		<placeWorkers>
