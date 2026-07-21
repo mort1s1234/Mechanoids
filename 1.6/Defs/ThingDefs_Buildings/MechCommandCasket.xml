@@ -83,6 +83,11 @@
 		<comps>
 			<li Class="CompProperties_Flickable" />
 			<li Class="CompProperties_Breakdownable" />
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>APM_CasketBandwidthAmplifier</li>
+				</linkableFacilities>
+			</li>			
 		</comps>
 		<placeWorkers>
 			<li>PlaceWorker_PreventInteractionSpotOverlap</li>
