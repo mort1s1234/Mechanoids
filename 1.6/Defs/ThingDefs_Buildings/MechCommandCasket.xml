@@ -20,6 +20,9 @@
 		<building>
 			<paintable>false</paintable>
 			<destroySound>BuildingDestroyed_Metal_Big</destroySound>
+			<forcedCostLeavings>
+				<li>APM_PsionicChip</li>
+			</forcedCostLeavings>
 			<buildingTags>
 				<li>Biotech</li>
 			</buildingTags>
