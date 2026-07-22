@@ -36,8 +36,10 @@ namespace ApexMechanoids
         public static ThingDef APM_Projectile_Hook;
         public static ThingDef APM_Mote_HookRope;
         public static StatDef APM_GestationFactor;
+        public static StatDef APM_CasketBandwidth;
         public static ThingDef APM_MechCommandCasket;
-		
+        public static HediffDef APM_MechCommandCasketBoost;
+
         public static HediffDef RemoteRepairerImplant;  //from Biotech
         public static HediffDef RemoteShielderImplant;  //from Biotech
         public static HediffDef APM_Hediff_Devoured;
@@ -61,6 +63,7 @@ namespace ApexMechanoids
         public static JobDef APM_SirenChatWithPrisoner;
         public static JobDef APM_FrostivusUnloadFoodToStorage;
         public static JobDef APM_FrostivusManualUnloadFood;
+        public static JobDef APM_RavagerArtilleryAttack;
     }
     [DefOf]
     public static class ApexEffecterDefsOf

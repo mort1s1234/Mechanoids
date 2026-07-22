@@ -224,31 +224,31 @@
 		</subSounds>
 	</SoundDef>
 
-	<SoundDef>
-		<defName>APM_GazerBeamLoop</defName>
-		<sustain>false</sustain>
-		<priorityMode>PrioritizeExisting</priorityMode>
-		<context>MapOnly</context>
-		<maxVoices>4</maxVoices>
-		<maxSimultaneous>2</maxSimultaneous>
-		<subSounds>
-			<li>
-				<grains>
-					<li Class="AudioGrain_Clip">
-						<clipPath>GazerPowerBeam</clipPath>
-					</li>
-				</grains>
-				<volumeRange>
-					<min>50</min>
-					<max>60</max>
-				</volumeRange>
-				<pitchRange>
-					<min>1.1</min>
-					<max>1.2</max>
-				</pitchRange>
-			</li>
-		</subSounds>
-	</SoundDef>
+<!-- GAZER LASER WEAPON -->
+    <SoundDef>
+        <defName>APM_GazerWeapon</defName>
+        <context>MapOnly</context>
+        <eventNames />
+        <maxVoices>4</maxVoices>
+        <maxSimultaneous>2</maxSimultaneous>
+        <subSounds>
+            <li>
+                <grains>
+                    <li Class="AudioGrain_Clip">
+                        <clipPath>GazerWarmUp</clipPath>
+                    </li>
+                </grains>
+                <volumeRange>
+                    <min>45</min>
+                    <max>52</max>
+                </volumeRange>
+                <pitchRange>
+                    <min>0.85</min>
+                    <max>1.05</max>
+                </pitchRange>
+            </li>
+        </subSounds>
+    </SoundDef>
 
 	<!-- Sun Ray Sounds -->
 	<SoundDef>
@@ -381,7 +381,7 @@
 
 	<!-- Starfall Ability Sound -->
 	<SoundDef>
-		<defName>Starfall</defName>
+		<defName>APM_Starfall</defName>
 		<context>MapOnly</context>
 		<eventNames />
 		<maxVoices>4</maxVoices>
