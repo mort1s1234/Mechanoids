@@ -351,7 +351,7 @@
 	<AbilityDef>
 		<defName>SeveringEdge</defName>
 		<label>severing edge</label>
-		<description>Utilizing the innate psychic channeling qualities of its blade, the Terminus releases a sweeping blade of energy in front of itself, cutting anything in the area.</description>
+		<description>Utilizing the innate psychic channeling qualities of its blade, the caster releases a sweeping blade of energy in front of itself, cutting anything in the area.</description>
 		<iconPath>UI/SeveringEdge</iconPath>
 		<cooldownTicksRange>800</cooldownTicksRange>
 		<aiCanUse>true</aiCanUse>

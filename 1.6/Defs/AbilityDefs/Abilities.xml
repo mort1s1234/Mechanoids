@@ -50,7 +50,7 @@
 		<showPsycastEffects>False</showPsycastEffects>
 		<displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
 		<disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
-		<warmupStartSound MayRequire="Ludeon.RimWorld.Ideology">CombatCommand_Warmup</warmupStartSound>
+		<warmupStartSound>DynamoPowerPlant_Warmup</warmupStartSound>
 		<casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
 		<verbProperties>
 			<verbClass>Verb_CastAbility</verbClass>
@@ -491,7 +491,7 @@
 		<comps>
 			<li Class="ApexMechanoids.CompProperties_Starfall">
 				<carrierProjectileDef>APM_StarfallCarrier</carrierProjectileDef>
-				<launchSoundDefName>Starfall</launchSoundDefName>
+				<launchSoundDefName>APM_Starfall</launchSoundDefName>
 			</li>
 		</comps>
 	</AbilityDef>
@@ -617,7 +617,7 @@
 		<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
 		<disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
 		<showPsycastEffects>false</showPsycastEffects>
-		<warmupStartSound MayRequire="Ludeon.RimWorld.Ideology">CombatCommand_Warmup</warmupStartSound>
+		<warmupStartSound>GazerEMP_Warmup</warmupStartSound>
 		<verbProperties>
 			<verbClass>Verb_CastAbility</verbClass>
 			<warmupTime>3.0</warmupTime>
