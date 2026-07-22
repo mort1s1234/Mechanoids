@@ -3,7 +3,7 @@
 
 	<AbilityDef>
 		<defName>APM_Absorb</defName>
-		<label>Recycle Biomess</label>
+		<label>Recycle Biomass</label>
 		<jobDef>APM_Absorb</jobDef>
 		<description>Grind up target corpse, and slowly process them into chem fuel.</description>
 		<iconPath>UI/Absorb</iconPath>
