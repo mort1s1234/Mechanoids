@@ -51,13 +51,6 @@
 				<cooldownTime>2.6</cooldownTime>
 			</li>
 		</tools>
-		<comps>
-			<li Class="ApexMechanoids.CompProperties_AbilityGranter">
-				<abilities>
-					<li>APM_Mech_Duel</li>
-				</abilities>
-			</li>
-		</comps>
 		<modExtensions>
 			<li Class="VEF.Things.ThingDefExtension" MayRequire="OskarPotocki.VanillaFactionsExpanded.Core">
 				<usableWithShields>true</usableWithShields>

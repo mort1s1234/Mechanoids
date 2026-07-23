@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
-
-
 	<!-- MechCommandCasket Parent -->
-	<ThingDef Name="APM_MechCommandCasket_Base" ParentName="BuildingBase" Abstract="True">
+	<ThingDef Name="APM_MechCommandCasket_Base"
+	          ParentName="BuildingBase"
+	          Abstract="True">
 		<tickerType>Normal</tickerType>
 		<thingClass>ApexMechanoids.Building_MechCommandCasket</thingClass>
 		<drawerType>MapMeshAndRealTime</drawerType>
@@ -55,16 +55,17 @@
 						<li>Chocolate</li>
 					</disallowedThingDefs>
 				</filter>
-			  </defaultStorageSettings>
+			</defaultStorageSettings>
 		</building>
 		<inspectorTabs>
 			<li>ITab_BiosculpterNutritionStorage</li>
 		</inspectorTabs>
+		<containedPawnsSelectable>true</containedPawnsSelectable>
 		<designationCategory>Biotech</designationCategory>
 		<statBases>
 			<MaxHitPoints>250</MaxHitPoints>
-			<WorkToBuild>2200</WorkToBuild>
-			<Mass>20</Mass>
+			<WorkToBuild>3200</WorkToBuild>
+			<Mass>100</Mass>
 			<Flammability>0.6</Flammability>
 		</statBases>
 		<size>(3,2)</size>
@@ -83,14 +84,18 @@
 		</costList>
 		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
 		<comps>
-			<li Class="CompProperties_Flickable" />
-			<li Class="CompProperties_Breakdownable" />
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Breakdownable"/>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>APM_CasketBandwidthAmplifier</li>
+				</linkableFacilities>
+			</li>
 		</comps>
 		<placeWorkers>
 			<li>PlaceWorker_PreventInteractionSpotOverlap</li>
 		</placeWorkers>
-    </ThingDef>
-
+	</ThingDef>
 	<ThingDef ParentName="APM_MechCommandCasket_Base">
 		<defName>APM_MechCommandCasket</defName>
 		<label>mech command casket</label>
@@ -121,20 +126,17 @@
 		</costList>
 		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
 		<comps>
-			<li Class="CompProperties_Flickable" />
-			<li Class="CompProperties_Breakdownable" />
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Breakdownable"/>
 		</comps>
 		<placeWorkers>
 			<li>PlaceWorker_PreventInteractionSpotOverlap</li>
 		</placeWorkers>
-    </ThingDef>
-
-
-
+	</ThingDef>
 	<ThingDef ParentName="APM_MechCommandCasket_Base">
 		<defName>APM_MechCommandCasket</defName>
 		<label>mech command casket</label>
-		<description>The mech command casket is a fusion of mechlink and cryptosleep casket technology, allowing the enclosed user to control their mechanoids from the relative safety of the casket. The signal boosting capabilities of this machine allow the mechanitor to control their mechs even when world tiles away from them.</description>
+		<description>The mech command casket is a fusion of mechlink and biosculpter casket technology, allowing the enclosed user to control their mechanoids from the relative safety of the casket. The signal boosting capabilities of this machine allow the mechanitor to control their mechs even when world tiles away from them.</description>
 		<graphicData>
 			<texPath>Things/Building/MechCommandCasket/MechCommandCasket</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
@@ -147,8 +149,8 @@
 		</graphicData>
 		<statBases>
 			<MaxHitPoints>250</MaxHitPoints>
-			<WorkToBuild>2200</WorkToBuild>
-			<Mass>20</Mass>
+			<WorkToBuild>3200</WorkToBuild>
+			<Mass>100</Mass>
 			<Flammability>0.6</Flammability>
 		</statBases>
 		<size>(3,2)</size>
@@ -158,12 +160,15 @@
 			<ComponentIndustrial>4</ComponentIndustrial>
 			<ComponentSpacer>6</ComponentSpacer>
 			<SubcoreHigh>1</SubcoreHigh>
+			<APM_PsionicChip>1</APM_PsionicChip>
 		</costList>
 		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
 		<researchPrerequisites>
 			<li>ApexMechtech</li>
 		</researchPrerequisites>
 		<comps>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_Power">
 				<compClass>CompPowerTrader</compClass>
 				<shortCircuitInRain>true</shortCircuitInRain>
@@ -172,9 +177,12 @@
 			</li>
 			<li Class="ApexMechanoids.CompProperties_RemoteMechCasketAbilities">
 				<actionspeed>1.0</actionspeed>
-				<repairExp>0.05</repairExp>		<!-- same as remote repair implant -->
-				<repairCostsEnergy>true</repairCostsEnergy>	<!-- same as remote repair implant -->
-				<Shieldcooldown>300</Shieldcooldown>	<!-- same as remote shield implant -->
+				<repairExp>0.05</repairExp>
+				<!-- same as remote repair implant -->
+				<repairCostsEnergy>true</repairCostsEnergy>
+				<!-- same as remote repair implant -->
+				<Shieldcooldown>300</Shieldcooldown>
+				<!-- same as remote shield implant -->
 				<textpath_Connect>UI/Gizmos/APM_ConnectToMech</textpath_Connect>
 				<textpath_Disconnect>UI/Gizmos/APM_DisconnectFromMech</textpath_Disconnect>
 				<textpath_Repair>UI/Gizmos/APM_Repair</textpath_Repair>
@@ -187,66 +195,71 @@
 			<li>PlaceWorker_PreventInteractionSpotOverlap</li>
 		</placeWorkers>
 	</ThingDef>
-
-
-	<ThingDef ParentName="APM_MechCommandCasket_Base">
-		<defName>APM_MechCommandCasketUpgraded</defName>
-		<label>mech command casket with bandwidth</label>
-		<description>The mech command casket is a fusion of mechlink and cryptosleep casket technology, allowing the enclosed user to control their mechanoids from the relative safety of the casket. The signal boosting capabilities of this machine allow the mechanitor to control their mechs even when world tiles away from them.</description>
+	<ThingDef ParentName="BuildingBase">
+		<defName>APM_CasketBandwidthAmplifier</defName>
+		<label>mech casket bandwidth amplifier</label>
+		<description>PLACEHOLDER DESCRIPTION! It increases the bandwidth of any mechanitor inside a command casket it is placed adjacent to.</description>
+		<tickerType>Long</tickerType>
 		<graphicData>
-			<texPath>Things/Building/MechCommandCasket/MechCommandCasket</texPath>
+			<texPath>Things/Building/GestatorAmplifier/Amplifier</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
-			<drawSize>(3,2)</drawSize>
+			<drawSize>(2,2)</drawSize>
 			<drawOffset>(0,0,0)</drawOffset>
 			<shadowData>
-				<volume>(2.70, 1, 1.70)</volume>
-				<offset>(0, 0, 0)</offset>
+				<volume>(1.65, 0.75, 1)</volume>
+				<offset>(0.15, 0, 0)</offset>
 			</shadowData>
 		</graphicData>
+		<thingCategories>
+			<li>BuildingsMisc</li>
+		</thingCategories>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<canOverlapZones>false</canOverlapZones>
+		<pathCost>42</pathCost>
+		<blockWind>true</blockWind>
+		<fillPercent>0.5</fillPercent>
+		<building>
+			<paintable>false</paintable>
+			<destroySound>BuildingDestroyed_Metal_Small</destroySound>
+			<buildingTags>
+				<li>Biotech</li>
+			</buildingTags>
+			<ai_chillDestination>false</ai_chillDestination>
+		</building>
+		<designationCategory>Biotech</designationCategory>
 		<statBases>
-			<MaxHitPoints>250</MaxHitPoints>
-			<WorkToBuild>2200</WorkToBuild>
-			<Mass>20</Mass>
-			<Flammability>0.6</Flammability>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>1000</WorkToBuild>
+			<Mass>70</Mass>
+			<Flammability>0.5</Flammability>
 		</statBases>
-		<size>(3,2)</size>
+		<size>(2,1)</size>
+		<rotatable>true</rotatable>
 		<costList>
-			<Steel>150</Steel>
-			<Plasteel>40</Plasteel>
-			<ComponentIndustrial>4</ComponentIndustrial>
-			<ComponentSpacer>6</ComponentSpacer>
-			<SubcoreHigh>1</SubcoreHigh>
+			<Steel>250</Steel>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<APM_OcularChip>1</APM_OcularChip>
 		</costList>
 		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
 		<researchPrerequisites>
-			<li>ApexMechtech</li>
+			<li>AdvancedMechtech</li>
 		</researchPrerequisites>
 		<comps>
-			<li Class="CompProperties_Power">
-				<compClass>CompPowerTrader</compClass>
-				<shortCircuitInRain>true</shortCircuitInRain>
-				<basePowerConsumption>1000</basePowerConsumption>
-				<idlePowerDraw>80</idlePowerDraw>
-			</li>
-			<li Class="ApexMechanoids.CompProperties_RemoteMechCasketAbilities">
-				<actionspeed>1.0</actionspeed>
-				<repairExp>0.05</repairExp>		<!-- same as remote repair implant -->
-				<repairCostsEnergy>true</repairCostsEnergy>	<!-- same as remote repair implant -->
-				<Shieldcooldown>300</Shieldcooldown>	<!-- same as remote shield implant -->
-				<textpath_Connect>UI/Gizmos/APM_ConnectToMech</textpath_Connect>
-				<textpath_Disconnect>UI/Gizmos/APM_DisconnectFromMech</textpath_Disconnect>
-				<textpath_Repair>UI/Gizmos/APM_Repair</textpath_Repair>
-				<textpath_Shield>UI/Gizmos/APM_ShieldMech</textpath_Shield>
-				<textpath_ShieldCooldown>UI/Gizmos/APM_ShieldMechCooldown</textpath_ShieldCooldown>
-				<labelShort>Casket</labelShort>
+			<li Class="CompProperties_Facility">
+				<statOffsets>
+					<APM_CasketBandwidth>6</APM_CasketBandwidth>
+				</statOffsets>
+				<maxSimultaneous>2</maxSimultaneous>
+				<mustBePlacedAdjacent>true</mustBePlacedAdjacent>
+				<!-- 2 is adjacent  -->
 			</li>
 		</comps>
 		<placeWorkers>
-			<li>PlaceWorker_PreventInteractionSpotOverlap</li>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
 		</placeWorkers>
 	</ThingDef>
-
-
 	<HediffDef>
 		<defName>APM_MechCommandCasketBoost</defName>
 		<label>mech command casket boost</label>
@@ -255,7 +268,8 @@
 		<defaultLabelColor>(0.52, 1, 0.95)</defaultLabelColor>
 		<comps>
 			<li Class="HediffCompProperties_Disappears">
-				<disappearsAfterTicks>90</disappearsAfterTicks>	<!-- so it gets removed when the pawn leaves -->
+				<disappearsAfterTicks>90</disappearsAfterTicks>
+				<!-- so it gets removed when the pawn leaves -->
 				<showRemainingTime>false</showRemainingTime>
 			</li>
 			<li Class="HediffCompProperties_DisappearsOnDeath"/>
@@ -275,7 +289,4 @@
 		</stages>
 		<isBad>false</isBad>
 	</HediffDef>
-
-
-
 </Defs>
