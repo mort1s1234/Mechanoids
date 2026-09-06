@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-	<ThingDef Name="APM_Mech_Lasher" ParentName="BaseMechanoidWalker">
+	<ThingDef ParentName="BaseMechanoidWalker">
 		<defName>APM_Mech_Lasher</defName>
 		<label>Lasher</label>
-		<description>Wielding a plasma charged whip, this mechanoid was designed to handle, tame and train animals. Its more unique role in a mechanoid task force has this lasher’s whip also function in short range combat, with it being able to strike out at foes, dealing EMP damage.\n\nThis mechanoid can strike out with its whip, dealing damage and electrifying anything within a short area around the whip.</description>
+		<description>Wielding a plasma charged whip, this mechanoid was originally engineered for heavy combat and destruction of enemy groups on the front lines as part of the core hive forces. However, mechanitors reconfigured its behavioral matrices to repurpose it for advanced animal handling, taming, and training. Beyond its agricultural utility, its primary combat role still utilizes this plasma whip in close-range skirmishes, allowing it to strike down foes and deal EMP damage with a chance to proc.</description>
 		<tools>
 			<li>
 				<label>left fist</label>
@@ -47,6 +47,22 @@
 			</mechEnabledWorkTypes>
 			<baseHealthScale>1.32</baseHealthScale>
 			<baseBodySize>1.5</baseBodySize>
+			<lifeStageAges Inherit="False">
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Tesseron_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Tesseron_Death</soundDeath>
+					<soundCall>Pawn_Mech_Tesseron_Call</soundCall>
+				</li>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Tesseron_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Tesseron_Death</soundDeath>
+					<soundCall>Pawn_Mech_Tesseron_Call</soundCall>
+				</li>
+			</lifeStageAges>
 			<detritusLeavings>
 				<li>
 					<def>ChunkMechanoidSlag</def>
@@ -81,7 +97,7 @@
 		<race>APM_Mech_Lasher</race>
 		<combatPower>180</combatPower>
 		<lifeStages>
-			<li MayRequire="Ludeon.RimWorld.Biotech">
+			<li>
 				<bodyGraphicData>
 					<texPath>Things/Pawn/Mechanoid/Lasher/Lasher</texPath>
 					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Lasher/Mech_Lasher</maskPath>

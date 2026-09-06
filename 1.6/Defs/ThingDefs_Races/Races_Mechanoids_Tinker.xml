@@ -61,6 +61,22 @@
 			<mechEnabledWorkTypes>
 				<li>APM_TinkerRepair</li>
 			</mechEnabledWorkTypes>
+			<lifeStageAges Inherit="False">
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Scorcher_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Scorcher_Death</soundDeath>
+					<soundCall>Pawn_Mech_Scorcher_Call</soundCall>
+				</li>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Scorcher_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Scorcher_Death</soundDeath>
+					<soundCall>Pawn_Mech_Scorcher_Call</soundCall>
+				</li>
+			</lifeStageAges>
 			<detritusLeavings>
 				<li>
 					<def>ChunkMechanoidSlag</def>

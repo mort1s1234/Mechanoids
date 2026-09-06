@@ -61,7 +61,7 @@
 			-->
 			<li Class="ApexMechanoids.DefModExtension_MechClusterExtra">
 				<minTotalPoints>500</minTotalPoints>
-				<maxPerCluster>1</maxPerCluster>
+				<maxPerCluster>2</maxPerCluster>
 				<spawnChanceByTotalPoints>
 					<points>
 						<li>(500, 0.08)</li>

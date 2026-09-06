@@ -59,6 +59,22 @@
 				<li>APM_SirenWarden</li>
 			</mechEnabledWorkTypes>
 			<mechFixedSkillLevel>10</mechFixedSkillLevel>
+			<lifeStageAges Inherit="False">
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Warqueen_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Warqueen_Death</soundDeath>
+					<soundCall>Pawn_Mech_Warqueen_Call</soundCall>
+				</li>
+				<li MayRequire="Ludeon.RimWorld.Biotech">
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Warqueen_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Warqueen_Death</soundDeath>
+					<soundCall>Pawn_Mech_Warqueen_Call</soundCall>
+				</li>
+			</lifeStageAges>
 			<detritusLeavings>
 				<li>
 					<def>ChunkMechanoidSlag</def>
@@ -138,7 +154,7 @@
 		<label>siren's song</label>
 		<description>The Siren emits a pleasant tune that lifts the spirits of nearby organic allies and briefly helps them recover recreation.</description>
 		<iconPath>UI/SirenSong</iconPath>
-		<cooldownTicksRange>900000</cooldownTicksRange>
+		<cooldownTicksRange>600000</cooldownTicksRange>
 		<!-- 15 days -->
 		<targetRequired>false</targetRequired>
 		<hostile>false</hostile>
@@ -168,7 +184,7 @@
 			</li>
 			<li Class="ApexMechanoids.CompProperties_NeedOffset">
 				<needDef>Joy</needDef>
-				<offset>0.1</offset>
+				<offset>0.2</offset>
 			</li>
 			<li Class="ApexMechanoids.CompProperties_SpawnSirenSongNotes">
 				<fleckDef>APM_SirenSongNote</fleckDef>

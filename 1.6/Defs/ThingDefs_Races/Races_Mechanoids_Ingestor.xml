@@ -81,7 +81,7 @@
 		<race>APM_Mech_Ingestor</race>
 		<combatPower>320</combatPower>
 		<lifeStages>
-			<li MayRequire="Ludeon.RimWorld.Biotech">
+			<li>
 				<bodyGraphicData>
 					<texPath>Things/Pawn/Mechanoid/Ingestor/Ingestor</texPath>
 					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Ingestor/Mech_Ingestor</maskPath>

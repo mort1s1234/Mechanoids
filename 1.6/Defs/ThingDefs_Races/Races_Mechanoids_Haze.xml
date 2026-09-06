@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-	<ThingDef ParentName="BaseMechanoid">
+	<ThingDef ParentName="BaseMechanoidWalker">
 		<defName>APM_Mech_Haze</defName>
 		<label>Haze</label>
 		<description>A mechanoid experiment into organic area denial, the haze can pump tox gas into the area around it. Its shots are especially lethal, inflicting toxic buildup upon hit. The intellect of the mechhive knows no bounds, even repurposing its waste products to further its goals.</description>
@@ -56,26 +56,26 @@
 			<thinkTreeMain>Mechanoid</thinkTreeMain>
 			<intelligence>ToolUser</intelligence>
 			<mechWeightClass>Light</mechWeightClass>
-			<lifeStageAges>
-				<li>
-					<def>MechanoidFullyFormed</def>
-					<minAge>0</minAge>
-					<soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
-					<soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
-					<soundCall>Pawn_Mech_Centipede_Call</soundCall>
-				</li>
-				<li MayRequire="Ludeon.RimWorld.Biotech">
-					<def>MechanoidFullyFormed</def>
-					<minAge>100</minAge>
-					<soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
-					<soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
-					<soundCall>Pawn_Mech_Centipede_Call</soundCall>
-				</li>
-			</lifeStageAges>
 			<soundCallIntervalRange>2500~3500</soundCallIntervalRange>
 			<soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
 			<soundMeleeHitBuilding>Pawn_Melee_Punch_HitBuilding_Generic</soundMeleeHitBuilding>
 			<soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
+						<lifeStageAges Inherit="False">
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Scorcher_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Scorcher_Death</soundDeath>
+					<soundCall>Pawn_Mech_Scorcher_Call</soundCall>
+				</li>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Scorcher_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Scorcher_Death</soundDeath>
+					<soundCall>Pawn_Mech_Scorcher_Call</soundCall>
+				</li>
+			</lifeStageAges>
 		</race>
 		<comps>
 			<li Class="ApexMechanoids.CompProperties_HazeToxicMistController">
