@@ -20,6 +20,7 @@
 				<disappearsAfterTicks>15000</disappearsAfterTicks>
 				<showRemainingTime>true</showRemainingTime>
 			</li>
+			<li Class="HediffCompProperties_DisappearsOnDeath" />
 			<li Class="ApexMechanoids.HediffCompProperties_ApplyHediffOnRemove">
 				<hediffDef>APM_Hediff_DisciplineBurnout</hediffDef>
 				<mechHediffDef>APM_Hediff_DisciplineBurnout_Mech</mechHediffDef>
