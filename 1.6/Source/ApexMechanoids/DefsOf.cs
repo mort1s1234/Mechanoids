@@ -86,6 +86,7 @@ namespace ApexMechanoids
         public static JobDef APM_CastPulseJump;
         public static JobDef APM_HaulToToxicPurifier;
         public static JobDef APM_RepairMech;
+        public static JobDef APM_ProjectDefenceMatrix;
 
 	}
     [DefOf]

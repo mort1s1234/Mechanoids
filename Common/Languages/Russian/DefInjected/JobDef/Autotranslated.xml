@@ -26,5 +26,6 @@
   <APM_SirenConvertPrisoner.reportString>поет, обращая TargetA.</APM_SirenConvertPrisoner.reportString>
   <APM_SirenSuppressSlave.reportString>поет, подавляя TargetA.</APM_SirenSuppressSlave.reportString>
   <APM_SirenLureChannel.reportString>поет.</APM_SirenLureChannel.reportString>
+  <APM_ProjectDefenceMatrix.reportString>удерживает щит на TargetA.</APM_ProjectDefenceMatrix.reportString>
 
 </LanguageData>

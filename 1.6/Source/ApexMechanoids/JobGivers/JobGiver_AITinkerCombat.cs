@@ -34,6 +34,7 @@ namespace ApexMechanoids
         public int shieldRecentAttackTargetTicks = 300;
         public int shieldRecentRangedHarmTicks = 2500;
         public int shieldTargetLockTicks = 500;
+        public int shieldJobReviewInterval = 500;
         public float shieldSelfMeleeThreatRadius = 2.9f;
 
         public float shieldAimedAtScore = 2500f;
@@ -42,6 +43,7 @@ namespace ApexMechanoids
         public float shieldMissingHealthScore = 900f;
         public float shieldMeleeAllyScore = 1000f;
         public float shieldLockScore = 400f;
+        public float shieldSwitchScoreMargin = 1000f;
         public float shieldNoThreatFactor = 0.35f;
         public float shieldWeight = 1f;
         public float repairMissingHealthScore = 1200f;
@@ -77,6 +79,7 @@ namespace ApexMechanoids
             obj.shieldRecentAttackTargetTicks = shieldRecentAttackTargetTicks;
             obj.shieldRecentRangedHarmTicks = shieldRecentRangedHarmTicks;
             obj.shieldTargetLockTicks = shieldTargetLockTicks;
+            obj.shieldJobReviewInterval = shieldJobReviewInterval;
             obj.shieldSelfMeleeThreatRadius = shieldSelfMeleeThreatRadius;
             obj.shieldAimedAtScore = shieldAimedAtScore;
             obj.shieldRecentlyAttackedScore = shieldRecentlyAttackedScore;
@@ -84,6 +87,7 @@ namespace ApexMechanoids
             obj.shieldMissingHealthScore = shieldMissingHealthScore;
             obj.shieldMeleeAllyScore = shieldMeleeAllyScore;
             obj.shieldLockScore = shieldLockScore;
+            obj.shieldSwitchScoreMargin = shieldSwitchScoreMargin;
             obj.shieldNoThreatFactor = shieldNoThreatFactor;
             obj.shieldWeight = shieldWeight;
             obj.repairMissingHealthScore = repairMissingHealthScore;
@@ -315,9 +319,10 @@ namespace ApexMechanoids
 
         private Job TryGetSupportJob(Pawn pawn, Ability shieldAbility, Thing enemyTarget)
         {
+            Pawn heldShieldTarget = OngoingShieldTarget(pawn);
             bool canShield = enemyTarget != null
                 && shieldAbility != null
-                && shieldAbility.CanCast
+                && (shieldAbility.CanCast || heldShieldTarget != null)
                 && !HasCloseMeleeThreat(pawn);
 
             int ticksGame = Find.TickManager.TicksGame;
@@ -330,6 +335,8 @@ namespace ApexMechanoids
             float bestShieldTinkerScore = float.MinValue;
             Pawn bestRepairTarget = null;
             float bestRepairScore = float.MinValue;
+            bool heldShieldTargetValid = false;
+            float heldShieldTargetScore = float.MinValue;
 
             float shieldMaxDistanceSq = shieldSearchRadius * shieldSearchRadius;
             float repairMaxDistanceSq = repairSearchRadius * repairSearchRadius;
@@ -350,6 +357,12 @@ namespace ApexMechanoids
                     if (candidate == lockedShieldTarget)
                     {
                         score += shieldLockScore;
+                    }
+
+                    if (candidate == heldShieldTarget)
+                    {
+                        heldShieldTargetValid = true;
+                        heldShieldTargetScore = score;
                     }
 
                     if (candidate.def == ApexDefsOf.APM_Mech_Tinker)
@@ -381,6 +394,12 @@ namespace ApexMechanoids
             Pawn shieldTarget = bestShieldTarget ?? bestShieldTinker;
             float shieldScore = bestShieldTarget != null ? bestShieldScore : bestShieldTinkerScore;
 
+            if (heldShieldTargetValid
+                && ShouldKeepHeldShield(heldShieldTarget, heldShieldTargetScore, shieldTarget, shieldScore, bestRepairTarget, bestRepairScore))
+            {
+                return pawn.CurJob;
+            }
+
             if (bestRepairTarget != null
                 && bestRepairScore >= repairMinScore
                 && (shieldTarget == null || bestRepairScore * repairWeight > shieldScore * shieldWeight))
@@ -388,12 +407,40 @@ namespace ApexMechanoids
                 return MakeRepairJob(bestRepairTarget, enemyTarget != null);
             }
 
-            if (shieldTarget != null)
+            if (shieldTarget != null && shieldAbility.CanCast)
             {
                 return MakeShieldJob(pawn, shieldAbility, shieldTarget, ticksGame);
             }
 
             return null;
+        }
+
+        private bool ShouldKeepHeldShield(Pawn heldTarget, float heldScore, Pawn bestShieldTarget, float bestShieldScore, Pawn bestRepairTarget, float bestRepairScore)
+        {
+            float keepScore = heldScore * shieldWeight + shieldSwitchScoreMargin;
+
+            if (bestShieldTarget != null && bestShieldTarget != heldTarget && bestShieldScore * shieldWeight > keepScore)
+            {
+                return false;
+            }
+
+            if (bestRepairTarget != null && bestRepairScore >= repairMinScore && bestRepairScore * repairWeight > keepScore)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private static Pawn OngoingShieldTarget(Pawn pawn)
+        {
+            Job job = pawn.CurJob;
+            if (job == null || job.def != ApexDefsOf.APM_ProjectDefenceMatrix)
+            {
+                return null;
+            }
+
+            return job.targetA.Pawn;
         }
 
         private float ShieldTargetScore(Pawn target, Thing enemyTarget, float distanceSq, int ticksGame)
@@ -541,6 +588,11 @@ namespace ApexMechanoids
         private void RememberShieldTarget(Pawn pawn, Pawn target, int ticksGame)
         {
             if (shieldTargetLockTicks <= 0 || pawn == null || target == null)
+            {
+                return;
+            }
+
+            if (shieldTargetMemory.TryGetValue(pawn.thingIDNumber, out ShieldTargetMemory existing) && existing.target == target)
             {
                 return;
             }
@@ -705,7 +757,10 @@ namespace ApexMechanoids
         {
             LocalTargetInfo targetInfo = target;
             RememberShieldTarget(pawn, target, ticksGame);
-            return ability.GetJob(targetInfo, targetInfo);
+            Job job = ability.GetJob(targetInfo, targetInfo);
+            job.expiryInterval = shieldJobReviewInterval;
+            job.checkOverrideOnExpire = true;
+            return job;
         }
 
         private Job TryGetBlindingPositionJob(Pawn pawn, Ability ability, Thing enemyTarget)
@@ -804,10 +859,15 @@ namespace ApexMechanoids
 
         private static bool HasActiveShield(Pawn target)
         {
-            List<Thing> thingList = target.Position.GetThingList(target.Map);
-            for (int i = 0; i < thingList.Count; i++)
+            if (target?.Map == null)
             {
-                MechShield shield = thingList[i] as MechShield;
+                return false;
+            }
+
+            List<Thing> shields = target.Map.listerThings.ThingsOfDef(ThingDefOf.MechShield);
+            for (int i = 0; i < shields.Count; i++)
+            {
+                MechShield shield = shields[i] as MechShield;
                 if (shield != null && shield.IsTargeting(target))
                 {
                     return true;

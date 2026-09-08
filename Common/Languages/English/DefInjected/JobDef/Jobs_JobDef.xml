@@ -14,4 +14,6 @@
 	<APM_RavagerArtilleryAttack.reportString>firing artillery at TargetA.</APM_RavagerArtilleryAttack.reportString>
 	<!--                       EN: repairing TargetA. -->
 	<APM_RepairMech.reportString>repairing TargetA.</APM_RepairMech.reportString>
+	<!--                                 EN: shielding TargetA. -->
+	<APM_ProjectDefenceMatrix.reportString>shielding TargetA.</APM_ProjectDefenceMatrix.reportString>
 </LanguageData>

@@ -531,7 +531,7 @@
 		<defName>APM_DefenceMatrix</defName>
 		<label>Defence Matrix</label>
 		<description>Remotely project a personal defense shield onto a same-faction pawn. The shield stops incoming damage, but also prevents shooting out. The tinker will be focused on projecting the shield.</description>
-		<jobDef>ShieldMech</jobDef>
+		<jobDef>APM_ProjectDefenceMatrix</jobDef>
 		<targetRequired>true</targetRequired>
 		<canUseAoeToGetTargets>False</canUseAoeToGetTargets>
 		<iconPath>UI/Matrix</iconPath>
