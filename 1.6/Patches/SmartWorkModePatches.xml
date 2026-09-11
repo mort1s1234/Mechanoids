@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Smart Work Mode</li>
+		</mods>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/ThinkTreeDef[defName="APM_TinkerMechanoid"]/thinkRoot/subNodes/li[@Class="ThinkNode_ConditionalPlayerControlledMech"]/subNodes/li[@Class="ThinkNode_ConditionalNotFormingCaravan"]/subNodes</xpath>
+			<value>
+				<li Class="ThinkNode_ConditionalWorkMode">
+					<workMode>SmartWork</workMode>
+					<subNodes>
+						<li Class="JobGiver_SeekAllowedArea" />
+						<li Class="JobGiver_GetEnergy_Charger" />
+						<li Class="JobGiver_Work">
+							<emergency>true</emergency>
+						</li>
+						<li Class="JobGiver_Work" />
+						<li Class="SmartWorkMode.JobGiver_SmartShutdown" />
+					</subNodes>
+				</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Smart Work Mode</li>
+		</mods>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/ThinkTreeDef[defName="APM_FrostivusMechanoid"]/thinkRoot/subNodes/li[@Class="ApexMechanoids.ThinkNode_ConditionalFrostivusControlled"]/subNodes/li[@Class="ThinkNode_ConditionalNotFormingCaravan"]/subNodes</xpath>
+			<value>
+				<li Class="ThinkNode_ConditionalWorkMode">
+					<workMode>SmartWork</workMode>
+					<subNodes>
+						<li Class="JobGiver_SeekAllowedArea" />
+						<li Class="JobGiver_GetEnergy_Charger" />
+						<li Class="ApexMechanoids.JobGiver_FrostivusRescuePawn" />
+						<li Class="JobGiver_Work" />
+						<li Class="SmartWorkMode.JobGiver_SmartShutdown" />
+					</subNodes>
+				</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Smart Work Mode</li>
+		</mods>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/ThinkTreeDef[defName="APM_IngestorMechanoid"]/thinkRoot/subNodes/li[@Class="ThinkNode_ConditionalPlayerControlledMech"]/subNodes/li[@Class="ThinkNode_ConditionalNotFormingCaravan"]/subNodes</xpath>
+			<value>
+				<li Class="ThinkNode_ConditionalWorkMode">
+					<workMode>SmartWork</workMode>
+					<subNodes>
+						<li Class="JobGiver_SeekAllowedArea" />
+						<li Class="JobGiver_GetEnergy_Charger" />
+						<li Class="JobGiver_Work">
+							<emergency>true</emergency>
+						</li>
+						<li Class="JobGiver_Work" />
+						<li Class="SmartWorkMode.JobGiver_SmartShutdown" />
+					</subNodes>
+				</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Smart Work Mode</li>
+		</mods>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/ThinkTreeDef[defName="APM_SirenMechanoid"]/thinkRoot/subNodes/li[@Class="ThinkNode_ConditionalPlayerControlledMech"]/subNodes/li[@Class="ThinkNode_ConditionalNotFormingCaravan"]/subNodes</xpath>
+			<value>
+				<li Class="ThinkNode_ConditionalWorkMode">
+					<workMode>SmartWork</workMode>
+					<subNodes>
+						<li Class="JobGiver_SeekAllowedArea" />
+						<li Class="JobGiver_GetEnergy_Charger" />
+						<li Class="JobGiver_Work">
+							<emergency>true</emergency>
+						</li>
+						<li Class="JobGiver_Work" />
+						<li Class="SmartWorkMode.JobGiver_SmartShutdown" />
+					</subNodes>
+				</li>
+			</value>
+		</match>
+	</Operation>
+</Patch>

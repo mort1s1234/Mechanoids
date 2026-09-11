@@ -31,6 +31,7 @@ namespace ApexMechanoids
             this.FailOnDestroyedOrNull(TargetIndex.A);
             this.FailOnForbidden(TargetIndex.A);
             this.FailOn(() => Mech.IsAttacking());
+            this.FailOn(() => TinkerRepairUtility.IsTinker(pawn) && !TinkerRepairUtility.HasRepairControl(pawn));
             yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
 
             Toil repair = Toils_General.WaitWith(TargetIndex.A, int.MaxValue, useProgressBar: false, maintainPosture: true, maintainSleep: true);

@@ -156,7 +156,7 @@ namespace ApexMechanoids
                 && !pawn.Dead
                 && !pawn.Downed
                 && Utils.IsAwakeAndNotDormant(pawn)
-                && (!pawn.IsPlayerControlled || allowPlayerControlled)
+                && (pawn.Faction != Faction.OfPlayer || (allowPlayerControlled && pawn.IsColonyMechPlayerControlled))
                 && pawn.abilities != null
                 && pawn.health?.capacities != null
                 && pawn.health.capacities.CapableOf(PawnCapacityDefOf.Moving)
