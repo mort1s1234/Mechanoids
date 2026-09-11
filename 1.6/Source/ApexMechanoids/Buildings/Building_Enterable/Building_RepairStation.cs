@@ -310,8 +310,18 @@ namespace ApexMechanoids
             }
 
             Pawn pawn = selectedPawn;
-            int ticksQueued = selectedPawnClaimTick >= 0 ? Find.TickManager.TicksGame - selectedPawnClaimTick : QueuedRepairTimeoutTicks + 1;
-            if (ticksQueued > QueuedRepairTimeoutTicks || pawn.Destroyed || pawn.Dead || !pawn.Spawned || pawn.Map != Map)
+            if (selectedPawnClaimTick < 0)
+            {
+                selectedPawnClaimTick = Find.TickManager.TicksGame;
+                selectedPawnAutoRepair = false;
+            }
+            int ticksQueued = Find.TickManager.TicksGame - selectedPawnClaimTick;
+            if (pawn.Destroyed || pawn.Dead || pawn.MapHeld != Map || (!pawn.Spawned && pawn.CarriedBy == null))
+            {
+                ClearQueuedRepair(interruptJob: false);
+                return;
+            }
+            if (ticksQueued > QueuedRepairTimeoutTicks && !HasCarryJobForThis(pawn))
             {
                 ClearQueuedRepair(interruptJob: false);
                 return;
@@ -326,9 +336,65 @@ namespace ApexMechanoids
                 ClearQueuedRepair(interruptJob: true);
                 return;
             }
+            if (NeedsCarry(pawn))
+            {
+                return;
+            }
             if (ticksQueued > QueuedRepairGraceTicks && !HasEnterBuildingJobForThis(pawn))
             {
                 ClearQueuedRepair(interruptJob: false);
+            }
+        }
+
+        private static bool NeedsCarry(Pawn pawn)
+        {
+            return pawn.Downed || pawn.IsPrisonerOfColony || pawn.CarriedBy != null || !pawn.health.capacities.CapableOf(PawnCapacityDefOf.Moving);
+        }
+
+        private bool IsCarryJobForThis(Job job)
+        {
+            return job != null && job.def == JobDefOf.CarryToBuilding && job.targetA.Thing == this;
+        }
+
+        private bool HasCarryJobForThis(Pawn takee)
+        {
+            if (Map == null)
+            {
+                return false;
+            }
+
+            IReadOnlyList<Pawn> playerPawns = Map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer);
+            for (int i = 0; i < playerPawns.Count; i++)
+            {
+                Job job = playerPawns[i]?.CurJob;
+                if (IsCarryJobForThis(job) && job.targetB.Thing == takee)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void InterruptCarryJobsForThis()
+        {
+            if (Map == null)
+            {
+                return;
+            }
+
+            IReadOnlyList<Pawn> playerPawns = Map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer);
+            for (int i = 0; i < playerPawns.Count; i++)
+            {
+                Pawn worker = playerPawns[i];
+                if (worker?.jobs == null)
+                {
+                    continue;
+                }
+                worker.jobs.jobQueue.RemoveAll(worker, IsCarryJobForThis);
+                if (IsCarryJobForThis(worker.CurJob))
+                {
+                    worker.jobs.EndCurrentJob(JobCondition.InterruptForced);
+                }
             }
         }
 
@@ -407,7 +473,11 @@ namespace ApexMechanoids
             selectedPawnAutoRepair = false;
             selectedPawnClaimTick = -1;
 
-            if (interruptJob && pawn?.jobs != null)
+            if (!interruptJob)
+            {
+                return;
+            }
+            if (pawn?.jobs != null)
             {
                 pawn.jobs.jobQueue.RemoveAll(pawn, IsEnterBuildingJobForThis);
                 if (IsEnterBuildingJobForThis(pawn.CurJob))
@@ -415,6 +485,7 @@ namespace ApexMechanoids
                     pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
                 }
             }
+            InterruptCarryJobsForThis();
         }
 
         private void DoRepairTick(Pawn mech)
