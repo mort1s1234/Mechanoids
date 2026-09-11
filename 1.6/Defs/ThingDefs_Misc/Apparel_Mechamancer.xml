@@ -7,6 +7,7 @@
 		<thingCategories>
 			<li>ApparelArmor</li>
 		</thingCategories>
+		<tickerType>Normal</tickerType>
 		<tradeTags>
 			<li>ExoticMisc</li>
 			<li>Clothing</li>
@@ -31,9 +32,7 @@
 			<Insulation_Heat>38</Insulation_Heat>
 			<EquipDelay>20</EquipDelay>
 			<EnergyShieldRechargeRate>0.02</EnergyShieldRechargeRate>
-			<EnergyShieldEnergyMax>0.4</EnergyShieldEnergyMax>
-			<EnergyShieldRechargeRate MayRequire="Ludeon.RimWorld.Royalty">0.12</EnergyShieldRechargeRate>
-			<EnergyShieldEnergyMax MayRequire="Ludeon.RimWorld.Royalty">1.2</EnergyShieldEnergyMax>
+			<EnergyShieldEnergyMax>2.6</EnergyShieldEnergyMax>
 		</statBases>
 		<costList>
 			<ComponentSpacer>8</ComponentSpacer>
@@ -44,8 +43,10 @@
 			<APM_ExtraChip>2</APM_ExtraChip>
 		</costList>
 		<comps>
-			<li Class="CompProperties_Shield" MayRequire="Ludeon.RimWorld.Royalty">
+			<li Class="CompProperties_Shield">
 				<blocksRangedWeapons>false</blocksRangedWeapons>
+				<startingTicksToReset>1200</startingTicksToReset>
+				<energyLossPerDamage>0.022</energyLossPerDamage>
 			</li>
 		</comps>
 		<equippedStatOffsets>
