@@ -5,7 +5,7 @@
 		<label>Apex Mechtech</label>
 		<description>The technology needed for your mechanitor to create and control Apex-tier mechanoids. You can get chips by using a mechanitor to summon a Three Lords threat. They can also be summoned separately.</description>
 		<baseCost>4000</baseCost>
-		<techLevel>Spacer</techLevel>
+		<techLevel>Ultra</techLevel>
 		<tab>Main</tab>
 		<researchViewX>17.00</researchViewX>
 		<researchViewY>4.20</researchViewY>
@@ -24,7 +24,7 @@
 		<label>Advanced Mechtech</label>
 		<description>The technology needed for your mechanitor to create and control Advanced-tier mechanoids. You can get chips by using a mechanitor to summon a Gazer threat.</description>
 		<baseCost>3000</baseCost>
-		<techLevel>Spacer</techLevel>
+		<techLevel>Ultra</techLevel>
 		<tab>Main</tab>
 		<researchViewX>15.50</researchViewX>
 		<researchViewY>4.70</researchViewY>
