@@ -399,4 +399,5 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 *.dds
+*.zstd
 1.6/Assemblies/ApexMechanoids.dll
