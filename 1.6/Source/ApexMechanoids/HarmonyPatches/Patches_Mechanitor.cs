@@ -13,25 +13,25 @@ namespace ApexMechanoids
         {
             if (!__result)
             {
+                // Pawn_MechanitorTracker.CanControlMechs is called during MechanitorUtility.CanDraftMech -> which means unless we want them to always be draftable we can't make __result true!
+                /*
                 if (__instance.Pawn.HostFaction != null)
                 {
                     __result = true;
                     return;
                 }
-
                 List<Pawn> ops = __instance.OverseenPawns;
                 if (ops != null && ops.Where((Pawn p) => p.TryGetComp<CompMechanitorRangeExtender>() != null)?.Count() > 0)
                 {
                     __result = true;
                     return;
                 }
-
+                */
                 if (Utils.IsUplinkActiveFor(__instance.Pawn))
                 {
                     __result = true;
                     return;
                 }
-
             }
         }
     }
