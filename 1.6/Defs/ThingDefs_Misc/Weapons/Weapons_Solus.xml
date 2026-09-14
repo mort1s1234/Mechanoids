@@ -22,6 +22,7 @@
 			<AccuracyMedium>1.0</AccuracyMedium>
 			<AccuracyLong>1.0</AccuracyLong>
 			<RangedWeapon_Cooldown>10.0</RangedWeapon_Cooldown>
+			<WorkToMake>34000</WorkToMake>
 		</statBases>
 		<weaponClasses>
 			<li>RangedHeavy</li>

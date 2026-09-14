@@ -13,6 +13,7 @@
 			<BandwidthCost MayRequire="Ludeon.RimWorld.Biotech">3</BandwidthCost>
 			<MechEnergyLossPerHP MayRequire="Ludeon.Rimworld.Biotech">0.2</MechEnergyLossPerHP>
 		</statBases>
+		<uiIconPath>Things/Pawn/Mechanoid/Ingestor/IngestorIcon</uiIconPath>
 		<tools Inherit="False">
 			<li>
 				<label>head</label>
@@ -81,7 +82,7 @@
 		<race>APM_Mech_Ingestor</race>
 		<combatPower>320</combatPower>
 		<lifeStages>
-			<li MayRequire="Ludeon.RimWorld.Biotech">
+			<li>
 				<bodyGraphicData>
 					<texPath>Things/Pawn/Mechanoid/Ingestor/Ingestor</texPath>
 					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Ingestor/Mech_Ingestor</maskPath>

@@ -22,7 +22,7 @@ namespace ApexMechanoids
                 && !pawn.Downed
                 && pawn.Spawned
                 && pawn.Map != null
-                && Utils.IsAwakeAndNotDormant(pawn)
+                && Utils.IsAwakeOrInterruptibleSelfShutdown(pawn)
                 && pawn.Faction != null
                 && HasRepairControl(pawn)
                 && pawn.health?.capacities != null
@@ -30,7 +30,7 @@ namespace ApexMechanoids
                 && pawn.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation);
         }
 
-        private static bool HasRepairControl(Pawn pawn)
+        public static bool HasRepairControl(Pawn pawn)
         {
             return pawn.Faction != Faction.OfPlayer || pawn.IsColonyMechPlayerControlled;
         }

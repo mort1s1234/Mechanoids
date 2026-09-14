@@ -7,7 +7,7 @@
 		<description>Three powerful mechanoid types were created by an Archotech mind in an attempt to create a central commander of all mechanoid forces. Influenced by the Old Earth nation of Rome, the Dominus provides considerable buffs to nearby allies and personally challenges perceived threats in 1v1 melee combat. The pure force of its determination manifests in a psychic maelstrom forming around those it challenges, summoning a shield generator and increasing damage taken until one stands victorious or it exhausts its will after a certain amount of time. If this occurs, both duelists will be significantly weakened for a period. If a victor emerges, the opposite will occur. It can alternatively channel its will into a temporary wave of energy for its allies. Additionally, mechanitors can extend their command range in a radius around this mech if under their control.</description>
 		<statBases>
 			<MarketValue>1500</MarketValue>
-			<MoveSpeed>3.4</MoveSpeed>
+			<MoveSpeed>3.6</MoveSpeed>
 			<ArmorRating_Blunt>0.64</ArmorRating_Blunt>
 			<ArmorRating_Sharp>0.85</ArmorRating_Sharp>
 			<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">5</BandwidthCost>
@@ -49,16 +49,16 @@
 				<li>
 					<def>MechanoidFullyFormed</def>
 					<minAge>0</minAge>
-					<soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
-					<soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
-					<soundCall>Pawn_Mech_Centipede_Call</soundCall>
+					<soundWounded>Pawn_Mech_Apocriton_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Apocriton_Death</soundDeath>
+					<soundCall>Pawn_Mech_Apocriton_Call</soundCall>
 				</li>
 				<li MayRequire="Ludeon.RimWorld.Biotech">
 					<def>MechanoidFullyFormed</def>
 					<minAge>100</minAge>
-					<soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
-					<soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
-					<soundCall>Pawn_Mech_Centipede_Call</soundCall>
+					<soundWounded>Pawn_Mech_Apocriton_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Apocriton_Death</soundDeath>
+					<soundCall>Pawn_Mech_Apocriton_Call</soundCall>
 				</li>
 			</lifeStageAges>
 			<soundCallIntervalRange>2500~3500</soundCallIntervalRange>
@@ -385,7 +385,7 @@
 		<label>the duel trial</label>
 		<description>A selected target is chosen for a duel and a shield is generated around the duelists. For the duration of the duel, ranged attacks, abilities and Incoming damage increased.  Additionally, if the duel does not end within a certain time frame, the duelists gain a harsh debuff. If either combatant dies or is downed, the victor gains a powerful temporary buff instead.</description>
 		<iconPath>UI/Duel</iconPath>
-		<cooldownTicksRange>2800</cooldownTicksRange>
+		<cooldownTicksRange>2300</cooldownTicksRange>
 		<targetRequired>true</targetRequired>
 		<hostile>true</hostile>
 		<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
@@ -428,6 +428,7 @@
 
 	<AbilityDef ParentName="APM_Mech_Duel_Base">
 		<defName>APM_Mech_Duel</defName>
+		<cooldownTicksRange>2300</cooldownTicksRange>
 		<comps>
 			<li Class="ApexMechanoids.CompProperties_SpawnThingDuelAttached">
 				<thing>APM_DuelSpot</thing>
@@ -437,6 +438,7 @@
 
 	<AbilityDef ParentName="APM_Mech_Duel_Base">
 		<defName>APM_Mech_Duel_Boss</defName>
+		<cooldownTicksRange>1100</cooldownTicksRange>
 		<comps>
 			<li Class="ApexMechanoids.CompProperties_SpawnThingDuelAttached">
 				<thing>APM_DuelSpot_Boss</thing>

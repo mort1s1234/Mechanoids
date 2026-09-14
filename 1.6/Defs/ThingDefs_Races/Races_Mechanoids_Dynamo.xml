@@ -3,7 +3,7 @@
 	<ThingDef ParentName="BaseMechanoidWalker">
 		<defName>APM_Mech_Dynamo</defName>
 		<label>dynamo</label>
-		<description>An hybrid of mechanoid and and mechhive infrastructure, the dynamo is outfitted with an oversized internal reactor. The drawbacks of its increased power output means that vanometric means are not enough to fuel this reactor, requiring uranium to stay active. It has the ability to anchor itself in the ground and attach itself to an existing power grid as well as use its energy to act as a mobile shield generator, able to process excess uranium to regenerate the durability of its shield.</description>
+		<description>An hybrid of mechanoid and and mechhive infrastructure, the dynamo is outfitted with an oversized internal reactor. The drawbacks of its increased power output means that vanometric means are not enough to fuel this reactor, requiring uranium to stay active. It has the ability to anchor itself in the ground and attach itself to an existing power grid as well as use its energy to act as a mobile shield generator, able to process excess uranium to regenerate the durability of its shield. Dynamo also grants an aura in which all allied mechanoids gradually recharge.</description>
 		<statBases>
 			<MarketValue>1600</MarketValue>
 			<MoveSpeed>2.5</MoveSpeed>

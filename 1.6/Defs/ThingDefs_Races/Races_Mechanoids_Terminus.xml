@@ -70,16 +70,16 @@
 				<li>
 					<def>MechanoidFullyFormed</def>
 					<minAge>0</minAge>
-					<soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
-					<soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
-					<soundCall>Pawn_Mech_Centipede_Call</soundCall>
+					<soundWounded>Pawn_Mech_Diabolus_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Diabolus_Death</soundDeath>
+					<soundCall>Pawn_Mech_Diabolus_Call</soundCall>
 				</li>
 				<li MayRequire="Ludeon.RimWorld.Biotech">
 					<def>MechanoidFullyFormed</def>
 					<minAge>100</minAge>
-					<soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
-					<soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
-					<soundCall>Pawn_Mech_Centipede_Call</soundCall>
+					<soundWounded>Pawn_Mech_Diabolus_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Diabolus_Death</soundDeath>
+					<soundCall>Pawn_Mech_Diabolus_Call</soundCall>
 				</li>
 			</lifeStageAges>
 			<detritusLeavings>
@@ -222,7 +222,7 @@
 		<label>overdrive</label>
 		<description>Terminus diverts power inward and briefly enters an overdriven combat state. While active, it sheds its cape, strikes harder, recovers between swings faster and becomes harder to stagger.</description>
 		<iconPath>UI/Overdrive</iconPath>
-		<cooldownTicksRange>30000</cooldownTicksRange>
+		<cooldownTicksRange>20000</cooldownTicksRange>
 		<targetRequired>false</targetRequired>
 		<hostile>false</hostile>
 		<aiCanUse>true</aiCanUse>
@@ -330,7 +330,7 @@
 					<MeleeDamageFactor>1.4</MeleeDamageFactor>
 					<MeleeCooldownFactor>0.65</MeleeCooldownFactor>
 					<StaggerDurationFactor>0.35</StaggerDurationFactor>
-					<EMPResistance>0.95</EMPResistance>
+					<EMPResistance>0.98</EMPResistance>
 				</statFactors>
 			</li>
 		</stages>

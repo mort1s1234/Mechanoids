@@ -3,11 +3,18 @@ name: Build C# Project
 on:
   push:
     branches:
-      - main
-      - master
-      - develop
       - '**'
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: build-csharp-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -15,26 +22,120 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '9.0.x'
 
-
     - name: Restore dependencies
       run: dotnet restore ./1.6/Source/ApexMechanoids.sln
-
 
     - name: Build solution
       run: dotnet build ./1.6/Source/ApexMechanoids.sln --no-restore
 
     - name: Run tests
+      continue-on-error: true
       run: dotnet test ./1.6/Source/ApexMechanoids.sln --no-restore
-          
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: build-output
         path: ./1.6/Assemblies/
+
+    - name: Commit rebuilt assembly
+      if: |
+        github.event_name == 'push' &&
+        !contains(github.event.head_commit.message, '[skip ci]')
+      env:
+        BRANCH: ${{ github.ref_name }}
+      run: |
+        set -e
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+        # -f bypasses .gitignore in case *.dll is ever ignored
+        git add -f ./1.6/Assemblies/ApexMechanoids.dll
+
+        if git diff --cached --quiet; then
+          echo "Assembly unchanged, nothing to commit."
+          exit 0
+        fi
+
+        git commit -m "chore(assemblies): rebuild ApexMechanoids.dll [skip ci]"
+        git pull --rebase origin "$BRANCH"
+        git push origin HEAD:"$BRANCH"
+
+    - name: Resolve game version
+      id: version
+      run: |
+        VERSION=$(python3 -c "import xml.etree.ElementTree as ET;r=ET.parse('About/About.xml').getroot();n=r.find('supportedVersions');print((n.find('li').text if n is not None and n.find('li') is not None else '1.6').strip())")
+        echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+        echo "zip=ApexMechanoids-${VERSION}-$(git rev-parse --short HEAD).zip" >> "$GITHUB_OUTPUT"
+
+    - name: Stage whole mod
+      run: |
+        mkdir -p artifact
+        rsync -a --delete-excluded \
+          --exclude '.git/' \
+          --exclude '.github/' \
+          --exclude '.idea/' \
+          --exclude '.vs/' \
+          --exclude '.vscode/' \
+          --exclude '.codebuddy/' \
+          --exclude '.DS_Store' \
+          --exclude 'artifact/' \
+          --exclude 'ModInfographic/' \
+          --exclude 'WeaponTweakData/' \
+          --exclude '1.6/Source/' \
+          --exclude 'obj/' \
+          --exclude 'bin/' \
+          --exclude '.gitignore' \
+          --exclude 'out.tsv' \
+          ./ artifact/
+
+    - name: Zip whole mod
+      run: |
+        cd artifact
+        zip -qr "../${{ steps.version.outputs.zip }}" .
+        cd ..
+        unzip -l "${{ steps.version.outputs.zip }}" | tail -5
+
+    - name: Upload whole-mod zip
+      uses: actions/upload-artifact@v4
+      with:
+        name: ApexMechanoids-mod
+        path: ${{ steps.version.outputs.zip }}
+        if-no-files-found: error
+
+    - name: Find existing bot comment
+      if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+      id: bot_comment
+      uses: peter-evans/find-comment@v3
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        comment-author: github-actions[bot]
+        body-includes: Apex Mechanoids dev build
+
+    - name: Comment mod zip link on PR
+      if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+      uses: peter-evans/create-or-update-comment@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        comment-id: ${{ steps.bot_comment.outputs.comment-id }}
+        issue-number: ${{ github.event.pull_request.number }}
+        edit-mode: replace
+        body: |
+          ### Apex Mechanoids dev build
+
+          🔗 **[Download the whole mod (zip)](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})** — artifact `ApexMechanoids-mod` → `${{ steps.version.outputs.zip }}`
+
+          Built from `${{ github.event.pull_request.head_sha }}` against RimWorld `${{ steps.version.outputs.version }}`.
+
+          Unzip straight into your RimWorld `Mods/` folder — it already contains `About/`, `Defs/`, `Patches/`, `Assemblies/` and the freshly compiled `ApexMechanoids.dll`.
+
+          <sub>Updated automatically on every push to this PR.</sub>

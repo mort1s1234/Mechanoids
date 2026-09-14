@@ -121,14 +121,6 @@
 			<li>
 				<filter>
 					<thingDefs>
-						<li>SubcoreRegular</li>
-					</thingDefs>
-				</filter>
-				<count>1</count>
-			</li>
-			<li>
-				<filter>
-					<thingDefs>
 						<li>Steel</li>
 					</thingDefs>
 				</filter>
@@ -149,6 +141,14 @@
 					</thingDefs>
 				</filter>
 				<count>3</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>SubcoreRegular</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
 			</li>
 		</ingredients>
 	</RecipeDef>
@@ -418,7 +418,7 @@
       <li>
         <filter>
           <thingDefs>
-            <li>SubcoreRegular</li>
+            <li>SubcoreHigh</li>
           </thingDefs>
         </filter>
         <count>1</count>

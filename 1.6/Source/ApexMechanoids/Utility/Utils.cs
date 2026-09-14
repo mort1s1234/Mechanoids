@@ -53,6 +53,44 @@ namespace ApexMechanoids
                 && IsAwakeAndNotDormant(pawn);
         }
 
+        public static bool IsAwakeOrInterruptibleSelfShutdown(Pawn pawn)
+        {
+            if (IsAwakeAndNotDormant(pawn))
+            {
+                return true;
+            }
+
+            if (pawn?.health?.capacities == null || !pawn.health.capacities.CanBeAwake || pawn.IsDeactivated())
+            {
+                return false;
+            }
+
+            Job job = pawn.CurJob;
+            if (job == null || job.def != JobDefOf.SelfShutdown || job.expiryInterval <= 0 || !job.checkOverrideOnExpire)
+            {
+                return false;
+            }
+
+            if (pawn.needs?.energy != null && pawn.needs.energy.IsLowEnergySelfShutdown)
+            {
+                return false;
+            }
+
+            CompCanBeDormant dormantComp = pawn.TryGetComp<CompCanBeDormant>();
+            return dormantComp == null || dormantComp.Awake;
+        }
+
+        public static bool CanRunWorkPawn(Pawn pawn)
+        {
+            return pawn != null
+                && !pawn.Destroyed
+                && !pawn.Dead
+                && !pawn.Downed
+                && pawn.Spawned
+                && pawn.Map != null
+                && IsAwakeOrInterruptibleSelfShutdown(pawn);
+        }
+
         public static BodyPartRecord GetNonMissingBodyPart(Pawn pawn, BodyPartDef def, BodyPartGroupDef group = null)
         {
             foreach (var notMissingPart in pawn.health.hediffSet.GetNotMissingParts())

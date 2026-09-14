@@ -58,7 +58,7 @@
 		<tickerType>Normal</tickerType>
 		<statBases>
 			<MarketValue>5000</MarketValue>
-			<WorkToMake>7200</WorkToMake>
+			<WorkToMake>12200</WorkToMake>
 			<Mass>3</Mass>
 			<Flammability>0.4</Flammability>
 			<EquipDelay>6</EquipDelay>

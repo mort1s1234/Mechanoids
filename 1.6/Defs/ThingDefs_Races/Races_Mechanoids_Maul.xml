@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-	<ThingDef Name="APM_Mech_Maul" ParentName="BaseMechanoidWalker">
+	<ThingDef ParentName="HeavyMechanoid">
 		<defName>APM_Mech_Maul</defName>
 		<label>Maul</label>
 		<description>The maul is the mechhive’s core tenet made machine, to crush and overwhelm. Impervious to small arms, this mechanoid is the bane of infantry, light vehicles, and outer defense emplacements. It is intelligent enough to know when it isn’t on the upper hand, and will continuously overclock and overheat its weapon until the job is done as it takes damage.</description>
@@ -12,6 +12,7 @@
 			<ArmorRating_Heat>2.0</ArmorRating_Heat>
 			<BandwidthCost MayRequire="Ludeon.RimWorld.Biotech">4</BandwidthCost>
 			<MechEnergyLossPerHP MayRequire="Ludeon.Rimworld.Biotech">0.2</MechEnergyLossPerHP>
+			<WorkSpeedGlobal>1.5</WorkSpeedGlobal>
 		</statBases>
 		<tools>
 			<li>
@@ -65,6 +66,23 @@
 					<spawnChance>0.3</spawnChance>
 				</li>
 			</detritusLeavings>
+			<bulletStaggerEffecterDef>TunnelerSlowedDown</bulletStaggerEffecterDef>
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Tunneler_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Tunneler_Death</soundDeath>
+					<soundCall>Pawn_Mech_Tunneler_Call</soundCall>
+				</li>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Tunneler_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Tunneler_Death</soundDeath>
+					<soundCall>Pawn_Mech_Tunneler_Call</soundCall>
+				</li>
+			</lifeStageAges>
 		</race>
 		<comps>
 			<li Class="ApexMechanoids.CompProperties_StatFactorsFromHealth">

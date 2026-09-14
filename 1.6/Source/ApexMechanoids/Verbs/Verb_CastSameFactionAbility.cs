@@ -89,17 +89,34 @@ namespace ApexMechanoids
                 return false;
             }
 
+            return ShieldedPawnFromCasterJob(caster, shield) != null
+                || ShieldedPawnOnShieldCell(caster, shield) != null;
+        }
+
+        private static Pawn ShieldedPawnFromCasterJob(Pawn caster, MechShield shield)
+        {
+            Pawn targetPawn = caster.CurJob?.targetA.Pawn;
+            if (targetPawn == null || !shield.IsTargeting(targetPawn))
+            {
+                return null;
+            }
+
+            return IsSameFactionPawn(caster, targetPawn) ? targetPawn : null;
+        }
+
+        private static Pawn ShieldedPawnOnShieldCell(Pawn caster, MechShield shield)
+        {
             var thingList = shield.Position.GetThingList(shield.Map);
             for (int i = 0; i < thingList.Count; i++)
             {
                 Pawn targetPawn = thingList[i] as Pawn;
                 if (IsSameFactionPawn(caster, targetPawn) && shield.IsTargeting(targetPawn))
                 {
-                    return true;
+                    return targetPawn;
                 }
             }
 
-            return false;
+            return null;
         }
     }
 }

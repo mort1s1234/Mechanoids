@@ -30,10 +30,15 @@ namespace ApexMechanoids
 
         public static bool CanDoFoodPreservation(Pawn pawn)
         {
-            return CanUseFrostivusMapCommand(pawn);
+            return CanRunFrostivusFoodPreservation(pawn, allowInterruptibleSelfShutdown: true);
         }
 
         public static bool CanUseFrostivusMapCommand(Pawn pawn)
+        {
+            return CanRunFrostivusFoodPreservation(pawn, allowInterruptibleSelfShutdown: false);
+        }
+
+        private static bool CanRunFrostivusFoodPreservation(Pawn pawn, bool allowInterruptibleSelfShutdown)
         {
             return IsFrostivus(pawn)
                 && !pawn.Destroyed
@@ -41,7 +46,7 @@ namespace ApexMechanoids
                 && !pawn.Downed
                 && pawn.Spawned
                 && pawn.Map != null
-                && Utils.IsAwakeAndNotDormant(pawn)
+                && (allowInterruptibleSelfShutdown ? Utils.IsAwakeOrInterruptibleSelfShutdown(pawn) : Utils.IsAwakeAndNotDormant(pawn))
                 && pawn.inventory != null
                 && HasFoodPreservationControl(pawn)
                 && pawn.health?.capacities != null

@@ -224,6 +224,7 @@ namespace ApexMechanoids.HarmonyPatches
             AbilityDef abilityDef = job?.ability?.def;
             return abilityDef != null
                 && !job.playerForced
+                && job.def != ApexDefsOf.APM_ProjectDefenceMatrix
                 && job.verbToUse is Verb_CastAbility
                 && abilityDef.defName.StartsWith(ApexAbilityDefPrefix, StringComparison.Ordinal);
         }

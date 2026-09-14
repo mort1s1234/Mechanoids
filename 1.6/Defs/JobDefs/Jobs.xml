@@ -68,4 +68,11 @@
 		<driverClass>ApexMechanoids.JobDriver_ApexRepairMech</driverClass>
 		<reportString>repairing TargetA.</reportString>
 	</JobDef>
+
+	<JobDef>
+		<defName>APM_ProjectDefenceMatrix</defName>
+		<driverClass>ApexMechanoids.JobDriver_ProjectShield</driverClass>
+		<reportString>shielding TargetA.</reportString>
+		<abilityCasting>true</abilityCasting>
+	</JobDef>
 </Defs>

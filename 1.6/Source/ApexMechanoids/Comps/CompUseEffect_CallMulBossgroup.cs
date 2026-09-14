@@ -75,7 +75,7 @@ namespace ApexMechanoids
             IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(Props.incidentDef.category, parent.Map);
             incidentParms.forced = true;
             incidentParms.faction = Faction.OfMechanoids;
-            Find.Storyteller.incidentQueue.Add(Props.incidentDef, Find.TickManager.TicksGame + Rand.Range(60000, 180000), incidentParms);
+            Find.Storyteller.incidentQueue.Add(Props.incidentDef, Find.TickManager.TicksGame + Rand.Range(10000, 25000), incidentParms);
         }
 
         public override TaggedString ConfirmMessage(Pawn p)

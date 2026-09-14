@@ -26,6 +26,7 @@
 			<AccuracyMedium>0.45</AccuracyMedium>
 			<AccuracyLong>0.30</AccuracyLong>
 			<RangedWeapon_Cooldown>2.4</RangedWeapon_Cooldown>
+			<WorkToMake>16000</WorkToMake>
 		</statBases>
 		<verbs>
 			<li>
@@ -53,7 +54,7 @@
 				<capacities>
 					<li>APM_Whip</li>
 				</capacities>
-				<power>16</power>
+				<power>13</power>
 				<cooldownTime>2.6</cooldownTime>
 				<extraMeleeDamages>
 				<li>

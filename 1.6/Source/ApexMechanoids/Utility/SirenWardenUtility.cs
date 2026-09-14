@@ -22,7 +22,7 @@ namespace ApexMechanoids
 
         public static bool CanSirenWork(Pawn pawn)
         {
-            return Utils.CanRunAutonomousPawn(pawn) && pawn.def?.defName == SirenDefName;
+            return Utils.CanRunWorkPawn(pawn) && pawn.def?.defName == SirenDefName;
         }
 
         public static bool CanSirenSing(Pawn siren)
