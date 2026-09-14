@@ -38,7 +38,16 @@ namespace ApexMechanoids
         public CompPowerTrader PowerTraderComp => cachedPowerComp ?? (cachedPowerComp = parent.TryGetComp<CompPowerTrader>());
         private CompPowerTrader cachedPowerComp;
 
-        public bool PowerOn => PowerTraderComp.PowerOn;
+        /// <summary>A container with no power comp at all has no power to lose.</summary>
+        public bool PowerOn => PowerTraderComp == null || PowerTraderComp.PowerOn;
+
+        /// <summary>
+        /// How much of the preservation cycle is left to run on reserves, once the power has gone.
+        /// Full while the container is powered, so a flare always starts the count from the top.
+        /// </summary>
+        private int graceTicksLeft = -1;
+
+        private int GraceTicksTotal => Mathf.Max(1, Props.powerLossGraceTicks);
 
         public Comp_MechanoidContainerControlled() : base()
         {
@@ -107,20 +116,69 @@ namespace ApexMechanoids
             }
         }
 
-        public override void ReceiveCompSignal(string signal)
+        /// <summary>
+        /// Losing power no longer empties the container on the spot. It starts the preservation
+        /// cycle running on reserves instead, and only what is left of those decides whether the
+        /// occupant comes out; see <see cref="MechContainerPowerRules"/> for why the reserves
+        /// outlast a solar flare.
+        ///
+        /// Driven from the tick rather than from the power signal so that power coming back, the
+        /// mech being taken out, and a save loaded mid outage all read the same two flags. A signal
+        /// only fires on the edge, and the edge is not where any of those happen.
+        /// </summary>
+        public override void CompTick()
         {
-            if (signal == CompPowerTrader.PowerTurnedOffSignal && isContaining)
+            TickPowerGrace();
+            base.CompTick();
+        }
+
+        private void TickPowerGrace()
+        {
+            if (!parent.Spawned)
             {
-                Pawn mech = innerContainer.First() as Pawn;
-                if (!innerContainer.TryDrop(mech, parent.PositionHeld, parent.MapHeld, ThingPlaceMode.Near, out _))
+                return;
+            }
+
+            graceTicksLeft = MechContainerPowerRules.NormalizeGraceTicks(graceTicksLeft, GraceTicksTotal);
+            switch (MechContainerPowerRules.Resolve(isContaining, PowerOn, graceTicksLeft))
+            {
+                case ContainerPowerState.Sealed:
+                    graceTicksLeft = GraceTicksTotal;
+                    break;
+                case ContainerPowerState.Draining:
+                    graceTicksLeft--;
+                    break;
+                case ContainerPowerState.Releasing:
+                    ReleaseForPowerLoss();
+                    graceTicksLeft = GraceTicksTotal;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// The reserves are out. This is the drop that used to happen the instant the power did.
+        /// </summary>
+        private void ReleaseForPowerLoss()
+        {
+            Pawn mech = innerContainer.First() as Pawn;
+            if (!innerContainer.TryDrop(mech, parent.PositionHeld, parent.MapHeld, ThingPlaceMode.Near, out _))
+            {
+                if (!RCellFinder.TryFindRandomCellNearWith(parent.PositionHeld, (IntVec3 c) => c.Standable(parent.MapHeld), parent.MapHeld, out var result, 1))
                 {
-                    if (!RCellFinder.TryFindRandomCellNearWith(parent.PositionHeld, (IntVec3 c) => c.Standable(parent.MapHeld), parent.MapHeld, out var result, 1))
-                    {
-                        Debug.LogError($"Could not drop {mech.ThingID}!");
-                    }
-                    GenSpawn.Spawn(innerContainer.Take(mech), result, parent.MapHeld);
+                    Debug.LogError($"Could not drop {mech.ThingID}!");
                 }
-                IsEmpty = true;
+                GenSpawn.Spawn(innerContainer.Take(mech), result, parent.MapHeld);
+            }
+            IsEmpty = true;
+
+            // Worth a line. The drop used to land in the same moment as the letter for whatever cut
+            // the power, so the player could connect the two; half a day later they cannot.
+            if (mech != null)
+            {
+                Messages.Message(
+                    "APM.MechanoidContainer.ReservesExhausted".Translate(parent.LabelShortCap, mech.LabelShortCap),
+                    new LookTargets(new Thing[] { mech, parent }),
+                    MessageTypeDefOf.NegativeEvent);
             }
         }
 
@@ -167,6 +225,13 @@ namespace ApexMechanoids
             if (IsEmpty)
             {
                 return "CommandPodEjectFailEmpty".Translate();
+            }
+            // The other half of what a flare should do here. A mech somebody walked in there stays
+            // in there while the power is off, out of reach rather than loose on the map. A
+            // container that stored nothing is not covered; see MechContainerPowerRules.CanExtract.
+            if (!MechContainerPowerRules.CanExtract(isContaining, PowerOn))
+            {
+                return "NoPower".Translate().CapitalizeFirst();
             }
             // Bandwidth is deliberately not tested here. It decides how the container opens, not
             // whether it opens; see Comp_MechanoidContainer.TakeControlIfPossible.
@@ -343,6 +408,10 @@ namespace ApexMechanoids
         {
             base.PostExposeData();
             Scribe_Deep.Look(ref innerContainer, "innerContainer", this);
+            // -1 is "has never counted anything down", which a save written before this existed and
+            // a container built this tick both are. MechContainerPowerRules.NormalizeGraceTicks
+            // reads that as full reserves rather than spent ones.
+            Scribe_Values.Look(ref graceTicksLeft, "powerLossGraceTicksLeft", -1);
             if (Scribe.mode == LoadSaveMode.PostLoadInit && innerContainer.removeContentsIfDestroyed)
             {
                 innerContainer.removeContentsIfDestroyed = false;
@@ -366,6 +435,13 @@ namespace ApexMechanoids
                 {
                     iString = "CasketContains".Translate() + $" {innerContainer.First().Label}" + iString;
                 }
+            }
+            // The countdown is the only thing telling the player their reserve squad is on a clock,
+            // so it has to be readable rather than something they find out when the mech walks out.
+            int reserveTicks = MechContainerPowerRules.NormalizeGraceTicks(graceTicksLeft, GraceTicksTotal);
+            if (MechContainerPowerRules.Resolve(isContaining, PowerOn, reserveTicks) == ContainerPowerState.Draining)
+            {
+                iString += "APM.MechanoidContainer.ReservePowerLeft".Translate(reserveTicks.ToStringTicksToPeriod()) + "\n";
             }
             return iString + BaseCompInspectStringExtra();
         }

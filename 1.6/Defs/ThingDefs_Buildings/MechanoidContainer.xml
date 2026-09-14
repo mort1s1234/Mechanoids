@@ -201,7 +201,7 @@
 	<ThingDef ParentName="APM_MechanoidContainerBase">
 		<defName>APM_MechanoidContainer_Player</defName>
 		<label>mechanoid stasis container</label>
-		<description>A specialized stasis container designed for the safe storage of mechanoids. Placing a mechanoid inside completely severs its active neural link with the mechanitor and puts its systems into deep suspended animation. In this state, the machine consumes no power and does not occupy the mechanitor's bandwidth, freeing up valuable network resources. The container allows you to keep an assault or worker squad in reserve, ready for deployment at a moment's notice without risking network overload.</description>
+		<description>A specialized stasis container designed for the safe storage of mechanoids. Placing a mechanoid inside completely severs its active neural link with the mechanitor and puts its systems into deep suspended animation. In this state, the machine consumes no power and does not occupy the mechanitor's bandwidth, freeing up valuable network resources. The container allows you to keep an assault or worker squad in reserve, ready for deployment at a moment's notice without risking network overload. Losing the container's own power seals it rather than opening it: the preservation cycle runs on internal reserves for over half a day, nothing can be taken out until the power is back, and only once the reserves are spent does the occupant wake and step out.</description>
 		<graphicData>
 			<texPath>Things/Building/MechanoidContainer/MechanoidContainer</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
@@ -239,6 +239,14 @@
 				<activeTicks>120</activeTicks>
 				<ticksToActivate>500</ticksToActivate>
 				<cooldownTicks>20000</cooldownTicks>
+				<!--
+					How long the preservation cycle runs on reserves once the power goes. A vanilla solar
+					flare is at most half a day, 30000 ticks, so this sits above it on purpose: a flare
+					can no longer empty every container on the map at once, while a grid nobody repaired
+					still does. This is the only container the colony can walk a mech into, so it is the
+					only one the number means anything for.
+				-->
+				<powerLossGraceTicks>33000</powerLossGraceTicks>
 				<activateTexPath>UI/Gizmos/MechControlGroup</activateTexPath>
         
 				<activateLabelString>Extract</activateLabelString>
