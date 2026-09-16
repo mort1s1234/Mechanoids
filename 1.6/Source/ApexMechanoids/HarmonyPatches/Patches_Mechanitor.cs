@@ -13,20 +13,6 @@ namespace ApexMechanoids
         {
             if (!__result)
             {
-                // Pawn_MechanitorTracker.CanControlMechs is called during MechanitorUtility.CanDraftMech -> which means unless we want them to always be draftable we can't make __result true!
-                /*
-                if (__instance.Pawn.HostFaction != null)
-                {
-                    __result = true;
-                    return;
-                }
-                List<Pawn> ops = __instance.OverseenPawns;
-                if (ops != null && ops.Where((Pawn p) => p.TryGetComp<CompMechanitorRangeExtender>() != null)?.Count() > 0)
-                {
-                    __result = true;
-                    return;
-                }
-                */
                 if (Utils.IsUplinkActiveFor(__instance.Pawn))
                 {
                     __result = true;
@@ -35,8 +21,6 @@ namespace ApexMechanoids
             }
         }
     }
-
-
 
     [HarmonyPatch(typeof(Pawn_MechanitorTracker), nameof(Pawn_MechanitorTracker.CanCommandTo))]
     public static class Patch_Pawn_MechanitorTracker_CanCommandTo
@@ -89,56 +73,5 @@ namespace ApexMechanoids
             }
         }
     }
-
-    [HarmonyPatch(typeof(MechanitorUtility), "CanDraftMech")]
-    public class Patches_MechanitorUtility_CanDraftMech
-    {
-        public static void Postfix(Pawn mech, ref AcceptanceReport __result)
-        {
-            if ((bool)__result || mech.DeadOrDowned || (!mech.IsColonyMech && mech.HostFaction == null) || (mech.needs.energy != null && mech.needs.energy.IsLowEnergySelfShutdown))
-            {
-                return;
-            }
-            else if (mech.HostFaction == Faction.OfPlayer)
-            {
-                __result = true;
-            }
-            Pawn overseer = mech.GetOverseer();
-            if (overseer != null)
-            {
-                AcceptanceReport canControlMechs = overseer.mechanitor.CanControlMechs;
-                if (!canControlMechs)
-                {
-                    return;
-                }
-                if (!overseer.mechanitor.ControlledPawns.Contains(mech))
-                {
-                    return;
-                }
-            }
-            if (mech.kindDef.race.HasComp(typeof(CompMechanitorRangeExtender)))
-            {
-                __result = true;
-                return;
-            }
-            List<Pawn> ops = mech.GetOverseer()?.mechanitor?.OverseenPawns;
-            if (ops.NullOrEmpty())
-            {
-                return;
-            }
-            List<Pawn> opsWithComp = ops.Where((Pawn x) => x.GetComp<CompMechanitorRangeExtender>() != null).ToList();
-            if (opsWithComp.NullOrEmpty())
-            {
-                return;
-            }
-            foreach (Pawn p in ops.Where((Pawn x) => x.MapHeld == mech.MapHeld))
-            {
-                if (opsWithComp.Contains(p))
-                {
-                    __result = true;
-                    break;
-                }
-            }
-        }
-    }
+ 
 }
