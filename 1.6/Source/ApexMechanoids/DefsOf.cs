@@ -49,6 +49,7 @@ namespace ApexMechanoids
         public static ThingDef APM_MechCommandCasket;
         public static HediffDef APM_MechCommandCasketBoost;
         public static HediffDef APM_Hediff_JavelinMissileLock;
+        public static HediffDef APM_Hediff_SirenLureCooldown;
         public static ThingDef APM_Gun_JavelinRocketLauncher;
         public static ThingDef APM_Proj_JavelinMissile;
 

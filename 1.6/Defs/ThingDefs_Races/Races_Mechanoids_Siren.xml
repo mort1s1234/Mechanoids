@@ -258,11 +258,39 @@
 			</li>
 			<li Class="ApexMechanoids.CompProperties_SirenLureChannel">
 				<jobDef>APM_SirenLureChannel</jobDef>
+				<!--
+					How long the pawn is deaf to the song once this one has finished, on top of the ten
+					seconds the song itself runs for. Longer than the ability's own 1000 tick cooldown on
+					purpose, so what limits a second attempt is the pawn rather than the caster, and a
+					second siren cannot pick up where the first left off.
+				-->
+				<targetQuietTicks>2500</targetQuietTicks>
 			</li>
 		</comps>
 	</AbilityDef>
 
 	<!-- Effects from abilities -->
+	<!--
+		What stops a siren singing the same pawn back and forth between two of them. Applied to the
+		target when the lure lands and worn for the song plus a quiet spell after it, during which no
+		siren can start another one on that pawn. See SirenLureTargetRules.
+	-->
+	<HediffDef>
+		<defName>APM_Hediff_SirenLureCooldown</defName>
+		<label>song fatigue</label>
+		<description>This pawn's mind has been wrung out by a siren's song and has stopped answering it. No siren can compel them again until it passes.</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<defaultLabelColor>(0.52, 1, 0.95)</defaultLabelColor>
+		<isBad>false</isBad>
+		<maxSeverity>1.0</maxSeverity>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<showRemainingTime>True</showRemainingTime>
+			</li>
+			<li Class="HediffCompProperties_DisappearsOnDeath"></li>
+		</comps>
+	</HediffDef>
+
 	<HediffDef>
 		<defName>APM_Hediff_SirenSong</defName>
 		<label>siren's song</label>

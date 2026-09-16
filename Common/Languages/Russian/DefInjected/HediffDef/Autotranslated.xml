@@ -172,4 +172,7 @@
   <APM_Hediff_DisciplineBurnout.description>Пришлось работать быстрее, чем следовало, под дисциплиной Вассала. Движение и работа даются тяжело, пока усталость не пройдёт.</APM_Hediff_DisciplineBurnout.description>
   <APM_Hediff_DisciplineBurnout_Mech.label>перегретое ядро</APM_Hediff_DisciplineBurnout_Mech.label>
   <APM_Hediff_DisciplineBurnout_Mech.description>Слишком долго на форсированной дисциплине. Ядро раскалено: мех двигается медленнее и быстрее расходует запас энергии, пока не остынет.</APM_Hediff_DisciplineBurnout_Mech.description>
+
+  <APM_Hediff_SirenLureCooldown.label>усталость от песни</APM_Hediff_SirenLureCooldown.label>
+  <APM_Hediff_SirenLureCooldown.description>Разум этой пешки был сломлен песней сирены и перестал на нее откликаться. Никакая сирена не сможет подчинить их себе, пока это не пройдет.</APM_Hediff_SirenLureCooldown.description>
 </LanguageData>

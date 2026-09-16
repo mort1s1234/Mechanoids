@@ -44,12 +44,54 @@ namespace ApexMechanoids
 
         public static bool CanStartLureOnTarget(Pawn targetPawn, Pawn caster, AbilityDef abilityDef, JobDef channelJobDef, bool scanOtherSirenJobs = true)
         {
-            if (!CanAffectTarget(targetPawn, caster) || targetPawn.CurJobDef == JobDefOf.GotoMindControlled)
+            if (!SirenLureTargetRules.CanStartLure(
+                    canAffectTarget: CanAffectTarget(targetPawn, caster),
+                    alreadyBeingLured: targetPawn?.CurJobDef == JobDefOf.GotoMindControlled,
+                    recentlyLured: IsDeafToTheSong(targetPawn),
+                    anotherSirenLuring: false))
             {
                 return false;
             }
 
+            // The map wide scan is last and skippable because it is the expensive one, and the AI
+            // target search runs this once per candidate.
             return !scanOtherSirenJobs || !HasOtherLureJobOnTarget(targetPawn, caster, abilityDef, channelJobDef);
+        }
+
+        /// <summary>
+        /// Whether this pawn is still carrying the mark from the last song. Left public because the
+        /// mark is the whole of the cooldown; nothing else records that a lure happened.
+        /// </summary>
+        public static bool IsDeafToTheSong(Pawn targetPawn)
+        {
+            return targetPawn?.health?.hediffSet?.GetFirstHediffOfDef(ApexDefsOf.APM_Hediff_SirenLureCooldown) != null;
+        }
+
+        /// <summary>
+        /// Marks the pawn as having just been sung at, or refreshes the mark if it somehow already
+        /// has one. Applied when the song lands rather than when it ends, so cutting a lure short is
+        /// not a way round the cooldown.
+        /// </summary>
+        public static void MarkAsRecentlyLured(Pawn targetPawn, int lureDurationTicks, int quietTicks)
+        {
+            if (targetPawn?.health == null)
+            {
+                return;
+            }
+
+            int markTicks = SirenLureTargetRules.MarkTicks(lureDurationTicks, quietTicks);
+            Hediff mark = targetPawn.health.hediffSet.GetFirstHediffOfDef(ApexDefsOf.APM_Hediff_SirenLureCooldown);
+            if (mark == null)
+            {
+                mark = HediffMaker.MakeHediff(ApexDefsOf.APM_Hediff_SirenLureCooldown, targetPawn);
+                targetPawn.health.AddHediff(mark);
+            }
+
+            HediffComp_Disappears disappears = mark.TryGetComp<HediffComp_Disappears>();
+            if (disappears != null)
+            {
+                disappears.ticksToDisappear = markTicks;
+            }
         }
 
         public static bool TryMakeBestAILureJob(Pawn pawn, float targetAcquireRadius, int recentFirefightTicks, out Job job)

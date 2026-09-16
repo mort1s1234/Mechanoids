@@ -131,6 +131,12 @@ namespace ApexMechanoids
             }
 
             int durationTicks = Mathf.Max(1, parent.def.GetStatValueAbstract(StatDefOf.Ability_Duration, caster).SecondsToTicks());
+
+            // The pawn is deaf to the song for this one plus a quiet spell after it, which is what
+            // stops a siren, or a pair of them, singing the same colonist back and forth. Marked as
+            // the song lands rather than as it ends, so interrupting it is not a way round the wait.
+            SirenLureUtility.MarkAsRecentlyLured(targetPawn, durationTicks, ChannelProps.targetQuietTicks);
+
             Job channelJob = JobMaker.MakeJob(ChannelProps.jobDef, targetPawn, caster);
             channelJob.count = durationTicks;
             channelJob.playerForced = caster.Faction == Faction.OfPlayer;
@@ -143,6 +149,12 @@ namespace ApexMechanoids
     public class CompProperties_SirenLureChannel : CompProperties_AbilityEffect
     {
         public JobDef jobDef;
+
+        /// <summary>
+        /// How long the target stays deaf to the song once this lure has finished, on top of the
+        /// lure's own duration. See <see cref="SirenLureTargetRules"/>.
+        /// </summary>
+        public int targetQuietTicks = SirenLureTargetRules.DefaultQuietTicks;
 
         public CompProperties_SirenLureChannel()
         {

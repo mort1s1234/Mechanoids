@@ -141,6 +141,8 @@
   <APM.MechanoidContainer.Gizmo.ChooseMech.MouseLabel>Select mechanoid...</APM.MechanoidContainer.Gizmo.ChooseMech.MouseLabel>
   <APM.MechanoidContainer.ContainsUnknown>Contains an unidentified mechanoid.</APM.MechanoidContainer.ContainsUnknown>
   <APM.MechanoidContainer.ForcedOpen>{0} forced {1} open without the bandwidth to hold what was inside. {2} is loose and answers to nobody until a mechanitor takes control of it.</APM.MechanoidContainer.ForcedOpen>
+  <APM.MechanoidContainer.ReservePowerLeft>Reserve power: {0} left.</APM.MechanoidContainer.ReservePowerLeft>
+  <APM.MechanoidContainer.ReservesExhausted>{0} ran its preservation cycle dry and let {1} out. It answers to nobody until a mechanitor takes control of it.</APM.MechanoidContainer.ReservesExhausted>
 
   <!-- Ravager & Artillery -->
   <APM_Ravager_AutoArtillery_Label>Auto artillery</APM_Ravager_AutoArtillery_Label>

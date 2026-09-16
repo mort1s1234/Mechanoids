@@ -24,6 +24,16 @@
 			<li>Manipulation</li>
 		</requiredCapacities>
 	</WorkGiverDef>
+	<!--
+		Mechanoids before anything else the tinker could be doing. A wall at half hit points costs the
+		colony nothing until something walks through it; a mech at half hit points loses the next
+		fight, and the tinker is the only thing that can put one back together in the field.
+
+		Two things say so. The priority puts it above repair building, which used to outrank it at 230
+		and is why a tinker with a damaged squad around it went and patched masonry. The emergency
+		flag puts it in the list JobGiver_Work walks before it touches ordinary work at all, so it
+		stays first even if the tinker is ever given a second work type to do.
+	-->
 	<WorkGiverDef>
 		<defName>APM_TinkerRepairMech</defName>
 		<label>repair mech</label>
@@ -31,7 +41,8 @@
 		<workType>APM_TinkerRepair</workType>
 		<verb>repair</verb>
 		<gerund>repairing</gerund>
-		<priorityInType>220</priorityInType>
+		<priorityInType>240</priorityInType>
+		<emergency>true</emergency>
 		<requiredCapacities>
 			<li>Manipulation</li>
 		</requiredCapacities>
