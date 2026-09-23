@@ -192,16 +192,28 @@ namespace ApexMechanoids
 
         public static bool IsValidActiveDuelOpponent(Pawn pawn, Thing target)
         {
-            if (!IsBasicSpawnedPawn(pawn) || pawn.Downed)
-            {
-                return false;
-            }
-
             Pawn targetPawn = target as Pawn;
-            return IsBasicSpawnedPawn(targetPawn)
-                && targetPawn != pawn
-                && targetPawn.Map == pawn.Map
-                && !targetPawn.Downed;
+            return DuelPresenceRules.CanKeepDueling(
+                IsPresentForDuel(pawn),
+                IsPresentForDuel(targetPawn),
+                pawn?.MapHeld != null && targetPawn?.MapHeld == pawn.MapHeld,
+                targetPawn == pawn);
+        }
+
+        /// <summary>Whether a pawn is mid flight, pulled by a hook or jumping, on a map.</summary>
+        public static bool IsInFlight(Pawn pawn)
+        {
+            return pawn?.ParentHolder is PawnFlyer flyer && flyer.Spawned;
+        }
+
+        private static bool IsPresentForDuel(Pawn pawn)
+        {
+            return pawn != null
+                && DuelPresenceRules.IsPresent(
+                    pawn.Destroyed || pawn.Dead,
+                    pawn.Downed,
+                    pawn.Spawned && pawn.Map != null,
+                    IsInFlight(pawn));
         }
 
         public static bool IsInDuel(Pawn pawn)
