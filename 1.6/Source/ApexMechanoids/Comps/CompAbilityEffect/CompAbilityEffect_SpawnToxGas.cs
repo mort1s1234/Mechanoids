@@ -113,6 +113,7 @@ namespace ApexMechanoids
             float radius = threatRadius > 0f ? threatRadius : 4.9f;
             int requiredHostiles = Math.Max(minHostilesToTrigger, 1);
             int nearbyHostiles = 0;
+            bool neighbourCasting = false;
             IReadOnlyList<Pawn> pawns = map.mapPawns.AllPawnsSpawned;
 
             for (int i = 0; i < pawns.Count; i++)
@@ -123,7 +124,13 @@ namespace ApexMechanoids
                     continue;
                 }
 
-                if (other.Position.DistanceTo(caster.PositionHeld) > radius)
+                float distance = other.Position.DistanceTo(caster.PositionHeld);
+                if (!neighbourCasting && distance <= ToxicMistCoverageRules.NeighbourReach && IsCastingToxGas(other))
+                {
+                    neighbourCasting = true;
+                }
+
+                if (distance > radius)
                 {
                     continue;
                 }
@@ -156,7 +163,41 @@ namespace ApexMechanoids
                 nearbyHostiles++;
             }
 
-            return nearbyHostiles >= requiredHostiles;
+            if (nearbyHostiles < requiredHostiles)
+            {
+                return false;
+            }
+
+            return !ToxicMistCoverageRules.AlreadyCovered(
+                CountGassedCells(caster.PositionHeld, map, out int checkedCells),
+                checkedCells,
+                map.GetComponent<MapComponent_GradualGasEmitter>()?.AnyEmissionNear(caster.PositionHeld, GasType.ToxGas, ToxicMistCoverageRules.NeighbourReach) ?? false,
+                neighbourCasting);
+        }
+
+        private static bool IsCastingToxGas(Pawn pawn)
+        {
+            return pawn.CurJob?.ability?.CompOfType<CompAbilityEffect_SpawnToxGas>() != null;
+        }
+
+        private static int CountGassedCells(IntVec3 center, Map map, out int checkedCells)
+        {
+            checkedCells = 0;
+            int gassed = 0;
+            foreach (IntVec3 cell in GenRadial.RadialCellsAround(center, ToxicMistCoverageRules.CoverageRadius, useCenter: true))
+            {
+                if (!cell.InBounds(map))
+                {
+                    continue;
+                }
+
+                checkedCells++;
+                if (map.gasGrid.DensityAt(cell, GasType.ToxGas) >= ToxicMistCoverageRules.GassedDensity)
+                {
+                    gassed++;
+                }
+            }
+            return gassed;
         }
 
         private static bool IsProtectedAlly(Pawn caster, Pawn other)
