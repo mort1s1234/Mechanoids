@@ -64,6 +64,21 @@ namespace ApexMechanoids
             emissions.Add(emission);
         }
 
+        /// <summary>Whether a cloud of this gas is still coming out within reach of a cell.</summary>
+        public bool AnyEmissionNear(IntVec3 cell, GasType gasType, float reach)
+        {
+            float reachSquared = reach * reach;
+            for (int i = 0; i < emissions.Count; i++)
+            {
+                GradualGasEmission emission = emissions[i];
+                if (emission.ticksRemaining > 0 && emission.gasType == gasType && (emission.center - cell).LengthHorizontalSquared <= reachSquared)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public override void MapComponentTick()
         {
             for (int i = emissions.Count - 1; i >= 0; i--)
