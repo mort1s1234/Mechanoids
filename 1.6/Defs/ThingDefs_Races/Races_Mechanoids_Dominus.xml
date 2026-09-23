@@ -101,7 +101,6 @@
 		<skipResistant>true</skipResistant>
 		<controlGroupPortraitZoom MayRequire="Ludeon.Rimworld.Biotech">0.48</controlGroupPortraitZoom>
 		<weaponMoney>99999~99999</weaponMoney>
-		<controlGroupPortraitZoom>1</controlGroupPortraitZoom>
 	</PawnKindDef>
 
 	<!-- Player -->
