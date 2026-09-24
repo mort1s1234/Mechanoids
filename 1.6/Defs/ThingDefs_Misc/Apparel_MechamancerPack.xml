@@ -15,7 +15,8 @@
 		<graphicData>
 			<texPath>Things/Pawn/Humanlike/Apparel/MechamancerPack/MechamancerPack_icon</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
-			<drawSize>(1.4,1.4)</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1,1)</drawSize>
 		</graphicData>
 		<costList>
       	<ComponentSpacer>6</ComponentSpacer>
@@ -79,6 +80,7 @@
 				<li>Belt</li>
 			</layers>
 			<wornGraphicPath>Things/Pawn/Humanlike/Apparel/MechamancerPack/MechamancerPack</wornGraphicPath>
+			<useWornGraphicMask>true</useWornGraphicMask>
 			<wornGraphicData>
 				<renderUtilityAsPack>true</renderUtilityAsPack>
 				<north>

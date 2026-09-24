@@ -16,9 +16,9 @@
 		</tradeTags>
 		<generateCommonality>2</generateCommonality>
 		<graphicData>
-			<texPath>Things/Pawn/Humanlike/Apparel/MechamancerSuit/MechJuggernaut_icon</texPath><!-- make an icon -->
+			<texPath>Things/Pawn/Humanlike/Apparel/MechamancerSuit/Mechamancer_icon</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
-			<shaderType>Cutout</shaderType>
+			<shaderType>CutoutComplex</shaderType>
 			<drawSize>(0.85, 0.85)</drawSize>
 		</graphicData>
 		<statBases>
@@ -71,7 +71,8 @@
 				<li>RoyalTier7</li>
 				<li>APM_Mechamancer</li>
 			</tags>
-			<wornGraphicPath>Things/Pawn/Humanlike/Apparel/MechamancerSuit/MechJuggernaut</wornGraphicPath>
+			<wornGraphicPath>Things/Pawn/Humanlike/Apparel/MechamancerSuit/Mechamancer</wornGraphicPath>
+			<useWornGraphicMask>true</useWornGraphicMask>
 			<defaultOutfitTags>
 				<li>Soldier</li>
 				<li>Spacefarer</li>
@@ -127,10 +128,10 @@
 		</tradeTags>
 		<generateCommonality>2</generateCommonality>
 		<graphicData>
-			<texPath>Things/Pawn/Humanlike/Apparel/MechamancerHelmet/MechJuggernautH_icon</texPath>
+			<texPath>Things/Pawn/Humanlike/Apparel/MechamancerHelmet/MechamancerH_icon</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
-			<shaderType>Cutout</shaderType>
-			<drawSize>(0.75, 0.75)</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(0.85, 0.85)</drawSize>
 		</graphicData>
 		<statBases>
 			<MaxHitPoints>300</MaxHitPoints>
@@ -167,7 +168,8 @@
 				<li>RoyalTier7</li>
 				<li>APM_Mechamancer</li>
 			</tags>
-			<wornGraphicPath>Things/Pawn/Humanlike/Apparel/MechamancerHelmet/MechJuggernautH</wornGraphicPath>
+			<wornGraphicPath>Things/Pawn/Humanlike/Apparel/MechamancerHelmet/MechamancerH</wornGraphicPath>
+			<useWornGraphicMask>true</useWornGraphicMask>
 			<defaultOutfitTags>
 				<li>Soldier</li>
 				<li>Spacefarer</li>
