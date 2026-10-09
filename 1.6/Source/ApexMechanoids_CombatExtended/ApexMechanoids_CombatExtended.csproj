@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<AssemblyName>ApexMechanoidsCE</AssemblyName>
+		<AssemblyVersion>0.8</AssemblyVersion>
+		<FileVersion>0.8</FileVersion>
+		<Version>0.8</Version>
+		<Company />
+		<Authors />
+		<Copyright>CC BY-NC-SA 4.0 2025</Copyright>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<TargetFramework>net48</TargetFramework>
+		<Configurations>Debug;Release</Configurations>
+		<Platforms>AnyCPU</Platforms>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+		<OutputPath>../../CombatExtended/Assemblies/</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<OutputPath>../../CombatExtended/Assemblies/</OutputPath>
+	</PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CombatExtended">
+      <HintPath>RefAssemblies\CombatExtended.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Krafs.Rimworld.Ref">
+      <Version>1.6.4871</Version>
+    </PackageReference>
+    <PackageReference Include="Lib.Harmony" Version="2.4.2" ExcludeAssets="runtime">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>compile</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ApexMechanoids\ApexMechanoids.csproj">
+      <Project>{2e8a0964-4340-447b-bdd0-d40399e13e7a}</Project>
+      <Name>ApexMechanoids</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
