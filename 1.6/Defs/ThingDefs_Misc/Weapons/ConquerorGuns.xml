@@ -14,7 +14,7 @@
 		<destroyOnDrop>true</destroyOnDrop>
 		<tradeability>None</tradeability>
 		<statBases>
-			<WorkToMake>45000</WorkToMake>
+			<MarketValue>1000</MarketValue>
 			<Mass>4.2</Mass>
 			<AccuracyTouch>0.60</AccuracyTouch>
 			<AccuracyShort>0.75</AccuracyShort>
@@ -93,7 +93,7 @@
 		<destroyOnDrop>true</destroyOnDrop>
 		<tradeability>None</tradeability>
 		<statBases>
-			<WorkToMake>45000</WorkToMake>
+			<MarketValue>1000</MarketValue>
 			<Mass>5.5</Mass>
 			<AccuracyTouch>0.50</AccuracyTouch>
 			<AccuracyShort>0.75</AccuracyShort>
@@ -161,7 +161,7 @@
 		<destroyOnDrop>true</destroyOnDrop>
 		<tradeability>None</tradeability>
 		<statBases>
-			<WorkToMake>45000</WorkToMake>
+			<MarketValue>1000</MarketValue>
 			<Mass>3.0</Mass>
 			<AccuracyTouch>0.82</AccuracyTouch>
 			<AccuracyShort>0.78</AccuracyShort>

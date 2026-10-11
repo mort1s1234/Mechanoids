@@ -264,6 +264,7 @@
                 <min>1</min>
                 <max>1.05</max>
             </pitchRange>
+			<muteWhenPaused>true</muteWhenPaused>
         </li>
     </subSounds>
 </SoundDef>

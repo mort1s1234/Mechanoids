@@ -14,7 +14,7 @@
 		<destroyOnDrop>true</destroyOnDrop>
 		<relicChance>0</relicChance>
 		<statBases>
-			<MarketValue>9999</MarketValue>
+			<MarketValue>1800</MarketValue>
 			<AccuracyTouch>0.7</AccuracyTouch>
 			<AccuracyShort>0.85</AccuracyShort>
 			<AccuracyMedium>0.92</AccuracyMedium>

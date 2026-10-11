@@ -15,7 +15,7 @@
 		<destroyOnDrop>true</destroyOnDrop>
 		<tradeability>None</tradeability>
 		<statBases>
-			<WorkToMake>30000</WorkToMake>
+			<MarketValue>1200</MarketValue>
 			<Mass>8</Mass>
 			<AccuracyTouch>0.55</AccuracyTouch>
 			<AccuracyShort>0.75</AccuracyShort>
