@@ -95,17 +95,17 @@ namespace ApexMechanoids
             return methods;
         }
 
-        private static void Prefix(Verb __instance, ref LocalTargetInfo castTarg)
+        private static void Prefix(Verb __instance, ref LocalTargetInfo __0)
         {
             if (__instance?.verbProps == null || !__instance.verbProps.beamTargetsGround)
             {
                 return;
             }
-            if (!(castTarg.Thing is Pawn))
+            if (!(__0.Thing is Pawn))
             {
                 return;
             }
-            castTarg = GroundTargetLineOfSight.Resolve(__instance, castTarg);
+            __0 = GroundTargetLineOfSight.Resolve(__instance, __0);
         }
     }
 }
