@@ -3,7 +3,6 @@ test "Siren song lifts colonists in its radius" project="Apex Mechanoids" create
 
 requires dlc=Biotech
 requires mod=Mortis.ApexMechanoids
-requires assert=thoughtpart
 spawn Pawn:APM_Mech_Siren at 0,0 faction=player name="Siren"
 spawn Pawn:Colonist at 0,-2 name="Mechanitor"
 draft "Mechanitor"

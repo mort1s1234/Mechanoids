@@ -3,7 +3,6 @@ test "Steel discipline ends in burnout" project="Apex Mechanoids" created=2026-0
 
 requires dlc=Biotech
 requires mod=Mortis.ApexMechanoids
-requires assert=thoughtpart
 spawn Pawn:APM_Mech_Vassal faction=player name="Vassal"
 spawn Pawn:Colonist age=30 name="Worker"
 draft "Worker"

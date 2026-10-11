@@ -3,7 +3,6 @@ test "Steel discipline drives allies in reach" project="Apex Mechanoids" created
 
 requires dlc=Biotech
 requires mod=Mortis.ApexMechanoids
-requires assert=thoughtpart
 speed paused
 spawn Pawn:APM_Mech_Vassal at 0,0 faction=player name="Vassal" gear=none
 spawn Pawn:Colonist at 4,0 age=30 name="Near"
