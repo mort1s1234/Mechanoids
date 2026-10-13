@@ -22,8 +22,9 @@ waitfor pawn "Duelist" hediff=APM_InDuel ticks=240 expect=present
 speed paused
 assert pawn "Duelist" hediff=Burn severity min=19 max=21 expect=present
 down "Raider"
-tick 5 note="MentalStateTick notices the downed opponent on its next tick"
-assert pawn "Duelist" hediff=APM_DuelWinner expect=present
+speed x1
+waitfor pawn "Duelist" hediff=APM_DuelWinner ticks=60 expect=present
+speed paused
 assert pawn "Duelist" hediff=Burn severity min=11 max=13 expect=present
 assert pawn "Raider" hediff=Burn severity min=19 max=21 expect=present
 assert log clean

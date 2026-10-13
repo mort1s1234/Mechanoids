@@ -32,8 +32,7 @@ waitfor pawn "Lured" hediff=APM_Hediff_SirenLureCooldown ticks=150 expect=presen
 assert pawn "Lured" job=GotoMindControlled expect=present
 assert pawn "Lure" job=APM_SirenLureChannel expect=present
 
-tick 700 note="song 600 ticks, then 100 spare; the mark (3100) keeps 2400"
-assert pawn "Lured" job=GotoMindControlled expect=absent
+waitfor pawn "Lured" job=GotoMindControlled ticks=700 expect=absent
 assert pawn "Lured" hediff=APM_Hediff_SirenLureCooldown expect=present
 
 select "Second"

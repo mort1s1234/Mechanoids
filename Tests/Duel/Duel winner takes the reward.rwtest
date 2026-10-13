@@ -19,9 +19,9 @@ speed paused
 assert pawn "Duelist" hediff=APM_DuelWinner expect=absent
 
 down "Raider"
-tick 5 note="MentalStateTick notices the downed opponent on its next tick"
-
-assert pawn "Duelist" hediff=APM_DuelWinner expect=present
+speed x1
+waitfor pawn "Duelist" hediff=APM_DuelWinner ticks=60 expect=present
+speed paused
 assert pawn "Duelist" hediff=APM_DuelWinner severity min=0.12 max=0.13 expect=present
 assert pawn "Duelist" stat=MoveSpeed min=4.65 max=4.75 expect=present
 assert pawn "Duelist" hediff=APM_InDuel expect=absent

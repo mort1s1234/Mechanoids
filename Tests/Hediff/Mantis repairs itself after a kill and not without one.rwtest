@@ -7,9 +7,10 @@ speed paused
 spawn Pawn:APM_Mech_Mantis faction=player name="Hunter"
 spawn Pawn:APM_Mech_Mantis faction=player name="Idle"
 spawn Pawn:Mech_Scyther name="Prey" gear=none
-tick 60 note="hediff givers run every 60 ticks, the Mantis gets its mechanites on the first one"
-assert pawn "Hunter" hediff=APM_ApexMechanoid_HealOnKills expect=present
-assert pawn "Idle" hediff=APM_ApexMechanoid_HealOnKills expect=present
+speed x1
+waitfor pawn "Hunter" hediff=APM_ApexMechanoid_HealOnKills ticks=60 expect=present
+waitfor pawn "Idle" hediff=APM_ApexMechanoid_HealOnKills ticks=60 expect=present
+speed paused
 damage "Prey" amount=999 kind=Burn by="Hunter"
 assert pawn "Prey" dead expect=present
 damage "Hunter" amount=100 kind=Burn

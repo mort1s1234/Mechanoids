@@ -20,6 +20,6 @@ select APM_DynamoPoweredGenerator
 gizmo "Mobile Mode" expect=allowed
 assert text contains "APM" expect=absent
 
-waitfor pawn "Dynamo" downed expect=absent ticks=120
-assert thing APM_DynamoPoweredGenerator expect=absent
+waitfor thing APM_DynamoPoweredGenerator ticks=120 expect=absent
+assert pawn "Dynamo" downed expect=absent
 assert log clean

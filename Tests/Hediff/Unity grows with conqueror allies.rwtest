@@ -19,8 +19,7 @@ spawn Pawn:APM_Mech_Conqueror_AR name="AR"
 pacify "AR"
 spawn Pawn:APM_Mech_Conqueror_SMG name="SMG"
 pacify "SMG"
-tick 600 note="two recount intervals after the allies arrived"
-assert pawn "DMR" hediff=APM_Hediff_Unity severity min=0.19 max=0.21 expect=present
-assert pawn "AR" hediff=APM_Hediff_Unity severity min=0.19 max=0.21 expect=present
+waitfor pawn "DMR" hediff=APM_Hediff_Unity severity min=0.19 max=0.21 ticks=500 expect=present
+waitfor pawn "AR" hediff=APM_Hediff_Unity severity min=0.19 max=0.21 ticks=500 expect=present
 assert pawn "DMR" stat=MoveSpeed min=4.33 max=4.40 expect=present
 assert log clean

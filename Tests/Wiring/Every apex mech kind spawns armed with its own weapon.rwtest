@@ -112,6 +112,6 @@ draft "Siren"
 attack "Siren" target="Target"
 draft "Vassal"
 attack "Vassal" target="Target"
-tick 40 note="the shortest ranged warmup is 0.9 s = 54 ticks, so every gun is still aiming and none has fired yet"
+tick 30 note="the shortest ranged warmup is the Conqueror SMG's 0.6 s = 36 ticks, so every gun is still aiming and none has fired yet"
 ask "apex-weapons-drawn" claim="all twenty apex mechs stand spread apart around two mechanitors in mechamancer gear; nineteen of them hold their own weapon drawn and turned towards the colonist to the east, while the Satellite, a summoned mech no mechanitor controls, stands undrafted; the six melee mechs walk towards him with their blade or lance in hand; no mech is empty-handed, and no weapon is pink, a white square or drawn away from its body"
 assert log clean
