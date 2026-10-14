@@ -1,0 +1,47 @@
+rwtest 1
+test "Gazer sun ray burns along its line, hostile shockwave spares wild animals" project="Apex Mechanoids" created=2026-09-26T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+spawn Pawn:APM_Mech_Gazer at 0,0 faction=player name="Gazer"
+spawn Pawn:Colonist at -3,-4 name="Mechanitor"
+draft "Mechanitor"
+give "Mechanitor" need=Food value=1
+overseer "Gazer" by="Mechanitor" now=true
+draft "Gazer"
+spawn Pawn:Colonist at 12,0 name="Target"
+draft "Target"
+spawn Pawn:Colonist at -8,0 name="Behind"
+draft "Behind"
+assert pawn "Target" pain max=0 expect=present
+select "Gazer"
+gizmo "Sun Ray" expect=allowed
+target cell=2,0 expect=refused
+gizmo "Sun Ray" expect=allowed
+target "Target" expect=allowed
+tick 1250 note="the 570 tick warmup and the whole 948 tick sweep, with room to spare"
+gizmo "Sun Ray" expect=disabled
+deselect
+assert pawn "Behind" pain max=0 expect=present
+assert pawn "Behind" hediff=BeamWound expect=absent
+undraft "Gazer"
+assert hit "Target" by="Gazer" min=1
+despawn Pawn:APM_Mech_Gazer
+despawn Pawn:Colonist
+
+spawn Pawn:APM_Mech_Gazer at 0,0 faction=Mechanoid name="Hostile gazer"
+spawn Pawn:Colonist at 2,0 name="Colonist" gear=none
+draft "Colonist"
+spawn Pawn:Muffalo at -3,0 faction=none name="Muffalo"
+
+assert pawn "Colonist" hediff=Shredded expect=absent
+assert pawn "Muffalo" hediff=Shredded expect=absent
+
+waitfor pawn "Colonist" hediff=Shredded ticks=400 expect=present
+tick 60 note="the 32 tick blast wave has passed every cell of its 8.9 cell radius"
+
+assert casts "Hostile gazer" ability=APM_Shockwave min=1 max=1
+assert hit "Colonist" by="Hostile gazer" min=1
+assert pawn "Muffalo" hediff=Shredded expect=absent
+assert hit "Muffalo" by="Hostile gazer" min=0 max=0
+assert log clean

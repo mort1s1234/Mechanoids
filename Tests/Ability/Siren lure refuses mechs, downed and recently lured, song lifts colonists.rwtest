@@ -1,8 +1,8 @@
 rwtest 1
-test "Siren lure refuses mechs, the downed and the recently lured" project="Apex Mechanoids" created=2026-09-26T00:00:00
+test "Siren lure refuses mechs, downed and recently lured, song lifts colonists" project="Apex Mechanoids" created=2026-09-26T00:00:00
 
-requires dlc=Biotech
 requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
 spawn Pawn:APM_Mech_Siren at 0,0 faction=player name="Lure"
 spawn Pawn:APM_Mech_Siren at 0,4 faction=player name="Second"
 spawn Pawn:Colonist at -2,0 name="Mechanitor"
@@ -44,4 +44,36 @@ deselect
 waitfor pawn "Fresh" hediff=APM_Hediff_SirenLureCooldown ticks=150 expect=present
 assert pawn "Tin" hediff=APM_Hediff_SirenLureCooldown expect=absent
 assert pawn "Fallen" hediff=APM_Hediff_SirenLureCooldown expect=absent
+
+spawn Pawn:APM_Mech_Siren at 0,30 faction=player name="Singer"
+spawn Pawn:Colonist at 0,28 name="Singer mechanitor"
+draft "Singer mechanitor"
+spawn Pawn:Colonist at 4,30 name="Near" gear=none
+draft "Near"
+spawn Pawn:Colonist at 15,30 name="Far" gear=none
+draft "Far"
+overseer "Singer" by="Singer mechanitor" now=true
+draft "Singer"
+give "Near" need=Joy value=0.3
+give "Far" need=Joy value=0.3
+
+assert pawn "Near" capacity=Moving min=0.95 max=1.02 expect=present
+assert pawn "Near" capacity=Consciousness min=0.95 max=1.02 expect=present
+
+select "Singer"
+gizmo "Siren's song" expect=allowed
+deselect
+
+waitfor pawn "Near" hediff=APM_Hediff_SirenSong ticks=180 expect=present
+assert pawn "Near" need=Joy min=0.48 max=0.52 expect=present
+assert pawn "Near" capacity=Moving min=1.07 max=1.13 expect=present
+assert pawn "Near" capacity=Consciousness min=1.02 max=1.08 expect=present
+waitfor pawn "Near" thought=APM_Thought_SirenSong ticks=300 expect=present
+assert thoughtpart "Near" thought=APM_Thought_SirenSong min=5.9 max=6.1 expect=present
+
+assert pawn "Far" hediff=APM_Hediff_SirenSong expect=absent
+assert pawn "Far" need=Joy max=0.32 expect=present
+assert pawn "Far" capacity=Moving max=1.02 expect=present
+assert pawn "Far" thought=APM_Thought_SirenSong expect=absent
+assert pawn "Singer" hediff=APM_Hediff_SirenSong expect=absent
 assert log clean

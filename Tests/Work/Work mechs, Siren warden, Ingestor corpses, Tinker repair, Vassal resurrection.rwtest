@@ -1,0 +1,137 @@
+rwtest 1
+test "Work mechs, Siren warden, Ingestor corpses, Tinker repair, Vassal resurrection" project="Apex Mechanoids" created=2026-09-26T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+speed paused
+room size=5,5 prison=true name="cell"
+spawn Thing:Bed in="cell"
+spawn Pawn:Colonist in="cell" name="Prisoner"
+spawn Pawn:APM_Mech_Siren faction=player name="Siren"
+spawn Pawn:APM_Mech_Lasher faction=player name="Lasher"
+prisoner "Prisoner" resistance=10 mode=ReduceResistance
+
+assert prisoner "Prisoner" secure expect=present
+assert pawn "Prisoner" room=PrisonCell expect=present
+assert reach "Siren" to="Prisoner" pathEndMode=Touch expect=present
+assert pawn "Prisoner" resistance min=9.9 max=10.1 expect=present
+
+work "Siren" giver=APM_SirenChatWithPrisoner on="Prisoner" expect=allowed
+work "Lasher" giver=APM_SirenChatWithPrisoner on="Prisoner" expect=absent
+
+prisoner "Prisoner" mode=MaintainOnly
+work "Siren" giver=APM_SirenChatWithPrisoner on="Prisoner" expect=absent
+
+prisoner "Prisoner" mode=AttemptRecruit
+work "Siren" giver=APM_SirenChatWithPrisoner on="Prisoner" expect=allowed
+
+prisoner "Prisoner" mode=ReduceResistance
+speed x1
+job "Siren" giver=APM_SirenChatWithPrisoner on="Prisoner" until=done ticks=3000
+assert pawn "Prisoner" resistance min=7.0 max=9.8 expect=present
+
+spawn Pawn:APM_Mech_Ingestor at -40,0 faction=player name="Ingestor"
+spawn Pawn:Colonist at -38,0 faction=enemy name="Body"
+damage "Body" amount=999
+assert pawn "Body" dead expect=present
+assert thing Corpse_Human expect=present
+work "Ingestor" giver=APM_IngestorProcessCorpses on=Corpse_Human expect=allowed
+
+select "Ingestor"
+gizmo "Recycle all valid corpses" expect=absent
+gizmo "Use marked corpses only" expect=allowed
+gizmo "Enable stripping" expect=allowed
+assert text contains "APM_" expect=absent
+deselect
+
+work "Ingestor" giver=APM_IngestorProcessCorpses on=Corpse_Human expect=absent
+
+reload note="both settings are saved on the comp"
+select "Ingestor"
+gizmo "Use marked corpses only" expect=absent
+gizmo "Enable stripping" expect=absent
+deselect
+work "Ingestor" giver=APM_IngestorProcessCorpses on=Corpse_Human expect=absent
+
+select "Ingestor"
+gizmo "Recycle all valid corpses" expect=allowed
+gizmo "Disable stripping" expect=allowed
+deselect
+work "Ingestor" giver=APM_IngestorProcessCorpses on=Corpse_Human expect=allowed
+
+job "Ingestor" giver=APM_IngestorProcessCorpses on=Corpse_Human until=ended ticks=2000
+assert thing Corpse_Human expect=absent
+assert pawn "Ingestor" hediff=APM_AbsorbedThing expect=present
+
+spawn Pawn:Colonist at -38,2 faction=enemy name="Second body"
+damage "Second body" amount=999
+assert thing Corpse_Human expect=present
+work "Ingestor" giver=APM_IngestorProcessCorpses on=Corpse_Human expect=absent
+
+reload note="the pending chemfuel batch is saved on the hediff"
+assert pawn "Ingestor" hediff=APM_AbsorbedThing expect=present
+
+spawn Pawn:APM_Mech_Tinker at 0,-46 faction=player name="Tinker"
+spawn Pawn:Mech_Lifter at 2,-46 faction=player name="Patient"
+damage "Patient" amount=10 kind=Blunt
+assert pawn "Patient" hediff=Crack expect=present
+
+work "Tinker" giver=APM_TinkerRepairMech on="Patient" expect=absent
+
+spawn Pawn:Colonist at -2,-46 name="Mechanitor"
+overseer "Tinker" by="Mechanitor"
+overseer "Patient" by="Mechanitor"
+assert pawn "Tinker" downed expect=absent
+assert pawn "Tinker" job=SelfShutdown expect=absent
+work "Tinker" giver=APM_TinkerRepairMech on="Patient" forced=true expect=allowed
+job "Tinker" giver=APM_TinkerRepairMech on="Patient" forced=true until=done ticks=2500
+assert pawn "Patient" hediff=Crack expect=absent
+
+despawn Pawn:APM_Mech_Tinker
+spawn Pawn:APM_Mech_Tinker at 0,-40 faction=player name="Auto tinker"
+spawn Pawn:Mech_Lifter at 6,-40 faction=player name="Auto patient"
+spawn Pawn:Colonist at -4,-40 name="Auto mechanitor"
+draft "Auto mechanitor"
+give "Auto mechanitor" need=Food value=1
+overseer "Auto tinker" by="Auto mechanitor" now=true
+overseer "Auto patient" by="Auto mechanitor" now=true
+comp "Auto patient" type=CompMechRepairable autoRepair=false
+damage "Auto patient" amount=10 kind=Blunt
+assert pawn "Auto patient" hediff=Crack expect=present
+
+tick 2500 note="the pick-up budget of the auto repair block, spent with auto repair off"
+assert jobhistory "Auto tinker" job=APM_RepairMech expect=absent
+assert pawn "Auto patient" hediff=Crack expect=present
+
+comp "Auto patient" type=CompMechRepairable autoRepair=true
+waitfor jobhistory "Auto tinker" job=APM_RepairMech ticks=2500 expect=present
+waitfor pawn "Auto patient" hediff=Crack expect=absent ticks=2500
+
+sky glow=1
+room at 30,-5 size=15,11 roof=false name="gestator yard"
+spawn Thing:WoodFiredGenerator in="gestator yard" faction=player fueled=true
+spawn Thing:MechGestator in="gestator yard" faction=player name="gestator"
+spawn Thing:Steel in="gestator yard" count=25
+spawn Pawn:Colonist in="gestator yard" name="Gestator mechanitor"
+spawn Pawn:APM_Mech_Vassal in="gestator yard" faction=player name="Vassal"
+spawn Pawn:APM_Mech_Vassal in="gestator yard" faction=player name="Second vassal"
+spawn Pawn:Mech_Lifter in="gestator yard" faction=player name="Fallen"
+overseer "Vassal" by="Gestator mechanitor" now=true
+waitfor power "gestator" ticks=250 expect=present
+assert pawn "Gestator mechanitor" stat=MechBandwidth min=6 max=6 expect=present
+
+damage "Fallen" amount=999
+assert pawn "Fallen" dead expect=present
+assert thing Corpse_Mech_Lifter expect=present
+
+select "gestator"
+tab "Bills"
+click "Add bill"
+menu "Resurrect light mechanoid" expect=allowed
+deselect
+
+work "Vassal" giver=DoBillsMechGestator on="gestator" forced=true expect=allowed
+
+overseer "Second vassal" by="Gestator mechanitor" now=true
+work "Vassal" giver=DoBillsMechGestator on="gestator" forced=true expect=disabled reason="Not enough bandwidth" match=equals
+assert log clean

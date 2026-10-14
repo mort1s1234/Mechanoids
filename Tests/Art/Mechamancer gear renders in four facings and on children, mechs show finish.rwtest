@@ -1,8 +1,8 @@
 rwtest 1
-test "Mechamancer gear renders on adults in four facings and the pack on children" project="Apex Mechanoids" created=2026-09-26T00:00:00
+test "Mechamancer gear renders in four facings and on children, mechs show finish" project="Apex Mechanoids" created=2026-09-26T00:00:00
 
-requires dlc=Biotech
 requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
 speed paused
 spawn Pawn:Colonist at -6,0 name="South" facing=south
 spawn Pawn:Colonist at -2,0 name="East" facing=east
@@ -62,4 +62,23 @@ assert pawn "Child north" apparel=APM_Apparel_MechamancerPack expect=present
 
 ask "pack-child-visible" claim="all four children visibly wear the backpack: from the south it shows behind the body, from the north it covers the back, from east and west it hangs at the back; it is not missing, cut off, pink or oversized for the child"
 ask "pack-child-sides" claim="on both east and west children the backpack sits on the back, touching it, just like on the adult next to them; it does not float behind the child and does not overlap the child's front"
+despawn Pawn:Colonist
+
+spawn Pawn:APM_Mech_Dominus at -8,4 faction=player facing=south rolled=true
+spawn Pawn:APM_Mech_Terminus at -4,4 faction=player facing=south rolled=true
+spawn Pawn:APM_Mech_Celerus at 0,4 faction=player facing=south rolled=true
+spawn Pawn:APM_Mech_Siren at 4,4 faction=player facing=south rolled=true
+spawn Pawn:APM_Mech_Tinker at 8,4 faction=player facing=south rolled=true
+spawn Pawn:APM_Mech_Dominus at -8,-4 facing=south rolled=true
+spawn Pawn:APM_Mech_Terminus at -4,-4 facing=south rolled=true
+spawn Pawn:APM_Mech_Celerus at 0,-4 facing=south rolled=true
+spawn Pawn:APM_Mech_Siren at 4,-4 facing=south rolled=true
+spawn Pawn:APM_Mech_Tinker at 8,-4 facing=south rolled=true
+
+ask "mech-faction-tint" claim="the top row (colony mechs) and the middle row (hostile mechs) show the same five mech kinds, each holding its built-in weapon; in each column the two are the same body and differ at most in the tinted accent parts; no mech has a pink or magenta patch, and none is tinted over its whole body"
+
+spawn Pawn:APM_Mech_Dominus_Boss at -8,-10 facing=south rolled=true
+spawn Pawn:APM_Mech_Terminus_Boss at -4,-10 facing=south rolled=true
+spawn Pawn:APM_Mech_Celerus_Boss at 0,-10 facing=south rolled=true
+ask "mech-boss-finish" claim="the bottom row shows the boss Dominus, Terminus and Celerus; each looks clearly different from the regular one straight above it in the middle row - a boss finish, not the same texture - and none has pink patches or missing parts"
 assert log clean

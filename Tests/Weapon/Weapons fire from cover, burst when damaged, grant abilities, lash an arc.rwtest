@@ -1,0 +1,131 @@
+rwtest 1
+test "Weapons fire from cover, burst when damaged, grant abilities, lash an arc" project="Apex Mechanoids" created=2026-09-26T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+room at -2,-3 size=6,7 door=none roof=false
+
+spawn Pawn:APM_Mech_Javelin at 0,0 faction=player name="Javelin"
+spawn Pawn:Colonist at -1,-2 name="Mechanitor"
+draft "Mechanitor"
+give "Mechanitor" need=Food value=1
+overseer "Javelin" by="Mechanitor" now=true
+equip "Javelin" thing=APM_Gun_JavelinRocketLauncher now=true
+assert pawn "Javelin" equipment=APM_Gun_JavelinRocketLauncher expect=present
+
+spawn Pawn:Colonist at 20,0 name="Dummy A"
+draft "Dummy A"
+
+spawn Thing:Wall at -2,10
+spawn Thing:Wall at -1,10
+spawn Thing:Wall at 0,10
+spawn Thing:Wall at 1,10
+spawn Thing:Wall at 2,10
+spawn Pawn:Colonist at 0,20 name="Dummy B"
+draft "Dummy B"
+
+assert pawn "Dummy A" hediff=APM_Hediff_JavelinMissileLock expect=absent
+assert pawn "Dummy A" pain max=0 expect=present
+
+draft "Javelin"
+attack "Javelin" target="Dummy A"
+waitfor jobhistory "Javelin" job=AttackStatic ticks=60 expect=present
+waitfor shots "Javelin" min=1 ticks=600
+waitfor pawn "Dummy A" hediff=APM_Hediff_JavelinMissileLock ticks=600 expect=present
+assert pawn "Dummy A" pain min=0.1 expect=present
+undraft "Javelin"
+
+tick 450 note="cooldown 7.4 s = 444 ticks from the east shot runs out before the north order"
+draft "Javelin"
+select "Javelin"
+gizmo "Javelin rocket launcher" expect=allowed
+target "Dummy B" expect=refused reason="Cannot hit target"
+deselect
+attack "Javelin" target="Dummy B"
+tick 600 note="the same 244 tick warmup-plus-flight the east shot needed, with the same margin"
+assert shots "Javelin" min=0 max=0
+assert pawn "Dummy B" hediff=APM_Hediff_JavelinMissileLock expect=absent
+undraft "Javelin"
+
+spawn Pawn:APM_Mech_Maul at 0,-40 faction=player name="Fresh"
+spawn Pawn:Colonist at -3,-42 name="Mechanitor A"
+draft "Mechanitor A"
+give "Mechanitor A" need=Food value=1
+overseer "Fresh" by="Mechanitor A" now=true
+equip "Fresh" thing=APM_Gun_Maul now=true
+spawn Thing:Wall at 12,-40 name="Wall A"
+
+spawn Pawn:APM_Mech_Maul at 0,-30 faction=player name="Worn"
+spawn Pawn:Colonist at -3,-32 name="Mechanitor B"
+draft "Mechanitor B"
+give "Mechanitor B" need=Food value=1
+overseer "Worn" by="Mechanitor B" now=true
+equip "Worn" thing=APM_Gun_Maul now=true
+spawn Thing:Wall at 12,-30 name="Wall B"
+
+damage "Worn" amount=129 kind=Blunt
+assert pawn "Worn" hediff=Crack expect=present
+assert pawn "Fresh" hediff=Crack expect=absent
+
+draft "Fresh"
+draft "Worn"
+attack "Fresh" target="Wall A"
+attack "Worn" target="Wall B"
+tick 250 note="warmup 72 + burst up to 44 = 116; the next burst no earlier than 116 + 348"
+assert shots "Fresh" min=8 max=8
+assert shots "Worn" min=12 max=60
+undraft "Fresh"
+undraft "Worn"
+
+spawn Pawn:Colonist at 40,40 name="Wielder"
+draft "Wielder"
+select "Wielder"
+gizmo "Severing edge" expect=absent
+
+equip "Wielder" thing=APM_Weapon_SeveringBlade now=true
+assert pawn "Wielder" equipment=APM_Weapon_SeveringBlade expect=present
+assert ability "Wielder" ability=APM_SeveringEdge range min=4.4 max=5.4
+gizmo "Severing edge" expect=allowed
+target cell=43,40 expect=allowed
+waitfor casts "Wielder" ability=APM_SeveringEdge min=1 ticks=60
+gizmo "Skip" expect=absent
+
+equip "Wielder" thing=APM_Weapon_Skipblade now=true
+assert pawn "Wielder" equipment=APM_Weapon_Skipblade expect=present
+assert ability "Wielder" ability=APM_SkipbladeBlink range min=17.4 max=18.4
+gizmo "Severing edge" expect=absent
+gizmo "Skip" expect=allowed
+target cell=48,40 expect=allowed
+waitfor casts "Wielder" ability=APM_SkipbladeBlink min=1 ticks=60
+assert text contains "APM" expect=absent
+
+speed paused
+spawn Pawn:APM_Mech_Lasher at -40,0 faction=player facing=east name="Lasher"
+spawn Pawn:Colonist at -42,-3 name="Lasher mechanitor"
+draft "Lasher mechanitor"
+give "Lasher mechanitor" need=Food value=1
+overseer "Lasher" by="Lasher mechanitor" now=true
+equip "Lasher" thing=APM_Weapon_MechWhip now=true
+assert pawn "Lasher" equipment=APM_Weapon_MechWhip expect=present
+
+spawn Pawn:Colonist at -36,0 faction=none name="Target"
+spawn Pawn:Colonist at -36,1 faction=none name="Flank"
+spawn Pawn:Colonist at -36,-1 name="Ally"
+draft "Ally"
+spawn Pawn:Colonist at -34,0 faction=none name="Far"
+spawn Pawn:Colonist at -44,0 faction=none name="Behind"
+assert pawn "Target" pain max=0 expect=present
+assert pawn "Flank" pain max=0 expect=present
+
+draft "Lasher"
+attack "Lasher" target="Target"
+tick 10 note="warmup 0: one lash lands within a tick or two, the next only after the 2.6 s cooldown"
+assert pawn "Target" pain min=0.05 expect=present
+assert pawn "Flank" pain min=0.04 expect=present
+assert pawn "Flank" hediff=Cut expect=present
+assert pawn "Ally" pain max=0 expect=present
+assert pawn "Ally" hediff=Cut expect=absent
+assert pawn "Far" pain max=0 expect=present
+assert pawn "Behind" pain max=0 expect=present
+undraft "Lasher"
+assert log clean

@@ -1,8 +1,8 @@
 rwtest 1
-test "Regular and boss effects keep their colours" project="Apex Mechanoids" created=2026-09-26T00:00:00
+test "Regular and boss effects keep their colours, in abilities and in the duel" project="Apex Mechanoids" created=2026-09-26T00:00:00
 
-requires dlc=Biotech
 requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
 speed paused
 spawn Pawn:APM_Mech_Dominus at -12,0 faction=player name="Dominus regular" facing=south rolled=true
 spawn Pawn:APM_Mech_Dominus_Boss at 12,0 faction=player name="Dominus boss" facing=south rolled=true
@@ -78,4 +78,36 @@ gizmo "Smokescreen" expect=allowed
 target cell=8,10 expect=allowed
 deselect
 ask "smokescreen" ticks=300 claim="a grenade arcs from each Celerus and bursts into a spreading cloud; the left grenade and cloud are pale blue-grey, the right grenade is violet and its cloud is a dark purple"
+despawn Pawn:APM_Mech_Dominus
+despawn Pawn:APM_Mech_Dominus_Boss
+despawn Pawn:APM_Mech_Pulse
+despawn Pawn:APM_Mech_Terminus
+despawn Pawn:APM_Mech_Terminus_Boss
+despawn Pawn:APM_Mech_Celerus
+despawn Pawn:APM_Mech_Celerus_Boss
+despawn Pawn:Colonist
+
+spawn Pawn:APM_Mech_Dominus at -12,0 faction=player name="Left dominus" rolled=true
+spawn Pawn:Colonist at -8,0 faction=enemy name="Left duelist"
+spawn Pawn:APM_Mech_Dominus_Boss at 12,0 faction=player name="Right dominus boss" rolled=true
+spawn Pawn:Colonist at 8,0 faction=enemy name="Right duelist"
+spawn Pawn:Colonist at -16,-8 name="Left mechanitor"
+draft "Left mechanitor"
+spawn Pawn:Colonist at 16,-8 name="Right mechanitor"
+draft "Right mechanitor"
+overseer "Left dominus" by="Left mechanitor" now=true
+overseer "Right dominus boss" by="Right mechanitor" now=true
+
+select "Left dominus"
+gizmo "The duel trial" expect=allowed
+target "Left duelist" expect=allowed
+select "Right dominus boss"
+gizmo "The duel trial" expect=allowed
+target "Right duelist" expect=allowed
+deselect
+waitfor thing APM_DuelSpot ticks=240 expect=present
+waitfor thing APM_DuelSpot_Boss ticks=240 expect=present
+
+ask "duel-start" ticks=90 claim="each duel opens with a VS sign and orbiting fire orbs between the two duelists; the left set is pale steel blue-grey, the right set is orange"
+ask "duel-shield" claim="a round shield dome encloses each pair of duelists, centred between them, and neither dome is a white square or missing"
 assert log clean

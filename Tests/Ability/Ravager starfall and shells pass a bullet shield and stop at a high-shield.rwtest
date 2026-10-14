@@ -1,9 +1,9 @@
 rwtest 1
-test "Starfall passes a bullet shield and stops at a high-shield" project="Apex Mechanoids" created=2026-10-01T00:00:00
+test "Ravager starfall and shells pass a bullet shield and stop at a high-shield" project="Apex Mechanoids" created=2026-10-01T00:00:00
 
+requires mod=Mortis.ApexMechanoids
 requires dlc=Biotech
 requires dlc=Royalty
-requires mod=Mortis.ApexMechanoids
 spawn Thing:ShieldGeneratorBullets at 12,6 faction=Mechanoid name="Bullet shield"
 spawn Thing:ShieldGeneratorMortar at 20,30 faction=Mechanoid name="High shield"
 spawn Pawn:APM_Mech_Ravager at -26,0 faction=player name="Ravager"
@@ -46,4 +46,40 @@ assert casts "Ravager C" ability=APM_Starfall min=1 max=1
 assert hit "Target" by="Ravager" min=1
 assert pawn "Target C" hediff=Shredded expect=absent
 assert hit "Target C" by="Ravager C" min=0 max=0
+
+spawn Pawn:APM_Mech_Ravager at -26,-60 faction=player name="Shell ravager"
+spawn Pawn:Colonist at -26,-68 name="Shell mechanitor"
+draft "Shell mechanitor"
+spawn Pawn:Colonist at 10,-60 name="Inside"
+draft "Inside"
+spawn Pawn:Colonist at 20,-80 name="Covered"
+draft "Covered"
+give "Shell mechanitor" need=Food value=1
+give "Inside" need=Food value=1
+give "Covered" need=Food value=1
+overseer "Shell ravager" by="Shell mechanitor" now=true
+assert pawn "Shell ravager" equipment=APM_Ravager_Artillery expect=present
+draft "Shell ravager"
+
+spawn Thing:ShieldGeneratorBullets at 12,-54 faction=Mechanoid name="Shell bullet shield"
+select "Shell ravager"
+gizmo "Starspewer" expect=allowed
+target "Inside" expect=allowed
+deselect
+waitfor shots "Shell ravager" min=1 ticks=400
+waitfor impact "Shell ravager" min=1 ticks=300
+assert impact "Shell ravager" blocked min=0 max=0
+assert hit "Inside" by="Shell ravager" min=1 max=1
+despawn Thing:ShieldGeneratorBullets
+
+spawn Thing:ShieldGeneratorMortar at 22,-76 faction=Mechanoid name="Shell high shield"
+tick 1400 note="Starspewer cooldown 22 s = 1320 ticks runs out before the second order"
+select "Shell ravager"
+gizmo "Starspewer" expect=allowed
+target "Covered" expect=allowed
+deselect
+waitfor shots "Shell ravager" min=2 ticks=400
+waitfor impact "Shell ravager" min=2 ticks=300
+assert impact "Shell ravager" blocked min=1 max=1
+assert hit "Covered" by="Shell ravager" min=0 max=0
 assert log clean
