@@ -1,5 +1,5 @@
 rwtest 1
-test "Command casket admits only a mechanitor" project="Apex Mechanoids" created=2026-09-26T00:00:00
+test "Command casket admits only mechanitors, remote repair costs more for the shield" project="Apex Mechanoids" created=2026-09-26T00:00:00
 
 requires dlc=Biotech
 requires mod=Mortis.ApexMechanoids
@@ -10,6 +10,7 @@ spawn Thing:APM_MechCommandCasket in="yard" faction=player name="casket"
 spawn Pawn:Colonist in="yard" name="Mechanitor"
 spawn Pawn:Colonist in="yard" name="Plain"
 spawn Pawn:Mech_Lifter in="yard" faction=player name="Lifter"
+spawn Pawn:APM_Mech_Aegis in="yard" faction=player name="Aegis"
 waitfor power "casket" ticks=250 expect=present
 
 ordermenu "Plain" on="casket"
@@ -18,6 +19,8 @@ menu "Enter command casket" expect=absent
 
 overseer "Lifter" by="Mechanitor" now=true
 assert pawn "Mechanitor" hediff=MechlinkImplant expect=present
+overseer "Aegis" by="Mechanitor" now=true
+give "Mechanitor" hediff=RemoteRepairerImplant severity=1 part=Brain
 
 ordermenu "Mechanitor" on="casket"
 menu "Enter command casket" expect=allowed
@@ -25,4 +28,20 @@ waitfor inspect "casket" contains "Contains:" ticks=2500 expect=present
 assert text contains "APM." expect=absent
 reload note="the casket user and its nutrition are saved"
 assert inspect "casket" contains "Contains:" expect=present
+
+give "Aegis" need=MechEnergy value=0.5
+damage "Aegis" amount=20 kind=Burn
+select "Mechanitor"
+gizmo "remote repair" expect=allowed
+target "Aegis" expect=allowed
+waitfor pawn "Aegis" hediff=Burn expect=absent ticks=6000
+assert pawn "Aegis" need=MechEnergy min=0.42 max=0.47 expect=present
+
+give "Aegis" need=MechEnergy value=0.5
+damage "Aegis" amount=20 kind=Burn part=APM_AegisShield
+select "Mechanitor"
+gizmo "remote repair" expect=allowed
+target "Aegis" expect=allowed
+waitfor pawn "Aegis" hediff=Burn expect=absent ticks=6000
+assert pawn "Aegis" need=MechEnergy min=0.29 max=0.35 expect=present
 assert log clean

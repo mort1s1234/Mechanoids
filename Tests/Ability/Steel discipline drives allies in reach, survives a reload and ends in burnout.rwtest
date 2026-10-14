@@ -1,5 +1,5 @@
 rwtest 1
-test "Steel discipline drives allies in reach" project="Apex Mechanoids" created=2026-09-26T00:00:00
+test "Steel discipline drives allies in reach, survives a reload and ends in burnout" project="Apex Mechanoids" created=2026-09-26T00:00:00
 
 requires dlc=Biotech
 requires mod=Mortis.ApexMechanoids
@@ -7,6 +7,8 @@ speed paused
 spawn Pawn:APM_Mech_Vassal at 0,0 faction=player name="Vassal" gear=none
 spawn Pawn:Colonist at 4,0 age=30 name="Near"
 draft "Near"
+spawn Pawn:Colonist at -3,0 age=30 name="Worker"
+draft "Worker"
 spawn Pawn:Colonist at 15,0 age=30 name="Far"
 draft "Far"
 spawn Pawn:Colonist at 0,3 faction=enemy name="Raider"
@@ -17,6 +19,8 @@ overseer "Vassal" by="Mechanitor" now=true
 
 assert pawn "Near" stat=MoveSpeed min=4.5 max=4.7 expect=present
 assert thing "Near" at 4,0 expect=present
+assert pawn "Worker" stat=MoveSpeed min=4.5 max=4.7 expect=present
+assert pawn "Vassal" stat=MechEnergyUsageFactor min=0.95 max=1.05 expect=present
 
 speed x1
 select "Vassal"
@@ -28,6 +32,8 @@ assert pawn "Near" hediff=APM_Hediff_SteelDiscipline expect=present
 assert pawn "Near" stat=MoveSpeed min=4.8 max=5.0 expect=present
 assert pawn "Near" thought=APM_Thought_InspiredByDiscipline expect=present
 assert thoughtpart "Near" thought=APM_Thought_InspiredByDiscipline min=7.9 max=8.1 expect=present
+assert pawn "Worker" hediff=APM_Hediff_SteelDiscipline expect=present
+assert pawn "Worker" hediff=APM_Hediff_DisciplineBurnout expect=absent
 
 assert pawn "Far" hediff=APM_Hediff_SteelDiscipline expect=absent
 assert pawn "Far" stat=MoveSpeed min=4.5 max=4.7 expect=present
@@ -36,6 +42,19 @@ assert pawn "Raider" hediff=APM_Hediff_SteelDiscipline expect=absent
 reload note="the buff is a saved hediff with a Disappears timer"
 assert pawn "Near" hediff=APM_Hediff_SteelDiscipline expect=present
 assert pawn "Near" stat=MoveSpeed min=4.8 max=5.0 expect=present
-assert log clean
-
 assert statpart "Near" stat=WorkSpeedGlobal from=APM_Hediff_SteelDiscipline offset min=0.14 max=0.16
+
+give "Worker" hediff=APM_Hediff_SteelDiscipline severity=0
+give "Vassal" hediff=APM_Hediff_SteelDiscipline severity=0
+waitfor pawn "Worker" hediff=APM_Hediff_DisciplineBurnout ticks=60 expect=present
+assert pawn "Worker" hediff=APM_Hediff_SteelDiscipline expect=absent
+assert pawn "Worker" hediff=APM_Hediff_DisciplineBurnout_Mech expect=absent
+assert pawn "Worker" stat=MoveSpeed min=4.35 max=4.55 expect=present
+assert pawn "Worker" thought=APM_Thought_DisciplineBurnout expect=present
+assert thoughtpart "Worker" thought=APM_Thought_DisciplineBurnout min=-6.1 max=-5.9 expect=present
+assert statpart "Worker" stat=WorkSpeedGlobal from=APM_Hediff_DisciplineBurnout offset min=-0.11 max=-0.09
+
+waitfor pawn "Vassal" hediff=APM_Hediff_DisciplineBurnout_Mech ticks=60 expect=present
+assert pawn "Vassal" hediff=APM_Hediff_DisciplineBurnout expect=absent
+assert pawn "Vassal" stat=MechEnergyUsageFactor min=1.3 max=1.4 expect=present
+assert log clean

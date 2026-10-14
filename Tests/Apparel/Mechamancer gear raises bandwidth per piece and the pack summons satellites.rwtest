@@ -1,5 +1,5 @@
 rwtest 1
-test "Mechamancer gear raises bandwidth" project="Apex Mechanoids" created=2026-09-26T00:00:00
+test "Mechamancer gear raises bandwidth per piece and the pack summons satellites" project="Apex Mechanoids" created=2026-09-26T00:00:00
 
 requires dlc=Biotech
 requires mod=Mortis.ApexMechanoids
@@ -22,4 +22,20 @@ wear "Mechanitor" apparel=APM_Apparel_MechamancerPack
 assert pawn "Mechanitor" apparel=APM_Apparel_MechamancerPack expect=present
 assert pawn "Mechanitor" apparel=APM_Apparel_MechamancerSuit expect=present
 assert pawn "Mechanitor" stat=MechBandwidth min=61.9 max=62.1 expect=present
+
+spawn Pawn:Colonist name="Packer"
+wear "Packer" apparel=APM_Apparel_MechamancerPack
+assert thing APM_Mech_Satellite expect=absent
+
+select "Packer"
+gizmo "summon satellite" expect=allowed
+waitfor thing APM_Mech_Satellite ticks=180 expect=present
+select "Packer"
+gizmo "summon satellite" expect=allowed
+tick 180 note="second use: 60 tick warmup plus the cast job"
+
+select "Packer"
+gizmo "summon satellite" expect=refused
+assert text contains "APM" expect=absent
+deselect
 assert log clean

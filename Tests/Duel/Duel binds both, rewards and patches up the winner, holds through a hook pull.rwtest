@@ -1,0 +1,96 @@
+rwtest 1
+test "Duel binds both, rewards and patches up the winner, holds through a hook pull" project="Apex Mechanoids" created=2026-09-26T00:00:00
+
+requires dlc=Biotech
+requires mod=Mortis.ApexMechanoids
+speed paused
+spawn Pawn:Colonist at 0,0 name="Duelist"
+spawn Pawn:Colonist at 4,0 faction=enemy name="Raider"
+equip "Duelist" thing=APM_Weapon_DuelistsPsySpear now=true
+assert pawn "Duelist" equipment=APM_Weapon_DuelistsPsySpear expect=present
+assert pawn "Duelist" stat=IncomingDamageFactor min=0.95 max=1.05 expect=present
+assert pawn "Duelist" stat=MeleeCooldownFactor min=0.95 max=1.05 expect=present
+assert pawn "Duelist" stat=MoveSpeed min=4.5 max=4.7 expect=present
+
+draft "Duelist"
+select "Duelist"
+gizmo "The duel trial" expect=allowed
+target "Raider" expect=allowed
+assert text contains "APM" expect=absent
+deselect
+speed x1
+waitfor pawn "Raider" hediff=APM_InDuel ticks=240 expect=present
+speed paused
+assert pawn "Duelist" hediff=APM_InDuel expect=present
+assert thing APM_DuelSpot expect=present
+assert pawn "Duelist" stat=IncomingDamageFactor min=1.7 max=1.8 expect=present
+assert pawn "Duelist" stat=MeleeCooldownFactor min=0.65 max=0.75 expect=present
+assert pawn "Duelist" hediff=APM_DuelWinner expect=absent
+
+down "Raider"
+speed x1
+waitfor pawn "Duelist" hediff=APM_DuelWinner ticks=60 expect=present
+speed paused
+assert pawn "Duelist" hediff=APM_DuelWinner severity min=0.12 max=0.13 expect=present
+assert pawn "Duelist" stat=MoveSpeed min=4.65 max=4.75 expect=present
+assert pawn "Duelist" hediff=APM_InDuel expect=absent
+assert pawn "Raider" hediff=APM_InDuel expect=absent
+assert thing APM_DuelSpot expect=absent
+assert pawn "Raider" hediff=APM_DuelDraw expect=absent
+
+reload note="the winner's severity is saved and decays per day"
+assert pawn "Duelist" hediff=APM_DuelWinner severity min=0.12 max=0.13 expect=present
+
+spawn Pawn:Colonist at 0,10 name="Wounded duelist" gear=none xenotype=Baseliner
+spawn Pawn:Colonist at 4,10 faction=enemy name="Wounded raider" gear=none xenotype=Baseliner
+equip "Wounded duelist" thing=APM_Weapon_DuelistsPsySpear now=true
+assert pawn "Wounded duelist" stat=IncomingDamageFactor min=0.99 max=1.01 expect=present
+assert pawn "Wounded raider" stat=IncomingDamageFactor min=0.99 max=1.01 expect=present
+damage "Wounded duelist" amount=20 kind=Burn part=Torso
+damage "Wounded raider" amount=20 kind=Burn part=Torso
+assert pawn "Wounded duelist" hediff=Burn severity min=19 max=21 expect=present
+assert pawn "Wounded raider" hediff=Burn severity min=19 max=21 expect=present
+select "Wounded duelist"
+gizmo "The duel trial" expect=allowed
+target "Wounded raider" expect=allowed
+deselect
+speed x1
+waitfor pawn "Wounded duelist" hediff=APM_InDuel ticks=240 expect=present
+speed paused
+assert pawn "Wounded duelist" hediff=Burn severity min=19 max=21 expect=present
+down "Wounded raider"
+speed x1
+waitfor pawn "Wounded duelist" hediff=APM_DuelWinner ticks=60 expect=present
+speed paused
+assert pawn "Wounded duelist" hediff=Burn severity min=11 max=13 expect=present
+assert pawn "Wounded raider" hediff=Burn severity min=19 max=21 expect=present
+
+spawn Pawn:Colonist at 0,-10 name="Hooked duelist"
+draft "Hooked duelist"
+spawn Pawn:Colonist at 4,-10 faction=enemy name="Hooked raider"
+pacify "Hooked raider"
+spawn Pawn:APM_Mech_Terminus at -10,-10 faction=player name="Terminus"
+spawn Pawn:Colonist at -14,-14 name="Mechanitor"
+draft "Mechanitor"
+overseer "Terminus" by="Mechanitor" now=true
+draft "Terminus"
+equip "Hooked duelist" thing=APM_Weapon_DuelistsPsySpear now=true
+assert thing "Hooked duelist" at 0,-10 expect=present
+select "Hooked duelist"
+gizmo "The duel trial" expect=allowed
+target "Hooked raider" expect=allowed
+deselect
+speed x1
+waitfor pawn "Hooked duelist" hediff=APM_InDuel ticks=240 expect=present
+
+select "Terminus"
+gizmo "Grappling Hook" expect=allowed
+target "Hooked duelist" expect=allowed
+deselect
+waitfor thing APM_PawnFlyer_Hooked ticks=240 expect=present
+waitfor thing APM_PawnFlyer_Hooked expect=absent ticks=300
+
+assert pawn "Hooked duelist" hediff=APM_InDuel expect=present
+assert pawn "Hooked raider" hediff=APM_InDuel expect=present
+assert pawn "Hooked duelist" hediff=APM_DuelDraw expect=absent
+assert log clean

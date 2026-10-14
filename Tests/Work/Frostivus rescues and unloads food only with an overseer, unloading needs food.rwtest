@@ -1,0 +1,41 @@
+rwtest 1
+test "Frostivus rescues and unloads food only with an overseer, unloading needs food" project="Apex Mechanoids" created=2026-09-26T00:00:00
+
+requires dlc=Biotech
+requires mod=Mortis.ApexMechanoids
+room at 8,8 size=7,7 door=none roof=false name="pen"
+spawn Pawn:APM_Mech_Frostivus in="pen" faction=player name="Frost"
+spawn Thing:MealSimple in="pen" name="meal"
+spawn Pawn:APM_Mech_Frostivus at 0,0 faction=player name="Carrier"
+
+work "Frost" giver=APM_FrostivusRescueFood on="meal" expect=absent
+
+select "Carrier"
+gizmo "Unload preserved food" expect=absent
+deselect
+
+spawn Thing:MealSimple at 0,1 count=2 name="Carrier meals"
+pack "Carrier" thing="Carrier meals" count=2
+assert pawn "Carrier" inventory=MealSimple expect=present
+select "Carrier"
+gizmo "Unload preserved food" expect=disabled reason="Frostivus cannot use preservation commands right now." match=equals
+assert text contains "APM." expect=absent
+deselect
+
+spawn Pawn:Colonist name="Mechanitor"
+give "Mechanitor" need=Food value=1
+overseer "Frost" by="Mechanitor"
+work "Frost" giver=APM_FrostivusRescueFood on="meal" expect=allowed
+job "Frost" giver=APM_FrostivusRescueFood on="meal" until=done ticks=1500
+assert pawn "Frost" inventory=MealSimple expect=present
+assert thing MealSimple expect=absent
+
+spawn Pawn:Colonist name="Carrier mechanitor"
+give "Carrier mechanitor" need=Food value=1
+overseer "Carrier" by="Carrier mechanitor"
+select "Carrier"
+gizmo "Unload preserved food" expect=allowed
+target cell=3,0 expect=allowed
+deselect
+waitfor thing MealSimple ticks=600 expect=present
+assert log clean
