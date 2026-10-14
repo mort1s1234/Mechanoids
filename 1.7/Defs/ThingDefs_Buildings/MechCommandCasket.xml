@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- MechCommandCasket Parent -->
+	<ThingDef Name="APM_MechCommandCasket_Base" ParentName="BuildingBase" Abstract="True">
+		<tickerType>Normal</tickerType>
+		<thingClass>ApexMechanoids.Building_MechCommandCasket</thingClass>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<thingCategories>
+			<li>BuildingsMisc</li>
+		</thingCategories>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<canOverlapZones>false</canOverlapZones>
+		<pathCost>42</pathCost>
+		<blockWind>true</blockWind>
+		<fillPercent>0.5</fillPercent>
+		<building>
+			<paintable>false</paintable>
+			<destroySound>BuildingDestroyed_Metal_Big</destroySound>
+			<forcedCostLeavings>
+				<li>APM_PsionicChip</li>
+			</forcedCostLeavings>
+			<buildingTags>
+				<li>Biotech</li>
+			</buildingTags>
+			<ai_chillDestination>false</ai_chillDestination>
+			<haulToContainerDuration>120</haulToContainerDuration>
+			<fixedStorageSettings>
+				<filter>
+					<categories>
+						<li>Foods</li>
+					</categories>
+					<specialFiltersToDisallow>
+						<li>AllowPlantFood</li>
+					</specialFiltersToDisallow>
+				</filter>
+			</fixedStorageSettings>
+			<defaultStorageSettings>
+				<filter>
+					<categories>
+						<li>Foods</li>
+					</categories>
+					<disallowedCategories>
+						<li>EggsFertilized</li>
+					</disallowedCategories>
+					<disallowedThingDefs>
+						<li>InsectJelly</li>
+						<li>MealLavish</li>
+						<li>MealLavish_Veg</li>
+						<li>MealLavish_Meat</li>
+						<li>HemogenPack</li>
+						<li>Chocolate</li>
+					</disallowedThingDefs>
+				</filter>
+			</defaultStorageSettings>
+		</building>
+		<inspectorTabs>
+			<li>ITab_BiosculpterNutritionStorage</li>
+		</inspectorTabs>
+		<containedPawnsSelectable>true</containedPawnsSelectable>
+		<designationCategory>Biotech</designationCategory>
+		<statBases>
+			<MaxHitPoints>250</MaxHitPoints>
+			<WorkToBuild>3200</WorkToBuild>
+			<Mass>100</Mass>
+			<Flammability>0.6</Flammability>
+		</statBases>
+		<size>(5,3)</size>
+		<rotatable>true</rotatable>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<interactionCellOffset>(0,0,2)</interactionCellOffset>
+		<hasInteractionCell>true</hasInteractionCell>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<costList>
+			<Steel>250</Steel>
+			<Plasteel>80</Plasteel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+			<ComponentSpacer>8</ComponentSpacer>
+			<SubcoreHigh>1</SubcoreHigh>
+			<APM_PsionicChip>1</APM_PsionicChip>
+		</costList>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<comps>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>APM_CasketBandwidthAmplifier</li>
+				</linkableFacilities>
+			</li>
+		</comps>
+		<placeWorkers>
+			<li>PlaceWorker_PreventInteractionSpotOverlap</li>
+		</placeWorkers>
+	</ThingDef>
+	<ThingDef ParentName="APM_MechCommandCasket_Base">
+		<defName>APM_MechCommandCasket</defName>
+		<label>command casket</label>
+		<description>The pinnacle of mechanitor engineering, a monumental sarcophagus that embodies absolute power and technological majesty. Fusing mechlink and biosculpter technologies, it allows the enclosed user to command their legions from absolute safety. However, its true power lies within: a highly complex replica of a 'Cerebrex' brain is integrated into its core. This allows the casket to pierce atmospheric interference and connect directly to the global mechanoid network in orbit. By hijacking the processing power of these orbital systems, the mechanitor can broadcast their commands over colossal distances, controlling their mechs even when world tiles away.</description>
+		<graphicData>
+			<texPath>Things/Building/MechCommandCasket/MechCommandCasket</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(6,5)</drawSize>
+			<drawOffset>(0,0,0.5)</drawOffset>
+			<shadowData>
+				<volume>(2.70, 1, 1.70)</volume>
+				<offset>(0, 0, 0)</offset>
+			</shadowData>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>250</MaxHitPoints>
+			<WorkToBuild>3200</WorkToBuild>
+			<Mass>100</Mass>
+			<Flammability>0.6</Flammability>
+		</statBases>
+		<size>(5,3)</size>
+		<costList>
+			<Steel>450</Steel>
+			<Plasteel>110</Plasteel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+			<ComponentSpacer>8</ComponentSpacer>
+			<SubcoreHigh>3</SubcoreHigh>
+			<APM_PsionicChip>1</APM_PsionicChip>
+			<APM_PsyfluxChip>1</APM_PsyfluxChip>
+		</costList>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<researchPrerequisites>
+			<li>ApexMechtech</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="ApexMechanoids.CompProperties_RemoteMechCasketAbilities">
+				<actionspeed>1.0</actionspeed>
+				<repairExp>0.05</repairExp>
+				<!-- same as remote repair implant -->
+				<repairCostsEnergy>true</repairCostsEnergy>
+				<!-- same as remote repair implant -->
+				<Shieldcooldown>300</Shieldcooldown>
+				<!-- same as remote shield implant -->
+				<textpath_Connect>UI/Gizmos/APM_ConnectToMech</textpath_Connect>
+				<textpath_Disconnect>UI/Gizmos/APM_DisconnectFromMech</textpath_Disconnect>
+				<textpath_Repair>UI/Gizmos/APM_Repair</textpath_Repair>
+				<textpath_Shield>UI/Gizmos/APM_ShieldMech</textpath_Shield>
+				<textpath_ShieldCooldown>UI/Gizmos/APM_ShieldMechCooldown</textpath_ShieldCooldown>
+				<labelShort>Casket</labelShort>
+			</li>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Breakdownable"/>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>1000</basePowerConsumption>
+				<idlePowerDraw>80</idlePowerDraw>
+			</li>
+			<li  MayRequire="VanillaExpanded.VNutrientE" Class="PipeSystem.CompProperties_Resource">
+				<pipeNet>VNPE_NutrientPasteNet</pipeNet>
+			</li>
+		</comps>
+		<placeWorkers>
+			<li>PlaceWorker_PreventInteractionSpotOverlap</li>
+		</placeWorkers>
+	</ThingDef>
+	
+	<ThingDef ParentName="BuildingBase">
+		<defName>APM_CasketBandwidthAmplifier</defName>
+		<label>subcore signal booster</label>
+		<description>An auxiliary expansion module designed to augment the command casket using the raw processing power of high subcores. By integrating high-tier subcores directly into the casket's auxiliary neural network, this device significantly amplifies the mechanitor's mental output. It expands the available bandwidth limit, allowing the operator to safely control a much larger and more complex legion of mechanoids without overloading their own neurological link.</description>
+		<tickerType>Long</tickerType>
+		<graphicData>
+			<texPath>Things/Building/CasketAmplifier/CasketAmplifier</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3,2)</drawSize>
+			<drawOffset>(0,0,0)</drawOffset>
+			<shadowData>
+				<volume>(1.65, 0.75, 1)</volume>
+				<offset>(0.15, 0, 0)</offset>
+			</shadowData>
+		</graphicData>
+		<thingCategories>
+			<li>BuildingsMisc</li>
+		</thingCategories>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<canOverlapZones>false</canOverlapZones>
+		<pathCost>42</pathCost>
+		<blockWind>true</blockWind>
+		<fillPercent>0.5</fillPercent>
+		<building>
+			<paintable>false</paintable>
+			<destroySound>BuildingDestroyed_Metal_Small</destroySound>
+			<buildingTags>
+				<li>Biotech</li>
+			</buildingTags>
+			<ai_chillDestination>false</ai_chillDestination>
+		</building>
+		<designationCategory>Biotech</designationCategory>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>1000</WorkToBuild>
+			<Mass>70</Mass>
+			<Flammability>0.5</Flammability>
+		</statBases>
+		<size>(3,1)</size>
+		<rotatable>true</rotatable>
+		<costList>
+			<Steel>250</Steel>
+			<ComponentSpacer>2</ComponentSpacer>
+			<SubcoreHigh>1</SubcoreHigh>
+			<APM_ExtraChip>1</APM_ExtraChip>
+		</costList>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<researchPrerequisites>
+			<li>ApexMechtech</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="CompProperties_Facility">
+				<statOffsets>
+					<APM_CasketBandwidth>8</APM_CasketBandwidth>
+				</statOffsets>
+				<maxSimultaneous>4</maxSimultaneous>
+				<mustBePlacedAdjacent>true</mustBePlacedAdjacent>
+				<!-- 2 is adjacent  -->
+			</li>
+						<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>400</basePowerConsumption>
+				<idlePowerDraw>80</idlePowerDraw>
+			</li>
+		</comps>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+		</placeWorkers>
+	</ThingDef>
+	<HediffDef>
+		<defName>APM_MechCommandCasketBoost</defName>
+		<label>mech command casket boost</label>
+		<description>This mechanitors bandwidth is increased while inside the command casket.</description>
+		<hediffClass>ApexMechanoids.Hediff_CommandCasketBoost</hediffClass> <!-- bandwidth gets added by this class!  -->
+		<defaultLabelColor>(0.52, 1, 0.95)</defaultLabelColor>
+		<isBad>false</isBad>
+	</HediffDef>
+
+	<ThingDef ParentName="CrateBase">
+		<defName>APM_MechCommandCasket_Ancient</defName>
+		<thingClass>ApexMechanoids.Building_AncientCommandCasket</thingClass>
+		<label>command casket</label>
+		<description>The pinnacle of mechanitor engineering, a monumental sarcophagus that embodies absolute power and technological majesty. Fusing mechlink and biosculpter technologies, it allows the enclosed user to command their legions from absolute safety. However, its true power lies within: a highly complex replica of a 'Cerebrex' brain is integrated into its core. This allows the casket to pierce atmospheric interference and connect directly to the global mechanoid network in orbit. By hijacking the processing power of these orbital systems, the mechanitor can broadcast their commands over colossal distances, controlling their mechs even when world tiles away.</description>
+		<graphicData>
+			<texPath>Things/Building/MechCommandCasket/MechCommandCasket</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(6,5)</drawSize>
+			<drawOffset>(0,0,0.5)</drawOffset>
+			<shadowData>
+				<volume>(2.70, 1, 1.70)</volume>
+				<offset>(0, 0, 0)</offset>
+			</shadowData>
+		</graphicData>
+		<size>(5, 3)</size>
+		<rotatable>true</rotatable>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<interactionCellOffset>(0,0,2)</interactionCellOffset>
+		<hasInteractionCell>true</hasInteractionCell>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<fillPercent>0.50</fillPercent>
+		<statBases>
+			<MaxHitPoints>250</MaxHitPoints>
+			<WorkToBuild>3200</WorkToBuild>
+			<Flammability>0.6</Flammability>
+		</statBases>
+		<tickerType>Normal</tickerType>
+		<!--
+			The previous owner, named here rather than in code. Building_AncientCommandCasket reads
+			this the same way the stasis containers read fixedMechKind, so the casket class holds
+			whoever the def says and a second ancient casket needs no second class.
+		-->
+		<modExtensions>
+			<li Class="ApexMechanoids.DefModExtension_CasketOccupant">
+				<pawnKind>APM_Mechanitor_Ancient</pawnKind>
+				<rotStage>Dessicated</rotStage>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+</Defs>

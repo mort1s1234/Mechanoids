@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- ==================== THING DEF ==================== -->
+	<ThingDef ParentName="BaseMechanoid" Name="APM_Mech_Dominus_Base" Abstract="True">
+		<defName>APM_Mech_Dominus</defName>
+		<label>Dominus</label>
+		<description>Three powerful mechanoid types were created by an Archotech mind in an attempt to create a central commander of all mechanoid forces. Influenced by the Old Earth nation of Rome, the Dominus provides considerable buffs to nearby allies and personally challenges perceived threats in 1v1 melee combat. The pure force of its determination manifests in a psychic maelstrom forming around those it challenges, summoning a shield generator and increasing damage taken until one stands victorious or it exhausts its will after a certain amount of time. If this occurs, both duelists will be significantly weakened for a period. If a victor emerges, the opposite will occur. It can alternatively channel its will into a temporary wave of energy for its allies. Additionally, mechanitors can extend their command range in a radius around this mech if under their control.</description>
+		<statBases>
+			<MarketValue>1500</MarketValue>
+			<MoveSpeed>3.8</MoveSpeed>
+			<ArmorRating_Blunt>0.64</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.85</ArmorRating_Sharp>
+			<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">5</BandwidthCost>
+			<CarryingCapacity>33</CarryingCapacity>
+			<Mass>33</Mass>
+			<ControlTakingTime MayRequire="Ludeon.Rimworld.Biotech">30</ControlTakingTime>
+			<ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">1</ToxicEnvironmentResistance>
+			<MechEnergyLossPerHP MayRequire="Ludeon.Rimworld.Biotech">0.15</MechEnergyLossPerHP>
+			<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">8</WastepacksPerRecharge>
+			<EMPResistance MayRequire="Ludeon.Rimworld.Biotech">0.55</EMPResistance>
+		</statBases>
+		<tools>
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>18.5</power>
+				<cooldownTime>2.9</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			</li>
+		</tools>
+		<comps>
+			<li Class="ApexMechanoids.CompProperties_MechanitorRangeExtender">
+				<minRange>7.9</minRange>
+				<maxRange>19.4</maxRange>
+			</li>
+		</comps>
+		<killedLeavingsPlayerHostile>
+			<APM_PsionicChip>1</APM_PsionicChip>
+		</killedLeavingsPlayerHostile>
+		<race>
+			<body>APM_Dominus</body>
+			<baseBodySize>3</baseBodySize>
+			<baseHealthScale>4.5</baseHealthScale>
+			<thinkTreeMain>APM_DominusMechanoid</thinkTreeMain>
+			<intelligence>ToolUser</intelligence>
+			<mechWeightClass>Medium</mechWeightClass>
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Apocriton_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Apocriton_Death</soundDeath>
+					<soundCall>Pawn_Mech_Apocriton_Call</soundCall>
+				</li>
+				<li MayRequire="Ludeon.RimWorld.Biotech">
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Apocriton_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Apocriton_Death</soundDeath>
+					<soundCall>Pawn_Mech_Apocriton_Call</soundCall>
+				</li>
+			</lifeStageAges>
+			<soundCallIntervalRange>2500~3500</soundCallIntervalRange>
+			<soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
+			<soundMeleeHitBuilding>Pawn_Melee_Punch_HitBuilding_Generic</soundMeleeHitBuilding>
+			<soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
+		</race>
+		<modExtensions>
+			<li Class="ApexMechanoids.DefModExtension_SearchAndDestroyMech">
+				<disabledAutoUseAbilitiesWhenSearchAndDestroy>
+					<li>APM_PressTheAttack</li>
+				</disabledAutoUseAbilitiesWhenSearchAndDestroy>
+			</li>
+		</modExtensions>
+		<butcherProducts>
+			<Steel>50</Steel>
+			<Plasteel>20</Plasteel>
+		</butcherProducts>
+	</ThingDef>
+
+	<ThingDef ParentName="APM_Mech_Dominus_Base">
+		<defName>APM_Mech_Dominus</defName>
+		<label>Dominus</label>
+		<description>Three powerful mechanoid types were created by an Archotech mind in an attempt to create a central commander of all mechanoid forces. Influenced by the Old Earth nation of Rome, the Dominus provides considerable buffs to nearby allies and personally challenges perceived threats in 1v1 melee combat. The pure force of its determination manifests in a psychic maelstrom forming around those it challenges, summoning a shield generator and increasing damage taken until one stands victorious or it exhausts its will after a certain amount of time. If this occurs, both duelists will be significantly weakened for a period. If a victor emerges, the opposite will occur. It can alternatively channel its will into a temporary wave of energy for its allies. Additionally, mechanitors can extend their command range in a radius around this mech if under their control.</description>
+	</ThingDef>
+
+	<ThingDef ParentName="APM_Mech_Dominus_Base">
+		<defName>APM_Mech_DominusB</defName>
+		<label>Dominus</label>
+		<description>Three powerful mechanoid types were created by an Archotech mind in an attempt to create a central commander of all mechanoid forces. Influenced by the Old Earth nation of Rome, the Dominus provides considerable buffs to nearby allies and personally challenges perceived threats in 1v1 melee combat. The pure force of its determination manifests in a psychic maelstrom forming around those it challenges, summoning a shield generator and increasing damage taken until one stands victorious or it exhausts its will after a certain amount of time. If this occurs, both duelists will be significantly weakened for a period. If a victor emerges, the opposite will occur. It can alternatively channel its will into a temporary wave of energy for its allies. Additionally, mechanitors can extend their command range in a radius around this mech if under their control.</description>
+	</ThingDef>
+
+	<!-- ==================== PAWN KINDS ==================== -->
+	<PawnKindDef ParentName="BaseMechanoidKind" Name="APM_PawnKind_Dominus_Base" Abstract="True">
+		<label>dominus</label>
+		<combatPower>600</combatPower>
+		<maxPerGroup>3</maxPerGroup>
+		<isBoss>true</isBoss>
+		<allowInMechClusters>false</allowInMechClusters>
+		<skipResistant>true</skipResistant>
+		<controlGroupPortraitZoom MayRequire="Ludeon.Rimworld.Biotech">0.48</controlGroupPortraitZoom>
+		<weaponMoney>99999~99999</weaponMoney>
+	</PawnKindDef>
+
+	<!-- Player -->
+	<PawnKindDef ParentName="APM_PawnKind_Dominus_Base">
+		<defName>APM_Mech_Dominus</defName>
+		<race>APM_Mech_Dominus</race>
+		<label>dominus</label>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/Dominus/Regular/Dominus</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Dominus/Regular/Mech_Dominus</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>2</drawSize>
+					<shadowData>
+						<volume>(0.7, 1, 0.7)</volume>
+						<offset>(0, 0, -0.4)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/Dominus/Regular/DominusAncient</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Dominus/Regular/Mech_Dominus</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>2</drawSize>
+					<shadowData>
+						<volume>(0.7, 1, 0.7)</volume>
+						<offset>(0, 0, -0.4)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+		<weaponTags Inherit="False">
+			<li>APM_WeaponDominusMechlance</li>
+		</weaponTags>
+		<abilities>
+			<li>APM_PressTheAttack</li>
+			<li>APM_Mech_Duel</li>
+		</abilities>
+	</PawnKindDef>
+
+	<!-- Boss -->
+	<PawnKindDef ParentName="APM_PawnKind_Dominus_Base">
+		<defName>APM_Mech_Dominus_Boss</defName>
+		<label>dominus</label>
+		<race>APM_Mech_DominusB</race>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/Dominus/Boss/DominusBAncient</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Dominus/Boss/Mech_DominusB</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>2</drawSize>
+					<shadowData>
+						<volume>(0.7, 1, 0.7)</volume>
+						<offset>(0, 0, -0.4)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/Dominus/Boss/DominusBAncient</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Dominus/Boss/Mech_DominusB</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>2</drawSize>
+					<shadowData>
+						<volume>(0.7, 1, 0.7)</volume>
+						<offset>(0, 0, -0.4)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+		<weaponTags Inherit="False">
+			<li>APM_WeaponDominusApexMechlance</li>
+		</weaponTags>
+		<abilities>
+			<li>APM_PressTheAttack</li>
+			<li>APM_Mech_Duel_Boss</li>
+		</abilities>
+	</PawnKindDef>
+
+	<!-- ==================== ABILITIES & HEDIFFS ==================== -->
+	<AbilityDef>
+		<defName>APM_PressTheAttack</defName>
+		<label>Press The Attack</label>
+		<description>The Dominus emits a psychic pulse that influences nearby allies to ignore pain, move faster and stay in high spirits.</description>
+		<iconPath>UI/PressTheAttack</iconPath>
+		<cooldownTicksRange>12000</cooldownTicksRange> 
+		<targetRequired>false</targetRequired>
+		<hostile>false</hostile>
+		<casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+		<showCastingProgressBar>true</showCastingProgressBar>
+		<aiCanUse>true</aiCanUse>
+		<statBases>
+			<Ability_EffectRadius>14.9</Ability_EffectRadius> 
+			<Ability_Duration>800</Ability_Duration> 
+		</statBases>
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>1</warmupTime>
+			<soundCast>APM_PressTheAttack_Cast</soundCast>
+			<range>14.9</range>
+			<targetParams>
+				<canTargetSelf>true</canTargetSelf>
+			</targetParams>
+		</verbProperties>
+		<comps>
+			<li Class="ApexMechanoids.CompProperties_AbilitySteelDiscipline">
+				<radius>14.9</radius>
+				<buffHediff>APM_Hediff_PressTheAttack</buffHediff>
+				<buffHediffBoss>APM_Hediff_PressTheAttack_Boss</buffHediffBoss>
+			</li>
+		</comps>
+	</AbilityDef>
+
+	<HediffDef Name="APM_Hediff_PressTheAttack_Base" Abstract="True">
+		<label>Psionic rush</label>
+		<description>A psionic wave directly stimulating the brain's neural pathways. It temporarily numbs pain receptors and forces an intense surge of adrenaline, allowing the subject to move significantly faster and disregard physical trauma. The effect is highly potent but short-lived.</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<showRemainingTime>True</showRemainingTime>
+			</li>
+			<li Class="HediffCompProperties_DisappearsOnDeath" />
+		</comps>
+		<isBad>false</isBad>
+		<stages>
+			<li>
+				<painFactor>0.70</painFactor> 
+				<statOffsets>
+					<MoveSpeed>0.40</MoveSpeed>
+				</statOffsets>
+				<statFactors>
+					<MeleeCooldownFactor>0.85</MeleeCooldownFactor> 
+					<AimingDelayFactor>0.85</AimingDelayFactor> 
+					<RangedCooldownFactor>0.85</RangedCooldownFactor> 
+				</statFactors>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<offset>0.10</offset>
+					</li>
+				</capMods>
+			</li>
+		</stages>
+	</HediffDef>
+
+	<!-- Player -->
+	<HediffDef ParentName="APM_Hediff_PressTheAttack_Base">
+		<defName>APM_Hediff_PressTheAttack</defName>
+		<renderNodeProperties>
+			<li>
+				<workerClass>PawnRenderNodeWorker_FlipWhenCrawling</workerClass>
+				<texPath>Things/Mote/PressTheAttack/Halo</texPath>
+				<parentTagDef>Head</parentTagDef>
+				<pawnType>HumanlikeOnly</pawnType>
+				<color>(163, 180, 187)</color>
+				<drawData>
+					<scale>0.7</scale>
+					<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+					<defaultData>
+						<layer>92</layer>
+						<offset>(0,0,0.5)</offset>
+					</defaultData>
+				</drawData>
+			</li>
+			<li>
+				<workerClass>PawnRenderNodeWorker_FlipWhenCrawling</workerClass>
+				<texPath>Things/Mote/PressTheAttack/Halo</texPath>
+				<pawnType>NonHumanlikeOnly</pawnType>
+				<color>(163, 180, 187)</color>
+				<drawData>
+					<scale>0.7</scale>
+					<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+					<defaultData>
+						<layer>92</layer>
+						<offset>(0,0,0.9)</offset>
+					</defaultData>
+				</drawData>
+			</li>
+			<li Class="ApexMechanoids.PawnRenderNodeProperties_Animated">
+				<nodeClass>ApexMechanoids.PawnRenderNode_RandomAnimated</nodeClass>
+				<workerClass>PawnRenderNodeWorker_FlipWhenCrawling</workerClass>
+				<texPath>Things/Mote/PressTheAttack/Wings</texPath>
+				<parentTagDef>Body</parentTagDef>
+				<pawnType>Any</pawnType>
+				<color>(163, 180, 187)</color>
+				<texPaths>
+					<li>Things/Mote/PressTheAttack/Wings/WingsA</li>
+					<li>Things/Mote/PressTheAttack/Wings/WingsB</li>
+					<li>Things/Mote/PressTheAttack/Wings/WingsC</li>
+				</texPaths>
+				<ticksPerTexture>3</ticksPerTexture>
+				<drawData>
+					<scale>2.3</scale>
+					<defaultData>
+						<layer>-6</layer>
+						<offset>(0,0,0)</offset>
+					</defaultData>
+				</drawData>
+			</li>
+		</renderNodeProperties>
+	</HediffDef>
+
+	<!-- Boss -->
+	<HediffDef ParentName="APM_Hediff_PressTheAttack_Base">
+		<defName>APM_Hediff_PressTheAttack_Boss</defName>
+		<renderNodeProperties>
+			<li>
+				<workerClass>PawnRenderNodeWorker_FlipWhenCrawling</workerClass>
+				<texPath>Things/Mote/PressTheAttack/Halo</texPath>
+				<parentTagDef>Head</parentTagDef>
+				<pawnType>HumanlikeOnly</pawnType>
+				<color>(230, 130, 40)</color>
+				<drawData>
+					<scale>0.7</scale>
+					<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+					<defaultData>
+						<layer>92</layer>
+						<offset>(0,0,0.5)</offset>
+					</defaultData>
+				</drawData>
+			</li>
+			<li>
+				<workerClass>PawnRenderNodeWorker_FlipWhenCrawling</workerClass>
+				<texPath>Things/Mote/PressTheAttack/Halo</texPath>
+				<pawnType>NonHumanlikeOnly</pawnType>
+				<color>(230, 130, 40)</color>
+				<drawData>
+					<scale>0.7</scale>
+					<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+					<defaultData>
+						<layer>92</layer>
+						<offset>(0,0,0.9)</offset>
+					</defaultData>
+				</drawData>
+			</li>
+			<li Class="ApexMechanoids.PawnRenderNodeProperties_Animated">
+				<nodeClass>ApexMechanoids.PawnRenderNode_RandomAnimated</nodeClass>
+				<workerClass>PawnRenderNodeWorker_FlipWhenCrawling</workerClass>
+				<texPath>Things/Mote/PressTheAttack/Wings</texPath>
+				<parentTagDef>Body</parentTagDef>
+				<pawnType>Any</pawnType>
+				<color>(230, 130, 40)</color>
+				<texPaths>
+					<li>Things/Mote/PressTheAttack/Wings/WingsA</li>
+					<li>Things/Mote/PressTheAttack/Wings/WingsB</li>
+					<li>Things/Mote/PressTheAttack/Wings/WingsC</li>
+				</texPaths>
+				<ticksPerTexture>3</ticksPerTexture>
+				<drawData>
+					<scale>2.3</scale>
+					<defaultData>
+						<layer>-6</layer>
+						<offset>(0,0,0)</offset>
+					</defaultData>
+				</drawData>
+			</li>
+		</renderNodeProperties>
+	</HediffDef>
+
+	<!-- ==================== THOUGHTS ==================== -->
+	<ThoughtDef Name="APM_Thought_PressTheAttack_Base" Abstract="True">
+		<workerClass>ThoughtWorker_Hediff</workerClass>
+		<validWhileDespawned>true</validWhileDespawned>
+		<developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+		<stages>
+			<li>
+				<label>Rush</label>
+				<description>I'm ready to Fight.</description>
+				<baseMoodEffect>12</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef ParentName="APM_Thought_PressTheAttack_Base">
+		<defName>APM_Thought_PressTheAttack</defName>
+		<hediff>APM_Hediff_PressTheAttack</hediff>
+	</ThoughtDef>
+
+	<ThoughtDef ParentName="APM_Thought_PressTheAttack_Base">
+		<defName>APM_Thought_PressTheAttack_Boss</defName>
+		<hediff>APM_Hediff_PressTheAttack_Boss</hediff>
+	</ThoughtDef>
+
+	<!-- ==================== DUEL ABILITIES ==================== -->
+	<AbilityDef Name="APM_Mech_Duel_Base" Abstract="True">
+		<label>the duel trial</label>
+		<description>A selected target is chosen for a duel and a shield is generated around the duelists. For the duration of the duel, ranged attacks, abilities and Incoming damage increased.  Additionally, if the duel does not end within a certain time frame, the duelists gain a harsh debuff. If either combatant dies or is downed, the victor gains a powerful temporary buff instead.</description>
+		<iconPath>UI/Duel</iconPath>
+		<targetRequired>true</targetRequired>
+		<hostile>true</hostile>
+		<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+		<disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+		<aiCanUse>true</aiCanUse>
+		<canUseAoeToGetTargets>false</canUseAoeToGetTargets>
+		<comps>
+			<li Class="CompProperties_AbilityGiveMentalState">
+				<compClass>ApexMechanoids.CompAbilityEffect_GiveMentalState</compClass>
+				<stateDef>APM_Duel</stateDef>
+				<stateDefForMechs>APM_Duel</stateDefForMechs>
+				<applyToSelf>false</applyToSelf>
+				<forced>true</forced>
+			</li>
+			<li Class="ApexMechanoids.CompProperties_AbilityAIRequiresOverpower">
+				<maximalMeleeDPSDifference>15</maximalMeleeDPSDifference>
+			</li>
+			<li Class="CompProperties_AbilityEffect">
+				<compClass>ApexMechanoids.CompAbilityEffect_AICheckTargetingParams</compClass>
+			</li>
+		</comps>
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>1</warmupTime>
+			<drawAimPie>false</drawAimPie>
+			<range>8.9</range>
+			<targetParams>
+				<canTargetCorpses>false</canTargetCorpses>
+				<canTargetItems>false</canTargetItems>
+				<mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+				<canTargetSelf>false</canTargetSelf>
+				<canTargetPawns>true</canTargetPawns>
+				<neverTargetIncapacitated>true</neverTargetIncapacitated>
+				<canTargetAnimals>false</canTargetAnimals>
+				<canTargetBuildings>false</canTargetBuildings>
+				<thingCategory>None</thingCategory>
+			</targetParams>
+		</verbProperties>
+	</AbilityDef>
+
+	<AbilityDef ParentName="APM_Mech_Duel_Base">
+		<defName>APM_Mech_Duel</defName>
+		<cooldownTicksRange>2300</cooldownTicksRange>
+		<comps>
+			<li Class="ApexMechanoids.CompProperties_SpawnThingDuelAttached">
+				<thing>APM_DuelSpot</thing>
+			</li>
+		</comps>
+	</AbilityDef>
+
+	<AbilityDef ParentName="APM_Mech_Duel_Base">
+		<defName>APM_Mech_Duel_Boss</defName>
+		<cooldownTicksRange>1100</cooldownTicksRange>
+		<comps>
+			<li Class="ApexMechanoids.CompProperties_SpawnThingDuelAttached">
+				<thing>APM_DuelSpot_Boss</thing>
+			</li>
+		</comps>
+	</AbilityDef>
+</Defs>

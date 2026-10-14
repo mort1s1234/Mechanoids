@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- Базовый Def объекта DuelSpot -->
+	<ThingDef ParentName="BuildingBase" Name="APM_DuelSpot_Base" Abstract="True">
+		<thingClass>ApexMechanoids.Building_DuelSpot</thingClass>
+		<label>duel spot</label>
+		<description>A selected target is chosen for a duel and a shield is generated around the duelists. For the duration of the duel, ranged attacks, abilities and Incoming damage increased.  Additionally, if the duel does not end within a certain time frame, the duelists gain a harsh debuff. If either combatant dies or is downed, the victor gains a powerful temporary buff instead.</description>
+		<altitudeLayer>Filth</altitudeLayer>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<pathCost>0</pathCost>
+		<passability>Standable</passability>
+		<useHitPoints>false</useHitPoints>
+		<fillPercent>0.35</fillPercent>
+		<graphicData>
+			<texPath>Things/Building/Duel/Shield</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1</drawSize>
+		</graphicData>
+		<tickerType>Normal</tickerType>
+		<killedLeavings />
+		<rotatable>false</rotatable>
+		<selectable>true</selectable>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+		<building>
+			<claimable>false</claimable>
+			<destroySound>BuildingDestroyed_Metal_Small</destroySound>
+			<ai_chillDestination>false</ai_chillDestination>
+			<isEdifice>false</isEdifice>
+			<expandHomeArea>false</expandHomeArea>
+			<destroyEffecter MayRequire="Ludeon.RimWorld.Royalty">Broadshield_Burnout</destroyEffecter>
+		</building>
+		<comps>
+			<li Class="CompProperties_ProjectileInterceptor">
+				<radius>5.9</radius>
+				<interceptGroundProjectiles>true</interceptGroundProjectiles>
+				<interceptNonHostileProjectiles>true</interceptNonHostileProjectiles>
+				<interceptOutgoingProjectiles>true</interceptOutgoingProjectiles>
+				<color>(0.6, 0.6, 0.8)</color>
+				<idlePulseSpeed>3</idlePulseSpeed>
+				<minIdleAlpha>0.05</minIdleAlpha>
+				<disarmedByEmpForTicks>600</disarmedByEmpForTicks>
+				<activeSound>APM_DominusShield_Ambience</activeSound>
+			</li>
+			<li Class="CompProperties_DestroyAfterDelay">
+				<delayTicks>1200</delayTicks>
+				<destroyMode>KillFinalize</destroyMode>
+				<countdownLabel>Finish in</countdownLabel>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<!-- Игрок -->
+	<ThingDef ParentName="APM_DuelSpot_Base">
+		<defName>APM_DuelSpot</defName>
+		<comps>
+			<li Class="ApexMechanoids.CompProperties_DrawRotatedAdditionalGraphics">
+				<graphics>
+					<li>
+						<texPath>Things/Building/Duel/Ring_Layer1</texPath>
+						<graphicClass>Graphic_Single</graphicClass>
+						<drawOffset>(0,-0.03,0)</drawOffset>
+						<color>(163, 180, 187)</color>
+						<drawSize>5.7</drawSize>
+					</li>
+					<li>
+						<texPath>Things/Building/Duel/Ring_Layer2</texPath>
+						<graphicClass>Graphic_Single</graphicClass>
+						<drawOffset>(0,-0.02,0)</drawOffset>
+						<color>(163, 180, 187)</color>
+						<drawSize>5.7</drawSize>
+					</li>
+					<li>
+						<texPath>Things/Building/Duel/Ring_Layer3</texPath>
+						<drawOffset>(0,-0.01,0)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<color>(163, 180, 187)</color>
+						<drawSize>5.7</drawSize>
+					</li>
+				</graphics>
+			</li>
+			<li Class="ApexMechanoids.CompProperties_PlayerFactionColoredAdditionalGraphics">
+				<graphics>
+					<li>
+						<texPath>Things/Building/Duel/Flag_Grayscale</texPath>
+						<maskPath>Things/Building/Duel/Flag_Grayscale_m</maskPath>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>CutoutComplex</shaderType>
+						<drawSize>1.5</drawSize>
+						<drawOffset>(-4,0,0)</drawOffset>
+						<color>(68, 150, 215)</color>
+					</li>
+					<li>
+						<texPath>Things/Building/Duel/Flag_Grayscale</texPath>
+						<maskPath>Things/Building/Duel/Flag_Grayscale_m</maskPath>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>CutoutComplex</shaderType>
+						<drawSize>1.5</drawSize>
+						<drawOffset>(4,0,0)</drawOffset>
+						<color>(68, 150, 215)</color>
+					</li>
+					<li>
+						<texPath>Things/Building/Duel/Flag_Grayscale</texPath>
+						<maskPath>Things/Building/Duel/Flag_Grayscale_m</maskPath>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>CutoutComplex</shaderType>
+						<drawSize>1.5</drawSize>
+						<drawOffset>(-2.2,0,-3)</drawOffset>
+						<color>(68, 150, 215)</color>
+					</li>
+					<li>
+						<texPath>Things/Building/Duel/Flag_Grayscale</texPath>
+						<maskPath>Things/Building/Duel/Flag_Grayscale_m</maskPath>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>CutoutComplex</shaderType>
+						<drawSize>1.5</drawSize>
+						<drawOffset>(2.2,0,-3)</drawOffset>
+						<color>(68, 150, 215)</color>
+					</li>
+					<li>
+						<texPath>Things/Building/Duel/Flag_Grayscale</texPath>
+						<maskPath>Things/Building/Duel/Flag_Grayscale_m</maskPath>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>CutoutComplex</shaderType>
+						<drawSize>1.5</drawSize>
+						<drawOffset>(-2.2,0,3)</drawOffset>
+						<color>(68, 150, 215)</color>
+					</li>
+					<li>
+						<texPath>Things/Building/Duel/Flag_Grayscale</texPath>
+						<maskPath>Things/Building/Duel/Flag_Grayscale_m</maskPath>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>CutoutComplex</shaderType>
+						<drawSize>1.5</drawSize>
+						<drawOffset>(2.2,0,3)</drawOffset>
+						<color>(68, 150, 215)</color>
+					</li>
+				</graphics>
+			</li>
+			<li Class="CompProperties_Effecter">
+				<effecterDef>APM_Duel</effecterDef>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<!-- Босс -->
+	<ThingDef ParentName="APM_DuelSpot_Base">
+		<defName>APM_DuelSpot_Boss</defName>
+		<comps>
+			<li Class="ApexMechanoids.CompProperties_DrawRotatedAdditionalGraphics">
+				<graphics>
+					<li>
+						<texPath>Things/Building/Duel/Ring_Layer1</texPath>
+						<graphicClass>Graphic_Single</graphicClass>
+						<drawOffset>(0,-0.03,0)</drawOffset>
+						<color>(230, 130, 40)</color>
+						<drawSize>5.7</drawSize>
+					</li>
+					<li>
+						<texPath>Things/Building/Duel/Ring_Layer2</texPath>
+						<graphicClass>Graphic_Single</graphicClass>
+						<drawOffset>(0,-0.02,0)</drawOffset>
+						<color>(230, 130, 40)</color>
+						<drawSize>5.7</drawSize>
+					</li>
+					<li>
+						<texPath>Things/Building/Duel/Ring_Layer3</texPath>
+						<graphicClass>Graphic_Single</graphicClass>
+						<drawOffset>(0,-0.01,0)</drawOffset>
+						<color>(230, 130, 40)</color>
+						<drawSize>5.7</drawSize>
+					</li>
+				</graphics>
+			</li>
+			<li Class="ApexMechanoids.CompProperties_PlayerFactionColoredAdditionalGraphics">
+				<graphics>
+					<li>
+						<texPath>Things/Building/Duel/Flag</texPath>
+						<graphicClass>Graphic_Single</graphicClass>
+						<drawSize>1.5</drawSize>
+						<drawOffset>(-4,0,0)</drawOffset>
+					</li>
+					<li>
+						<texPath>Things/Building/Duel/Flag</texPath>
+						<graphicClass>Graphic_Single</graphicClass>
+						<drawSize>1.5</drawSize>
+						<drawOffset>(4,0,0)</drawOffset>
+					</li>
+					<li>
+						<texPath>Things/Building/Duel/Flag</texPath>
+						<graphicClass>Graphic_Single</graphicClass>
+						<drawSize>1.5</drawSize>
+						<drawOffset>(-2.2,0,-3)</drawOffset>
+					</li>
+					<li>
+						<texPath>Things/Building/Duel/Flag</texPath>
+						<graphicClass>Graphic_Single</graphicClass>
+						<drawSize>1.5</drawSize>
+						<drawOffset>(2.2,0,-3)</drawOffset>
+					</li>
+					<li>
+						<texPath>Things/Building/Duel/Flag</texPath>
+						<graphicClass>Graphic_Single</graphicClass>
+						<drawSize>1.5</drawSize>
+						<drawOffset>(-2.2,0,3)</drawOffset>
+					</li>
+					<li>
+						<texPath>Things/Building/Duel/Flag</texPath>
+						<graphicClass>Graphic_Single</graphicClass>
+						<drawSize>1.5</drawSize>
+						<drawOffset>(2.2,0,3)</drawOffset>
+					</li>
+				</graphics>
+			</li>
+			<li Class="CompProperties_Effecter">
+				<effecterDef>APM_Duel_Boss</effecterDef>
+			</li>
+		</comps>
+	</ThingDef>
+</Defs>

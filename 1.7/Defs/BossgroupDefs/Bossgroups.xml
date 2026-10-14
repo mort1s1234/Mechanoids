@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+					<!-- Raid ones -->
+	<BossDef>
+		<defName>APM_Boss_DominusRaid</defName>
+		<kindDef>APM_Mech_Dominus</kindDef>
+		<appearAfterTicks>14400000</appearAfterTicks><!-- 4 years -->
+	</BossDef>
+
+	<BossDef>
+		<defName>APM_Boss_TerminusRaid</defName>
+		<kindDef>APM_Mech_Terminus</kindDef>
+		<appearAfterTicks>14400000</appearAfterTicks><!-- 4 years -->
+	</BossDef>
+
+	<BossDef>
+		<defName>APM_Boss_CelerusRaid</defName>
+		<kindDef>APM_Mech_Celerus</kindDef>
+		<appearAfterTicks>14400000</appearAfterTicks><!-- 4 years -->
+	</BossDef>
+
+
+					<!-- Regular ones -->
+	<!-- Dominus -->
+
+	<BossDef>
+		<defName>APM_Boss_Dominus</defName>
+		<kindDef>APM_Mech_Dominus_Boss</kindDef>
+		<appearAfterTicks>14400000</appearAfterTicks><!-- 4 years -->
+	</BossDef>
+
+	<BossgroupDef ParentName="BaseBossgroup">
+		<defName>APM_Group_Dominus</defName>
+		<boss>APM_Boss_Dominus</boss>
+		<waves>
+			<li> <!-- Wave 0 -->
+				<bossCount>1</bossCount>
+				<escorts>
+					<APM_Mech_Satellite>3</APM_Mech_Satellite>
+					<APM_Mech_Conqueror_AR>1</APM_Mech_Conqueror_AR>
+				</escorts>
+			</li>
+			<li> <!-- Wave 1 -->
+				<bossCount>1</bossCount>
+				<escorts>
+					<APM_Mech_Satellite>4</APM_Mech_Satellite>
+					<APM_Mech_Conqueror_AR>2</APM_Mech_Conqueror_AR>
+					<APM_Mech_Vassal>1</APM_Mech_Vassal>
+				</escorts>
+			</li>
+			<li> <!-- Wave 2 -->
+				<bossCount>1</bossCount>
+				<escorts>
+					<APM_Mech_Satellite>3</APM_Mech_Satellite>
+					<APM_Mech_Conqueror_AR>2</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>1</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>1</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Siren>1</APM_Mech_Siren>
+				</escorts>
+				<bossApparel>
+					<li>
+						<thing>Apparel_HeavyShield</thing>
+					</li>
+				</bossApparel>
+			</li>
+			<li> <!-- Wave 3 -->
+				<bossCount>2</bossCount>
+				<escorts>
+					<APM_Mech_Satellite>2</APM_Mech_Satellite>
+					<APM_Mech_Conqueror_AR>3</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>2</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>2</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Vassal>1</APM_Mech_Vassal>
+					<APM_Mech_Siren>1</APM_Mech_Siren>
+				</escorts>
+			</li>
+			<li> <!-- Wave 4 -->
+				<bossCount>2</bossCount>
+				<escorts>
+					<APM_Mech_Conqueror_AR>4</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>3</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>3</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Vassal>1</APM_Mech_Vassal>
+					<APM_Mech_Siren>2</APM_Mech_Siren>
+				</escorts>
+			</li>
+			<li> <!-- Wave 5 -->
+				<bossCount>2</bossCount>
+				<escorts>
+					<APM_Mech_Conqueror_AR>5</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>4</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>4</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Vassal>1</APM_Mech_Vassal>
+					<APM_Mech_Siren>3</APM_Mech_Siren>
+				</escorts>
+				<bossApparel>
+					<li>
+						<thing>Apparel_HeavyShield</thing>
+					</li>
+				</bossApparel>
+			</li>
+			<li> <!-- Wave 6 -->
+				<bossCount>2</bossCount>
+				<escorts>
+					<APM_Mech_Conqueror_AR>6</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>5</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>5</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Vassal>1</APM_Mech_Vassal>
+					<APM_Mech_Siren>3</APM_Mech_Siren>
+				</escorts>
+				<bossApparel>
+					<li>
+						<thing>Apparel_HeavyShield</thing>
+					</li>
+				</bossApparel>
+			</li>
+			<li> <!-- Wave 7 -->
+				<bossCount>3</bossCount>
+				<escorts>
+					<APM_Mech_Conqueror_AR>8</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>6</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>6</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Vassal>1</APM_Mech_Vassal>
+					<APM_Mech_Siren>4</APM_Mech_Siren>
+				</escorts>
+				<bossApparel>
+					<li>
+						<thing>Apparel_HeavyShield</thing>
+					</li>
+				</bossApparel>
+			</li>
+		</waves>
+		<leaderDescription>The {LEADERKIND_label} is a master of single combat. It will psychically lock a target into a 1v1 duel; avoid engaging it with your most valuable pawns during this phase, as the loser will be significantly weakened. Keep other fighters away to avoid its energy waves, and focus fire on it only when its will is exhausted to capitalize on its weakened state.</leaderDescription>
+		<rewardDef>APM_PsionicChip</rewardDef>
+	</BossgroupDef>
+
+
+	<!-- Terminus -->
+
+	<BossDef>
+		<defName>APM_Boss_Terminus</defName>
+		<kindDef>APM_Mech_Terminus_Boss</kindDef>
+		<appearAfterTicks>14400000</appearAfterTicks><!-- 4 years -->
+	</BossDef>
+
+	<BossgroupDef ParentName="BaseBossgroup">
+		<defName>APM_Group_Terminus</defName>
+		<boss>APM_Boss_Terminus</boss>
+		<waves>
+			<li> <!-- Wave 0 -->
+				<bossCount>1</bossCount>
+				<escorts>
+					<APM_Mech_Satellite>3</APM_Mech_Satellite>
+					<APM_Mech_Conqueror_DMR>1</APM_Mech_Conqueror_DMR>
+				</escorts>
+			</li>
+			<li> <!-- Wave 1 -->
+				<bossCount>1</bossCount>
+				<escorts>
+					<APM_Mech_Satellite>4</APM_Mech_Satellite>
+					<APM_Mech_Conqueror_DMR>2</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Tinker>1</APM_Mech_Tinker>
+				</escorts>
+			</li>
+			<li> <!-- Wave 2 -->
+				<bossCount>1</bossCount>
+				<escorts>
+					<APM_Mech_Satellite>3</APM_Mech_Satellite>
+					<APM_Mech_Conqueror_AR>2</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>1</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>1</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Maul>1</APM_Mech_Maul>
+				</escorts>
+				<bossApparel>
+					<li>
+						<thing>Apparel_HeavyShield</thing>
+					</li>
+				</bossApparel>
+			</li>
+			<li> <!-- Wave 3 -->
+				<bossCount>2</bossCount>
+				<escorts>
+					<APM_Mech_Satellite>2</APM_Mech_Satellite>
+					<APM_Mech_Conqueror_AR>3</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>2</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>2</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Maul>1</APM_Mech_Maul>
+					<APM_Mech_Tinker>1</APM_Mech_Tinker>
+				</escorts>
+			</li>
+			<li> <!-- Wave 4 -->
+				<bossCount>2</bossCount>
+				<escorts>
+					<APM_Mech_Conqueror_AR>4</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>3</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>3</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Maul>1</APM_Mech_Maul>
+					<APM_Mech_Ingestor>1</APM_Mech_Ingestor>
+					<APM_Mech_Tinker>1</APM_Mech_Tinker>
+				</escorts>
+			</li>
+			<li> <!-- Wave 5 -->
+				<bossCount>2</bossCount>
+				<escorts>
+					<APM_Mech_Conqueror_AR>5</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>4</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>4</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Maul>2</APM_Mech_Maul>
+					<APM_Mech_Ingestor>1</APM_Mech_Ingestor>
+					<APM_Mech_Tinker>2</APM_Mech_Tinker>
+				</escorts>
+				<bossApparel>
+					<li>
+						<thing>Apparel_HeavyShield</thing>
+					</li>
+				</bossApparel>
+			</li>
+			<li> <!-- Wave 6 -->
+				<bossCount>2</bossCount>
+				<escorts>
+					<APM_Mech_Conqueror_AR>6</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>5</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>5</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Maul>2</APM_Mech_Maul>
+					<APM_Mech_Ingestor>2</APM_Mech_Ingestor>
+					<APM_Mech_Tinker>2</APM_Mech_Tinker>
+				</escorts>
+				<bossApparel>
+					<li>
+						<thing>Apparel_HeavyShield</thing>
+					</li>
+				</bossApparel>
+			</li>
+			<li> <!-- Wave 7 -->
+				<bossCount>3</bossCount>
+				<escorts>
+					<APM_Mech_Conqueror_AR>8</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>6</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>6</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Maul>3</APM_Mech_Maul>
+					<APM_Mech_Ingestor>2</APM_Mech_Ingestor>
+					<APM_Mech_Tinker>3</APM_Mech_Tinker>
+				</escorts>
+				<bossApparel>
+					<li>
+						<thing>Apparel_HeavyShield</thing>
+					</li>
+				</bossApparel>
+			</li>
+		</waves>
+		<leaderDescription>The {LEADERKIND_label} is an implacable juggernaut that punishes those who try to maintain distance. Its melee sweep can devastate clustered groups, and its grappling hook will forcibly drag your ranged units into its reach. Spread out your forces to minimize sweep damage and prepare high-durability melee blockers to intercept it before it can pull your gunners into its grasp.</leaderDescription>
+		<rewardDef>APM_ExtraChip</rewardDef>
+	</BossgroupDef>
+
+
+	<!-- Celerus -->
+
+	<BossDef>
+		<defName>APM_Boss_Celerus</defName>
+		<kindDef>APM_Mech_Celerus_Boss</kindDef>
+		<appearAfterTicks>14400000</appearAfterTicks><!-- 4 years -->
+	</BossDef>
+
+	<BossgroupDef ParentName="BaseBossgroup">
+		<defName>APM_Group_Celerus</defName>
+		<boss>APM_Boss_Celerus</boss>
+		<waves>
+			<li> <!-- Wave 0 -->
+				<bossCount>1</bossCount>
+				<escorts>
+					<APM_Mech_Satellite>3</APM_Mech_Satellite>
+					<APM_Mech_Conqueror_SMG>1</APM_Mech_Conqueror_SMG>
+				</escorts>
+			</li>
+			<li> <!-- Wave 1 -->
+				<bossCount>1</bossCount>
+				<escorts>
+					<APM_Mech_Satellite>4</APM_Mech_Satellite>
+					<APM_Mech_Conqueror_SMG>2</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Pulse>1</APM_Mech_Pulse>
+				</escorts>
+			</li>
+			<li> <!-- Wave 2 -->
+				<bossCount>1</bossCount>
+				<escorts>
+					<APM_Mech_Satellite>3</APM_Mech_Satellite>
+					<APM_Mech_Conqueror_AR>2</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>1</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>1</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Pulse>1</APM_Mech_Pulse>
+				</escorts>
+				<bossApparel>
+					<li>
+						<thing>Apparel_HeavyShield</thing>
+					</li>
+				</bossApparel>
+			</li>
+			<li> <!-- Wave 3 -->
+				<bossCount>2</bossCount>
+				<escorts>
+					<APM_Mech_Satellite>2</APM_Mech_Satellite>
+					<APM_Mech_Conqueror_AR>3</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>2</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>2</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Pulse>1</APM_Mech_Pulse>
+					<APM_Mech_Mantis>1</APM_Mech_Mantis>
+				</escorts>
+			</li>
+			<li> <!-- Wave 4 -->
+				<bossCount>2</bossCount>
+				<escorts>
+					<APM_Mech_Conqueror_AR>4</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>3</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>3</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Pulse>2</APM_Mech_Pulse>
+					<APM_Mech_Mantis>1</APM_Mech_Mantis>
+				</escorts>
+			</li>
+			<li> <!-- Wave 5 -->
+				<bossCount>2</bossCount>
+				<escorts>
+					<APM_Mech_Conqueror_AR>5</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>4</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>4</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Pulse>2</APM_Mech_Pulse>
+					<APM_Mech_Mantis>2</APM_Mech_Mantis>
+				</escorts>
+				<bossApparel>
+					<li>
+						<thing>Apparel_HeavyShield</thing>
+					</li>
+				</bossApparel>
+			</li>
+			<li> <!-- Wave 6 -->
+				<bossCount>2</bossCount>
+				<escorts>
+					<APM_Mech_Conqueror_AR>6</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>5</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>5</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Pulse>3</APM_Mech_Pulse>
+					<APM_Mech_Mantis>2</APM_Mech_Mantis>
+				</escorts>
+				<bossApparel>
+					<li>
+						<thing>Apparel_HeavyShield</thing>
+					</li>
+				</bossApparel>
+			</li>
+			<li> <!-- Wave 7 -->
+				<bossCount>3</bossCount>
+				<escorts>
+					<APM_Mech_Conqueror_AR>8</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>6</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>6</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Pulse>3</APM_Mech_Pulse>
+					<APM_Mech_Mantis>3</APM_Mech_Mantis>
+				</escorts>
+				<bossApparel>
+					<li>
+						<thing>Apparel_HeavyShield</thing>
+					</li>
+				</bossApparel>
+			</li>
+		</waves>
+		<leaderDescription>The {LEADERKIND_label} is a master of evasion and disorientation. It uses short-range teleports and smoke to render itself imperceptible while delivering constant electrical shocks. Do not rely on precision targeting while it is obscured; use area-of-effect weapons to flush it out of the smoke and catch it between its teleports.</leaderDescription>
+		<rewardDef>APM_PsyfluxChip</rewardDef>
+	</BossgroupDef>
+
+
+	<!-- Gazer -->
+
+	<BossDef>
+		<defName>APM_Boss_Gazer</defName>
+		<kindDef>APM_Mech_Gazer</kindDef>
+		<appearAfterTicks>7200000</appearAfterTicks><!-- 2 years -->
+	</BossDef>
+
+	<BossgroupDef ParentName="BaseBossgroup">
+		<defName>APM_Group_Gazer</defName>
+		<boss>APM_Boss_Gazer</boss>
+		<waves>
+			<li> <!-- Wave 0 -->
+				<bossCount>1</bossCount>
+				<escorts>
+					<APM_Mech_Satellite>3</APM_Mech_Satellite>
+					<APM_Mech_Conqueror_AR>1</APM_Mech_Conqueror_AR>
+				</escorts>
+			</li>
+			<li> <!-- Wave 1 -->
+				<bossCount>1</bossCount>
+				<escorts>
+					<APM_Mech_Satellite>4</APM_Mech_Satellite>
+					<APM_Mech_Conqueror_AR>2</APM_Mech_Conqueror_AR>
+					<APM_Mech_Tinker>1</APM_Mech_Tinker>
+				</escorts>
+			</li>
+			<li> <!-- Wave 2 -->
+				<bossCount>1</bossCount>
+				<escorts>
+					<APM_Mech_Satellite>3</APM_Mech_Satellite>
+					<APM_Mech_Conqueror_AR>2</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>1</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>1</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Dynamo>1</APM_Mech_Dynamo>
+				</escorts>
+				<bossApparel>
+					<li>
+						<thing>Apparel_HeavyShield</thing>
+					</li>
+				</bossApparel>
+			</li>
+			<li> <!-- Wave 3 -->
+				<bossCount>2</bossCount>
+				<escorts>
+					<APM_Mech_Satellite>2</APM_Mech_Satellite>
+					<APM_Mech_Conqueror_AR>3</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>2</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>2</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Dynamo>1</APM_Mech_Dynamo>
+					<APM_Mech_Tinker>1</APM_Mech_Tinker>
+				</escorts>
+			</li>
+			<li> <!-- Wave 4 -->
+				<bossCount>2</bossCount>
+				<escorts>
+					<APM_Mech_Conqueror_AR>4</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>3</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>3</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Dynamo>1</APM_Mech_Dynamo>
+					<APM_Mech_Aegis>1</APM_Mech_Aegis>
+					<APM_Mech_Tinker>1</APM_Mech_Tinker>
+				</escorts>
+			</li>
+			<li> <!-- Wave 5 -->
+				<bossCount>2</bossCount>
+				<escorts>
+					<APM_Mech_Conqueror_AR>5</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>4</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>4</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Dynamo>2</APM_Mech_Dynamo>
+					<APM_Mech_Aegis>1</APM_Mech_Aegis>
+					<APM_Mech_Tinker>2</APM_Mech_Tinker>
+				</escorts>
+				<bossApparel>
+					<li>
+						<thing>Apparel_HeavyShield</thing>
+					</li>
+				</bossApparel>
+			</li>
+			<li> <!-- Wave 6 -->
+				<bossCount>2</bossCount>
+				<escorts>
+					<APM_Mech_Conqueror_AR>6</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>5</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>5</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Dynamo>2</APM_Mech_Dynamo>
+					<APM_Mech_Aegis>2</APM_Mech_Aegis>
+					<APM_Mech_Tinker>2</APM_Mech_Tinker>
+				</escorts>
+				<bossApparel>
+					<li>
+						<thing>Apparel_HeavyShield</thing>
+					</li>
+				</bossApparel>
+			</li>
+			<li> <!-- Wave 7 -->
+				<bossCount>3</bossCount>
+				<escorts>
+					<APM_Mech_Conqueror_AR>8</APM_Mech_Conqueror_AR>
+					<APM_Mech_Conqueror_DMR>6</APM_Mech_Conqueror_DMR>
+					<APM_Mech_Conqueror_SMG>6</APM_Mech_Conqueror_SMG>
+					<APM_Mech_Dynamo>2</APM_Mech_Dynamo>
+					<APM_Mech_Aegis>3</APM_Mech_Aegis>
+					<APM_Mech_Tinker>2</APM_Mech_Tinker>
+				</escorts>
+				<bossApparel>
+					<li>
+						<thing>Apparel_HeavyShield</thing>
+					</li>
+				</bossApparel>
+			</li>
+		</waves>
+		<leaderDescription>The {LEADERKIND_label} is a stationary threat of catastrophic potential. Its beam emitter requires a long stabilization time, providing a window to move out of its line of fire before it obliterates everything in its path. If enemies get too close, it can release a surge of stored energy as an explosive shockwave, violently throwing back and stunning anyone caught within its radius.</leaderDescription>
+		<rewardDef>APM_OcularChip</rewardDef>
+	</BossgroupDef>
+	
+</Defs>

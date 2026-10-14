@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef Name="APM_Mech_Frostivus" ParentName="BaseMechanoidWalker">
+		<defName>APM_Mech_Frostivus</defName>
+		<label>Frostivus</label>
+		<description>A very unique mechanoid, the frostivus is a mobile cryogenic chamber. It consumes organic material such as foodstuffs to store, freeze and dispense at request. It can be commanded to seal a targeted pawn inside of itself to store for the mechhive to later utilize for its twisted machinations.</description>
+		<statBases>
+			<MarketValue>1200</MarketValue>
+			<MoveSpeed>3.3</MoveSpeed>
+			<ArmorRating_Blunt>0.22</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.4</ArmorRating_Sharp>
+			<ArmorRating_Heat>2.0</ArmorRating_Heat>
+			<BandwidthCost MayRequire="Ludeon.RimWorld.Biotech">2</BandwidthCost>
+			<Mass>33</Mass>
+			<MechEnergyLossPerHP MayRequire="Ludeon.Rimworld.Biotech">0.66</MechEnergyLossPerHP>
+		</statBases>
+		<tools>
+			<li>
+				<label>front left leg</label>
+				<labelNoLocation>leg</labelNoLocation>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>12.0</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>FrontLeftLeg</linkedBodyPartsGroup>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li>
+				<label>front right leg</label>
+				<labelNoLocation>leg</labelNoLocation>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>12.0</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>FrontRightLeg</linkedBodyPartsGroup>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>8.5</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+				<chanceFactor>0.2</chanceFactor>
+			</li>
+		</tools>
+		<race>
+			<body>APM_Frostivus</body>
+			<thinkTreeMain>APM_FrostivusMechanoid</thinkTreeMain>
+			<baseBodySize>3.0</baseBodySize>
+			<baseHealthScale>1.82</baseHealthScale>
+			<mechWeightClass>Medium</mechWeightClass>
+			<lifeStageAges Inherit="False">
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Legionary_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Legionary_Death</soundDeath>
+					<soundCall>Pawn_Mech_Legionary_Call</soundCall>
+				</li>
+				<li MayRequire="Ludeon.RimWorld.Biotech">
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Legionary_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Legionary_Death</soundDeath>
+					<soundCall>Pawn_Mech_Legionary_Call</soundCall>
+				</li>
+			</lifeStageAges>
+			<detritusLeavings>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>10</texOverrideIndex>
+					<spawnChance>0.5</spawnChance>
+				</li>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>19</texOverrideIndex>
+					<spawnChance>0.5</spawnChance>
+				</li>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>14</texOverrideIndex>
+					<spawnChance>0.5</spawnChance>
+				</li>
+			</detritusLeavings>
+			<mechEnabledWorkTypes>
+				<li>APM_FrostivusFoodPreservation</li>
+			</mechEnabledWorkTypes>
+			<mechWorkTypePriorities>
+				<APM_FrostivusFoodPreservation>2</APM_FrostivusFoodPreservation>
+			</mechWorkTypePriorities>
+		</race>
+		<comps>
+			<li Class="ApexMechanoids.CompProperties_FrostivusFoodPreservation" />
+		</comps>
+		<butcherProducts>
+			<Steel>30</Steel>
+			<Plasteel>10</Plasteel>
+		</butcherProducts>
+	</ThingDef>
+
+	<PawnKindDef ParentName="BaseMechanoidKind">
+		<defName>APM_Mech_Frostivus</defName>
+		<label>frostivus</label>
+		<race>APM_Mech_Frostivus</race>
+		<combatPower>200</combatPower>
+    	<allowInMechClusters>false</allowInMechClusters>
+		<lifeStages>
+			<li MayRequire="Ludeon.RimWorld.Biotech">
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/Frostivus/Frostivus</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Frostivus/Mech_Frostivus</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>3</drawSize>
+					<shadowData>
+						<volume>(0.6, 0.8, 0.6)</volume>
+						<offset>(0, 0, -0.4)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/Frostivus/FrostivusAncient</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Frostivus/Mech_Frostivus</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>3</drawSize>
+					<shadowData>
+						<volume>(0.6, 0.8, 0.6)</volume>
+						<offset>(0, 0, -0.4)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+		<techHediffsChance>1</techHediffsChance>
+		<techHediffsMoney>9999~9999</techHediffsMoney>
+		<controlGroupPortraitZoom>0.85</controlGroupPortraitZoom>
+		<abilities>
+			<li>APM_Ability_CryptoSwallow</li>
+		</abilities>
+	</PawnKindDef>
+	
+	<AbilityDef>
+		<defName>APM_Ability_CryptoSwallow</defName>
+		<label>Crypto Swallow</label>
+		<description>Engulfs a humanlike pawn or corpse, sealing it within an internal cryo-chamber. Preserves the target in suspended animation until released.</description>
+		<iconPath>UI/Cryptoswallow</iconPath>
+		<jobDef>APM_CryptoSwallow</jobDef>
+		<stunTargetWhileCasting>True</stunTargetWhileCasting>
+		<showPsycastEffects>False</showPsycastEffects>
+		<displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+		<disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
+		<showWhenDrafted>true</showWhenDrafted>
+		<cooldownTicksRange>3600~3600</cooldownTicksRange>
+		<hostile>false</hostile>
+		<casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+		<writeCombatLog>false</writeCombatLog>
+		<aiCanUse>false</aiCanUse>
+		<verbProperties>
+			<verbClass>Verb_CastAbilityTouch</verbClass>
+			<drawAimPie>False</drawAimPie>
+			<range>-1</range>
+			<warmupTime>1.0</warmupTime>
+			<requireLineOfSight>True</requireLineOfSight>
+			<soundCast>CryptosleepCasket_Eject</soundCast>
+			<targetParams>
+				<canTargetSelf>False</canTargetSelf>
+				<canTargetPawns>True</canTargetPawns>
+				<canTargetAnimals>False</canTargetAnimals>
+				<canTargetMechs>False</canTargetMechs>
+				<canTargetHumans>True</canTargetHumans>
+				<canTargetSubhumans>false</canTargetSubhumans>
+				<canTargetBuildings>False</canTargetBuildings>
+				<canTargetLocations>False</canTargetLocations>
+				<canTargetCorpses>True</canTargetCorpses>
+				<mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+			</targetParams>
+		</verbProperties>
+		<statBases>
+			<Ability_Duration>0</Ability_Duration>
+			<Ability_EffectRadius>0</Ability_EffectRadius>
+		</statBases>
+		<comps>
+			<li Class="ApexMechanoids.CompProperties_CryptoSwallow"></li>
+		</comps>
+	</AbilityDef>
+</Defs>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="BaseMechanoidWalker">
+		<defName>APM_Mech_Dynamo</defName>
+		<label>dynamo</label>
+		<description>An hybrid of mechanoid and and mechhive infrastructure, the dynamo is outfitted with an oversized internal reactor. The drawbacks of its increased power output means that vanometric means are not enough to fuel this reactor, requiring uranium to stay active. It has the ability to anchor itself in the ground and attach itself to an existing power grid as well as use its energy to act as a mobile shield generator, able to process excess uranium to regenerate the durability of its shield. Dynamo also grants an aura in which all allied mechanoids gradually recharge.</description>
+		<statBases>
+			<MarketValue>1600</MarketValue>
+			<MoveSpeed>2.5</MoveSpeed>
+			<ArmorRating_Blunt>0.22</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.55</ArmorRating_Sharp>
+			<ArmorRating_Heat>2.0</ArmorRating_Heat>
+			<BandwidthCost MayRequire="Ludeon.RimWorld.Biotech">3</BandwidthCost>
+			<CarryingCapacity>33</CarryingCapacity>
+			<Mass>60</Mass>
+			<MechEnergyLossPerHP MayRequire="Ludeon.Rimworld.Biotech">0.2</MechEnergyLossPerHP>
+			<ControlTakingTime MayRequire="Ludeon.RimWorld.Biotech">18</ControlTakingTime>
+			<EnergyShieldRechargeRate>0.25</EnergyShieldRechargeRate>
+			<EnergyShieldEnergyMax>1.5</EnergyShieldEnergyMax>
+		</statBases>
+		<tools>
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>12</power>
+				<cooldownTime>2.0</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			</li>
+		</tools>
+		<race>
+			<body>APM_Dynamo</body>
+			<baseBodySize>3.0</baseBodySize>
+			<baseHealthScale>2.82</baseHealthScale>
+			<mechWeightClass>Heavy</mechWeightClass>
+			<lifeStageAges Inherit="False">
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Legionary_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Legionary_Death</soundDeath>
+					<soundCall>Pawn_Mech_Legionary_Call</soundCall>
+				</li>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Legionary_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Legionary_Death</soundDeath>
+					<soundCall>Pawn_Mech_Legionary_Call</soundCall>
+				</li>
+			</lifeStageAges>
+			<detritusLeavings>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>16</texOverrideIndex>
+					<spawnChance>0.1</spawnChance>
+				</li>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>11</texOverrideIndex>
+					<spawnChance>0.1</spawnChance>
+				</li>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>1</texOverrideIndex>
+					<spawnChance>0.1</spawnChance>
+				</li>
+			</detritusLeavings>
+		</race>
+		<comps>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>4.5</fuelConsumptionRate>
+				<fuelCapacity>30.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>Uranium</li>
+					</thingDefs>
+				</fuelFilter>
+				<consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+				<canEjectFuel>true</canEjectFuel>
+				<drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
+			</li>
+			<li Class="CompProperties_ProjectileInterceptor">
+				<radius>6</radius>
+				<interceptGroundProjectiles>true</interceptGroundProjectiles>
+				<color>(0.4, 0.4, 0.4)</color>
+				<reactivateEffect>BulletShieldGenerator_Reactivate</reactivateEffect>
+				<activeSound>BulletShield_Ambience</activeSound>
+				<hitPoints>600</hitPoints>
+				<hitPointsRestoreInstantlyAfterCharge>true</hitPointsRestoreInstantlyAfterCharge>
+				<chargeDurationTicks>5400</chargeDurationTicks>
+				<rechargeHitPointsIntervalTicks>120</rechargeHitPointsIntervalTicks>
+				<drawWithNoSelection>True</drawWithNoSelection>
+				<disarmedByEmpForTicks>1500</disarmedByEmpForTicks>
+				<gizmoTipKey>ProjectileInterceptorTip</gizmoTipKey>
+			</li>
+			<li Class="ApexMechanoids.CompProperties_MechWirelessCharger">
+				<radius>6</radius>
+				<fuelPerCharge>0.009</fuelPerCharge>
+				<powerPerCharge>0.5</powerPerCharge>
+				<maxMechPerCharge>4</maxMechPerCharge>
+			</li>
+			<li Class="CompProperties_WasteProducer">
+				<showContentsInInspectPane>false</showContentsInInspectPane>
+			</li>
+			<li Class="CompProperties_ThingContainer">
+				<compClass>CompThingContainer</compClass>
+				<stackLimit>30</stackLimit>
+				<drawContainedThing>false</drawContainedThing>
+				<dropEffecterDef>MechChargerWasteRemoved</dropEffecterDef>
+			</li>
+		</comps>
+		<butcherProducts>
+			<Steel>40</Steel>
+			<Plasteel>10</Plasteel>
+		</butcherProducts>
+	</ThingDef>
+
+	<PawnKindDef ParentName="BaseMechanoidKind">
+		<defName>APM_Mech_Dynamo</defName>
+		<label>dynamo</label>
+		<race>APM_Mech_Dynamo</race>
+		<combatPower>300</combatPower>
+		<allowInMechClusters>false</allowInMechClusters>
+		<lifeStages>
+			<li MayRequire="Ludeon.RimWorld.Biotech">
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/Dynamo/Dynamo</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Dynamo/Mech_Dynamo</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<drawSize>3</drawSize>
+					<shadowData>
+						<volume>(0.6, 0.8, 0.6)</volume>
+						<offset>(0, 0, -0.3)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/Dynamo/DynamoAncient</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Dynamo/Mech_Dynamo</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<drawSize>3</drawSize>
+					<shadowData>
+						<volume>(0.6, 0.8, 0.6)</volume>
+						<offset>(0, 0, -0.3)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+		<weaponMoney>9999~9999</weaponMoney>
+		<weaponTags>
+			<li>APM_WeaponEMPImpactor</li>
+		</weaponTags>
+		<techHediffsChance>1</techHediffsChance>
+		<techHediffsMoney>9999~9999</techHediffsMoney>
+		<controlGroupPortraitZoom>0.85</controlGroupPortraitZoom>
+		<abilities>
+			<li>APM_SwitchToPowerPlantMode</li>
+		</abilities>
+	</PawnKindDef>
+</Defs>

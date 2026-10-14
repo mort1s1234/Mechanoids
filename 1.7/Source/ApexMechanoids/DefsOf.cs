@@ -1,0 +1,104 @@
+﻿using RimWorld;
+using Verse;
+
+namespace ApexMechanoids
+{
+    [DefOf]
+    public static class ApexDefsOf
+	{
+		public static ThingDef APM_Mech_Tinker;
+		public static ThingDef APM_Mech_Dynamo;
+		public static ThingDef APM_Mech_Frostivus;
+        public static ThingDef APM_Mech_Dominus;
+        public static ThingDef APM_Mech_Ingestor;
+        public static ThingDef APM_Building_ToxicPurifier;
+		public static AbilityDef APM_DefenceMatrix;
+        public static AbilityDef APM_BlindingLaser;
+        public static AbilityDef APM_ShieldCharge;
+        public static AbilityDef APM_Bladehopp;
+        public static ThingDef APM_Mech_Celerus;
+        public static ThingDef APM_Mech_CelerusB;
+        public static ThingDef APM_Smokescreen;
+        public static ThingDef APM_Smokescreen_Boss;
+        public static AbilityDef APM_Absorb;
+        public static DesignationDef APM_IngestorAbsorbCorpse;
+        public static WorkTypeDef APM_IngestorCorpseProcessing;
+        public static AbilityDef APM_CelerusBlink;
+        public static AbilityDef APM_Ability_SmokeScreen;
+        public static AbilityDef APM_Ability_SmokeScreen_Boss;
+        public static AbilityDef APM_Mech_Duel;
+        public static AbilityDef APM_Mech_Duel_Boss;
+        public static HediffDef APM_Hediff_TerminusOverdrive;
+        public static BodyPartGroupDef APM_LeftAegisShield;
+        public static BodyPartGroupDef APM_RightAegisShield;
+        public static PawnKindDef APM_Mech_Aegis;
+		public static BodyPartDef APM_AegisShield;
+        public static HediffDef APM_Hediff_Unity;
+        public static HediffDef APM_DuelWinner;
+        public static HediffDef APM_DuelDraw;
+        public static HediffDef APM_InDuel;
+        public static FleckDef ArcLargeEMP_B;
+        public static HediffDef APM_AbsorbedThing;
+        public static AnimationDef APM_EatingIngestor;
+        public static FleckDef APM_AirPuffGreen;
+        public static ThingDef APM_PawnFlyer_Hooked;
+        public static ThingDef APM_Projectile_Hook;
+        public static ThingDef APM_Mote_HookRope;
+        public static StatDef APM_GestationFactor;
+        public static StatDef APM_CasketBandwidth;
+        public static ThingDef APM_MechCommandCasket;
+        public static HediffDef APM_MechCommandCasketBoost;
+        public static HediffDef APM_Hediff_JavelinMissileLock;
+        public static HediffDef APM_Hediff_SirenLureCooldown;
+        public static ThingDef APM_Gun_JavelinRocketLauncher;
+        public static ThingDef APM_Proj_JavelinMissile;
+
+        public static ThingDef APM_MechanoidContainer_Cluster;
+        public static HediffDef RemoteRepairerImplant;  //from Biotech
+        public static HediffDef RemoteShielderImplant;  //from Biotech
+        public static HediffDef APM_Hediff_Devoured;
+        public static SoundDef ShieldMech_Complete;     //from Biotech
+        public static SoundDef ShieldMech_Start;        //from Biotech
+        public static SoundDef APM_DuelWin;
+        public static SoundDef APM_DuelLose;
+        public static SoundDef APM_DuelStarted;
+		
+        static ApexDefsOf()
+        {
+            DefOfHelper.EnsureInitializedInCtor(typeof(ApexDefsOf));
+        }
+		
+        public static JobDef APM_LasherTame;
+        public static JobDef APM_LasherTrain;
+        public static JobDef APM_LasherMilk;
+        public static JobDef APM_LasherShear;
+        public static JobDef APM_LasherSlaughter;
+        public static JobDef APM_LasherReleaseToWild;
+        public static JobDef APM_SirenChatWithPrisoner;
+        public static JobDef APM_SirenEnslavePrisoner;
+        public static JobDef APM_SirenReduceWillPrisoner;
+        public static JobDef APM_SirenConvertPrisoner;
+        public static JobDef APM_SirenSuppressSlave;
+        public static JobDef APM_FrostivusTakeFoodToInventory;
+        public static JobDef APM_FrostivusUnloadFoodToStorage;
+        public static JobDef APM_FrostivusManualUnloadFood;
+        public static JobDef APM_FrostivusReleaseDevouredContents;
+        public static JobDef APM_RavagerArtilleryAttack;
+        public static JobDef APM_CastPulseJump;
+        public static JobDef APM_HaulToToxicPurifier;
+        public static JobDef APM_RepairMech;
+        public static JobDef APM_ProjectDefenceMatrix;
+
+	}
+    [DefOf]
+    public static class ApexEffecterDefsOf
+    {
+        public static EffecterDef APM_DuelStart;
+        public static EffecterDef APM_DuelStart_Boss;
+        public static EffecterDef APM_DuelWin;
+        public static EffecterDef APM_DuelWin_Boss;
+        public static EffecterDef APM_DuelDraw;
+        public static EffecterDef APM_DuelDraw_Boss;
+        public static EffecterDef APM_DuelLose;
+    }
+}

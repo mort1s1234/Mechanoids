@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- ==================== THING DEFS ==================== -->
+	<ThingDef ParentName="BaseMechanoid" Name="APM_Mech_Terminus_Base" Abstract="True">
+		<label>Terminus</label>
+		<description>Three powerful mechanoid types were created by an Archotech mind in an attempt to create a central commander of all mechanoid forces. Influenced by the Old Earth region of Europe in medieval times, the Terminus cleaves through waves of foes and not even distance can mitigate its wrath. Its weapon has the ability to sweep through a large area in front of itself. The Terminus can also focus its psychic influence inward, enhancing its damage and stagger resistance. For foes who escape its grasp, it is also equipped with a grappling hook to draw in enemies from a distance to finish off. Additionally, mechanitors can extend their command range in a radius around this mech if under their control.</description>
+		<statBases>
+			<MarketValue>1900</MarketValue>
+			<MoveSpeed>3.3</MoveSpeed>
+			<ArmorRating_Blunt>0.84</ArmorRating_Blunt>
+			<ArmorRating_Sharp>1.12</ArmorRating_Sharp>
+			<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">5</BandwidthCost>
+			<CarryingCapacity>30</CarryingCapacity>
+			<Mass>52.5</Mass>
+			<MechEnergyLossPerHP MayRequire="Ludeon.Rimworld.Biotech">0.15</MechEnergyLossPerHP>
+			<EMPResistance MayRequire="Ludeon.Rimworld.Biotech">0.45</EMPResistance>
+		</statBases>
+		<tools>
+			<li>
+				<label>left fist</label>
+				<labelNoLocation>fist</labelNoLocation>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>12.0</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li>
+				<label>right fist</label>
+				<labelNoLocation>fist</labelNoLocation>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>12.0</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>8.5</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+				<chanceFactor>0.2</chanceFactor>
+			</li>
+		</tools>
+		<comps>
+			<li Class="ApexMechanoids.CompProperties_MechanitorRangeExtender">
+				<minRange>7.9</minRange>
+				<maxRange>19.4</maxRange>
+			</li>
+		</comps>
+		<killedLeavingsPlayerHostile>
+			<APM_ExtraChip>1</APM_ExtraChip>
+		</killedLeavingsPlayerHostile>
+		<race>
+			<body>APM_Terminus</body>
+			<renderTree>APM_RenderTree_Terminus</renderTree>
+			<baseBodySize>4</baseBodySize>
+			<baseHealthScale>6.32</baseHealthScale>
+			<thinkTreeMain>APM_TerminusMechanoid</thinkTreeMain>
+			<intelligence>ToolUser</intelligence>
+			<mechWeightClass>Heavy</mechWeightClass>
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Diabolus_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Diabolus_Death</soundDeath>
+					<soundCall>Pawn_Mech_Diabolus_Call</soundCall>
+				</li>
+				<li MayRequire="Ludeon.RimWorld.Biotech">
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Diabolus_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Diabolus_Death</soundDeath>
+					<soundCall>Pawn_Mech_Diabolus_Call</soundCall>
+				</li>
+			</lifeStageAges>
+			<detritusLeavings>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>11</texOverrideIndex>
+					<spawnChance>0.1</spawnChance>
+				</li>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>12</texOverrideIndex>
+					<spawnChance>0.1</spawnChance>
+				</li>
+			</detritusLeavings>
+		</race>
+		<butcherProducts>
+			<Steel>80</Steel>
+			<Plasteel>50</Plasteel>
+		</butcherProducts>
+		<modExtensions>
+			<li Class="ApexMechanoids.DefModExtension_SearchAndDestroyMech">
+				<disabledAutoUseAbilitiesWhenSearchAndDestroy>
+					<li>APM_TerminusOverdrive</li>
+					<li>APM_TerminusOverdrive_Boss</li>
+				</disabledAutoUseAbilitiesWhenSearchAndDestroy>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="APM_Mech_Terminus_Base">
+		<defName>APM_Mech_Terminus</defName>
+		<label>Terminus</label>
+		<description>Three powerful mechanoid types were created by an Archotech mind in an attempt to create a central commander of all mechanoid forces. Influenced by the Old Earth region of Europe in medieval times, the Terminus cleaves through waves of foes and not even distance can mitigate its wrath. Its weapon has the ability to sweep through a large area in front of itself. The Terminus can also focus its psychic influence inward, enhancing its damage and stagger resistance. For foes who escape its grasp, it is also equipped with a grappling hook to draw in enemies from a distance to finish off. Additionally, mechanitors can extend their command range in a radius around this mech if under their control.</description>
+	</ThingDef>
+
+	<ThingDef ParentName="APM_Mech_Terminus_Base">
+		<defName>APM_Mech_TerminusB</defName>
+		<label>Terminus</label>
+		<description>Three powerful mechanoid types were created by an Archotech mind in an attempt to create a central commander of all mechanoid forces. Influenced by the Old Earth region of Europe in medieval times, the Terminus cleaves through waves of foes and not even distance can mitigate its wrath. Its weapon has the ability to sweep through a large area in front of itself. The Terminus can also focus its psychic influence inward, enhancing its damage and stagger resistance. For foes who escape its grasp, it is also equipped with a grappling hook to draw in enemies from a distance to finish off. Additionally, mechanitors can extend their command range in a radius around this mech if under their control.</description>
+	</ThingDef>
+
+	<!-- ==================== PAWN KINDS ==================== -->
+	<PawnKindDef ParentName="BaseMechanoidKind" Name="APM_PawnKind_Terminus_Base" Abstract="True">
+		<label>terminus</label>
+		<combatPower>700</combatPower>
+		<maxPerGroup>3</maxPerGroup>
+		<isBoss>true</isBoss>
+		<allowInMechClusters>false</allowInMechClusters>
+		<skipResistant>true</skipResistant>
+		<weaponMoney>9999~9999</weaponMoney>
+		<techHediffsChance>1</techHediffsChance>
+		<techHediffsMoney>9999~9999</techHediffsMoney>
+		<controlGroupPortraitZoom>0.9</controlGroupPortraitZoom>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="APM_PawnKind_Terminus_Base">
+		<defName>APM_Mech_Terminus</defName>
+		<race>APM_Mech_Terminus</race>
+		<lifeStages>
+			<li MayRequire="Ludeon.RimWorld.Biotech">
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/Terminus/Regular/Terminus</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Terminus/Regular/Mech_Terminus</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>2.25</drawSize>
+					<shadowData>
+						<volume>(0.8, 1.5, 0.8)</volume>
+						<offset>(0, 0, -0.7)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/Terminus/Regular/TerminusAncient</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Terminus/Regular/Mech_Terminus</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>2.25</drawSize>
+					<shadowData>
+						<volume>(0.8, 1.5, 0.8)</volume>
+						<offset>(0, 0, -0.7)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+		<weaponTags Inherit="False">
+			<li>APM_WeaponTerminusExoblade</li>
+		</weaponTags>
+		<abilities>
+			<li>APM_SeveringEdge</li>
+			<li>APM_TerminusOverdrive</li>
+			<li>APM_HookPawn</li>
+		</abilities>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="APM_PawnKind_Terminus_Base">
+		<defName>APM_Mech_Terminus_Boss</defName>
+		<race>APM_Mech_TerminusB</race>
+		<lifeStages>
+			<li MayRequire="Ludeon.RimWorld.Biotech">
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/Terminus/Boss/TerminusBAncient</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Terminus/Boss/Mech_TerminusB</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>2.25</drawSize>
+					<shadowData>
+						<volume>(0.8, 1.5, 0.8)</volume>
+						<offset>(0, 0, -0.6)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/Terminus/Boss/TerminusBAncient</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Terminus/Boss/Mech_TerminusB</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>2.25</drawSize>
+					<shadowData>
+						<volume>(0.8, 1.5, 0.8)</volume>
+						<offset>(0, 0, -0.6)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+		<weaponTags Inherit="False">
+			<li>APM_WeaponTerminusApexExoblade</li>
+		</weaponTags>
+		<abilities>
+			<li>APM_SeveringEdge_Boss</li>
+			<li>APM_TerminusOverdrive_Boss</li>
+			<li>APM_HookPawn</li>
+		</abilities>
+	</PawnKindDef>
+
+	<!-- ==================== OVERDRIVE ABILITIES ==================== -->
+	<AbilityDef Name="APM_TerminusOverdrive_Base" Abstract="True">
+		<label>overdrive</label>
+		<description>Terminus diverts power inward and briefly enters an overdriven combat state. While active, it sheds its cape, strikes harder, recovers between swings faster and becomes harder to stagger.</description>
+		<iconPath>UI/Overdrive</iconPath>
+		<cooldownTicksRange>8000</cooldownTicksRange>
+		<targetRequired>false</targetRequired>
+		<hostile>false</hostile>
+		<aiCanUse>true</aiCanUse>
+		<showCastingProgressBar>true</showCastingProgressBar>
+		<casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+		<statBases>
+			<Ability_Duration>45</Ability_Duration>
+		</statBases>
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>1.1</warmupTime>
+			<range>0.9</range>
+			<drawAimPie>false</drawAimPie>
+			<soundCast>APM_Overdrive</soundCast>
+			<targetParams>
+				<canTargetSelf>true</canTargetSelf>
+				<canTargetPawns>false</canTargetPawns>
+				<canTargetBuildings>false</canTargetBuildings>
+				<canTargetAnimals>false</canTargetAnimals>
+				<canTargetHumans>false</canTargetHumans>
+				<canTargetLocations>false</canTargetLocations>
+				<canTargetMechs>false</canTargetMechs>
+			</targetParams>
+		</verbProperties>
+	</AbilityDef>
+
+	<AbilityDef ParentName="APM_TerminusOverdrive_Base">
+		<defName>APM_TerminusOverdrive</defName>
+		<warmupMote>APM_Mote_TerminusOverdrive_BlueSacrificePilar</warmupMote>
+		<warmupEffecter>APM_TerminusOverdrive_BlueSacrifice</warmupEffecter>
+		<comps>
+			<li Class="CompProperties_AbilityGiveHediff">
+				<compClass>CompAbilityEffect_GiveHediff</compClass>
+				<hediffDef>APM_Hediff_TerminusOverdrive</hediffDef>
+				<applyToSelf>true</applyToSelf>
+				<onlyApplyToSelf>true</onlyApplyToSelf>
+			</li>
+			<li Class="ApexMechanoids.CompProperties_AbilityWarmupMote">
+				<moteDef>APM_Mote_TerminusOverdrive_BlueSacrificeWave</moteDef>
+				<rotation>3</rotation>
+			</li>
+			<li Class="ApexMechanoids.CompProperties_TerminusOverdriveCapeBurst">
+				<moteDef>APM_Mote_TerminusCapeThrown</moteDef>
+				<burstCount>1</burstCount>
+				<spawnRadius>0.06</spawnRadius>
+				<sideOffsetDistance>0.0</sideOffsetDistance>
+				<verticalOffset>0.06</verticalOffset>
+				<speedRange>2.8~3.2</speedRange>
+				<angleOffsetRange>-10~10</angleOffsetRange>
+			</li>
+		</comps>
+	</AbilityDef>
+
+	<AbilityDef ParentName="APM_TerminusOverdrive_Base">
+		<defName>APM_TerminusOverdrive_Boss</defName>
+		<warmupMote>APM_Mote_TerminusOverdrive_SacrificePilar</warmupMote>
+		<warmupEffecter>APM_TerminusOverdrive_Sacrifice</warmupEffecter>
+		<comps>
+			<li Class="CompProperties_AbilityGiveHediff">
+				<compClass>CompAbilityEffect_GiveHediff</compClass>
+				<hediffDef>APM_Hediff_TerminusOverdrive</hediffDef>
+				<applyToSelf>true</applyToSelf>
+				<onlyApplyToSelf>true</onlyApplyToSelf>
+			</li>
+			<li Class="ApexMechanoids.CompProperties_AbilityWarmupMote">
+				<moteDef>APM_Mote_TerminusOverdrive_SacrificeWave</moteDef>
+				<rotation>3</rotation>
+			</li>
+			<li Class="ApexMechanoids.CompProperties_TerminusOverdriveCapeBurst">
+				<moteDef>APM_Mote_TerminusCapeThrown</moteDef>
+				<burstCount>1</burstCount>
+				<spawnRadius>0.06</spawnRadius>
+				<sideOffsetDistance>0.0</sideOffsetDistance>
+				<verticalOffset>0.06</verticalOffset>
+				<speedRange>2.8~3.2</speedRange>
+				<angleOffsetRange>-10~10</angleOffsetRange>
+			</li>
+		</comps>
+	</AbilityDef>
+
+	<!-- ==================== HEDIFFS ==================== -->
+	<HediffDef>
+		<defName>APM_Hediff_TerminusOverdrive</defName>
+		<label>overdrive</label>
+		<description>Terminus is diverting a burst of power into direct combat performance, trading away its cape and restraint for a short window of overwhelming aggression.</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<defaultLabelColor>(0.90, 0.83, 0.50)</defaultLabelColor>
+		<isBad>false</isBad>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<showRemainingTime>True</showRemainingTime>
+			</li>
+			<li Class="HediffCompProperties_DisappearsOnDeath" />
+			<li Class="ApexMechanoids.HediffCompProperties_TerminusOverdriveCapeVisibility" />
+		</comps>
+		<stages>
+			<li>
+				<capMods>
+					<li>
+						<capacity>Moving</capacity>
+						<offset>0.25</offset>
+					</li>
+				</capMods>
+				<statFactors>
+					<MeleeDamageFactor>1.6</MeleeDamageFactor>
+					<MeleeCooldownFactor>0.65</MeleeCooldownFactor>
+					<StaggerDurationFactor>0.35</StaggerDurationFactor>
+					<EMPResistance>0.98</EMPResistance>
+				</statFactors>
+			</li>
+		</stages>
+	</HediffDef>
+
+	<!-- ==================== SEVERING EDGE ABILITIES ==================== -->
+	<AbilityDef Name="SeveringEdge_Base" Abstract="True">
+		<label>severing edge</label>
+		<iconPath>UI/SeveringEdge</iconPath>
+		<aiCanUse>true</aiCanUse>
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<range>4.9</range>
+			<warmupTime>0.3</warmupTime>
+			<soundCast>APM_SeveringEdge</soundCast>
+			<targetParams>
+				<canTargetLocations>true</canTargetLocations>
+			</targetParams>
+		</verbProperties>
+		<moteOffsetAmountTowardsTarget>0.1</moteOffsetAmountTowardsTarget>
+	</AbilityDef>
+
+	<AbilityDef ParentName="SeveringEdge_Base">
+		<defName>APM_SeveringEdge</defName>
+		<description>Utilizing the innate psychic channeling qualities of its blade, the caster releases a sweeping blade of energy in front of itself, cutting anything in the area.</description>
+		<cooldownTicksRange>800</cooldownTicksRange>
+		<warmupMote>Mote_SeveringEdge_Intro</warmupMote>
+		<comps>
+			<li Class="CompProperties_AbilityLaunchProjectile">
+				<compClass>ApexMechanoids.CompAbilityEffect_LaunchMeleeScaledProjectile</compClass>
+				<projectileDef>SeveringEdge</projectileDef>
+			</li>
+			<li Class="ApexMechanoids.CompProperties_RotateMoteTowardsDestination">
+				<extraRotation>310</extraRotation>
+			</li>
+			<li Class="ApexMechanoids.CompProperties_MaintainWarmupMoteAfterCast">
+				<ticksToMaintain>60</ticksToMaintain>
+			</li>
+		</comps>
+	</AbilityDef>
+
+	<AbilityDef ParentName="SeveringEdge_Base">
+		<defName>APM_SeveringEdge_Boss</defName>
+		<description>Utilizing the innate psychic channeling qualities of its blade, the Terminus releases a sweeping blade of energy in front of itself, cutting anything in the area.</description>
+		<cooldownTicksRange>600</cooldownTicksRange>
+		<warmupMote>Mote_SeveringEdge_Intro_Boss</warmupMote>
+		<comps>
+			<li Class="CompProperties_AbilityLaunchProjectile">
+				<compClass>ApexMechanoids.CompAbilityEffect_LaunchMeleeScaledProjectile</compClass>
+				<projectileDef>SeveringEdge_Boss</projectileDef>
+			</li>
+			<li Class="ApexMechanoids.CompProperties_RotateMoteTowardsDestination">
+				<extraRotation>310</extraRotation>
+			</li>
+			<li Class="ApexMechanoids.CompProperties_MaintainWarmupMoteAfterCast">
+				<ticksToMaintain>60</ticksToMaintain>
+			</li>
+		</comps>
+	</AbilityDef>
+
+	<!-- ==================== PROJECTILES ==================== -->
+	<ThingDef ParentName="BaseBullet" Name="APM_SeveringEdge_Base" Abstract="True">
+		<thingClass>ApexMechanoids.SeveringEdge</thingClass>
+		<label>severing edge</label>
+		<projectile>
+			<damageDef>RangedStab</damageDef>
+			<damageAmountBase>46</damageAmountBase>
+			<armorPenetrationBase>1</armorPenetrationBase>
+			<stoppingPower>1</stoppingPower>
+			<speed>12</speed>
+			<useGraphicClass>true</useGraphicClass>
+		</projectile>
+		<modExtensions>
+			<li Class="ApexMechanoids.DefModExtension_MeleeScaledProjectile">
+				<meleeDamageMultiplier>1.5</meleeDamageMultiplier>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="APM_SeveringEdge_Base">
+		<defName>SeveringEdge</defName>
+		<graphicData Class="VEF.Graphics.GraphicData_Animated">
+			<texPath>Things/Projectile/SeveringEdge</texPath>
+			<graphicClass>VEF.Graphics.Graphic_Animated</graphicClass>
+			<drawSize>3.7</drawSize>
+			<ticksPerFrame>5</ticksPerFrame>
+			<color>(163, 180, 187)</color>
+		</graphicData>
+	</ThingDef>
+
+<ThingDef ParentName="APM_SeveringEdge_Base">
+		<defName>SeveringEdge_Boss</defName>
+		<graphicData Class="VEF.Graphics.GraphicData_Animated">
+			<texPath>Things/Projectile/SeveringEdge</texPath>
+			<graphicClass>VEF.Graphics.Graphic_Animated</graphicClass>
+			<drawSize>3.7</drawSize>
+			<ticksPerFrame>5</ticksPerFrame>
+			<color>(229, 211, 127)</color>
+		</graphicData>
+	</ThingDef>
+
+</Defs>

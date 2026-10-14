@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<HediffDef>
+		<defName>APM_Hediff_JavelinMissileLock</defName>
+		<label>Smart missile lock</label>
+		<description>&#x200B;</description>
+		<hediffClass>ApexMechanoids.Hediff_JavelinMissileLock</hediffClass>
+		<isBad>true</isBad>
+		<defaultLabelColor>(0.95, 0.55, 0.25)</defaultLabelColor>
+		<initialSeverity>1</initialSeverity>
+		<maxSeverity>6</maxSeverity>
+		<scenarioCanAdd>false</scenarioCanAdd>
+		<stages>
+			<li>
+				<label>weakness exposed</label>
+				<statOffsets>
+					<APM_WeaknessExposed>0.25</APM_WeaknessExposed>
+				</statOffsets>
+				<multiplyStatChangesBySeverity>true</multiplyStatChangesBySeverity>
+			</li>
+		</stages>
+		<modExtensions>
+			<li Class="ApexMechanoids.DefModExtension_JavelinMissileLock">
+				<decayIntervalTicks>900</decayIntervalTicks>
+			</li>
+		</modExtensions>
+	</HediffDef>
+</Defs>

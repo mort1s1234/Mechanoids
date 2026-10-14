@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="BaseBullet">
+		<defName>APM_Bullet_MaulBlaster</defName>
+		<label>heavy charge burst shot</label>
+		<graphicData>
+			<texPath>Things/Projectile/Charge_Small</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>TransparentPostLight</shaderType>
+		</graphicData>
+		<projectile>
+			<damageDef>Bullet</damageDef>
+			<damageAmountBase>12</damageAmountBase>
+			<armorPenetrationBase>0.32</armorPenetrationBase>
+			<speed>80</speed>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseGun">
+		<defName>APM_Gun_Maul</defName>
+		<label>heavy sledge blaster</label>
+		<description>An enhanced pulse-charged rapid-fire heavy machine gun built with an integrated kinetic hammer on its frame for devastating close-quarters bludgeoning. Heavy cooling allows long, deadly bursts, while additional interfacing technology lets certain mechanoid wielders continuously overclock and overheat the weapon's output, leading to potentially disastrous effects for both the user and anything caught in front of the barrel.</description>
+		<techLevel>Spacer</techLevel>
+		<graphicData>
+			<texPath>Things/Item/Equipment/WeaponRanged/HeavySledgeBlaster</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(1.4, 1.4)</drawSize>
+		</graphicData>
+		<uiIconScale>0.5</uiIconScale>
+		<soundInteract>Interact_ChargeLance</soundInteract>
+		<destroyOnDrop>true</destroyOnDrop>
+		<tradeability>None</tradeability>
+		<statBases>
+			<MarketValue>1400</MarketValue>
+			<Mass>14</Mass>
+			<AccuracyTouch>0.60</AccuracyTouch>
+    		<AccuracyShort>0.44</AccuracyShort> 
+    		<AccuracyMedium>0.30</AccuracyMedium> 
+    		<AccuracyLong>0.15</AccuracyLong>
+			<RangedWeapon_Cooldown>5.8</RangedWeapon_Cooldown>
+		</statBases>
+		<weaponTags>
+			<li>APM_WeaponMaul</li>
+		</weaponTags>
+		<weaponClasses>
+			<li>RangedHeavy</li>
+		</weaponClasses>
+		<verbs>
+			<li>
+				<verbClass>ApexMechanoids.Verb_ShootMultiple</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>APM_Bullet_MaulBlaster</defaultProjectile>
+				<warmupTime>1.2</warmupTime>
+				<range>20.9</range>
+				<ticksBetweenBurstShots>4</ticksBetweenBurstShots>
+				<burstShotCount>8</burstShotCount>
+				<soundCast>Shot_ChargeBlaster</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>9</muzzleFlashScale>
+			</li>
+		</verbs>
+		<tools>
+			<li>
+				<label>butt</label>
+				<capacities>
+					<li>Blunt</li>
+					<li>Poke</li>
+				</capacities>
+				<power>10</power>
+				<cooldownTime>2.0</cooldownTime>
+			</li>
+			<li>
+				<label>sledge hammer</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>28</power>
+				<cooldownTime>2.8</cooldownTime>
+			</li>
+		</tools>
+	</ThingDef>
+</Defs>

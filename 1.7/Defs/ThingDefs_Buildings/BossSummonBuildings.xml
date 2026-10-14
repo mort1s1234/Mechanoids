@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="BuildingBase">
+		<defName>APM_MechbandAntenna_Dominus</defName>
+		<label>Mechband Node</label>
+		<description>A mech-band signaling device more powerful than the mechband array. When activated, it puts out an apex level mech signal pulse, which will attract a mechanoid commander to attack with its escorts. If you defeat it, you can collect special technology from its corpse. The signal pulse burns out the dish, so this building can only be used once.</description>
+		<graphicData>
+			<texPath>Things/Building/Antenas/Node</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(1,1)</drawSize>
+			<shadowData>
+				<volume>(0.8, 0.75, 0.8)</volume>
+				<offset>(0.15, 0, 0)</offset>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<rotatable>false</rotatable>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.3</fillPercent>
+		<building>
+			<ai_chillDestination>false</ai_chillDestination>
+			<buildingTags>
+				<li>Biotech</li>
+			</buildingTags>
+		</building>
+		<designationCategory>Biotech</designationCategory>
+		<uiOrder>2451</uiOrder>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToBuild>8000</WorkToBuild>
+			<Mass>25</Mass>
+			<Flammability>0.5</Flammability>
+		</statBases>
+		<size>(1,1)</size>
+		<costList>
+			<Steel>50</Steel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+		</costList>
+		<killedLeavings>
+			<ChunkSlagSteel>3</ChunkSlagSteel>
+		</killedLeavings>
+		<researchPrerequisites>
+			<li>AdvancedMechtech</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="CompProperties_Usable">
+				<useJob>TriggerObject</useJob>
+				<useLabel>Summon dominus threat</useLabel>
+				<useDuration>900</useDuration>
+				<floatMenuFactionIcon>Mechanoid</floatMenuFactionIcon>
+			</li>
+			<li Class="CompProperties_Useable_CallBossgroup">
+				<bossgroupDef>APM_Group_Dominus</bossgroupDef>
+				<effecterDef>BurnoutMechlinkBoosterUsed</effecterDef>
+				<prepareEffecterDef>MechBandAntennaPrepared</prepareEffecterDef>
+				<unlockedLetterLabelKey>LetterLabelBossgroupCallerUnlocked</unlockedLetterLabelKey>
+				<unlockedLetterTextKey>LetterBossgroupCallerUnlocked</unlockedLetterTextKey>
+				<delayTicks>120</delayTicks>
+			</li>
+			<li Class="CompProperties_UseEffectDestroySelf">
+				<delayTicks>120</delayTicks>
+				<spawnKilledLeavings>true</spawnKilledLeavings>
+				<effecterDef>MechbandBuildingDestroyed</effecterDef>
+			</li>
+		</comps>
+		<tickerType>Normal</tickerType>
+		<filthLeaving>Filth_MachineBits</filthLeaving>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>APM_MechbandAntenna_Terminus</defName>
+		<label>Mechband Conduit</label>
+		<description>A mech-band signaling device more powerful than the mechband array. When activated, it puts out an apex level mech signal pulse, which will attract a mechanoid commander to attack with its escorts. If you defeat it, you can collect special technology from its corpse. The signal pulse burns out the dish, so this building can only be used once.</description>
+		<graphicData>
+			<texPath>Things/Building/Antenas/Conduit</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(1,1)</drawSize>
+			<shadowData>
+				<volume>(0.8, 0.75, 0.8)</volume>
+				<offset>(0.15, 0, 0)</offset>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<rotatable>false</rotatable>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.3</fillPercent>
+		<building>
+			<ai_chillDestination>false</ai_chillDestination>
+			<buildingTags>
+				<li>Biotech</li>
+			</buildingTags>
+		</building>
+		<designationCategory>Biotech</designationCategory>
+		<uiOrder>2451</uiOrder>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToBuild>8000</WorkToBuild>
+			<Mass>25</Mass>
+			<Flammability>0.5</Flammability>
+		</statBases>
+		<size>(1,1)</size>
+		<costList>
+			<Steel>50</Steel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+		</costList>
+		<killedLeavings>
+			<ChunkSlagSteel>3</ChunkSlagSteel>
+		</killedLeavings>
+		<researchPrerequisites>
+			<li>AdvancedMechtech</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="CompProperties_Usable">
+				<useJob>TriggerObject</useJob>
+				<useLabel>Summon terminus threat</useLabel>
+				<useDuration>900</useDuration>
+				<floatMenuFactionIcon>Mechanoid</floatMenuFactionIcon>
+			</li>
+			<li Class="CompProperties_Useable_CallBossgroup">
+				<bossgroupDef>APM_Group_Terminus</bossgroupDef>
+				<effecterDef>BurnoutMechlinkBoosterUsed</effecterDef>
+				<prepareEffecterDef>MechBandAntennaPrepared</prepareEffecterDef>
+				<unlockedLetterLabelKey>LetterLabelBossgroupCallerUnlocked</unlockedLetterLabelKey>
+				<unlockedLetterTextKey>LetterBossgroupCallerUnlocked</unlockedLetterTextKey>
+				<delayTicks>120</delayTicks>
+			</li>
+			<li Class="CompProperties_UseEffectDestroySelf">
+				<delayTicks>120</delayTicks>
+				<spawnKilledLeavings>true</spawnKilledLeavings>
+				<effecterDef>MechbandBuildingDestroyed</effecterDef>
+			</li>
+		</comps>
+		<tickerType>Normal</tickerType>
+		<filthLeaving>Filth_MachineBits</filthLeaving>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>APM_MechbandAntenna_Celerus</defName>
+		<label>Mechband Pylon</label>
+		<description>A mech-band signaling device more powerful than the mechband node. When activated, it puts out an apex level mech signal pulse, which will attract a mechanoid commander to attack with its escorts. If you defeat it, you can collect special technology from its corpse. The signal pulse burns out the dish, so this building can only be used once.</description>
+		<graphicData>
+			<texPath>Things/Building/Antenas/Pylon</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(1,1)</drawSize>
+			<shadowData>
+				<volume>(0.8, 0.75, 0.8)</volume>
+				<offset>(0.15, 0, 0)</offset>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<rotatable>false</rotatable>
+		<fillPercent>0.3</fillPercent>
+		<building>
+			<ai_chillDestination>false</ai_chillDestination>
+			<buildingTags>
+				<li>Biotech</li>
+			</buildingTags>
+		</building>
+		<designationCategory>Biotech</designationCategory>
+		<uiOrder>2451</uiOrder>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToBuild>8000</WorkToBuild>
+			<Mass>25</Mass>
+			<Flammability>0.5</Flammability>
+		</statBases>
+		<size>(1,1)</size>
+		<costList>
+			<Steel>50</Steel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+		</costList>
+		<killedLeavings>
+			<ChunkSlagSteel>3</ChunkSlagSteel>
+		</killedLeavings>
+		<researchPrerequisites>
+			<li>AdvancedMechtech</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="CompProperties_Usable">
+				<useJob>TriggerObject</useJob>
+				<useLabel>Summon celerus threat</useLabel>
+				<useDuration>900</useDuration>
+				<floatMenuFactionIcon>Mechanoid</floatMenuFactionIcon>
+			</li>
+			<li Class="CompProperties_Useable_CallBossgroup">
+				<bossgroupDef>APM_Group_Celerus</bossgroupDef>
+				<effecterDef>BurnoutMechlinkBoosterUsed</effecterDef>
+				<prepareEffecterDef>MechBandAntennaPrepared</prepareEffecterDef>
+				<unlockedLetterLabelKey>LetterLabelBossgroupCallerUnlocked</unlockedLetterLabelKey>
+				<unlockedLetterTextKey>LetterBossgroupCallerUnlocked</unlockedLetterTextKey>
+				<delayTicks>120</delayTicks>
+			</li>
+			<li Class="CompProperties_UseEffectDestroySelf">
+				<delayTicks>120</delayTicks>
+				<spawnKilledLeavings>true</spawnKilledLeavings>
+				<effecterDef>MechbandBuildingDestroyed</effecterDef>
+			</li>
+		</comps>
+		<tickerType>Normal</tickerType>
+		<filthLeaving>Filth_MachineBits</filthLeaving>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>APM_MechbandAntenna_Gazer</defName>
+		<label>Mechband Array</label>
+		<description>A mech-band signaling device more powerful than the mechband node. When activated, it puts out an apex level mech signal pulse, which will attract a mechanoid commander to attack with its escorts. If you defeat it, you can collect special technology from its corpse. The signal pulse burns out the dish, so this building can only be used once.</description>
+		<graphicData>
+			<texPath>Things/Building/Antenas/Array</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2,2)</drawSize>
+			<shadowData>
+				<volume>(1.7, 0.75, 0.8)</volume>
+				<offset>(0, 0, 0)</offset>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.3</fillPercent>
+		<building>
+			<ai_chillDestination>false</ai_chillDestination>
+			<buildingTags>
+				<li>Biotech</li>
+			</buildingTags>
+		</building>
+		<designationCategory>Biotech</designationCategory>
+		<uiOrder>2451</uiOrder>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToBuild>8000</WorkToBuild>
+			<Mass>25</Mass>
+			<Flammability>0.5</Flammability>
+		</statBases>
+		<size>(2,1)</size>
+		<costList>
+			<Steel>130</Steel>
+			<ComponentIndustrial>6</ComponentIndustrial>
+		</costList>
+		<killedLeavings>
+			<ChunkSlagSteel>3</ChunkSlagSteel>
+		</killedLeavings>
+		<researchPrerequisites>
+			<li>HighMechtech</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="CompProperties_Usable">
+				<useJob>TriggerObject</useJob>
+				<useLabel>Summon gazer threat</useLabel>
+				<useDuration>900</useDuration>
+				<floatMenuFactionIcon>Mechanoid</floatMenuFactionIcon>
+			</li>
+			<li Class="CompProperties_Useable_CallBossgroup">
+				<bossgroupDef>APM_Group_Gazer</bossgroupDef>
+				<effecterDef>BurnoutMechlinkBoosterUsed</effecterDef>
+				<prepareEffecterDef>MechBandAntennaPrepared</prepareEffecterDef>
+				<unlockedLetterLabelKey>LetterLabelBossgroupCallerUnlocked</unlockedLetterLabelKey>
+				<unlockedLetterTextKey>LetterBossgroupCallerUnlocked</unlockedLetterTextKey>
+				<delayTicks>120</delayTicks>
+			</li>
+			<li Class="CompProperties_UseEffectDestroySelf">
+				<delayTicks>120</delayTicks>
+				<spawnKilledLeavings>true</spawnKilledLeavings>
+				<effecterDef>MechbandBuildingDestroyed</effecterDef>
+			</li>
+		</comps>
+		<tickerType>Normal</tickerType>
+		<filthLeaving>Filth_MachineBits</filthLeaving>
+
+
+	</ThingDef>
+	<ThingDef ParentName="BuildingBase">
+		<defName>APM_MechbandAntenna_United</defName>
+		<label>Mechband Invoker</label>
+		<description>A mech-band signaling device more powerful than the mechband array. When activated, it puts out an 3-fold apex level mech signal pulse, which will attract a mechanoid commander to attack with its escorts. If you defeat it, you can collect special technology from its corpse. The signal pulse burns out the dish, so this building can only be used once. This particular mechband device sends out 3 simultaneous signals, be warned.</description>
+		<graphicData>
+			<texPath>Things/Building/Antenas/Invoker</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(3,3)</drawSize>
+			<shadowData>
+				<volume>(2, 1, 2)</volume>
+				<offset>(0, 0, -0.33)</offset>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<rotatable>false</rotatable>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.3</fillPercent>
+		<building>
+			<ai_chillDestination>false</ai_chillDestination>
+			<buildingTags>
+				<li>Biotech</li>
+			</buildingTags>
+		</building>
+		<designationCategory>Biotech</designationCategory>
+		<uiOrder>2451</uiOrder>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToBuild>16000</WorkToBuild>
+			<Mass>80</Mass>
+			<Flammability>0.5</Flammability>
+		</statBases>
+		<size>(3,3)</size>
+		<costList>
+			<Steel>200</Steel>
+			<ComponentIndustrial>6</ComponentIndustrial>
+			<ComponentSpacer>2</ComponentSpacer>
+		</costList>
+		<killedLeavings>
+			<ChunkSlagSteel>3</ChunkSlagSteel>
+		</killedLeavings>
+		<researchPrerequisites>
+			<li>ApexMechtech</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="CompProperties_Usable">
+				<useJob>TriggerObject</useJob>
+				<useLabel>Summon Three Lords threat</useLabel>
+				<useDuration>900</useDuration>
+				<floatMenuFactionIcon>Mechanoid</floatMenuFactionIcon>
+			</li>
+			<li Class="ApexMechanoids.CompProperties_Useable_CallMulBossgroup">
+				<incidentDef>APM_IncidentDef_TrioBoss</incidentDef>
+				<leaderName>Three Lords</leaderName>
+				<effecterDef>BurnoutMechlinkBoosterUsed</effecterDef>
+				<prepareEffecterDef>MechBandAntennaPrepared</prepareEffecterDef>
+				<spawnLetterLabelKey>LetterLabelBossgroupCallerUnlocked</spawnLetterLabelKey>
+				<spawnLetterTextKey>LetterBossgroupCallerUnlocked</spawnLetterTextKey>
+			</li>
+			<li Class="CompProperties_UseEffectDestroySelf">
+				<delayTicks>120</delayTicks>
+				<spawnKilledLeavings>true</spawnKilledLeavings>
+				<effecterDef>MechbandBuildingDestroyed</effecterDef>
+			</li>
+		</comps>
+		<tickerType>Normal</tickerType>
+		<filthLeaving>Filth_MachineBits</filthLeaving>
+	</ThingDef>
+</Defs>

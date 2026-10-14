@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<HediffDef>
+		<defName>APM_ApexMechanoid_HealOnKills</defName>
+		<label>Vampiric Mechanites</label>
+		<labelNoun>Vampiric</labelNoun>
+		<description>These mechanites bank charges whenever their host downs or kills a target, then spend those charges to self-repair when the host is damaged.</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<defaultLabelColor>(0, 0.7, 0.95)</defaultLabelColor>
+		<isBad>false</isBad>
+		<comps>
+			<li Class="ApexMechanoids.HediffCompProperties_VampiricMechanites">
+				<chargesPerDown>1</chargesPerDown>
+				<chargesPerKill>2</chargesPerKill>
+				<maxCharges>25</maxCharges>
+				<healIntervalTicks>60</healIntervalTicks>
+				<healAmountPerTick>5</healAmountPerTick>
+				<healTicksPerCharge>40</healTicksPerCharge>
+				<restoreMissingParts>true</restoreMissingParts>
+			</li>
+		</comps>
+	</HediffDef>
+</Defs>

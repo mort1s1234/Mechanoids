@@ -1,0 +1,471 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <RecipeDef Name="APM_BaseWeapon_Mechanoid" Abstract="True">
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>Smith</effectWorking>
+    <soundWorking>Recipe_Smith</soundWorking>
+    <unfinishedThingDef>UnfinishedGun</unfinishedThingDef>
+    <recipeUsers>
+      <li>FabricationBench</li>
+    </recipeUsers>
+    <skillRequirements>
+      <Crafting>12</Crafting>
+    </skillRequirements>
+    <researchPrerequisite>ApexMechtech</researchPrerequisite>
+  </RecipeDef>
+
+  <RecipeDef ParentName="APM_BaseWeapon_Mechanoid">
+    <defName>Make_DuelistPsyspear</defName>
+    <label>make duelist psyspear</label>
+    <description>Make a duelist psyspear.</description>
+    <jobString>Making duelist psyspear.</jobString>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Weapon_DuelistsPsySpear</ThingDef>
+    </descriptionHyperlinks>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>60</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+            <li>
+        <filter>
+          <thingDefs>
+            <li>APM_PsionicChip</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Weapon_DuelistsPsySpear>1</APM_Weapon_DuelistsPsySpear>
+    </products>
+    <displayPriority>240</displayPriority>
+  </RecipeDef>
+
+  <RecipeDef ParentName="APM_BaseWeapon_Mechanoid">
+    <defName>APM_Weapon_SeveringBlade</defName>
+    <label>make severing blade</label>
+    <description>Make a severing blade.</description>
+    <jobString>Making severing blade.</jobString>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Weapon_SeveringBlade</ThingDef>
+    </descriptionHyperlinks>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>80</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+            <li>
+        <filter>
+          <thingDefs>
+            <li>APM_ExtraChip</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Weapon_SeveringBlade>1</APM_Weapon_SeveringBlade>
+    </products>
+    <displayPriority>241</displayPriority>
+  </RecipeDef>
+
+  <RecipeDef ParentName="APM_BaseWeapon_Mechanoid">
+    <defName>APM_Weapon_Skipblade</defName>
+    <label>make skipblade</label>
+    <description>Make a skipblade.</description>
+    <jobString>Making skipblade.</jobString>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Weapon_Skipblade</ThingDef>
+    </descriptionHyperlinks>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+            <li>
+        <filter>
+          <thingDefs>
+            <li>APM_PsyfluxChip</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Weapon_Skipblade>1</APM_Weapon_Skipblade>
+    </products>
+    <displayPriority>242</displayPriority>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>APM_Weapon_PlasmaWhip</defName>
+    <label>make plasma whip</label>
+    <description>Make a plasma whip.</description>
+    <jobString>Making plasma whip.</jobString>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Weapon_PlasmaWhip</ThingDef>
+    </descriptionHyperlinks>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>Smith</effectWorking>
+    <soundWorking>Recipe_Smith</soundWorking>
+    <unfinishedThingDef>UnfinishedGun</unfinishedThingDef>
+    <recipeUsers>
+      <li>FabricationBench</li>
+    </recipeUsers>
+    <skillRequirements>
+      <Crafting>10</Crafting>
+    </skillRequirements>
+    <researchPrerequisite>AdvancedMechtech</researchPrerequisite>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Weapon_PlasmaWhip>1</APM_Weapon_PlasmaWhip>
+    </products>
+    <displayPriority>243</displayPriority>
+  </RecipeDef>
+
+  <RecipeDef ParentName="APM_BaseWeapon_Mechanoid">
+    <defName>APM_Solus</defName>
+    <label>make solus</label>
+    <description>Make a solus.</description>
+    <jobString>Making solus.</jobString>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Solus</ThingDef>
+    </descriptionHyperlinks>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>80</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+            <li>
+        <filter>
+          <thingDefs>
+            <li>APM_OcularChip</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Solus>1</APM_Solus>
+    </products>
+    <displayPriority>244</displayPriority>
+  </RecipeDef>
+
+  <RecipeDef Name="APM_BaseApparel" Abstract="True">
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>Smith</effectWorking>
+    <soundWorking>Recipe_Smith</soundWorking>
+    <recipeUsers>
+      <li>FabricationBench</li>
+    </recipeUsers>
+    <skillRequirements>
+      <Crafting>14</Crafting>
+    </skillRequirements>
+    <researchPrerequisite>ApexMechtech</researchPrerequisite>
+  </RecipeDef>
+
+
+  <RecipeDef ParentName="APM_BaseApparel">
+    <defName>APM_MechamancerPack</defName>
+    <label>make mechamancer pack</label>
+    <description>Make a mechamancer pack.</description>
+    <jobString>Making mechamancer pack.</jobString>
+		<unfinishedThingDef>UnfinishedPack</unfinishedThingDef>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Apparel_MechamancerPack</ThingDef>
+    </descriptionHyperlinks>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>80</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Uranium</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>6</count>
+      </li>
+            <li>
+        <filter>
+          <thingDefs>
+            <li>APM_PsionicChip</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>APM_PsyfluxChip</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Apparel_MechamancerPack>1</APM_Apparel_MechamancerPack>
+    </products>
+    <displayPriority>120</displayPriority>
+  </RecipeDef>
+
+      <RecipeDef ParentName="APM_BaseApparel">
+    <defName>APM_Apparel_MechamancerSuit</defName>
+    <label>make mechamancer suit</label>
+    <description>Make a mechamancer suit.</description>
+    <jobString>Making mechamancer suit.</jobString>
+		<unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Apparel_MechamancerSuit</ThingDef>
+    </descriptionHyperlinks>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>180</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Uranium</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>8</count>
+      </li>
+            <li>
+        <filter>
+          <thingDefs>
+            <li>APM_PsionicChip</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>APM_ExtraChip</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Apparel_MechamancerSuit>1</APM_Apparel_MechamancerSuit>
+    </products>
+    <displayPriority>121</displayPriority>
+  </RecipeDef>
+
+      <RecipeDef ParentName="APM_BaseApparel">
+    <defName>APM_Apparel_ArmorHelmetMechamancerHelmet</defName>
+    <label>make mechamancer helmet</label>
+    <description>Make a mechamancer helmet.</description>
+    <jobString>Making mechamancer helmet.</jobString>
+		<unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Apparel_ArmorHelmetMechamancerHelmet</ThingDef>
+    </descriptionHyperlinks>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>120</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Uranium</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+            <li>
+        <filter>
+          <thingDefs>
+            <li>APM_OcularChip</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>APM_PsyfluxChip</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Apparel_ArmorHelmetMechamancerHelmet>1</APM_Apparel_ArmorHelmetMechamancerHelmet>
+    </products>
+    <displayPriority>122</displayPriority>
+  </RecipeDef>
+</Defs>

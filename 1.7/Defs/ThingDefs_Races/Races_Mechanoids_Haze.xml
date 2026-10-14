@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="BaseMechanoidWalker">
+		<defName>APM_Mech_Haze</defName>
+		<label>Haze</label>
+		<description>A mechanoid experiment into organic area denial, the haze can pump tox gas into the area around it. Its shots are especially lethal, inflicting toxic buildup upon hit. The intellect of the mechhive knows no bounds, even repurposing its waste products to further its goals.</description>
+		<statBases>
+			<MarketValue>900</MarketValue>
+			<MoveSpeed>4.3</MoveSpeed>
+			<ArmorRating_Blunt>0.15</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.3</ArmorRating_Sharp>
+			<ArmorRating_Heat>2.0</ArmorRating_Heat>
+			<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">2</BandwidthCost>
+			<CarryingCapacity>50</CarryingCapacity>
+			<Mass>50</Mass>
+			<ControlTakingTime MayRequire="Ludeon.Rimworld.Biotech">30</ControlTakingTime>
+			<ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">1</ToxicEnvironmentResistance>
+			<MechEnergyLossPerHP MayRequire="Ludeon.Rimworld.Biotech">0.2</MechEnergyLossPerHP>
+			<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">8</WastepacksPerRecharge>
+			<EMPResistance MayRequire="Ludeon.Rimworld.Biotech">0.35</EMPResistance>
+		</statBases>
+		<tools>
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>6</power>
+				<cooldownTime>2.5</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			</li>
+			<li>
+				<label>front left paw</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>14.5</power>
+				<cooldownTime>1.9</cooldownTime>
+				<linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			</li>
+			<li>
+				<label>front right paw</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>14.5</power>
+				<cooldownTime>1.9</cooldownTime>
+				<linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			</li>
+		</tools>
+		<race>
+			<body>APM_Haze</body>
+			<baseBodySize>1</baseBodySize>
+			<baseHealthScale>1.32</baseHealthScale>
+			<thinkTreeMain>Mechanoid</thinkTreeMain>
+			<intelligence>ToolUser</intelligence>
+			<mechWeightClass>Light</mechWeightClass>
+			<soundCallIntervalRange>2500~3500</soundCallIntervalRange>
+			<soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
+			<soundMeleeHitBuilding>Pawn_Melee_Punch_HitBuilding_Generic</soundMeleeHitBuilding>
+			<soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
+						<lifeStageAges Inherit="False">
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Scorcher_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Scorcher_Death</soundDeath>
+					<soundCall>Pawn_Mech_Scorcher_Call</soundCall>
+				</li>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Scorcher_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Scorcher_Death</soundDeath>
+					<soundCall>Pawn_Mech_Scorcher_Call</soundCall>
+				</li>
+			</lifeStageAges>
+		</race>
+		<comps>
+			<li Class="ApexMechanoids.CompProperties_HazeToxicMistController">
+				<abilityDef>APM_Ability_ToxicMist</abilityDef>
+				<checkIntervalTicks>300</checkIntervalTicks>
+				<autoCastForPlayer>false</autoCastForPlayer>
+				<threatRadius>4.9</threatRadius>
+				<minHostilesToTrigger>1</minHostilesToTrigger>
+				<requireFleshThreat>true</requireFleshThreat>
+				<blockIfAlliesInRadius>true</blockIfAlliesInRadius>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="ApexMechanoids.DefModExtension_SearchAndDestroyMech">
+				<disabledAutoUseAbilitiesWhenSearchAndDestroy>
+					<li>APM_Ability_ToxicMist</li>
+				</disabledAutoUseAbilitiesWhenSearchAndDestroy>
+			</li>
+		</modExtensions>
+		<butcherProducts>
+			<Steel>15</Steel>
+			<Plasteel>5</Plasteel>
+		</butcherProducts>
+	</ThingDef>
+
+	<PawnKindDef ParentName="BaseMechanoidKind">
+		<defName>APM_Mech_Haze</defName>
+		<label>haze</label>
+		<race>APM_Mech_Haze</race>
+		<combatPower>140</combatPower>
+		<maxPerGroup MayRequire="Ludeon.Rimworld.Biotech">2</maxPerGroup>
+		<controlGroupPortraitZoom>1.2</controlGroupPortraitZoom>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/Haze/Haze</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Haze/Mech_Haze</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>1.5</drawSize>
+					<shadowData>
+						<volume>(0.4, 0.8, 0.4)</volume>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/Haze/HazeAncient</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Haze/Mech_Haze</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>1.5</drawSize>
+					<shadowData>
+						<volume>(0.4, 0.8, 0.4)</volume>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+		<weaponMoney>9999~9999</weaponMoney>
+		<weaponTags Inherit="False">
+			<li>APM_HazeGraserTag</li>
+		</weaponTags>
+		<techHediffsChance>1</techHediffsChance>
+		<techHediffsMoney>9999~9999</techHediffsMoney>
+		<abilities>
+			<li>APM_Ability_ToxicMist</li>
+		</abilities>
+	</PawnKindDef>
+</Defs>

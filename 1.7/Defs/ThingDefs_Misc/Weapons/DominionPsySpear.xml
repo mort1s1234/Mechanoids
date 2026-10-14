@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="BaseWeapon">
+		<defName>APM_Weapon_DuelistsPsySpear</defName>
+		<label>dominion psy-spear</label>
+		<description>A reinforced spear imbued with Dominus-derived psychic circuitry. Allows the wielder to challenge a single opponent into a psychic duel, creating a focused maelstrom that amplifies attacks within. The spear channels the wielder’s will, projecting a shield around the duel and enhancing damage output within the duel’s radius.</description>
+		<possessionCount>1</possessionCount>
+		<graphicData>
+			<texPath>Things/Item/Equipment/WeaponMelee/DuelistsPsySpear</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>1.6</drawSize>
+		</graphicData>
+		<uiIconScale>0.5</uiIconScale>
+		<techLevel>Spacer</techLevel>
+		<tradeability>Sellable</tradeability>
+		<relicChance>0</relicChance>
+		<thingCategories>
+      		<li>WeaponsMelee</li>
+    	</thingCategories>
+		<weaponTags>
+			<li>APM_WeaponDuelistsPsySpear</li>
+		</weaponTags>
+		<statBases>
+			<MarketValue>3800</MarketValue>
+			<WorkToMake>32000</WorkToMake>
+			<Mass>2.5</Mass>
+		</statBases>
+		<tools>
+			<li>
+				<label>handle</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>10</power>
+				<cooldownTime>2.0</cooldownTime>
+				<armorPenetration>0.40</armorPenetration>
+			</li>
+			<li>
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>32</power>
+				<cooldownTime>1.9</cooldownTime>
+				<armorPenetration>0.95</armorPenetration>
+			</li>
+			<li>
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>18</power>
+				<cooldownTime>2.1</cooldownTime>
+				<armorPenetration>0.70</armorPenetration>
+			</li>
+		</tools>
+		<comps>
+			<li Class="ApexMechanoids.CompProperties_AbilityGranter">
+				<abilities>
+					<li>APM_Mech_Duel</li>
+				</abilities>
+			</li>
+			<li>
+				<compClass>CompQuality</compClass>
+      		</li>
+		</comps>
+		<modExtensions>
+			<li Class="VEF.Things.ThingDefExtension" MayRequire="OskarPotocki.VanillaFactionsExpanded.Core">
+				<usableWithShields>true</usableWithShields>
+				<weaponDraftedDrawOffsets>
+					<north>
+						<drawOffset>(-0.30, 0.00, 0.30)</drawOffset>
+						<angleOffset>90</angleOffset>
+					</north>
+					<east>
+						<drawOffset>(0.20, 0.00, 0.30)</drawOffset>
+						<angleOffset>-30</angleOffset>
+					</east>
+					<south>
+						<drawOffset>(0.30, 0.00, 0.30)</drawOffset>
+						<angleOffset>-20</angleOffset>
+					</south>
+					<west>
+						<drawOffset>(-0.20, 0.00, 0.30)</drawOffset>
+						<angleOffset>30</angleOffset>
+					</west>
+				</weaponDraftedDrawOffsets>
+			</li>
+		</modExtensions>
+	</ThingDef>
+</Defs>

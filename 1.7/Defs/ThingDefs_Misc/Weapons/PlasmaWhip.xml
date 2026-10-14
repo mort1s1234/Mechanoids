@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="BaseWeapon">
+		<defName>APM_Weapon_PlasmaWhip</defName>
+		<label>plasma whip</label>
+		<description>Inspired by the whip wielded by the Lasher mechanoid, the plasma whip can deal damage and stun multiple targets at once, making it a good tool for holding back groups of foes in close range.</description>
+		<graphicData>
+			<texPath>Things/Item/Equipment/WeaponMelee/Pawn_Whip</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(0.9, 0.9)</drawSize>
+		</graphicData>
+		<techLevel>Spacer</techLevel>
+		<tradeability>Sellable</tradeability>
+		<relicChance>0</relicChance>
+		<thingCategories>
+      		<li>WeaponsMelee</li>
+    	</thingCategories>
+		<weaponTags>
+			<li>APM_WeaponPlasmaWhip</li>
+		</weaponTags>
+		<statBases>
+			<MarketValue>1400</MarketValue>
+			<Mass>1.2</Mass>
+			<AccuracyTouch>0.55</AccuracyTouch>
+			<AccuracyShort>0.60</AccuracyShort>
+			<AccuracyMedium>0.45</AccuracyMedium>
+			<AccuracyLong>0.30</AccuracyLong>
+			<RangedWeapon_Cooldown>2.4</RangedWeapon_Cooldown>
+			<WorkToMake>19000</WorkToMake>
+		</statBases>
+		<verbs>
+			<li>
+				<verbClass>ApexMechanoids.Verb_Whip</verbClass>
+				<beamDamageDef>APM_Whip</beamDamageDef>
+				<hasStandardCommand>true</hasStandardCommand>
+				<warmupTime>0</warmupTime>
+				<range>7.9</range>
+				<ticksBetweenBurstShots>4</ticksBetweenBurstShots>
+				<soundCast>APM_Whip</soundCast>
+				<muzzleFlashScale>0</muzzleFlashScale>
+				<targetParams>
+					<canTargetLocations>true</canTargetLocations>
+				</targetParams>
+			</li>
+		</verbs>
+		<modExtensions>
+			<li Class="VEF.Things.ThingDefExtension" MayRequire="OskarPotocki.VanillaExpandedFramework">
+				<usableWithShields>true</usableWithShields>
+			</li>
+		</modExtensions>
+		<comps>
+			<li>
+        <compClass>CompQuality</compClass>
+      		</li>
+		</comps>
+		<tools>
+			<li>
+				<label>edge</label>
+				<capacities>
+					<li>APM_Whip</li>
+				</capacities>
+				<power>13</power>
+				<cooldownTime>2.6</cooldownTime>
+				<extraMeleeDamages>
+				<li>
+					<def>EMP</def>
+					<chance>0.4</chance>
+					<amount>15</amount>
+				</li>
+				</extraMeleeDamages>
+			</li>
+		</tools>
+	</ThingDef>
+</Defs>

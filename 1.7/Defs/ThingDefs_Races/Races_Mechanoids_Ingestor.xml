@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef Name="APM_Mech_Ingestor" ParentName="MechCentipede">
+		<defName>APM_Mech_Ingestor</defName>
+		<label>Ingestor</label>
+		<description>While mechtech devices typically rely on internal power cells, provided electricity and incendiary fuel are still needed. The ingestor scourers the remains of battlefields for survivors to finish off and organic material including corpses, to automatically refine into chemfuel within its chassis.</description>
+		<statBases>
+			<MarketValue>1600</MarketValue>
+			<MoveSpeed>1.9</MoveSpeed>
+			<ArmorRating_Blunt>0.30</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.80</ArmorRating_Sharp>
+			<ArmorRating_Heat>2.0</ArmorRating_Heat>
+			<BandwidthCost MayRequire="Ludeon.RimWorld.Biotech">3</BandwidthCost>
+			<Mass>80</Mass>
+			<MechEnergyLossPerHP MayRequire="Ludeon.Rimworld.Biotech">0.2</MechEnergyLossPerHP>
+		</statBases>
+		<uiIconPath>Things/Pawn/Mechanoid/Ingestor/IngestorIcon</uiIconPath>
+		<tools Inherit="False">
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Bite</li>
+				</capacities>
+				<power>25</power>
+				<cooldownTime>3.2</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			</li>
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>8.5</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+				<chanceFactor>0.5</chanceFactor>
+			</li>
+		</tools>
+		<race>
+			<body>APM_Ingestor</body>
+			<renderTree>APM_RenderTree_Ingestor</renderTree>
+			<thinkTreeMain>APM_IngestorMechanoid</thinkTreeMain>
+			<baseHealthScale>4.32</baseHealthScale>
+			<mechWeightClass>UltraHeavy</mechWeightClass>
+			<mechEnabledWorkTypes>
+				<li>APM_IngestorCorpseProcessing</li>
+			</mechEnabledWorkTypes>
+			<mechWorkTypePriorities>
+				<APM_IngestorCorpseProcessing>2</APM_IngestorCorpseProcessing>
+			</mechWorkTypePriorities>
+		</race>
+		<comps>
+			<li Class="ApexMechanoids.CompProperties_IngestorAbsorbSettings">
+				<stripDestroyIconPath>UI/Ingestor/StripModeDestroyApparel</stripDestroyIconPath>
+				<stripKeepIconPath>UI/Ingestor/StripModeKeepApparel</stripKeepIconPath>
+				<processMarkedIconPath>UI/Ingestor/ProcessModeAnyCorpse</processMarkedIconPath>
+				<processAnyIconPath>UI/Ingestor/ProcessModeMarkedCorpse</processAnyIconPath>
+				<markIconPath>UI/Ingestor/MarkCorpse</markIconPath>
+			</li>
+		</comps>
+		<butcherProducts>
+			<Steel>45</Steel>
+			<Plasteel>25</Plasteel>
+		</butcherProducts>
+		<modExtensions>
+			<li Class="ApexMechanoids.DefModExtension_AnimationOnAttack">
+				<animation>APM_EatingIngestorOneLoop</animation>
+				<maneuver>Bite</maneuver>
+			</li>
+			<li Class="ApexMechanoids.DefModExtension_SearchAndDestroyMech">
+				<disabledAutoUseAbilitiesWhenSearchAndDestroy>
+					<li>APM_Absorb</li>
+				</disabledAutoUseAbilitiesWhenSearchAndDestroy>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<PawnKindDef ParentName="BaseMechanoidKind">
+		<defName>APM_Mech_Ingestor</defName>
+		<label>ingestor</label>
+		<race>APM_Mech_Ingestor</race>
+		<combatPower>320</combatPower>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/Ingestor/Ingestor</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Ingestor/Mech_Ingestor</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>3</drawSize>
+					<shadowData>
+						<volume>(1, 1.5, 1)</volume>
+						<offset>(0, 0, -0.3)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/Ingestor/IngestorAncient</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Ingestor/Mech_Ingestor</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>3</drawSize>
+					<shadowData>
+						<volume>(1, 1.5, 1)</volume>
+						<offset>(0, 0, -0.3)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+		<techHediffsChance>1</techHediffsChance>
+		<techHediffsMoney>9999~9999</techHediffsMoney>
+		<controlGroupPortraitZoom>0.75</controlGroupPortraitZoom>
+		<abilities>
+			<li>APM_Absorb</li>
+		</abilities>
+	</PawnKindDef>
+</Defs>

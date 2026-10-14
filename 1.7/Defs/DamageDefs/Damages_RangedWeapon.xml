@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<DamageDef ParentName="BluntBase">
+		<defName>Push</defName>
+		<deathMessage>{0} has been beaten to death.</deathMessage>
+		<label>push damage</label>
+		<workerClass>VEF.Weapons.DamageWorker_PushBackAttackMelee</workerClass>
+		<modExtensions>
+			<li Class="VEF.Weapons.DamageExtension">
+				<pushBackDistance>3</pushBackDistance>
+				<soundOnDamage>DropPod_Open</soundOnDamage>
+			</li>
+		</modExtensions>
+	</DamageDef>
+
+	<DamageDef ParentName="CutBase">
+		<defName>APM_Whip</defName>
+		<isRanged>true</isRanged>
+		<makesAnimalsFlee>true</makesAnimalsFlee>
+	</DamageDef>
+	
+</Defs>

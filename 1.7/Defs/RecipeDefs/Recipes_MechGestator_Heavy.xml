@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <RecipeDef ParentName="HeavyMechanoidRecipe">
+    <defName>APM_Aegis</defName>
+    <label>gestate aegis</label>
+    <description>Gestate an aegis mechanoid.</description>
+    <researchPrerequisite>ApexMechtech</researchPrerequisite>
+    <gestationCycles>6</gestationCycles>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>200</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>150</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreHigh</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Mech_Aegis>1</APM_Mech_Aegis>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Mech_Aegis</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MediumMechanoidRecipe">
+    <defName>APM_Terminus</defName>
+    <label>gestate terminus</label>
+    <description>Gestate a terminus archotech-commander mechanoid.</description>
+    <researchPrerequisite>ApexMechtech</researchPrerequisite>
+    <gestationCycles>10</gestationCycles>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>300</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>200</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreHigh</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>APM_ExtraChip</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Mech_Terminus>1</APM_Mech_Terminus>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Mech_Terminus</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+
+<RecipeDef ParentName="HeavyMechanoidRecipe">
+    <defName>APM_Maul</defName>
+    <label>gestate maul</label>
+    <description>Gestate a maul mechanoid.</description>
+    <researchPrerequisite>ApexMechtech</researchPrerequisite>
+    <gestationCycles>6</gestationCycles>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>250</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>180</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>6</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreHigh</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Mech_Maul>1</APM_Mech_Maul>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Mech_Maul</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+
+<RecipeDef ParentName="HeavyMechanoidRecipe">
+    <defName>APM_Mantis</defName>
+    <label>gestate mantis</label>
+    <description>Gestate a mantis mechanoid.</description>
+    <researchPrerequisite>ApexMechtech</researchPrerequisite>
+    <gestationCycles>5</gestationCycles>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>220</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>100</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreHigh</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Mech_Mantis>1</APM_Mech_Mantis>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Mech_Mantis</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+
+<RecipeDef ParentName="HeavyMechanoidRecipe">
+    <defName>APM_Dynamo</defName>
+    <label>gestate dynamo</label>
+    <description>Gestate a dynamo mechanoid.</description>
+    <researchPrerequisite>ApexMechtech</researchPrerequisite>
+    <gestationCycles>4</gestationCycles>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>180</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>120</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreHigh</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Mech_Dynamo>1</APM_Mech_Dynamo>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Mech_Dynamo</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+</Defs>

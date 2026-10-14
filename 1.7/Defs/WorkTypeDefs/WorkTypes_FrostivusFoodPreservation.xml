@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <WorkTypeDef>
+    <defName>APM_FrostivusFoodPreservation</defName>
+    <labelShort>preserve</labelShort>
+    <pawnLabel>Preserver</pawnLabel>
+    <gerundLabel>preserving food</gerundLabel>
+    <description>Rescue vulnerable food from unsafe storage or outdoor deterioration and unload it to cold storage when available.</description>
+    <verb>Preserve</verb>
+    <visible>false</visible>
+    <naturalPriority>950</naturalPriority>
+    <workTags>
+      <li>Commoner</li>
+      <li>AllWork</li>
+    </workTags>
+  </WorkTypeDef>
+
+</Defs>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <RecipeDef ParentName="LightMechanoidRecipe">
+    <defName>APM_Haze</defName>
+    <label>gestate haze</label>
+    <description>Gestate a haze area-denial mechanoid.</description>
+    <researchPrerequisite>AdvancedMechtech</researchPrerequisite>
+    <gestationCycles>2</gestationCycles>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>80</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreRegular</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Mech_Haze>1</APM_Mech_Haze>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Mech_Haze</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+</Defs>

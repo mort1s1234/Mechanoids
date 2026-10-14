@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!--========= General ============-->
+
+	<JobDef>
+		<defName>APM_Absorb</defName>
+		<driverClass>ApexMechanoids.JobDriver_Absorb</driverClass>
+		<casualInterruptible>false</casualInterruptible>
+		<collideWithPawns>true</collideWithPawns>
+		<neverShowWeapon>true</neverShowWeapon>
+	</JobDef>
+
+	<JobDef>
+		<defName>APM_EnterMechanoidContainer</defName>
+		<driverClass>ApexMechanoids.JobDriver_EnterMechanoidContainer</driverClass>
+		<reportString>entering TargetA.</reportString>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+</Defs>

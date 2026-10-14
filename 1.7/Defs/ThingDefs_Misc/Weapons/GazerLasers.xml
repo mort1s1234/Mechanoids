@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="BaseGun">
+		<defName>APM_Gazer_Laser</defName>
+		<label>laser</label>
+		<description>A weaker laser from Gazer's eye</description>
+		<graphicData>
+			<texPath>Blank</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<uiIconPath>UI/GazerLaser</uiIconPath>
+		<techLevel>Ultra</techLevel>
+		<tradeability>None</tradeability>
+		<destroyOnDrop>true</destroyOnDrop>
+		<relicChance>0</relicChance>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+			<AccuracyTouch>0.7</AccuracyTouch>
+			<AccuracyShort>0.85</AccuracyShort>
+			<AccuracyMedium>0.92</AccuracyMedium>
+			<AccuracyLong>0.90</AccuracyLong>
+			<RangedWeapon_Cooldown>6.8</RangedWeapon_Cooldown>
+		</statBases>
+		<weaponClasses>
+			<li>RangedHeavy</li>
+		</weaponClasses>
+		<weaponTags Inherit="False">
+			<li>APM_WeaponGazerLaser</li>
+		</weaponTags>
+		<verbs>
+			<li Class="ApexMechanoids.VerbProperties_ShootBeamFromOffset">
+				<verbClass>ApexMechanoids.Verb_ShootBeamFromOffset</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<warmupTime>1.0</warmupTime>
+				<range>24.9</range>
+				<minRange>3.9</minRange>
+				<beamFullWidthRange>6.9</beamFullWidthRange>
+				<burstShotCount>5</burstShotCount>
+				<showBurstShotStats>false</showBurstShotStats>
+				<beamWidth>6</beamWidth>
+				<ticksBetweenBurstShots>22</ticksBetweenBurstShots>
+				<beamDamageDef>MegaBeam</beamDamageDef>
+				<soundCastTail>GunTail_Medium</soundCastTail>
+				<muzzleFlashScale>9</muzzleFlashScale>
+				<soundCastBeam>APM_GazerWeapon</soundCastBeam>
+				<beamGroundFleckDef>Fleck_BeamBurn</beamGroundFleckDef>
+				<beamFleckChancePerTick>0.32</beamFleckChancePerTick>
+				<beamMaxDeviation>1.5</beamMaxDeviation>
+				<beamCurvature>0.6</beamCurvature>
+				<beamMoteDef>APM_Mote_GazerBeam_Base</beamMoteDef>
+				<beamEndEffecterDef>GraserBeam_End</beamEndEffecterDef>
+				<beamChanceToStartFire>0.85</beamChanceToStartFire>
+				<beamChanceToAttachFire>0.85</beamChanceToAttachFire>
+				<beamFireSizeRange>0.55~0.85</beamFireSizeRange>
+				<beamLineFleckDef>Fleck_BeamSpark</beamLineFleckDef>
+				<beamStartOffset>0.0</beamStartOffset>
+				<beamOriginOffset>1.2,-0.4</beamOriginOffset>
+				<beamOriginFrontOffset>0.0,0.0</beamOriginFrontOffset>
+				<beamOriginBackOffset>0.9,0.0</beamOriginBackOffset>
+				<beamLineFleckChanceCurve>
+					<points>
+						<li>(0, 0)</li>
+						<li>(0.65, 0.4)</li>
+						<li>(1, 0.75)</li>
+					</points>
+				</beamLineFleckChanceCurve>
+			</li>
+		</verbs>
+		<modExtensions>
+			<li Class="VEF.Things.ThingDefExtension" MayRequire="OskarPotocki.VanillaFactionsExpanded.Core">
+				<usableWithShields>false</usableWithShields>
+				<weaponDraftedDrawOffsets>
+					<north>
+						<drawOffset>(0.05,0.0,0.15)</drawOffset>
+						<angleOffset>-60</angleOffset>
+					</north>
+					<east>
+						<drawOffset>(0.20,-3.2,4.50)</drawOffset>
+						<angleOffset>-60</angleOffset>
+					</east>
+					<south>
+						<drawOffset>(0.3,0,0.10)</drawOffset>
+						<angleOffset>-60</angleOffset>
+					</south>
+					<west>
+						<drawOffset>(-0.10,0.0,0.15)</drawOffset>
+						<angleOffset>45</angleOffset>
+					</west>
+				</weaponDraftedDrawOffsets>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<DamageDef ParentName="Beam">
+		<defName>MegaBeam</defName>
+		<label>mega beam</label>
+		<defaultDamage>25</defaultDamage>
+	</DamageDef>
+
+</Defs>

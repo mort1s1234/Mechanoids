@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<HediffDef>
+		<defName>APM_InDuel</defName>
+		<label>in duel</label>
+		<hediffClass>HediffWithComps</hediffClass>
+		<description>Locked in a duel. A shield arena has been conjured around both combatants, blocking all ranged attacks and abilities for the duration. Incoming damage is greatly increased to force decisive action — the duel is meant to end quickly and brutally. All healing is suppressed within the arena, save for what little may be drawn from striking the enemy. Should either combatant be downed or slain, the survivor claims victory. Should time expire with both still standing, the duel ends in a draw — and both pay the price.</description>
+		<isBad>false</isBad>
+		<stages>
+			<li>
+				<statFactors>
+					<IncomingDamageFactor>1.75</IncomingDamageFactor>
+					<MeleeCooldownFactor>0.7</MeleeCooldownFactor>
+				</statFactors>
+			</li>
+		</stages>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>1600</disappearsAfterTicks>
+				<showRemainingTime>True</showRemainingTime>
+			</li>
+			<li Class="HediffCompProperties_DisappearsOnDeath" />
+		</comps>
+	</HediffDef>
+
+	<HediffDef>
+		<defName>APM_DuelWinner</defName>
+		<label>duel winner</label>
+		<hediffClass>HediffWithComps</hediffClass>
+		<description>This combatant has emerged victorious from the arena. The victory also mends part of the damage taken in the fight. Each duel won sharpens their edge — reflexes quicken, strikes land harder and the enemy's blows are turned aside with growing ease. The longer this warrior's unbroken winning streak the more formidable they become. The glory fades with time but the memory of victory lingers.</description>
+		<isBad>false</isBad>
+		<maxSeverity>2.0</maxSeverity>
+		<stages>
+			<!-- 1 Wins -->
+			<li>
+				<label>stolen thread (1 win)</label>
+				<statOffsets>
+					<MoveSpeed>0.10</MoveSpeed>
+				</statOffsets>
+				<statFactors>
+					<MeleeCooldownFactor>0.96</MeleeCooldownFactor>
+					<IncomingDamageFactor>0.96</IncomingDamageFactor>
+					<MeleeDPS>1.05</MeleeDPS>
+					<ShootingAccuracyPawn>1.03</ShootingAccuracyPawn>
+					<ArmorRating_Sharp>1.05</ArmorRating_Sharp>
+					<ArmorRating_Blunt>1.05</ArmorRating_Blunt>
+				</statFactors>
+			</li>
+			<!-- 2 Wins -->
+			<li>
+				<label>array expansion (2 wins)</label>
+				<minSeverity>0.135</minSeverity>
+				<severityGainFactor>2</severityGainFactor>
+				<statOffsets>
+					<MoveSpeed>0.18</MoveSpeed>
+				</statOffsets>
+				<statFactors>
+					<MeleeCooldownFactor>0.92</MeleeCooldownFactor>
+					<IncomingDamageFactor>0.92</IncomingDamageFactor>
+					<MeleeDPS>1.12</MeleeDPS>
+					<ShootingAccuracyPawn>1.06</ShootingAccuracyPawn>
+					<ArmorRating_Sharp>1.11</ArmorRating_Sharp>
+					<ArmorRating_Blunt>1.11</ArmorRating_Blunt>
+				</statFactors>
+			</li>
+			<!-- 3 Wins -->
+			<li>
+				<label>grid dominance (3 wins)</label>
+				<minSeverity>0.250</minSeverity>
+				<severityGainFactor>3</severityGainFactor>
+				<statOffsets>
+					<MoveSpeed>0.26</MoveSpeed>
+				</statOffsets>
+				<statFactors>
+					<MeleeCooldownFactor>0.88</MeleeCooldownFactor>
+					<IncomingDamageFactor>0.88</IncomingDamageFactor>
+					<MeleeDPS>1.20</MeleeDPS>
+					<ShootingAccuracyPawn>1.10</ShootingAccuracyPawn>
+					<ArmorRating_Sharp>1.17</ArmorRating_Sharp>
+					<ArmorRating_Blunt>1.17</ArmorRating_Blunt>
+				</statFactors>
+			</li>
+			<!-- 4 Wins -->
+			<li>
+				<label>kinetic overclock (4 wins)</label>
+				<minSeverity>0.375</minSeverity>
+				<severityGainFactor>4</severityGainFactor>
+				<statOffsets>
+					<MoveSpeed>0.35</MoveSpeed>
+				</statOffsets>
+				<statFactors>
+					<MeleeCooldownFactor>0.84</MeleeCooldownFactor>
+					<IncomingDamageFactor>0.84</IncomingDamageFactor>
+					<MeleeDPS>1.30</MeleeDPS>
+					<ShootingAccuracyPawn>1.16</ShootingAccuracyPawn>
+					<ArmorRating_Sharp>1.23</ArmorRating_Sharp>
+					<ArmorRating_Blunt>1.23</ArmorRating_Blunt>
+					<RangedCooldownFactor>0.85</RangedCooldownFactor>
+					<AimingDelayFactor>0.85</AimingDelayFactor>
+				</statFactors>
+			</li>
+			<!-- 5 Wins -->
+			<li>
+				<label>core assimilation (5 wins)</label>
+				<minSeverity>0.500</minSeverity>
+				<severityGainFactor>5</severityGainFactor>
+				<statOffsets>
+					<MoveSpeed>0.45</MoveSpeed>
+				</statOffsets>
+				<statFactors>
+					<MeleeCooldownFactor>0.80</MeleeCooldownFactor>
+					<IncomingDamageFactor>0.80</IncomingDamageFactor>
+					<MeleeDPS>1.40</MeleeDPS>
+					<ShootingAccuracyPawn>1.24</ShootingAccuracyPawn>
+					<ArmorRating_Sharp>1.29</ArmorRating_Sharp>
+					<ArmorRating_Blunt>1.29</ArmorRating_Blunt>
+					<RangedCooldownFactor>0.70</RangedCooldownFactor>
+					<AimingDelayFactor>0.70</AimingDelayFactor>
+				</statFactors>
+			</li>
+			<!-- 6 Wins -->
+			<li>
+				<label>neural saturation (6 wins)</label>
+				<minSeverity>0.625</minSeverity>
+				<severityGainFactor>6</severityGainFactor>
+				<statOffsets>
+					<MoveSpeed>0.55</MoveSpeed>
+				</statOffsets>
+				<statFactors>
+					<MeleeCooldownFactor>0.76</MeleeCooldownFactor>
+					<IncomingDamageFactor>0.76</IncomingDamageFactor>
+					<MeleeDPS>1.48</MeleeDPS>
+					<ShootingAccuracyPawn>1.32</ShootingAccuracyPawn>
+					<ArmorRating_Sharp>1.35</ArmorRating_Sharp>
+					<ArmorRating_Blunt>1.35</ArmorRating_Blunt>
+					<RangedCooldownFactor>0.55</RangedCooldownFactor>
+					<AimingDelayFactor>0.55</AimingDelayFactor>
+				</statFactors>
+			</li>
+			<!-- 7 Wins -->
+			<li>
+				<label>algorithmic apex (7 wins)</label>
+				<minSeverity>0.750</minSeverity>
+				<severityGainFactor>7</severityGainFactor>
+				<statOffsets>
+					<MoveSpeed>0.65</MoveSpeed>
+				</statOffsets>
+				<statFactors>
+					<MeleeCooldownFactor>0.72</MeleeCooldownFactor>
+					<IncomingDamageFactor>0.72</IncomingDamageFactor>
+					<MeleeDPS>1.56</MeleeDPS>
+					<ShootingAccuracyPawn>1.40</ShootingAccuracyPawn>
+					<ArmorRating_Sharp>1.41</ArmorRating_Sharp>
+					<ArmorRating_Blunt>1.41</ArmorRating_Blunt>
+					<RangedCooldownFactor>0.40</RangedCooldownFactor>
+					<AimingDelayFactor>0.40</AimingDelayFactor>
+				</statFactors>
+			</li>
+			<!-- 8 Wins -->
+			<li>
+				<label>singularity vector (8 wins)</label>
+				<minSeverity>0.875</minSeverity>
+				<severityGainFactor>8</severityGainFactor>
+				<statOffsets>
+					<MoveSpeed>0.75</MoveSpeed>
+				</statOffsets>
+				<statFactors>
+					<MeleeCooldownFactor>0.68</MeleeCooldownFactor>
+					<IncomingDamageFactor>0.68</IncomingDamageFactor>
+					<MeleeDPS>1.64</MeleeDPS>
+					<ShootingAccuracyPawn>1.48</ShootingAccuracyPawn>
+					<ArmorRating_Sharp>1.47</ArmorRating_Sharp>
+					<ArmorRating_Blunt>1.47</ArmorRating_Blunt>
+					<RangedCooldownFactor>0.32</RangedCooldownFactor>
+					<AimingDelayFactor>0.32</AimingDelayFactor>
+				</statFactors>
+			</li>
+			<!-- 9 Wins -->
+			<li>
+				<label>network monarch (9 wins)</label>
+				<minSeverity>1.000</minSeverity>
+				<severityGainFactor>9</severityGainFactor>
+				<statOffsets>
+					<MoveSpeed>0.85</MoveSpeed>
+				</statOffsets>
+				<statFactors>
+					<MeleeCooldownFactor>0.64</MeleeCooldownFactor>
+					<IncomingDamageFactor>0.64</IncomingDamageFactor>
+					<MeleeDPS>1.72</MeleeDPS>
+					<ShootingAccuracyPawn>1.56</ShootingAccuracyPawn>
+					<ArmorRating_Sharp>1.52</ArmorRating_Sharp>
+					<ArmorRating_Blunt>1.52</ArmorRating_Blunt>
+					<RangedCooldownFactor>0.25</RangedCooldownFactor>
+					<AimingDelayFactor>0.25</AimingDelayFactor>
+				</statFactors>
+			</li>
+			<!-- 10 Wins -->
+			<li>
+				<label>absolute supremacy (10 wins)</label>
+				<minSeverity>1.125</minSeverity>
+				<severityGainFactor>10</severityGainFactor>
+				<statOffsets>
+					<MoveSpeed>0.95</MoveSpeed>
+				</statOffsets>
+				<statFactors>
+					<MeleeCooldownFactor>0.60</MeleeCooldownFactor>
+					<IncomingDamageFactor>0.60</IncomingDamageFactor>
+					<MeleeDPS>1.80</MeleeDPS>
+					<ShootingAccuracyPawn>1.64</ShootingAccuracyPawn>
+					<ArmorRating_Sharp>1.56</ArmorRating_Sharp>
+					<ArmorRating_Blunt>1.56</ArmorRating_Blunt>
+					<RangedCooldownFactor>0.18</RangedCooldownFactor>
+					<AimingDelayFactor>0.18</AimingDelayFactor>
+				</statFactors>
+			</li>
+		</stages>
+		<comps>
+			<li Class="HediffCompProperties_SeverityPerDay">
+				<severityPerDay>-0.05</severityPerDay>
+			</li>
+		</comps>
+	</HediffDef>
+
+	<HediffDef>
+		<defName>APM_DuelDraw</defName>
+		<label>duel draw</label>
+		<hediffClass>HediffWithComps</hediffClass>
+		<description>The duel ended without a victor. Both combatants stood when the arena fell — a dishonor neither can easily shake. Movement is sluggish as though the shame of an unresolved contest weighs heavily on the body. The debuff will lift in time but the stigma of a draw is not quickly forgotten.</description>
+		<isBad>true</isBad>
+		<stages>
+			<li>
+				<capMods>
+					<li>
+						<capacity>Moving</capacity>
+						<offset>-0.15</offset>
+					</li>
+					<li>
+						<capacity>Manipulation</capacity>
+						<offset>-0.10</offset>
+					</li>
+					<li>
+						<capacity>Consciousness</capacity>
+						<offset>-0.10</offset>
+					</li>
+				</capMods>
+			</li>
+		</stages>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>60000~120000</disappearsAfterTicks>
+				<showRemainingTime>True</showRemainingTime>
+			</li>
+			<li Class="HediffCompProperties_DisappearsOnDeath" />
+		</comps>
+	</HediffDef>
+</Defs>

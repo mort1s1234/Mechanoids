@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="BaseMechanoid">
+    <defName>APM_Mech_Gazer</defName>
+    <label>Gazer</label>
+    <description>A different application of hellsphere technology resulted in the Gazer, a mechanoid clearly identified by its primary ocular beam emitter. This weapon is strong enough that the gazer must lock itself in place and divert all motor functions to stabilizing itself when firing. Even then, a significant charge time is required. The resultant beam can obliterate anything in front of it, even doing decent damage to structures. When pressed in close quarters, the Gazer can instead discharge the accumulated energy outward as a violent shockwave that hurls attackers back and disrupts nearby mechanized targets.</description>
+    <statBases>
+      <MarketValue>2200</MarketValue>
+      <MoveSpeed>1.6</MoveSpeed>
+      <ArmorRating_Blunt>0.55</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.96</ArmorRating_Sharp>
+      <ArmorRating_Heat>2.0</ArmorRating_Heat>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">6</BandwidthCost>
+      <CarryingCapacity>12.5</CarryingCapacity>
+      <Mass>37.5</Mass>
+      <ControlTakingTime MayRequire="Ludeon.Rimworld.Biotech">30</ControlTakingTime>
+      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">1</ToxicEnvironmentResistance>
+      <MechEnergyLossPerHP MayRequire="Ludeon.Rimworld.Biotech">0.15</MechEnergyLossPerHP>
+      <WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">8</WastepacksPerRecharge>
+      <EMPResistance MayRequire="Ludeon.Rimworld.Biotech">0.35</EMPResistance>
+    </statBases>
+    <tools>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>18.5</power>
+        <cooldownTime>2.9</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+      <li>
+        <label>front left paw</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>20.5</power>
+        <cooldownTime>2.9</cooldownTime>
+        <linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+      <li>
+        <label>front right paw</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>20.5</power>
+        <cooldownTime>2.9</cooldownTime>
+        <linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+    </tools>
+    <killedLeavingsPlayerHostile>
+      <APM_OcularChip>1</APM_OcularChip>
+    </killedLeavingsPlayerHostile>
+    <race>
+      <body>APM_Gazer</body>
+      <baseBodySize>8</baseBodySize>
+      <baseHealthScale>8.42</baseHealthScale>
+      <thinkTreeMain>APM_GazerMechanoid</thinkTreeMain>
+      <intelligence>ToolUser</intelligence>
+      <mechWeightClass>UltraHeavy</mechWeightClass>
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Diabolus_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Diabolus_Death</soundDeath>
+          <soundCall>Pawn_Mech_Diabolus_Call</soundCall>
+        </li>
+        <li MayRequire="Ludeon.RimWorld.Biotech">
+          <def>MechanoidFullyFormed</def>
+          <minAge>100</minAge>
+          <soundWounded>Pawn_Mech_Diabolus_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Diabolus_Death</soundDeath>
+          <soundCall>Pawn_Mech_Diabolus_Call</soundCall>
+        </li>
+      </lifeStageAges>
+      <soundCallIntervalRange>2500~3500</soundCallIntervalRange>
+      <soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_Punch_HitBuilding_Generic</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
+    </race>
+    <butcherProducts>
+      <Steel>50</Steel>
+      <Plasteel>20</Plasteel>
+    </butcherProducts>
+    <comps>
+      <li Class="ApexMechanoids.CompProperties_GazerShockwaveController">
+        <shockwaveAbilityDef>APM_Shockwave</shockwaveAbilityDef>
+        <checkIntervalTicks>30</checkIntervalTicks>
+        <meleeThreatRadius>4.0</meleeThreatRadius>
+        <minHostilesToTrigger>1</minHostilesToTrigger>
+      </li>
+      <li Class="ApexMechanoids.CompProperties_GazerLaserController">
+        <autoLaserEnabledDefault>true</autoLaserEnabledDefault>
+        <autoLaserGizmoIconPath>UI/AutoLaser</autoLaserGizmoIconPath>
+      </li>
+    </comps>
+    <modExtensions>
+			<li Class="ApexMechanoids.DefModExtension_SearchAndDestroyMech">
+				<disabledAutoUseAbilitiesWhenSearchAndDestroy>
+					<li>APM_SunRay</li>
+					<li>APM_Shockwave</li>
+				</disabledAutoUseAbilitiesWhenSearchAndDestroy>
+			</li>
+		</modExtensions>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMechanoidKind">
+    <defName>APM_Mech_Gazer</defName>
+    <label>gazer</label>
+    <race>APM_Mech_Gazer</race>
+    <combatPower>750</combatPower>
+    <isGoodBreacher>true</isGoodBreacher> 
+    <maxPerGroup>3</maxPerGroup>
+    <isBoss>true</isBoss>
+  	<allowInMechClusters>false</allowInMechClusters>
+    <skipResistant>true</skipResistant>
+    <controlGroupPortraitZoom>0.48</controlGroupPortraitZoom>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Things/Pawn/Mechanoid/Gazer/Gazer</texPath>
+          <maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Gazer/Mech_Gazer</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>3.5</drawSize>
+          <shadowData>
+						<volume>(1, 1.5, 1)</volume>
+						<offset>(0, 0, -0.3)</offset>
+					</shadowData>
+        </bodyGraphicData>
+      </li>
+      <li>
+        <bodyGraphicData>
+          <texPath>Things/Pawn/Mechanoid/Gazer/GazerAncient</texPath>
+          <maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Gazer/Mech_Gazer</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>3</drawSize>
+          <shadowData>
+						<volume>(1, 1.5, 1)</volume>
+						<offset>(0, 0, -0.3)</offset>
+					</shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponMoney>99999~99999</weaponMoney>
+    <weaponTags Inherit="False">
+      <li>APM_WeaponGazerLaser</li>
+    </weaponTags>
+    <abilities>
+      <li>APM_SunRay</li>
+    </abilities>
+  </PawnKindDef>
+</Defs>

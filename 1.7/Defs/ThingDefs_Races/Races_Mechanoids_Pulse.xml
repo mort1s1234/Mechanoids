@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="BaseMechanoid">
+		<defName>APM_Mech_Pulse</defName>
+		<label>pulse</label>
+		<description>The latest in mechanoid urban warfare tactics is the pulse mechanoid. Designed to catch enemies off guard by breaching structures, it can then discharge its signature ability. Impulses fired from this mech’s shoulder mounts not only blast out with deafening sound, but blind nearby opponents with intense light. A sensory deprived target stands no chance against the mechhive’s ever continuous march. For those who still stand afterwards, an installed jump pack quickly sends this mech to its next target.</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+			<MoveSpeed>4.3</MoveSpeed>
+			<ArmorRating_Blunt>0.26</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.55</ArmorRating_Sharp>
+			<ArmorRating_Heat>2.0</ArmorRating_Heat>
+			<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">2</BandwidthCost>
+			<CarryingCapacity>37.5</CarryingCapacity>
+			<Mass>50</Mass>
+			<ControlTakingTime MayRequire="Ludeon.Rimworld.Biotech">15</ControlTakingTime>
+			<MechEnergyLossPerHP MayRequire="Ludeon.Rimworld.Biotech">0.2</MechEnergyLossPerHP>
+			<WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">5</WastepacksPerRecharge>
+			<EMPResistance MayRequire="Ludeon.Rimworld.Biotech">0.45</EMPResistance>
+		</statBases>
+		<tools>
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>14.5</power>
+				<cooldownTime>3</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			</li>
+		</tools>
+		<race>
+			<body>APM_Pulse</body>
+			<baseBodySize>2</baseBodySize>
+			<baseHealthScale>1.52</baseHealthScale>
+			<thinkTreeMain>Mechanoid</thinkTreeMain>
+			<intelligence>ToolUser</intelligence>
+			<mechWeightClass>Medium</mechWeightClass>
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Termite_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Termite_Death</soundDeath>
+					<soundCall>Pawn_Mech_Termite_Call</soundCall>
+				</li>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Termite_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Termite_Death</soundDeath>
+					<soundCall>Pawn_Mech_Termite_Call</soundCall>
+				</li>
+			</lifeStageAges>
+			<soundCallIntervalRange>2500~3500</soundCallIntervalRange>
+			<soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
+			<soundMeleeHitBuilding>Pawn_Melee_Punch_HitBuilding_Generic</soundMeleeHitBuilding>
+			<soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
+		</race>
+		<butcherProducts>
+			<Steel>25</Steel>
+			<Plasteel>10</Plasteel>
+		</butcherProducts>
+		<modExtensions>
+			<li Class="ApexMechanoids.DefModExtension_SearchAndDestroyMech">
+				<disabledAutoUseAbilitiesWhenSearchAndDestroy>
+					<li>APM_PulseWave</li>
+				</disabledAutoUseAbilitiesWhenSearchAndDestroy>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<PawnKindDef ParentName="BaseMechanoidKind">
+		<defName>APM_Mech_Pulse</defName>
+		<label>pulse</label>
+		<race>APM_Mech_Pulse</race>
+		<combatPower>240</combatPower>
+		<maxPerGroup>3</maxPerGroup>
+		<controlGroupPortraitZoom>0.65</controlGroupPortraitZoom>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/Pulse/Pulse</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Pulse/Mech_Pulse</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>1.8</drawSize>
+					<shadowData>
+						<volume>(0.5, 0.9, 0.5)</volume>
+						<offset>(0, 0, -0.5)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/Pulse/PulseAncient</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Pulse/Mech_Pulse</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>1.8</drawSize>
+					<shadowData>
+						<volume>(0.5, 0.9, 0.5)</volume>
+						<offset>(0, 0, -0.5)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+		<weaponMoney>99999~99999</weaponMoney>
+		<weaponTags>
+			<li>APM_WeaponPulseShotgun</li>
+		</weaponTags>
+		<abilities>
+			<li>APM_PulseLongjump</li>
+			<li>APM_PulseWave</li>
+		</abilities>
+	</PawnKindDef>
+</Defs>

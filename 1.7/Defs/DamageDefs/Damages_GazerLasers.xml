@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<DamageDef ParentName="Beam">
+		<defName>APM_GazerBeam</defName>
+		<label>gazer beam</label>
+		<defaultDamage>24</defaultDamage>
+		<buildingDamageFactorImpassable>3</buildingDamageFactorImpassable>
+		<buildingDamageFactorPassable>1.5</buildingDamageFactorPassable>
+		<plantDamageFactor>2</plantDamageFactor>
+		<defaultArmorPenetration>1.6</defaultArmorPenetration>
+	</DamageDef>
+	<DamageDef ParentName="Beam">
+		<defName>APM_SunRay</defName>
+		<label>sun ray</label>
+		<defaultDamage>38</defaultDamage>
+		<buildingDamageFactorImpassable>9</buildingDamageFactorImpassable>
+		<buildingDamageFactorPassable>4.5</buildingDamageFactorPassable>
+		<plantDamageFactor>4</plantDamageFactor>
+		<defaultArmorPenetration>1.8</defaultArmorPenetration>
+	</DamageDef>
+</Defs>

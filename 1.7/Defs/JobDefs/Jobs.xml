@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<JobDef>
+		<defName>APM_BashDamage</defName>
+		<driverClass>ApexMechanoids.JobDriver_BashDamage</driverClass>
+		<reportString>Bashing into TargetA.</reportString>
+		<playerInterruptible>false</playerInterruptible>
+		<carryThingAfterJob>true</carryThingAfterJob>
+		<dropThingBeforeJob>false</dropThingBeforeJob>
+		<casualInterruptible>false</casualInterruptible>
+	</JobDef>
+
+	<JobDef>
+		<defName>APM_HookPawn</defName>
+		<driverClass>ApexMechanoids.JobDriver_HookPawn</driverClass>
+		<reportString>retracting grappling hook towards TargetA.</reportString>
+		<abilityCasting>true</abilityCasting>
+		<playerInterruptible>false</playerInterruptible>
+		<casualInterruptible>false</casualInterruptible>
+		<forceCompleteBeforeNextJob>true</forceCompleteBeforeNextJob>
+		<suspendable>false</suspendable>
+		<checkOverrideOnDamage>Never</checkOverrideOnDamage>
+	</JobDef>
+
+  <JobDef>
+    <defName>APM_HaulToToxicPurifier</defName>
+    <driverClass>ApexMechanoids.JobDriver_HaulToToxicPurifier</driverClass>
+    <reportString>hauling wastepacks to TargetA.</reportString>
+  </JobDef>
+
+	<JobDef>
+		<defName>APM_CastPulseJump</defName>
+		<driverClass>JobDriver_CastJump</driverClass>
+		<reportString>jumping to TargetA.</reportString>
+		<abilityCasting>true</abilityCasting>
+		<allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+		<playerInterruptible>false</playerInterruptible>
+		<forceCompleteBeforeNextJob>true</forceCompleteBeforeNextJob>
+		<carryThingAfterJob>true</carryThingAfterJob>
+		<dropThingBeforeJob>false</dropThingBeforeJob>
+		<casualInterruptible>false</casualInterruptible>
+		<suspendable>false</suspendable>
+		<checkOverrideOnDamage>Never</checkOverrideOnDamage>
+	</JobDef>
+
+	<JobDef>
+		<defName>APM_SirenLureChannel</defName>
+		<driverClass>ApexMechanoids.JobDriver_SirenLureChannel</driverClass>
+		<reportString>singing.</reportString>
+		<abilityCasting>true</abilityCasting>
+		<neverShowWeapon>true</neverShowWeapon>
+		<playerInterruptible>false</playerInterruptible>
+		<casualInterruptible>false</casualInterruptible>
+		<suspendable>false</suspendable>
+		<checkOverrideOnDamage>Never</checkOverrideOnDamage>
+	</JobDef>
+
+	<JobDef>
+		<defName>APM_RavagerArtilleryAttack</defName>
+		<driverClass>ApexMechanoids.JobDriver_RavagerArtilleryAttack</driverClass>
+		<reportString>firing artillery at TargetA.</reportString>
+		<playerInterruptible>true</playerInterruptible>
+		<casualInterruptible>false</casualInterruptible>
+	</JobDef>
+
+	<JobDef>
+		<defName>APM_RepairMech</defName>
+		<driverClass>ApexMechanoids.JobDriver_ApexRepairMech</driverClass>
+		<reportString>repairing TargetA.</reportString>
+	</JobDef>
+
+	<JobDef>
+		<defName>APM_ProjectDefenceMatrix</defName>
+		<driverClass>ApexMechanoids.JobDriver_ProjectShield</driverClass>
+		<reportString>shielding TargetA.</reportString>
+		<abilityCasting>true</abilityCasting>
+	</JobDef>
+</Defs>

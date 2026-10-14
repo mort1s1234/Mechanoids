@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="BaseWeapon">
+		<defName>APM_Weapon_SeveringBlade</defName>
+		<label>severing blade</label>
+		<description>A heavy combat blade integrated with Terminus-derived control matrices. Allows the wielder to channel psychic energy into wide sweeping strikes, cleaving through multiple foes at once.</description>
+		<possessionCount>1</possessionCount>
+		<graphicData>
+			<texPath>Things/Item/Equipment/WeaponMelee/SeveringBlade</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>1.4</drawSize>
+		</graphicData>
+		<uiIconScale>0.5</uiIconScale>
+		<techLevel>Spacer</techLevel>
+		<tradeability>Sellable</tradeability>
+		<relicChance>0</relicChance>
+		<thingCategories>
+      		<li>WeaponsMelee</li>
+    	</thingCategories>
+		<weaponTags>
+			<li>APM_WeaponSeveringBlade</li>
+		</weaponTags>
+		<statBases>
+			<MarketValue>3800</MarketValue>
+			<WorkToMake>38000</WorkToMake>
+			<Mass>3.5</Mass>
+		</statBases>
+		<tools>
+			<li>
+				<label>handle</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>12</power>
+				<cooldownTime>2.1</cooldownTime>
+				<armorPenetration>0.45</armorPenetration>
+			</li>
+			<li>
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>24</power>
+				<cooldownTime>2.3</cooldownTime>
+				<armorPenetration>0.80</armorPenetration>
+			</li>
+			<li>
+				<label>blade</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>35</power>
+				<cooldownTime>2.3</cooldownTime>
+				<armorPenetration>0.88</armorPenetration>
+			</li>
+		</tools>
+		<comps>
+			<li Class="ApexMechanoids.CompProperties_AbilityGranter">
+				<abilities>
+					<li>APM_SeveringEdge</li>
+				</abilities>
+			</li>
+			<li>
+				<compClass>CompQuality</compClass>
+      		</li>
+		</comps>
+		<modExtensions>
+			<li Class="VEF.Things.ThingDefExtension" MayRequire="OskarPotocki.VanillaFactionsExpanded.Core">
+				<usableWithShields>false</usableWithShields>
+				<weaponDraftedDrawOffsets>
+					<north>
+						<drawOffset>(-0.30, 0.00, 0.30)</drawOffset>
+						<angleOffset>90</angleOffset>
+					</north>
+					<east>
+						<drawOffset>(0.20, 0.00, 0.30)</drawOffset>
+						<angleOffset>-30</angleOffset>
+					</east>
+					<south>
+						<drawOffset>(0.30, 0.00, 0.30)</drawOffset>
+						<angleOffset>-20</angleOffset>
+					</south>
+					<west>
+						<drawOffset>(-0.20, 0.00, 0.30)</drawOffset>
+						<angleOffset>30</angleOffset>
+					</west>
+				</weaponDraftedDrawOffsets>
+			</li>
+		</modExtensions>
+	</ThingDef>
+</Defs>

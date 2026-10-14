@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <RecipeDef ParentName="MediumMechanoidRecipe">
+    <defName>APM_Celerus</defName>
+    <label>gestate celerus</label>
+    <description>Gestate a celerus archotech-commander mechanoid.</description>
+    <researchPrerequisite>ApexMechtech</researchPrerequisite>
+    <gestationCycles>6</gestationCycles>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>150</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>150</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreHigh</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>APM_PsyfluxChip</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Mech_Celerus>1</APM_Mech_Celerus>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Mech_Celerus</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MediumMechanoidRecipe">
+    <defName>APM_Dominus</defName>
+    <label>gestate dominus</label>
+    <description>Gestate a dominus archotech-commander mechanoid.</description>
+    <researchPrerequisite>ApexMechtech</researchPrerequisite>
+    <gestationCycles>8</gestationCycles>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>200</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>150</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreHigh</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>APM_PsionicChip</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Mech_Dominus>1</APM_Mech_Dominus>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Mech_Dominus</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+
+
+<RecipeDef Name="APM_ConquerorBase" ParentName="MediumMechanoidRecipe" Abstract="True">
+    <researchPrerequisite>AdvancedMechtech</researchPrerequisite>
+    <gestationCycles>2</gestationCycles>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>90</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Plasteel</li>
+					</thingDefs>
+				</filter>
+				<count>60</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>3</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>SubcoreRegular</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+	</RecipeDef>
+
+	<RecipeDef ParentName="APM_ConquerorBase">
+      <label>gestate carabine conqueror</label>
+		<defName>APM_Conqueror_DMR</defName>
+		<description>Gestate a Charge Carbine-equipped conqueror mechanoid.</description>
+		<jobString>Gestating conqueror (DMR).</jobString>
+		<products>
+			<APM_Mech_Conqueror_DMR>1</APM_Mech_Conqueror_DMR>
+		</products>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Mech_Conqueror_DMR</ThingDef>
+    </descriptionHyperlinks>
+	</RecipeDef>
+
+	<RecipeDef ParentName="APM_ConquerorBase">
+    <label>gestate blaster conqueror</label>
+		<defName>APM_Conqueror_AR</defName>
+		<description>Gestate a Blaster rifle-equipped conqueror mechanoid.</description>
+		<jobString>Gestating conqueror (AR).</jobString>
+		<products>
+			<APM_Mech_Conqueror_AR>1</APM_Mech_Conqueror_AR>
+		</products>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Mech_Conqueror_AR</ThingDef>
+    </descriptionHyperlinks>
+	</RecipeDef>
+
+	<RecipeDef ParentName="APM_ConquerorBase">
+    <label>gestate spitter conqueror</label>
+		<defName>APM_Conqueror_SMG</defName>
+		<description>Gestate a Charge Spitter-equipped conqueror mechanoid.</description>
+		<jobString>Gestating conqueror (SMG).</jobString>
+		<products>
+			<APM_Mech_Conqueror_SMG>1</APM_Mech_Conqueror_SMG>
+		</products>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Mech_Conqueror_SMG</ThingDef>
+    </descriptionHyperlinks>
+	</RecipeDef>
+
+  <RecipeDef ParentName="MediumMechanoidRecipe">
+    <defName>APM_Lasher</defName>
+    <label>gestate lasher</label>
+    <description>Gestate a lasher mechanoid.</description>
+    <researchPrerequisite>AdvancedMechtech</researchPrerequisite>
+    <gestationCycles>2</gestationCycles>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>75</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>50</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreRegular</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Mech_Lasher>1</APM_Mech_Lasher>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Mech_Lasher</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MediumMechanoidRecipe">
+    <defName>APM_Pulse</defName>
+    <label>gestate pulse</label>
+    <description>Gestate a pulse mechanoid.</description>
+    <researchPrerequisite>AdvancedMechtech</researchPrerequisite>
+    <gestationCycles>3</gestationCycles>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>100</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>75</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreRegular</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Mech_Pulse>1</APM_Mech_Pulse>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Mech_Pulse</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+
+<RecipeDef ParentName="MediumMechanoidRecipe">
+    <defName>APM_Vassal</defName>
+    <label>gestate vassal</label>
+    <description>Gestate a vassal mechanoid.</description>
+    <researchPrerequisite>AdvancedMechtech</researchPrerequisite>
+    <gestationCycles>3</gestationCycles>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>80</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>50</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreHigh</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Mech_Vassal>1</APM_Mech_Vassal>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Mech_Vassal</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MediumMechanoidRecipe">
+    <defName>APM_Tinker</defName>
+    <label>gestate tinker</label>
+    <description>Gestate a tinker mechanoid.</description>
+    <researchPrerequisite>AdvancedMechtech</researchPrerequisite>
+    <gestationCycles>2</gestationCycles>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>60</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreRegular</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Mech_Tinker>1</APM_Mech_Tinker>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Mech_Tinker</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MediumMechanoidRecipe">
+    <defName>APM_Siren</defName>
+    <label>gestate siren</label>
+    <description>Gestate a siren mechanoid.</description>
+    <researchPrerequisite>ApexMechtech</researchPrerequisite>
+    <gestationCycles>3</gestationCycles>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>90</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>80</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreHigh</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Mech_Siren>1</APM_Mech_Siren>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Mech_Siren</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MediumMechanoidRecipe">
+    <defName>APM_Frostivus</defName>
+    <label>gestate frostivus</label>
+    <description>Gestate a frostivus mechanoid.</description>
+    <researchPrerequisite>AdvancedMechtech</researchPrerequisite>
+    <gestationCycles>3</gestationCycles>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>150</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>80</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreRegular</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Mech_Frostivus>1</APM_Mech_Frostivus>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Mech_Frostivus</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+   
+    <RecipeDef ParentName="MediumMechanoidRecipe">
+    <defName>APM_Javelin</defName>
+    <label>gestate javelin</label>
+    <description>Gestate a javelin mechanoid.</description>
+    <researchPrerequisite>ApexMechtech</researchPrerequisite>
+    <gestationCycles>3</gestationCycles>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>200</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Uranium</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+        <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>80</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreHigh</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <APM_Mech_Javelin>1</APM_Mech_Javelin>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>APM_Mech_Javelin</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+</Defs>
