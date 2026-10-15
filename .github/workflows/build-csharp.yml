@@ -61,12 +61,24 @@ jobs:
         # -f bypasses .gitignore in case *.dll is ever ignored
         git add -f ./1.6/Assemblies/ApexMechanoids.dll
 
+        # Only branches that carry the Combat Extended compat project build this one
+        CE_DLL=./1.6/CombatExtended/Assemblies/ApexMechanoidsCE.dll
+        if [ -f "$CE_DLL" ]; then
+          git add -f "$CE_DLL"
+        fi
+
         if git diff --cached --quiet; then
-          echo "Assembly unchanged, nothing to commit."
+          echo "Assemblies unchanged, nothing to commit."
           exit 0
         fi
 
-        git commit -m "chore(assemblies): rebuild ApexMechanoids.dll [skip ci]"
+        git commit -m "chore(assemblies): rebuild ApexMechanoids.dll and ApexMechanoidsCE.dll [skip ci]"
+
+        # The build rewrites tracked assembly outputs, which would make the rebase below
+        # abort with "cannot pull with rebase: You have unstaged changes."
+        # Drop any leftover build-only modifications before rebasing.
+        git checkout -- .
+
         git pull --rebase origin "$BRANCH"
         git push origin HEAD:"$BRANCH"
 
