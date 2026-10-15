@@ -32,10 +32,21 @@
 
 	<!-- Four-legged, roughly animal-proportioned chassis. -->
 	<Operation Class="PatchOperationAddModExtension">
-		<xpath>Defs/ThingDef[race/body="APM_Frostivus" or race/body="APM_Haze" or race/body="APM_Mantis" or race/body="APM_Ravager"]</xpath>
+		<xpath>Defs/ThingDef[race/body="APM_Frostivus" or race/body="APM_Haze" or race/body="APM_Ravager"]</xpath>
 		<value>
 			<li Class="CombatExtended.RacePropertiesExtensionCE">
 				<bodyShape>Quadruped</bodyShape>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[race/body="APM_Mantis"]</xpath>
+		<value>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>Quadruped</bodyShape>
+				<canParry>true</canParry>
+				<maxParry>4</maxParry>
 			</li>
 		</value>
 	</Operation>
@@ -272,13 +283,13 @@
 	</Operation>
 
 	<Operation Class="PatchOperationReplace">
-		<xpath>Defs/ThingDef[race/body="APM_Conqueror"]/statBases/ArmorRating_Sharp</xpath>
+		<xpath>Defs/ThingDef[defName="APM_Mech_Conqueror_DMR" or defName="APM_Mech_Conqueror_AR" or defName="APM_Mech_Conqueror_SMG"]/statBases/ArmorRating_Sharp</xpath>
 		<value>
 			<ArmorRating_Sharp>5</ArmorRating_Sharp>
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationReplace">
-		<xpath>Defs/ThingDef[race/body="APM_Conqueror"]/statBases/ArmorRating_Blunt</xpath>
+		<xpath>Defs/ThingDef[defName="APM_Mech_Conqueror_DMR" or defName="APM_Mech_Conqueror_AR" or defName="APM_Mech_Conqueror_SMG"]/statBases/ArmorRating_Blunt</xpath>
 		<value>
 			<ArmorRating_Blunt>7.2</ArmorRating_Blunt>
 		</value>
@@ -1124,19 +1135,63 @@
 		<value>
 			<tools Inherit="False">
 				<li Class="CombatExtended.ToolCE">
+					<label>left blade</label>
+					<capacities>
+						<li>Cut</li>
+					</capacities>
+					<power>48</power>
+					<cooldownTime>2.07</cooldownTime>
+					<linkedBodyPartsGroup>LeftBlade</linkedBodyPartsGroup>
+					<armorPenetrationSharp>2.16</armorPenetrationSharp>
+					<armorPenetrationBlunt>5.4</armorPenetrationBlunt>
+					<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>left blade</label>
+					<capacities>
+						<li>Stab</li>
+					</capacities>
+					<power>30</power>
+					<cooldownTime>1.33</cooldownTime>
+					<linkedBodyPartsGroup>LeftBlade</linkedBodyPartsGroup>
+					<armorPenetrationSharp>40</armorPenetrationSharp>
+					<armorPenetrationBlunt>20</armorPenetrationBlunt>
+					<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>right blade</label>
+					<capacities>
+						<li>Cut</li>
+					</capacities>
+					<power>48</power>
+					<cooldownTime>2.07</cooldownTime>
+					<linkedBodyPartsGroup>RightBlade</linkedBodyPartsGroup>
+					<armorPenetrationSharp>2.16</armorPenetrationSharp>
+					<armorPenetrationBlunt>5.4</armorPenetrationBlunt>
+					<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>right blade</label>
+					<capacities>
+						<li>Stab</li>
+					</capacities>
+					<power>30</power>
+					<cooldownTime>1.33</cooldownTime>
+					<linkedBodyPartsGroup>RightBlade</linkedBodyPartsGroup>
+					<armorPenetrationSharp>40</armorPenetrationSharp>
+					<armorPenetrationBlunt>20</armorPenetrationBlunt>
+					<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+				</li>
+				<li Class="CombatExtended.ToolCE">
 					<label>head</label>
 					<capacities>
 						<li>Blunt</li>
 					</capacities>
-					<surpriseAttack>
-						<extraMeleeDamages />
-					</surpriseAttack>
-					<extraMeleeDamages />
-					<armorPenetrationBlunt>9.5</armorPenetrationBlunt>
-					<power>18.5</power>
-					<cooldownTime>2.9</cooldownTime>
-					<ensureLinkedBodyPartsGroupAlwaysUsable>True</ensureLinkedBodyPartsGroupAlwaysUsable>
+					<power>6</power>
+					<cooldownTime>5.9</cooldownTime>
 					<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+					<chanceFactor>0.2</chanceFactor>
+					<armorPenetrationBlunt>1.875</armorPenetrationBlunt>
 				</li>
 			</tools>
 		</value>

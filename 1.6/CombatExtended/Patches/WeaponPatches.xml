@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Patch>
-	<!-- CE mechanoids receive four to six spare primary magazines. -->
 	<Operation Class="PatchOperationReplace">
 		<xpath>Defs/ThingDef[
 			defName="APM_Gun_EMP_Impactor" or
@@ -8,7 +7,8 @@
 			defName="APM_Gun_Conqueror_DMR" or
 			defName="APM_Gun_Conqueror_SMG" or
 			defName="APM_Siren_ChargeEmitter" or
-			defName="APM_Gun_Pulse_Shotgun"]/tools</xpath>
+			defName="APM_Gun_Pulse_Shotgun" or
+			defName="APM_Haze_BeamGun"]/tools</xpath>
 		<value>
 			<tools>
 				<li Class="CombatExtended.ToolCE">
@@ -325,14 +325,17 @@
 			<thingClass>CombatExtended.BulletCE</thingClass>
 		</value>
 	</Operation>
+
 	<Operation Class="PatchOperationAttributeSet">
 		<xpath>Defs/ThingDef[defName="APM_Proj_SirenChargeEmitter"]/projectile</xpath>
 		<attribute>Class</attribute>
 		<value>CombatExtended.ProjectilePropertiesCE</value>
 	</Operation>
+
 	<Operation Class="PatchOperationRemove">
 		<xpath>Defs/ThingDef[defName="APM_Proj_SirenChargeEmitter"]/projectile/armorPenetrationBase</xpath>
 	</Operation>
+
 	<Operation Class="PatchOperationAdd">
 		<xpath>Defs/ThingDef[defName="APM_Proj_SirenChargeEmitter"]/projectile</xpath>
 		<value>
@@ -469,8 +472,8 @@
 		</value>
 	</Operation>
 
-	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_CelerusApexVoltana"]</xpath>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[@Name="APM_Weapon_CelerusVoltana_Base"]/tools</xpath>
 		<value>
 			<tools>
 				<li Class="CombatExtended.ToolCE">
@@ -512,7 +515,7 @@
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_CelerusApexVoltana"]</xpath>
+		<xpath>Defs/ThingDef[@Name="APM_Weapon_CelerusVoltana_Base"]</xpath>
 		<value>
 			<equippedStatOffsets>
 				<MeleeParryChance>0.6</MeleeParryChance>
@@ -522,111 +525,21 @@
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_CelerusApexVoltana"]</xpath>
+		<xpath>Defs/ThingDef[@Name="APM_Weapon_CelerusVoltana_Base"]/statBases</xpath>
 		<value>
-			<statBases>
-				<MaxHitPoints>100</MaxHitPoints>
-				<Flammability>0.5</Flammability>
-				<DeteriorationRate>2</DeteriorationRate>
-				<Beauty>-3</Beauty>
-				<SellPriceFactor>0.2</SellPriceFactor>
-				<MarketValue>2400</MarketValue>
-				<Mass>2</Mass>
-				<Bulk>7</Bulk>
-				<ToughnessRating>11</ToughnessRating>
-				<MeleeCounterParryBonus>1.1</MeleeCounterParryBonus>
-			</statBases>
+			<Bulk>7</Bulk>
+			<ToughnessRating>11</ToughnessRating>
+			<MeleeCounterParryBonus>1.1</MeleeCounterParryBonus>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="APM_Weapon_CelerusApexVoltana" or defName="APM_Weapon_CelerusVoltana"]/weaponTags</xpath>
+		<value>
+			<li>CE_OneHandedWeapon</li>
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationReplace">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_CelerusApexVoltana"]/weaponTags</xpath>
-		<value>
-			<weaponTags>
-				<li>APM_WeaponCelerusVoltana</li>
-				<li>CE_OneHandedWeapon</li>
-			</weaponTags>
-		</value>
-	</Operation>
-	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_CelerusVoltana"]</xpath>
-		<value>
-			<tools>
-				<li Class="CombatExtended.ToolCE">
-					<label>handle</label>
-					<capacities>
-						<li>Blunt</li>
-					</capacities>
-					<extraMeleeDamages />
-					<armorPenetrationBlunt>1.12</armorPenetrationBlunt>
-					<power>6</power>
-					<cooldownTime>1.8</cooldownTime>
-					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
-				</li>
-				<li Class="CombatExtended.ToolCE">
-					<label>tip</label>
-					<capacities>
-						<li>Stab</li>
-					</capacities>
-					<extraMeleeDamages />
-					<armorPenetrationBlunt>1.9</armorPenetrationBlunt>
-					<armorPenetrationSharp>45</armorPenetrationSharp>
-					<power>27</power>
-					<cooldownTime>1.4</cooldownTime>
-					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
-				</li>
-				<li Class="CombatExtended.ToolCE">
-					<label>blade</label>
-					<capacities>
-						<li>Cut</li>
-					</capacities>
-					<extraMeleeDamages />
-					<armorPenetrationBlunt>1.6</armorPenetrationBlunt>
-					<armorPenetrationSharp>30</armorPenetrationSharp>
-					<power>25</power>
-					<cooldownTime>0.9</cooldownTime>
-					<linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
-				</li>
-			</tools>
-		</value>
-	</Operation>
-	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_CelerusVoltana"]</xpath>
-		<value>
-			<equippedStatOffsets>
-				<MeleeParryChance>0.6</MeleeParryChance>
-				<MeleeCritChance>1</MeleeCritChance>
-				<MeleeDodgeChance>0.3</MeleeDodgeChance>
-			</equippedStatOffsets>
-		</value>
-	</Operation>
-	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_CelerusVoltana"]</xpath>
-		<value>
-			<statBases>
-				<MaxHitPoints>100</MaxHitPoints>
-				<Flammability>0.5</Flammability>
-				<DeteriorationRate>2</DeteriorationRate>
-				<Beauty>-3</Beauty>
-				<SellPriceFactor>0.2</SellPriceFactor>
-				<MarketValue>2400</MarketValue>
-				<Mass>2</Mass>
-				<Bulk>7</Bulk>
-				<ToughnessRating>11</ToughnessRating>
-				<MeleeCounterParryBonus>1.1</MeleeCounterParryBonus>
-			</statBases>
-		</value>
-	</Operation>
-	<Operation Class="PatchOperationReplace">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_CelerusVoltana"]/weaponTags</xpath>
-		<value>
-			<weaponTags>
-				<li>APM_WeaponCelerusVoltana</li>
-				<li>CE_OneHandedWeapon</li>
-			</weaponTags>
-		</value>
-	</Operation>
-	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_DominusApexMechlance"]</xpath>
+		<xpath>Defs/ThingDef[@Name="APM_Weapon_DominusMechlance_Base"]/tools</xpath>
 		<value>
 			<tools>
 				<li Class="CombatExtended.ToolCE">
@@ -669,7 +582,7 @@
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_DominusApexMechlance"]</xpath>
+		<xpath>Defs/ThingDef[@Name="APM_Weapon_DominusMechlance_Base"]</xpath>
 		<value>
 			<equippedStatOffsets>
 				<MeleeDodgeChance>0.15</MeleeDodgeChance>
@@ -679,90 +592,11 @@
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_DominusApexMechlance"]</xpath>
+		<xpath>Defs/ThingDef[@Name="APM_Weapon_DominusMechlance_Base"]/statBases</xpath>
 		<value>
-			<statBases>
-				<MaxHitPoints>100</MaxHitPoints>
-				<Flammability>0.5</Flammability>
-				<DeteriorationRate>2</DeteriorationRate>
-				<Beauty>-3</Beauty>
-				<SellPriceFactor>0.2</SellPriceFactor>
-				<Mass>2</Mass>
-				<MarketValue>2400</MarketValue>
-				<Bulk>8</Bulk>
-				<ToughnessRating>16</ToughnessRating>
-				<MeleeCounterParryBonus>0.3</MeleeCounterParryBonus>
-			</statBases>
-		</value>
-	</Operation>
-	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_DominusMechlance"]</xpath>
-		<value>
-			<tools>
-				<li Class="CombatExtended.ToolCE">
-					<label>handle</label>
-					<capacities>
-						<li>Blunt</li>
-					</capacities>
-					<extraMeleeDamages />
-					<armorPenetrationBlunt>1.5</armorPenetrationBlunt>
-					<armorPenetrationSharp>0.2</armorPenetrationSharp>
-					<power>10</power>
-					<cooldownTime>1.3</cooldownTime>
-					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
-				</li>
-				<li Class="CombatExtended.ToolCE">
-					<label>blade</label>
-					<capacities>
-						<li>Stab</li>
-					</capacities>
-					<extraMeleeDamages />
-					<armorPenetrationBlunt>4.5</armorPenetrationBlunt>
-					<armorPenetrationSharp>30.2</armorPenetrationSharp>
-					<power>27</power>
-					<cooldownTime>1.3</cooldownTime>
-					<linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
-				</li>
-				<li Class="CombatExtended.ToolCE">
-					<label>edge</label>
-					<capacities>
-						<li>Cut</li>
-					</capacities>
-					<extraMeleeDamages />
-					<armorPenetrationBlunt>1.62</armorPenetrationBlunt>
-					<armorPenetrationSharp>22.3</armorPenetrationSharp>
-					<power>34</power>
-					<cooldownTime>1.6</cooldownTime>
-					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
-				</li>
-			</tools>
-		</value>
-	</Operation>
-	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_DominusMechlance"]</xpath>
-		<value>
-			<equippedStatOffsets>
-				<MeleeDodgeChance>0.15</MeleeDodgeChance>
-				<MeleeParryChance>0.4</MeleeParryChance>
-				<MeleeCritChance>0.8</MeleeCritChance>
-			</equippedStatOffsets>
-		</value>
-	</Operation>
-	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_DominusMechlance"]</xpath>
-		<value>
-			<statBases>
-				<MaxHitPoints>100</MaxHitPoints>
-				<Flammability>0.5</Flammability>
-				<DeteriorationRate>2</DeteriorationRate>
-				<Beauty>-3</Beauty>
-				<SellPriceFactor>0.2</SellPriceFactor>
-				<Mass>2</Mass>
-				<MarketValue>2400</MarketValue>
-				<Bulk>8</Bulk>
-				<ToughnessRating>16</ToughnessRating>
-				<MeleeCounterParryBonus>0.3</MeleeCounterParryBonus>
-			</statBases>
+			<Bulk>8</Bulk>
+			<ToughnessRating>16</ToughnessRating>
+			<MeleeCounterParryBonus>0.8</MeleeCounterParryBonus>
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationReplace">
@@ -865,9 +699,6 @@
 			<defaultArmorPenetration>2</defaultArmorPenetration>
 		</value>
 	</Operation>
-	<Operation Class="PatchOperationRemove">
-		<xpath>Defs/ThingDef[starts-with(defName, "APM_") or starts-with(@Name, "APM_")]/tools/li/armorPenetration</xpath>
-	</Operation>
 	<Operation Class="PatchOperationReplace">
 		<xpath>Defs/ThingDef[defName="APM_Weapon_SeveringBlade"]/tools</xpath>
 		<value>
@@ -877,7 +708,6 @@
 					<capacities>
 						<li>Blunt</li>
 					</capacities>
-
 					<extraMeleeDamages />
 					<armorPenetrationBlunt>5.2</armorPenetrationBlunt>
 					<power>12</power>
@@ -889,7 +719,6 @@
 					<capacities>
 						<li>Stab</li>
 					</capacities>
-
 					<extraMeleeDamages />
 					<armorPenetrationBlunt>6.1</armorPenetrationBlunt>
 					<armorPenetrationSharp>33</armorPenetrationSharp>
@@ -902,7 +731,6 @@
 					<capacities>
 						<li>Cut</li>
 					</capacities>
-
 					<extraMeleeDamages />
 					<armorPenetrationBlunt>4.6</armorPenetrationBlunt>
 					<armorPenetrationSharp>26</armorPenetrationSharp>
@@ -919,14 +747,6 @@
 			<Flammability>1</Flammability>
 			<SellPriceFactor>0.2</SellPriceFactor>
 			<Bulk>10.03</Bulk>
-		</value>
-	</Operation>
-	<Operation Class="PatchOperationReplace">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_SeveringBlade"]/weaponTags</xpath>
-		<value>
-			<weaponTags>
-				<li>APM_WeaponSeveringBlade</li>
-			</weaponTags>
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationReplace">
@@ -984,23 +804,19 @@
 	<Operation Class="PatchOperationAdd">
 		<xpath>Defs/ThingDef[defName="APM_Weapon_Skipblade"]/statBases</xpath>
 		<value>
-			<Flammability>1</Flammability>
 			<Bulk>10.03</Bulk>
 			<ToughnessRating>7.5</ToughnessRating>
 			<MeleeCounterParryBonus>1.4</MeleeCounterParryBonus>
 		</value>
 	</Operation>
-	<Operation Class="PatchOperationReplace">
+	<Operation Class="PatchOperationAdd">
 		<xpath>Defs/ThingDef[defName="APM_Weapon_Skipblade"]/weaponTags</xpath>
 		<value>
-			<weaponTags>
-				<li>APM_WeaponSkipblade</li>
-				<li>CE_OneHandedWeapon</li>
-			</weaponTags>
+			<li>CE_OneHandedWeapon</li>
 		</value>
 	</Operation>
-	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_TerminusApexExoblade"]</xpath>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[@Name="APM_Weapon_TerminusExoblade_Base"]/tools</xpath>
 		<value>
 			<tools>
 				<li Class="CombatExtended.ToolCE">
@@ -1042,7 +858,7 @@
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_TerminusApexExoblade"]</xpath>
+		<xpath>Defs/ThingDef[@Name="APM_Weapon_TerminusExoblade_Base"]</xpath>
 		<value>
 			<equippedStatOffsets>
 				<MeleeParryChance>0.26</MeleeParryChance>
@@ -1052,105 +868,18 @@
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_TerminusApexExoblade"]</xpath>
+		<xpath>Defs/ThingDef[@Name="APM_Weapon_TerminusExoblade_Base"]/statBases</xpath>
 		<value>
-			<statBases>
-				<MaxHitPoints>100</MaxHitPoints>
-				<Flammability>0.5</Flammability>
-				<DeteriorationRate>2</DeteriorationRate>
-				<Beauty>-3</Beauty>
-				<SellPriceFactor>0.2</SellPriceFactor>
-				<MarketValue>2400</MarketValue>
-				<Mass>4.5</Mass>
-				<Bulk>10</Bulk>
-				<ToughnessRating>20</ToughnessRating>
-				<MeleeCounterParryBonus>0.4</MeleeCounterParryBonus>
-			</statBases>
-		</value>
-	</Operation>
-	<Operation Class="PatchOperationReplace">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_TerminusApexExoblade"]/weaponTags</xpath>
-		<value>
-			<weaponTags>
-				<li>APM_WeaponTerminusExoblade</li>
-			</weaponTags>
-		</value>
-	</Operation>
-	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_TerminusExoblade"]</xpath>
-		<value>
-			<tools>
-				<li Class="CombatExtended.ToolCE">
-					<label>handle</label>
-					<capacities>
-						<li>Blunt</li>
-					</capacities>
-					<extraMeleeDamages />
-					<armorPenetrationBlunt>4.8</armorPenetrationBlunt>
-					<power>10</power>
-					<cooldownTime>1.3</cooldownTime>
-					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
-				</li>
-				<li Class="CombatExtended.ToolCE">
-					<label>point</label>
-					<capacities>
-						<li>Stab</li>
-					</capacities>
-					<extraMeleeDamages />
-					<armorPenetrationBlunt>7.2</armorPenetrationBlunt>
-					<armorPenetrationSharp>29</armorPenetrationSharp>
-					<power>34</power>
-					<cooldownTime>2.1</cooldownTime>
-					<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
-				</li>
-				<li Class="CombatExtended.ToolCE">
-					<label>blade</label>
-					<capacities>
-						<li>Cut</li>
-					</capacities>
-					<extraMeleeDamages />
-					<armorPenetrationBlunt>6.21</armorPenetrationBlunt>
-					<armorPenetrationSharp>26</armorPenetrationSharp>
-					<power>42</power>
-					<cooldownTime>1.7</cooldownTime>
-					<linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
-				</li>
-			</tools>
-		</value>
-	</Operation>
-	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_TerminusExoblade"]</xpath>
-		<value>
-			<equippedStatOffsets>
-				<MeleeParryChance>0.26</MeleeParryChance>
-				<MeleeCritChance>1.2</MeleeCritChance>
-				<MeleeDodgeChance>0.08</MeleeDodgeChance>
-			</equippedStatOffsets>
-		</value>
-	</Operation>
-	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_TerminusExoblade"]</xpath>
-		<value>
-			<statBases>
-				<MaxHitPoints>100</MaxHitPoints>
-				<Flammability>0.5</Flammability>
-				<DeteriorationRate>2</DeteriorationRate>
-				<Beauty>-3</Beauty>
-				<SellPriceFactor>0.2</SellPriceFactor>
-				<MarketValue>2400</MarketValue>
-				<Mass>4.5</Mass>
-				<Bulk>10</Bulk>
-				<ToughnessRating>20</ToughnessRating>
-				<MeleeCounterParryBonus>0.4</MeleeCounterParryBonus>
-			</statBases>
-		</value>
-	</Operation>
-	<Operation Class="PatchOperationReplace">
-		<xpath>Defs/ThingDef[defName="APM_Weapon_TerminusExoblade"]/weaponTags</xpath>
-		<value>
-			<weaponTags>
-				<li>APM_WeaponTerminusExoblade</li>
-			</weaponTags>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Flammability>0.5</Flammability>
+			<DeteriorationRate>2</DeteriorationRate>
+			<Beauty>-3</Beauty>
+			<SellPriceFactor>0.2</SellPriceFactor>
+			<MarketValue>2400</MarketValue>
+			<Mass>4.5</Mass>
+			<Bulk>10</Bulk>
+			<ToughnessRating>20</ToughnessRating>
+			<MeleeCounterParryBonus>0.4</MeleeCounterParryBonus>
 		</value>
 	</Operation>
 </Patch>
