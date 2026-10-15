@@ -37,7 +37,7 @@ namespace ApexMechanoids
             return strongestMeleeVerb.verbProps.AdjustedArmorPenetration(strongestMeleeVerb, launcherPawn);
         }
 
-        private static Verb FindStrongestMeleeVerb(Pawn attacker)
+        public static Verb FindStrongestMeleeVerb(Pawn attacker)
         {
             if (attacker.meleeVerbs == null)
             {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- CE applies a race's natural armor only to body parts in this group. -->
+	<!-- Restrict descendant li nodes to body-part records: group lists also use li, but do not contain a def child. -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/BodyDef[starts-with(defName, "APM_")]/corePart[not(depth) or depth="Outside"][not(groups)] | Defs/BodyDef[starts-with(defName, "APM_")]/corePart//li[def][not(depth) or depth="Outside"][not(groups)]</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/BodyDef[starts-with(defName, "APM_")]/corePart[not(depth) or depth="Outside"][not(groups)] | Defs/BodyDef[starts-with(defName, "APM_")]/corePart//li[def][not(depth) or depth="Outside"][not(groups)]</xpath>
+			<value>
+				<groups />
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/BodyDef[starts-with(defName, "APM_")]/corePart[not(depth) or depth="Outside"]/groups[not(li="CoveredByNaturalArmor")] | Defs/BodyDef[starts-with(defName, "APM_")]/corePart//li[def][not(depth) or depth="Outside"]/groups[not(li="CoveredByNaturalArmor")]</xpath>
+		<value>
+			<li>CoveredByNaturalArmor</li>
+		</value>
+	</Operation>
+</Patch>

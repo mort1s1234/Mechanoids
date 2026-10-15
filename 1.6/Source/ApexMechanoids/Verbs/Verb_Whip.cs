@@ -197,7 +197,7 @@ namespace ApexMechanoids
             Vector3 direction = (target.Position - caster.Position).ToVector3();
             bool instigatorGuilty = !(caster is Pawn pawn) || !pawn.Drafted;
             float amount = tool.AdjustedBaseMeleeDamageAmount(source, DamageDefOf.Cut) * damageFactor;
-            DamageInfo damageInfo = new DamageInfo(verbProps.beamDamageDef, amount, amount * 0.015f, -1f, caster, null, source?.def, DamageInfo.SourceCategory.ThingOrUnknown, null, instigatorGuilty);
+            DamageInfo damageInfo = new DamageInfo(verbProps.beamDamageDef, amount, GetArmorPenetration(tool, amount), -1f, caster, null, source?.def, DamageInfo.SourceCategory.ThingOrUnknown, null, instigatorGuilty);
             damageInfo.SetBodyRegion(BodyPartHeight.Undefined, BodyPartDepth.Outside);
             damageInfo.SetAngle(direction);
             damageInfo.SetTool(tool);
@@ -222,6 +222,11 @@ namespace ApexMechanoids
                 }
             }
             return result;
+        }
+
+        protected virtual float GetArmorPenetration(Tool tool, float damageAmount)
+        {
+            return damageAmount * 0.015f;
         }
     }
 }

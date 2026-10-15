@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<loadFolders>
+	<v1.6>
+		<li>/</li>
+		<li>1.6</li>
+		<li>Common</li>
+		<li>WeaponTweakData</li>
+		<li IfModActive="CETeam.CombatExtended,CETeam.CombatExtended_steam">1.6/CombatExtended</li>
+	</v1.6>
+</loadFolders>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<CombatExtended.AmmoSetDef>
+		<defName>AmmoSet_12x64mmMaul</defName>
+		<label>12x64mm Charged(Maul)</label>
+		<ammoTypes>
+			<Ammo_12x64mmCharged>APM_CE_Bullet_MaulBlaster</Ammo_12x64mmCharged>
+		</ammoTypes>
+		<similarTo>AmmoSet_MechCharged</similarTo>
+	</CombatExtended.AmmoSetDef>
+	<!-- Maul's source projectile deals 39 damage and has no secondary payload.
+	     A dedicated CE projectile preserves that output while gaining CE collision,
+	     suppression, and armor penetration. Reusing the stock 12x64 mm charged
+	     projectile would add a four-damage explosive rider to every overclock shot. -->
+	<ThingDef ParentName="Base12x64mmChargedBullet">
+		<defName>APM_CE_Bullet_MaulBlaster</defName>
+		<label>heavy sledge blaster bolt</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>39</damageAmountBase>
+			<secondaryDamage />
+			<armorPenetrationSharp>30</armorPenetrationSharp>
+			<armorPenetrationBlunt>324</armorPenetrationBlunt>
+		</projectile>
+	</ThingDef>
+</Defs>
