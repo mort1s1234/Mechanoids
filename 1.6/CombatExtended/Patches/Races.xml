@@ -79,7 +79,6 @@
 			@Name="APM_Mech_Terminus_Base" or
 			defName="APM_Mech_Aegis" or
 			defName="APM_Mech_Frostivus" or
-			defName="APM_Mech_Frostivus" or
 			defName="APM_Mech_Gazer" or
 			defName="APM_Mech_Haze" or
 			defName="APM_Mech_Ingestor" or
@@ -117,6 +116,120 @@
 		</value>
 	</Operation>
 
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+			@Name="APM_Mech_Celerus_Base" or
+			@Name="APM_Mech_Dominus_Base" or
+			@Name="APM_Mech_Terminus_Base" or
+			defName="APM_Mech_Aegis" or
+			defName="APM_Mech_Gazer" or
+			defName="APM_Mech_Maul"]/comps</xpath>
+		<value>
+			<li Class="CombatExtended.CompProperties_ArmorDurability">
+				<Durability>3660</Durability>
+				<Regenerates>true</Regenerates>
+				<RegenInterval>1250</RegenInterval>
+				<RegenValue>5</RegenValue>
+				<Repairable>true</Repairable>
+				<RepairIngredients>
+					<Steel>5</Steel>
+					<Plasteel>5</Plasteel>
+				</RepairIngredients>
+				<RepairTime>300</RepairTime>
+				<RepairValue>200</RepairValue>
+				<MinArmorPct>0.5</MinArmorPct>
+				<MinArmorValueSharp>12</MinArmorValueSharp>
+				<MinArmorValueBlunt>27</MinArmorValueBlunt>
+				<!-- <MinArmorValueHeat>0.2</MinArmorValueHeat>
+				<MinArmorValueElectric>0.1</MinArmorValueElectric> -->
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+			defName="APM_Mech_Ingestor" or
+			defName="APM_Mech_Javelin" or
+			defName="APM_Mech_Ravager"]/comps</xpath>
+		<value>
+			<li Class="CombatExtended.CompProperties_ArmorDurability">
+				<Durability>2400</Durability>
+				<Regenerates>true</Regenerates>
+				<RegenInterval>1250</RegenInterval>
+				<RegenValue>5</RegenValue>
+				<Repairable>true</Repairable>
+				<RepairIngredients>
+					<Steel>5</Steel>
+					<Plasteel>5</Plasteel>
+				</RepairIngredients>
+				<RepairTime>300</RepairTime>
+				<RepairValue>200</RepairValue>
+				<MinArmorPct>0.5</MinArmorPct>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+			defName="APM_Mech_Pulse" or
+			defName="APM_Mech_Siren" or
+			defName="APM_Mech_Frostivus" or
+			defName="APM_Mech_Lasher" or
+			defName="APM_Mech_Mantis"]/comps</xpath>
+		<value>
+			<li Class="CombatExtended.CompProperties_ArmorDurability">
+				<Durability>1400</Durability>
+				<Regenerates>true</Regenerates>
+				<RegenInterval>1250</RegenInterval>
+				<RegenValue>5</RegenValue>
+				<Repairable>true</Repairable>
+				<RepairIngredients>
+					<Steel>5</Steel>
+				</RepairIngredients>
+				<RepairTime>300</RepairTime>
+				<RepairValue>200</RepairValue>
+				<MinArmorPct>0.5</MinArmorPct>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+			@Name="APM_Mech_ConquerorBase" or
+			defName="APM_Mech_Haze" or
+			defName="APM_Mech_Tinker" or
+			defName="APM_Mech_Vassal"]/comps</xpath>
+		<value>
+			<li Class="CombatExtended.CompProperties_ArmorDurability">
+				<Durability>1160</Durability>
+				<Regenerates>true</Regenerates>
+				<RegenInterval>1250</RegenInterval>
+				<RegenValue>5</RegenValue>
+				<Repairable>true</Repairable>
+				<RepairIngredients>
+					<Steel>5</Steel>
+				</RepairIngredients>
+				<RepairTime>300</RepairTime>
+				<RepairValue>200</RepairValue>
+				<MinArmorPct>0.5</MinArmorPct>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="APM_Mech_Satellite"]/comps</xpath>
+		<value>
+			<li Class="CombatExtended.CompProperties_ArmorDurability">
+				<Durability>800</Durability>
+				<Regenerates>true</Regenerates>
+				<RegenInterval>1250</RegenInterval>
+				<RegenValue>5</RegenValue>
+				<Repairable>false</Repairable>
+				<MinArmorPct>0.1</MinArmorPct>
+			</li>
+		</value>
+	</Operation>
+
 	<Operation Class="PatchOperationAddModExtension">
 		<xpath>Defs/ThingDef[defName="APM_Mech_Aegis"]</xpath>
 		<value>
@@ -150,8 +263,37 @@
 		</value>
 	</Operation>
 
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[
+			defName="APM_Mech_Frostivus" or
+			defName="APM_Mech_Haze" or
+			defName="APM_Mech_Ingestor" or
+			defName="APM_Mech_Lasher" or
+			defName="APM_Mech_Mantis" or
+			defName="APM_Mech_Pulse" or
+			defName="APM_Mech_Satellite" or
+			defName="APM_Mech_Siren" or
+			defName="APM_Mech_Tinker" or
+			defName="APM_Mech_Vassal"]/statBases/ArmorRating_Heat</xpath>
+	</Operation>
+
 	<Operation Class="PatchOperationReplace">
-		<xpath>Defs/ThingDef[defName="APM_Mech_Aegis"]/statBases/ArmorRating_Heat</xpath>
+		<xpath>Defs/ThingDef[
+			@Name="APM_Mech_Celerus_Base" or
+			defName="APM_Mech_Aegis" or
+			defName="APM_Mech_Gazer" or
+			defName="APM_Mech_Javelin" or
+			defName="APM_Mech_Maul" or
+			defName="APM_Mech_Ravager"]/statBases/ArmorRating_Heat</xpath>
+		<value>
+			<ArmorRating_Heat>0.25</ArmorRating_Heat>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+			@Name="APM_Mech_Dominus_Base" or
+			@Name="APM_Mech_Terminus_Base"]/statBases</xpath>
 		<value>
 			<ArmorRating_Heat>0.25</ArmorRating_Heat>
 		</value>
