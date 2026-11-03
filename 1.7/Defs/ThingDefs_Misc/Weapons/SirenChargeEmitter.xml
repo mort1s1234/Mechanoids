@@ -10,7 +10,7 @@
 		<hediff>Bruise</hediff>
 	</DamageDef>
 
-	<ThingDef ParentName="BaseGun">
+	<ThingDef ParentName="APM_MechanoidWeaponBase">
 		<defName>APM_Siren_ChargeEmitter</defName>
 		<label>charge emitter</label>
 		<description>A wave emitting device that fires focused blasts of high frequency vibration at targets. It is capable of bypassing armor as with intense enough emissions, anything in this weapon's way inevitably becomes another medium of transmission.</description>

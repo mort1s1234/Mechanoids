@@ -16,7 +16,7 @@
         </projectile>
     </ThingDef>
 
-    <ThingDef ParentName="BaseGun">
+    <ThingDef ParentName="APM_MechanoidWeaponBase">
         <defName>APM_Gun_Satellite</defName>
         <label>light charge suppressor</label>
         <description>A compact pulse-charged rapid-fire blaster for area suppressive fire in tight spaces. Even better at area denial than its larger, more common sibling, the heavy charge blaster, at the cost of range and damage.</description>

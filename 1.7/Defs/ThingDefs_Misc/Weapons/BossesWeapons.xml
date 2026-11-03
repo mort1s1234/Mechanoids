@@ -2,7 +2,7 @@
 <Defs>
 
 	<!-- ==================== DOMINUS MECHLANCE ==================== -->
-	<ThingDef ParentName="BaseGun" Name="APM_Weapon_DominusMechlance_Base" Abstract="True">
+	<ThingDef ParentName="APM_MechanoidWeaponBase" Name="APM_Weapon_DominusMechlance_Base" Abstract="True">
 		<techLevel>Spacer</techLevel>
 		<uiIconScale>0.5</uiIconScale>
 		<destroyOnDrop>true</destroyOnDrop>
@@ -75,7 +75,7 @@
 
 
 	<!-- ==================== CELERUS VOLTANA ==================== -->
-	<ThingDef ParentName="BaseGun" Name="APM_Weapon_CelerusVoltana_Base" Abstract="True">
+	<ThingDef ParentName="APM_MechanoidWeaponBase" Name="APM_Weapon_CelerusVoltana_Base" Abstract="True">
 		<techLevel>Spacer</techLevel>
 		<uiIconScale>0.5</uiIconScale>
 		<soundInteract>Interact_ChargeRifle</soundInteract>
@@ -148,7 +148,7 @@
 
 
 	<!-- ==================== TERMINUS EXOBLADE ==================== -->
-	<ThingDef ParentName="BaseGun" Name="APM_Weapon_TerminusExoblade_Base" Abstract="True">
+	<ThingDef ParentName="APM_MechanoidWeaponBase" Name="APM_Weapon_TerminusExoblade_Base" Abstract="True">
 		<techLevel>Spacer</techLevel>
 		<uiIconScale>0.5</uiIconScale>
 		<soundInteract>Interact_ChargeRifle</soundInteract>

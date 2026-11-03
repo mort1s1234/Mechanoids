@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-	<ThingDef ParentName="BaseGun">
+	<ThingDef ParentName="APM_MechanoidWeaponBase">
 		<defName>APM_Gun_JavelinRocketLauncher</defName>
 		<label>javelin rocket launcher</label>
 		<description>A mechanoid guided missile rack. Each rocket clears the tube on a fixed heading before its seeker takes over, so the launcher cannot engage anything standing close enough to be overflown before the missile has turned. The seeker logs the damage profile of every creature and machine it opens up, and each rocket that finds the same one again is fused to bite deeper than the last. Structures give it nothing to read, and are hit at a flat rate.</description>
@@ -132,6 +132,7 @@
 		<graphicData>
 			<texPath>Things/Projectile/Rocket/Rocket</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>TransparentPostLight</shaderType>
 		</graphicData>
 		<projectile>
 			<!-- The warhead is detonated from the projectile's own Impact rather than by using an

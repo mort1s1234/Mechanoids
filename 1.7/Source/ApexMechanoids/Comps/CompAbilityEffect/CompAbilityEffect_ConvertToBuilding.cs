@@ -26,9 +26,15 @@ namespace ApexMechanoids
         {
             get
             {
+                Map map = pawn.Map;
+                if (!pawn.Spawned || map == null)
+                {
+                    return false;
+                }
+
                 foreach (IntVec3 cell in GenAdj.OccupiedRect(pawn.Position, Props.thingDef.defaultPlacingRot, Props.thingDef.size).Cells)
                 {
-                    if (!cell.Standable(pawn.Map))
+                    if (!cell.Standable(map))
                     {
                         return false;
                     }
