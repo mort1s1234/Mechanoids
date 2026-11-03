@@ -132,7 +132,7 @@
 		<graphicData>
 			<texPath>Things/Projectile/Rocket/Rocket</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
-			<shaderType>TransparentPostLight</shaderType>
+			<shaderType>Cutout</shaderType>
 		</graphicData>
 		<projectile>
 			<!-- The warhead is detonated from the projectile's own Impact rather than by using an
