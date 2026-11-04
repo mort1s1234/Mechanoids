@@ -2,7 +2,6 @@ using RimWorld;
 using Verse;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
 
 namespace ApexMechanoids
@@ -14,6 +13,7 @@ namespace ApexMechanoids
 			public StatFactorFromHealth() { }
 
 			public StatDef stat;
+			public HediffDef hediff;
 
 			public SimpleCurve curve;
 		}
@@ -46,19 +46,10 @@ namespace ApexMechanoids
 
 			foreach(var statFactor in Props.statFactors)
 			{
-				if (statFactor.stat == null || statFactor.curve == null) continue;
-
-				string hediffDefName = $"APM_StatFactor_{statFactor.stat.defName}";
-				HediffDef hediffDef = DefDatabase<HediffDef>.GetNamedSilentFail(hediffDefName);
-				
-				if (hediffDef == null)
-				{
-					// Create hediff def dynamically if it doesn't exist
-					hediffDef = CreateHediffDef(statFactor.stat);
-				}
+				if (statFactor.stat == null || statFactor.hediff == null || statFactor.curve == null) continue;
 
 				// Get or add hediff
-				Hediff existingHediff = Pawn.health.hediffSet.GetFirstHediffOfDef(hediffDef);
+				Hediff existingHediff = Pawn.health.hediffSet.GetFirstHediffOfDef(statFactor.hediff);
 				float healthPercent = Pawn.health.summaryHealth.SummaryHealthPercent;
 				float factor = statFactor.curve.Evaluate(healthPercent);
 				
@@ -66,7 +57,7 @@ namespace ApexMechanoids
 				{
 					if (existingHediff == null)
 					{
-						existingHediff = HediffMaker.MakeHediff(hediffDef, Pawn);
+						existingHediff = HediffMaker.MakeHediff(statFactor.hediff, Pawn);
 						Pawn.health.AddHediff(existingHediff);
 					}
 					
@@ -79,33 +70,6 @@ namespace ApexMechanoids
 					Pawn.health.RemoveHediff(existingHediff);
 				}
 			}
-		}
-
-		private HediffDef CreateHediffDef(StatDef statDef)
-		{
-			string defName = $"APM_StatFactor_{statDef.defName}";
-			
-			var hediffDef = new HediffDef
-			{
-				defName = defName,
-				label = "APM.StatFactorFromHealth.Label".Translate(statDef.LabelCap.Named("STAT")),
-				description = "APM.StatFactorFromHealth.Description".Translate(statDef.LabelCap.Named("STAT")),
-				hediffClass = typeof(Hediff_StatFactorFromHealth),
-				defaultLabelColor = UnityEngine.Color.cyan,
-				isBad = false,
-				stages = new List<HediffStage>
-				{
-					new HediffStage
-					{
-						minSeverity = 0.01f,
-						label = "health affected"
-					}
-				}
-			};
-
-			// Add to def database
-			DefDatabase<HediffDef>.Add(hediffDef);
-			return hediffDef;
 		}
 
 		public override float GetStatFactor(StatDef stat)
@@ -142,7 +106,7 @@ namespace ApexMechanoids
 				{
 					foreach(var statFactor in comp.Props.statFactors)
 					{
-						if ($"APM_StatFactor_{statFactor.stat.defName}" == def.defName)
+						if (statFactor.hediff == def && statFactor.stat != null && statFactor.curve != null)
 						{
 							float healthPercent = pawn.health.summaryHealth.SummaryHealthPercent;
 							float factor = statFactor.curve.Evaluate(healthPercent);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-	<ThingDef ParentName="BaseGun" Name="APM_Gun_Conqueror_AR">
+	<ThingDef ParentName="APM_MechanoidWeaponBase" Name="APM_Gun_Conqueror_AR">
 		<defName>APM_Gun_Conqueror_AR</defName>
 		<label>charge blaster rifle</label>
 		<description>A general-purpose pulse-charged assault rifle designed for mid-range engagements. Highly reliable in all combat scenarios with a balanced rate of fire and precision.</description>
@@ -80,7 +80,7 @@
 		</projectile>
 	</ThingDef>
 
-	<ThingDef ParentName="BaseGun" Name="APM_Gun_Conqueror_DMR">
+	<ThingDef ParentName="APM_MechanoidWeaponBase" Name="APM_Gun_Conqueror_DMR">
 		<defName>APM_Gun_Conqueror_DMR</defName>
 		<label>charge carbine</label>
 		<description>A designated marksman rifle utilizing pulse-charge technology. Deals less structural damage per shot than a full Charge Lance, but fires significantly faster and excels at medium-to-long range.</description>
@@ -148,7 +148,7 @@
 		</projectile>
 	</ThingDef>
 
-	<ThingDef ParentName="BaseGun" Name="APM_Gun_Conqueror_SMG">
+	<ThingDef ParentName="APM_MechanoidWeaponBase" Name="APM_Gun_Conqueror_SMG">
 		<defName>APM_Gun_Conqueror_SMG</defName>
 		<label>charge spitter</label>
 		<description>A compact high-rate-of-fire submachine gun. Extremely deadly at close quarters, but suffers severe accuracy falloff over distance.</description>

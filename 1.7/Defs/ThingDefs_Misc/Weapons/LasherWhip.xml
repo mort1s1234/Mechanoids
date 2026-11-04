@@ -19,7 +19,7 @@
 		</graphicData>
 	</ThingDef>
 
-	<ThingDef ParentName="BaseGun">
+	<ThingDef ParentName="APM_MechanoidWeaponBase">
 		<defName>APM_Weapon_MechWhip</defName>
 		<label>mech whip</label>
 		<description>The mech whip can deal heavy damage and stun multiple targets in close proximity to the user. It appears the mechhive views sentient organic life akin to how we view cattle, and treats us as such.</description>

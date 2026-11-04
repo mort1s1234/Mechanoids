@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-	<ThingDef ParentName="BaseGun">
+	<ThingDef ParentName="APM_MechanoidWeaponBase">
 		<defName>APM_Gazer_Laser</defName>
 		<label>laser</label>
 		<description>A weaker laser from Gazer's eye</description>
