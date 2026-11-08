@@ -91,6 +91,7 @@
 				<statFactors>
 					<li>
 						<stat>MeleeCooldownFactor</stat>
+						<hediff>APM_StatFactor_MeleeCooldownFactor</hediff>
 						<curve>
 							<points>
 								<li>(0.0, 0.67)</li>
@@ -100,6 +101,7 @@
 					</li>
 					<li>
 						<stat>RangedCooldownFactor</stat>
+						<hediff>APM_StatFactor_RangedCooldownFactor</hediff>
 						<curve>
 							<points>
 								<li>(0.0, 0.67)</li>  
@@ -109,6 +111,7 @@
 					</li>
 					<li>
 						<stat>AimingDelayFactor</stat>
+						<hediff>APM_StatFactor_AimingDelayFactor</hediff>
 						<curve>
 							<points>
 								<li>(0.0, 0.67)</li>  

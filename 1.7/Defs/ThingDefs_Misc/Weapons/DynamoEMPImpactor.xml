@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-	<ThingDef ParentName="BaseGun">
+	<ThingDef ParentName="APM_MechanoidWeaponBase">
 		<defName>APM_Gun_EMP_Impactor</defName>
 		<label>EMP impactor</label>
 		<description>A mechanoid grade electromagnetic grenade launcher, featuring better accuracy, a larger range and a bigger blast than more common variants of the same type. Organic life has many clear weaknesses, yet militaries still use said threats in their arsenals all the same. The mechhive is no different.</description>

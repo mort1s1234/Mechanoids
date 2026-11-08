@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-	<ThingDef ParentName="BaseGun">
+	<ThingDef ParentName="APM_MechanoidWeaponBase">
 		<defName>APM_Gun_Vassal_SwordRifle</defName>
 		<label>charge sword rifle</label>
 		<description>A charged-shot sword rifle. Weaker than a charge rifle, but more accurate and melee capable.</description>
