@@ -217,7 +217,7 @@
 		<showCastingProgressBar>true</showCastingProgressBar>
 		<verbProperties>
 			<verbClass>Verb_CastAbility</verbClass>
-			<range>29.9</range>
+			<range>24.9</range>
 			<warmupTime>0.5</warmupTime>
 			<requireLineOfSight>False</requireLineOfSight>
 			<soundCast>APM_SirenLure_Cast</soundCast>
@@ -231,7 +231,7 @@
 			</targetParams>
 		</verbProperties>
 		<statBases>
-			<Ability_Duration>10</Ability_Duration>
+			<Ability_Duration>6</Ability_Duration>
 			<Ability_EffectRadius>0.9</Ability_EffectRadius>
 		</statBases>
 		<comps>
@@ -259,12 +259,12 @@
 			<li Class="ApexMechanoids.CompProperties_SirenLureChannel">
 				<jobDef>APM_SirenLureChannel</jobDef>
 				<!--
-					How long the pawn is deaf to the song once this one has finished, on top of the ten
+					How long the pawn is deaf to the song once this one has finished, on top of the six
 					seconds the song itself runs for. Longer than the ability's own 1000 tick cooldown on
 					purpose, so what limits a second attempt is the pawn rather than the caster, and a
 					second siren cannot pick up where the first left off.
 				-->
-				<targetQuietTicks>2500</targetQuietTicks>
+				<targetQuietTicks>3000</targetQuietTicks>
 			</li>
 		</comps>
 	</AbilityDef>

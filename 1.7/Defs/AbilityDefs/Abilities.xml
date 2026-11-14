@@ -166,7 +166,7 @@
 		<defName>APM_PulseWave</defName>
 		<abilityClass>ApexMechanoids.Ability_PulseWave</abilityClass>
 		<label>pulse wave</label>
-		<description>Unleash a blinding acoustic pulse that expands out from the mech, stunning and flash-blinding living pawns caught in the wave.</description>
+		<description>Unleash a blinding acoustic pulse, scaling with psychic sensitivity, that expands out from the mech, stunning and flash-blinding living pawns caught in the wave.</description>
 		<jobDef>CastAbilityOnThingWithoutWeapon</jobDef>
 		<iconPath>UI/PulseWave</iconPath>
 		<cooldownTicksRange>3600</cooldownTicksRange>
