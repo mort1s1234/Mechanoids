@@ -417,7 +417,7 @@ namespace ApexMechanoids
             {
                 stunSeconds = vanillaStun.GetStatValueAbstract(StatDefOf.Ability_Duration, caster);
                 stunSeconds *= pawn.GetStatValue(StatDefOf.PsychicSensitivity);
-                stunSeconds *= 2f;
+                stunSeconds *= 1.25f;
             }
 
             if (pawn.stances?.stunner != null)
