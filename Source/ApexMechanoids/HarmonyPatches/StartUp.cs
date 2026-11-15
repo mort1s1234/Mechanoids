@@ -13,7 +13,7 @@ namespace ApexMechanoids
         static StartUp()
         {
             harmony = new HarmonyLib.Harmony("ApexMechanoids");
-            harmony.PatchAll();
+            harmony.PatchAll(typeof(StartUp).Assembly);
         }
     }
 }
