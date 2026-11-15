@@ -105,7 +105,6 @@ jobs:
           --exclude '.DS_Store' \
           --exclude 'artifact/' \
           --exclude 'ModInfographic/' \
-          --exclude 'WeaponTweakData/' \
           --exclude '/Source/' \
           --exclude 'obj/' \
           --exclude 'bin/' \
