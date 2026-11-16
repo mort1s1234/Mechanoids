@@ -18,12 +18,14 @@ namespace ApexMechanoids
 
         public override bool ValidateTarget(LocalTargetInfo target, bool showMessages = true)
         {
-            if (CasterHasCloseMeleeThreat() || !IsSameFactionTarget(target))
+            bool meleeThreat = CasterHasCloseMeleeThreat();
+            if (meleeThreat || !IsSameFactionTarget(target))
             {
                 if (target.IsValid && showMessages && ability?.pawn != null)
                 {
+                    string reason = meleeThreat ? "AbilityCannotHitTarget".Translate() : "APM_Ability_TargetNotOwnFaction".Translate();
                     Messages.Message(
-                        "CannotUseAbility".Translate(ability.def.label) + ": " + "AbilityCannotHitTarget".Translate(),
+                        "CannotUseAbility".Translate(ability.def.label) + ": " + reason,
                         new LookTargets(ability.pawn, target.ToTargetInfo(ability.pawn.Map)),
                         MessageTypeDefOf.RejectInput,
                         historical: false);

@@ -29,19 +29,19 @@ assert pawn "Far" hediff=APM_LaserBlind expect=absent
 assert pawn "Far" capacity=Sight min=0.95 expect=present
 
 speed paused
-spawn Pawn:APM_Mech_Tinker at 40,0 faction=player name="Matrix tinker"
-spawn Pawn:Colonist at 37,-2 name="Matrix mechanitor" gear=none
-draft "Matrix mechanitor"
+hold on
+spawn Pawn:APM_Mech_Tinker at 15,0 faction=player name="Matrix tinker"
+spawn Pawn:Colonist at 12,-2 name="Matrix mechanitor" gear=none drafted=true
 give "Matrix mechanitor" need=Food value=1
 overseer "Matrix tinker" by="Matrix mechanitor" now=true
 draft "Matrix tinker"
-spawn Pawn:Colonist at 45,0 name="Ally"
-draft "Ally"
-spawn Pawn:Colonist at 40,5 faction=enemy name="Foe"
+spawn Pawn:Colonist at 20,0 name="Ally" drafted=true
+spawn Pawn:Colonist at 15,5 faction=enemy name="Foe"
+hold off
 
 select "Matrix tinker"
 gizmo "Defence Matrix" expect=allowed
-target "Foe" expect=refused
+target "Foe" expect=refused reason="Only allies of its own faction can be targeted."
 assert thing MechShield expect=absent
 down "Foe"
 
@@ -49,7 +49,7 @@ gizmo "Defence Matrix" expect=allowed
 target "Ally" expect=allowed
 deselect
 speed x1
-waitfor thing MechShield at 45,0 ticks=120 expect=present
-assert thing MechShield at 40,5 expect=absent
+waitfor thing MechShield at 20,0 ticks=120 expect=present
+assert thing MechShield at 15,5 expect=absent
 undraft "Matrix tinker"
 assert log clean

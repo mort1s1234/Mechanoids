@@ -28,23 +28,24 @@ assert pawn "Far" hediff=APM_PulseWaveBlind expect=absent
 assert pawn "Far" capacity=Sight min=0.95 expect=present
 assert pawn "Tin" hediff=APM_PulseWaveBlind expect=absent
 
-spawn Pawn:APM_Mech_Pulse at 40,0 faction=player name="Jumper"
-spawn Pawn:Colonist at 37,-2 name="Jumper mechanitor"
-draft "Jumper mechanitor"
+hold on
+spawn Pawn:APM_Mech_Pulse at 15,0 faction=player name="Jumper"
+spawn Pawn:Colonist at 12,-2 name="Jumper mechanitor" drafted=true
 give "Jumper mechanitor" need=Food value=1
 overseer "Jumper" by="Jumper mechanitor" now=true
 draft "Jumper"
+hold off
 
 select "Jumper"
 gizmo "Mech longjump" expect=allowed
-target cell=54,0 expect=refused
-assert thing "Jumper" at 40,0 expect=present
+target cell=29,0 expect=refused
+assert thing "Jumper" at 15,0 expect=present
 
-assert thing "Jumper" at 44,0 expect=absent
+assert thing "Jumper" at 19,0 expect=absent
 gizmo "Mech longjump" expect=allowed
-target cell=44,0 expect=allowed
+target cell=19,0 expect=allowed
 deselect
-waitfor thing "Jumper" at 44,0 ticks=300 expect=present
-assert thing "Jumper" at 40,0 expect=absent
+waitfor thing "Jumper" at 19,0 ticks=300 expect=present
+assert thing "Jumper" at 15,0 expect=absent
 undraft "Jumper"
 assert log clean

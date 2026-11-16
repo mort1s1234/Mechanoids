@@ -17,7 +17,7 @@ assert reach "Siren" to="Prisoner" pathEndMode=Touch expect=present
 assert pawn "Prisoner" resistance min=9.9 max=10.1 expect=present
 
 work "Siren" giver=APM_SirenChatWithPrisoner on="Prisoner" expect=allowed
-work "Lasher" giver=APM_SirenChatWithPrisoner on="Prisoner" expect=absent
+work "Lasher" giver=APM_SirenChatWithPrisoner on="Prisoner" expect=disabled
 
 prisoner "Prisoner" mode=MaintainOnly
 work "Siren" giver=APM_SirenChatWithPrisoner on="Prisoner" expect=absent
@@ -30,8 +30,8 @@ speed x1
 job "Siren" giver=APM_SirenChatWithPrisoner on="Prisoner" until=done ticks=3000
 assert pawn "Prisoner" resistance min=7.0 max=9.8 expect=present
 
-spawn Pawn:APM_Mech_Ingestor at -40,0 faction=player name="Ingestor"
-spawn Pawn:Colonist at -38,0 faction=enemy name="Body"
+spawn Pawn:APM_Mech_Ingestor at -20,0 faction=player name="Ingestor"
+spawn Pawn:Colonist at -18,0 faction=enemy name="Body"
 damage "Body" amount=999
 assert pawn "Body" dead expect=present
 assert thing Corpse_Human expect=present
@@ -63,7 +63,7 @@ job "Ingestor" giver=APM_IngestorProcessCorpses on=Corpse_Human until=ended tick
 assert thing Corpse_Human expect=absent
 assert pawn "Ingestor" hediff=APM_AbsorbedThing expect=present
 
-spawn Pawn:Colonist at -38,2 faction=enemy name="Second body"
+spawn Pawn:Colonist at -18,2 faction=enemy name="Second body"
 damage "Second body" amount=999
 assert thing Corpse_Human expect=present
 work "Ingestor" giver=APM_IngestorProcessCorpses on=Corpse_Human expect=absent
@@ -71,14 +71,14 @@ work "Ingestor" giver=APM_IngestorProcessCorpses on=Corpse_Human expect=absent
 reload note="the pending chemfuel batch is saved on the hediff"
 assert pawn "Ingestor" hediff=APM_AbsorbedThing expect=present
 
-spawn Pawn:APM_Mech_Tinker at 0,-46 faction=player name="Tinker"
-spawn Pawn:Mech_Lifter at 2,-46 faction=player name="Patient"
+spawn Pawn:APM_Mech_Tinker at 0,-26 faction=player name="Tinker"
+spawn Pawn:Mech_Lifter at 2,-26 faction=player name="Patient"
 damage "Patient" amount=10 kind=Blunt
 assert pawn "Patient" hediff=Crack expect=present
 
 work "Tinker" giver=APM_TinkerRepairMech on="Patient" expect=absent
 
-spawn Pawn:Colonist at -2,-46 name="Mechanitor"
+spawn Pawn:Colonist at -2,-26 name="Mechanitor"
 overseer "Tinker" by="Mechanitor"
 overseer "Patient" by="Mechanitor"
 assert pawn "Tinker" downed expect=absent
@@ -88,9 +88,9 @@ job "Tinker" giver=APM_TinkerRepairMech on="Patient" forced=true until=done tick
 assert pawn "Patient" hediff=Crack expect=absent
 
 despawn Pawn:APM_Mech_Tinker
-spawn Pawn:APM_Mech_Tinker at 0,-40 faction=player name="Auto tinker"
-spawn Pawn:Mech_Lifter at 6,-40 faction=player name="Auto patient"
-spawn Pawn:Colonist at -4,-40 name="Auto mechanitor"
+spawn Pawn:APM_Mech_Tinker at 0,-20 faction=player name="Auto tinker"
+spawn Pawn:Mech_Lifter at 6,-20 faction=player name="Auto patient"
+spawn Pawn:Colonist at -4,-20 name="Auto mechanitor"
 draft "Auto mechanitor"
 give "Auto mechanitor" need=Food value=1
 overseer "Auto tinker" by="Auto mechanitor" now=true
@@ -108,7 +108,7 @@ waitfor jobhistory "Auto tinker" job=APM_RepairMech ticks=2500 expect=present
 waitfor pawn "Auto patient" hediff=Crack expect=absent ticks=2500
 
 sky glow=1
-room at 30,-5 size=15,11 roof=false name="gestator yard"
+room at 12,-5 size=15,11 roof=false name="gestator yard"
 spawn Thing:WoodFiredGenerator in="gestator yard" faction=player fueled=true
 spawn Thing:MechGestator in="gestator yard" faction=player name="gestator"
 spawn Thing:Steel in="gestator yard" count=25
@@ -124,6 +124,7 @@ damage "Fallen" amount=999
 assert pawn "Fallen" dead expect=present
 assert thing Corpse_Mech_Lifter expect=present
 
+clock hold
 select "gestator"
 tab "Bills"
 click "Add bill"
@@ -134,4 +135,9 @@ work "Vassal" giver=DoBillsMechGestator on="gestator" forced=true expect=allowed
 
 overseer "Second vassal" by="Gestator mechanitor" now=true
 work "Vassal" giver=DoBillsMechGestator on="gestator" forced=true expect=disabled reason="Not enough bandwidth" match=equals
+clock release
+
+wear "Gestator mechanitor" apparel=Apparel_AirwireHeadset
+assert pawn "Gestator mechanitor" stat=MechBandwidth min=9 max=9 expect=present
+waitfor jobhistory APM_Mech_Vassal job=DoBill ticks=2500 expect=present
 assert log clean

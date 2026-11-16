@@ -29,10 +29,11 @@ assert hit "Target" by="Gazer" min=1
 despawn Pawn:APM_Mech_Gazer
 despawn Pawn:Colonist
 
-spawn Pawn:APM_Mech_Gazer at 0,0 faction=Mechanoid name="Hostile gazer"
-spawn Pawn:Colonist at 2,0 name="Colonist" gear=none
-draft "Colonist"
+hold on
+spawn Pawn:Colonist at 2,0 name="Colonist" gear=none drafted=true
 spawn Pawn:Muffalo at -3,0 faction=none name="Muffalo"
+spawn Pawn:APM_Mech_Gazer at 0,0 faction=Mechanoid name="Hostile gazer"
+hold off
 
 assert pawn "Colonist" hediff=Shredded expect=absent
 assert pawn "Muffalo" hediff=Shredded expect=absent

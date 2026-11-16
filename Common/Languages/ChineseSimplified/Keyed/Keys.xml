@@ -153,6 +153,7 @@
 
   <!-- EN: Only friendly mechanoids can be repaired. -->
   <APM_NotPlayerFaction>只能修复友好的机械族。</APM_NotPlayerFaction>
+  <APM_Ability_TargetNotOwnFaction>只能以己方派系的单位为目标。</APM_Ability_TargetNotOwnFaction>
 
   <!-- EN: Mechanoid size must be {0} for this station. -->
   <APM_WrongSize>机械族体型必须为 {0} 才能使用此工作站。</APM_WrongSize>

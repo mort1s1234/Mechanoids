@@ -25,15 +25,15 @@ tick 300 note="5 more repair pulses"
 assert pawn "Hunter" hediff=Burn severity min=45 max=55 expect=present
 assert pawn "Idle" hediff=Burn severity min=99 max=101 expect=present
 
-spawn Pawn:APM_Mech_Mantis at 40,0 faction=player name="Mantis"
-spawn Pawn:Colonist at 36,0 name="Mechanitor" gear=none
-draft "Mechanitor"
+speed paused
+hold on
+spawn Pawn:APM_Mech_Mantis at 15,0 faction=player name="Mantis"
+spawn Pawn:Colonist at 11,0 name="Mechanitor" gear=none drafted=true
 give "Mechanitor" need=Food value=1
 overseer "Mantis" by="Mechanitor" now=true
 draft "Mantis"
-
-speed paused
-spawn Pawn:Colonist at 45,0 faction=enemy name="Raider"
+spawn Pawn:Colonist at 20,0 faction=enemy name="Raider"
+hold off
 assert pawn "Raider" pain max=0 expect=present
 
 select "Mantis"
@@ -42,7 +42,7 @@ target "Raider" expect=allowed
 speed x1
 waitfor pawn "Raider" pain min=0.05 max=0.8 ticks=120 expect=present
 assert pawn "Mantis" near="Raider" max=1.5 expect=present
-assert thing "Mantis" at 45,0 expect=present
+assert thing "Mantis" at 20,0 expect=present
 assert pawn "Mechanitor" pain max=0 expect=present
 gizmo "Bladehopp" expect=disabled
 deselect

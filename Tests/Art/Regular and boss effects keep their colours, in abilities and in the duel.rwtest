@@ -4,18 +4,18 @@ test "Regular and boss effects keep their colours, in abilities and in the duel"
 requires mod=Mortis.ApexMechanoids
 requires dlc=Biotech
 speed paused
+hold on
 spawn Pawn:APM_Mech_Dominus at -12,0 faction=player name="Dominus regular" facing=south rolled=true
 spawn Pawn:APM_Mech_Dominus_Boss at 12,0 faction=player name="Dominus boss" facing=south rolled=true
 spawn Pawn:APM_Mech_Pulse at -9,0 faction=player name="Pulse near regular Dominus" facing=south
 spawn Pawn:APM_Mech_Pulse at 9,0 faction=player name="Pulse near boss Dominus" facing=south
-spawn Pawn:Colonist at -16,-4 name="Dominus regular mechanitor"
-draft "Dominus regular mechanitor"
-spawn Pawn:Colonist at 16,-4 name="Dominus boss mechanitor"
-draft "Dominus boss mechanitor"
+spawn Pawn:Colonist at -16,-4 name="Dominus regular mechanitor" drafted=true
+spawn Pawn:Colonist at 16,-4 name="Dominus boss mechanitor" drafted=true
 overseer "Dominus regular" by="Dominus regular mechanitor" now=true
 overseer "Dominus boss" by="Dominus boss mechanitor" now=true
 draft "Dominus regular"
 draft "Dominus boss"
+hold off
 speed x1
 select "Dominus regular"
 gizmo "Press The Attack" expect=allowed
@@ -29,16 +29,16 @@ assert pawn "Dominus boss" hediff=APM_Hediff_PressTheAttack_Boss expect=present
 ask "press-attack-halo" ticks=120 claim="each Dominus and the Pulse next to it wear a halo and animated wings from Press the Attack; the left pair is a pale steel blue-grey, the right pair is orange; the wings move; none is pink, white-boxed or missing"
 
 speed paused
+hold on
 spawn Pawn:APM_Mech_Terminus at -3,-6 faction=player name="Terminus regular" facing=north
 spawn Pawn:APM_Mech_Terminus_Boss at 3,-6 faction=player name="Terminus boss" facing=north rolled=true
-spawn Pawn:Colonist at -6,-12 name="Terminus regular mechanitor"
-draft "Terminus regular mechanitor"
-spawn Pawn:Colonist at 6,-12 name="Terminus boss mechanitor"
-draft "Terminus boss mechanitor"
+spawn Pawn:Colonist at -6,-12 name="Terminus regular mechanitor" drafted=true
+spawn Pawn:Colonist at 6,-12 name="Terminus boss mechanitor" drafted=true
 overseer "Terminus regular" by="Terminus regular mechanitor" now=true
 overseer "Terminus boss" by="Terminus boss mechanitor" now=true
 draft "Terminus regular"
 draft "Terminus boss"
+hold off
 speed x1
 select "Terminus regular"
 gizmo "Severing edge" expect=allowed
@@ -57,16 +57,16 @@ deselect
 ask "overdrive-wave" ticks=156 claim="both Terminus units throw off their cape, which flies away and fades; a wave rises around each; the left wave is pale steel blue-grey, the right wave is gold"
 
 speed paused
+hold on
 spawn Pawn:APM_Mech_Celerus at -8,6 faction=player name="Celerus regular"
 spawn Pawn:APM_Mech_Celerus_Boss at 8,6 faction=player name="Celerus boss" rolled=true
-spawn Pawn:Colonist at -14,2 name="Celerus regular mechanitor"
-draft "Celerus regular mechanitor"
-spawn Pawn:Colonist at 14,2 name="Celerus boss mechanitor"
-draft "Celerus boss mechanitor"
+spawn Pawn:Colonist at -14,2 name="Celerus regular mechanitor" drafted=true
+spawn Pawn:Colonist at 14,2 name="Celerus boss mechanitor" drafted=true
 overseer "Celerus regular" by="Celerus regular mechanitor" now=true
 overseer "Celerus boss" by="Celerus boss mechanitor" now=true
 draft "Celerus regular"
 draft "Celerus boss"
+hold off
 speed x1
 select "Celerus regular"
 gizmo "Smokescreen" expect=allowed
@@ -87,14 +87,13 @@ despawn Pawn:APM_Mech_Celerus
 despawn Pawn:APM_Mech_Celerus_Boss
 despawn Pawn:Colonist
 
+hold on
 spawn Pawn:APM_Mech_Dominus at -12,0 faction=player name="Left dominus" rolled=true
 spawn Pawn:Colonist at -8,0 faction=enemy name="Left duelist"
 spawn Pawn:APM_Mech_Dominus_Boss at 12,0 faction=player name="Right dominus boss" rolled=true
 spawn Pawn:Colonist at 8,0 faction=enemy name="Right duelist"
-spawn Pawn:Colonist at -16,-8 name="Left mechanitor"
-draft "Left mechanitor"
-spawn Pawn:Colonist at 16,-8 name="Right mechanitor"
-draft "Right mechanitor"
+spawn Pawn:Colonist at -16,-8 name="Left mechanitor" drafted=true
+spawn Pawn:Colonist at 16,-8 name="Right mechanitor" drafted=true
 overseer "Left dominus" by="Left mechanitor" now=true
 overseer "Right dominus boss" by="Right mechanitor" now=true
 
@@ -105,6 +104,7 @@ select "Right dominus boss"
 gizmo "The duel trial" expect=allowed
 target "Right duelist" expect=allowed
 deselect
+hold off
 waitfor thing APM_DuelSpot ticks=240 expect=present
 waitfor thing APM_DuelSpot_Boss ticks=240 expect=present
 

@@ -22,7 +22,7 @@ gizmo "Unload preserved food" expect=disabled reason="Frostivus cannot use prese
 assert text contains "APM." expect=absent
 deselect
 
-spawn Pawn:Colonist name="Mechanitor"
+spawn Pawn:Colonist in="pen" name="Mechanitor"
 give "Mechanitor" need=Food value=1
 overseer "Frost" by="Mechanitor"
 work "Frost" giver=APM_FrostivusRescueFood on="meal" expect=allowed
