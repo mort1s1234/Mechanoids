@@ -1,0 +1,885 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+			defName="APM_Gun_EMP_Impactor" or
+			defName="APM_Gun_Conqueror_AR" or
+			defName="APM_Gun_Conqueror_DMR" or
+			defName="APM_Gun_Conqueror_SMG" or
+			defName="APM_Siren_ChargeEmitter" or
+			defName="APM_Gun_Pulse_Shotgun" or
+			defName="APM_Haze_BeamGun"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>stock</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<armorPenetrationBlunt>1.45</armorPenetrationBlunt>
+					<power>9</power>
+					<cooldownTime>1.6</cooldownTime>
+					<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>barrel</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<armorPenetrationBlunt>2.6</armorPenetrationBlunt>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="APM_Gun_Maul"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>barrel</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<armorPenetrationBlunt>12.6</armorPenetrationBlunt>
+					<power>20</power>
+					<cooldownTime>2</cooldownTime>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<!-- Conqueror AR charge rifle-->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>APM_Gun_Conqueror_AR</defName>
+		<statBases>
+			<Mass>4.2</Mass>
+			<RangedWeapon_Cooldown>0.36</RangedWeapon_Cooldown>
+			<SightsEfficiency>1.10</SightsEfficiency>
+			<ShotSpread>0.08</ShotSpread>
+			<SwayFactor>1.20</SwayFactor>
+			<Bulk>7.00</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>1.46</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_6x22mmCharged</defaultProjectile>
+			<warmupTime>0.9</warmupTime>
+			<range>55</range>
+			<ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+			<burstShotCount>5</burstShotCount>
+			<soundCast>Shot_ChargeRifle</soundCast>
+			<soundCastTail>GunTail_Medium</soundCastTail>
+			<muzzleFlashScale>9</muzzleFlashScale>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>30</magazineSize>
+			<reloadTime>4</reloadTime>
+			<ammoSet>AmmoSet_6x22mmCharged</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aiUseBurstMode>true</aiUseBurstMode>
+			<aiAimMode>AimedShot</aiAimMode>
+		</FireModes>
+		<weaponTags>
+			<li>CE_AI_AR</li>
+			<li>NoSwitch</li>
+		</weaponTags>
+	</Operation>
+
+	<!-- Conqueror marksman carbine: the same 5x35 mm charged round and profile as CE's charge lance. -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>APM_Gun_Conqueror_DMR</defName>
+		<statBases>
+			<Mass>5.5</Mass>
+			<RangedWeapon_Cooldown>0.36</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.01</ShotSpread>
+			<SwayFactor>0.88</SwayFactor>
+			<Bulk>13.00</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>0.92</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_5x35mmCharged</defaultProjectile>
+			<warmupTime>1.1</warmupTime>
+			<range>62</range>
+			<soundCast>Shot_ChargeRifle</soundCast>
+			<soundCastTail>GunTail_Medium</soundCastTail>
+			<muzzleFlashScale>9</muzzleFlashScale>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>10</magazineSize>
+			<reloadTime>4</reloadTime>
+			<ammoSet>AmmoSet_5x35mmCharged</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aiAimMode>AimedShot</aiAimMode>
+		</FireModes>
+		<weaponTags>
+			<li>CE_AI_Rifle</li>
+			<li>NoSwitch</li>
+		</weaponTags>
+	</Operation>
+
+	<!-- Conqueror SMG: CE's charged-SMG cartridge and an established compact charged-weapon profile. -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>APM_Gun_Conqueror_SMG</defName>
+		<statBases>
+			<Mass>3.0</Mass>
+			<RangedWeapon_Cooldown>0.37</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.14</ShotSpread>
+			<SwayFactor>0.97</SwayFactor>
+			<Bulk>4.81</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>1.06</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_6x18mmCharged</defaultProjectile>
+			<warmupTime>0.6</warmupTime>
+			<range>31</range>
+			<ticksBetweenBurstShots>4</ticksBetweenBurstShots>
+			<burstShotCount>8</burstShotCount>
+			<soundCast>Shot_ChargeRifle</soundCast>
+			<soundCastTail>GunTail_Light</soundCastTail>
+			<muzzleFlashScale>7</muzzleFlashScale>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>40</magazineSize>
+			<reloadTime>4.5</reloadTime>
+			<ammoSet>AmmoSet_6x18mmCharged</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aimedBurstShotCount>3</aimedBurstShotCount>
+			<aiUseBurstMode>true</aiUseBurstMode>
+			<aiAimMode>Snapshot</aiAimMode>
+		</FireModes>
+		<weaponTags>
+			<li>CE_AI_SMG</li>
+			<li>NoSwitch</li>
+		</weaponTags>
+	</Operation>
+
+	<!-- Dynamo EMP impactor: low-velocity CE EMP grenades, restricted to the EMP ammo set. -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>APM_Gun_EMP_Impactor</defName>
+		<statBases>
+			<Mass>6.0</Mass>
+			<RangedWeapon_Cooldown>0.67</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.18</ShotSpread>
+			<SwayFactor>1.31</SwayFactor>
+			<Bulk>5.65</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>2.93</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_40x46mmGrenade_EMP</defaultProjectile>
+			<warmupTime>1.2</warmupTime>
+			<range>44</range>
+			<minRange>4</minRange>
+			<burstShotCount>1</burstShotCount>
+			<targetParams>
+				<canTargetLocations>true</canTargetLocations>
+			</targetParams>
+			<soundCast>Shot_IncendiaryLauncher</soundCast>
+			<soundCastTail>GunTail_Medium</soundCastTail>
+			<muzzleFlashScale>10</muzzleFlashScale>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>6</magazineSize>
+			<reloadTime>5.1</reloadTime>
+			<ammoSet>AmmoSet_40x46mmOnlyEMP</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aiAimMode>AimedShot</aiAimMode>
+		</FireModes>
+		<weaponTags>
+			<li>CE_AI_Launcher</li>
+			<li>NoSwitch</li>
+		</weaponTags>
+	</Operation>
+
+	<!-- Pulse scattershot: CE charged buckshot. One CE shot already resolves six pellets. -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>APM_Gun_Pulse_Shotgun</defName>
+		<statBases>
+			<Mass>8</Mass>
+			<RangedWeapon_Cooldown>1.58</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.14</ShotSpread>
+			<SwayFactor>1.25</SwayFactor>
+			<Bulk>9</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>1.39</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_12GaugeCharged</defaultProjectile>
+			<warmupTime>0.75</warmupTime>
+			<range>16</range>
+			<burstShotCount>1</burstShotCount>
+			<soundCast>Shot_ChargeBlaster</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>12</muzzleFlashScale>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>12</magazineSize>
+			<reloadTime>4.5</reloadTime>
+			<ammoSet>AmmoSet_12GaugeCharged</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aiAimMode>Snapshot</aiAimMode>
+		</FireModes>
+		<weaponTags>
+			<li>CE_AI_BROOM</li>
+			<li>NoSwitch</li>
+		</weaponTags>
+	</Operation>
+
+	<!-- Satellite suppressor: CE's light mechanoid charged cartridge. -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>APM_Gun_Satellite</defName>
+		<statBases>
+			<Mass>3</Mass>
+			<RangedWeapon_Cooldown>0.36</RangedWeapon_Cooldown>
+			<SightsEfficiency>0.8</SightsEfficiency>
+			<ShotSpread>0.17</ShotSpread>
+			<SwayFactor>0.72</SwayFactor>
+			<Bulk>3.5</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>0.85</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_5x16mmCharged</defaultProjectile>
+			<warmupTime>0.9</warmupTime>
+			<range>24</range>
+			<ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+			<burstShotCount>3</burstShotCount>
+			<soundCast>Shot_ChargeBlaster</soundCast>
+			<soundCastTail>GunTail_Medium</soundCastTail>
+			<muzzleFlashScale>7</muzzleFlashScale>
+			<recoilPattern>Mounted</recoilPattern>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>30</magazineSize>
+			<reloadTime>4</reloadTime>
+		</AmmoUser>
+		<FireModes>
+			<aiAimMode>SuppressFire</aiAimMode>
+		</FireModes>
+		<weaponTags>
+			<li>CE_AI_SMG</li>
+			<li>NoSwitch</li>
+		</weaponTags>
+	</Operation>
+
+	<!-- Siren sonic emitter remains an ammo-less energy weapon. Its damage def deliberately
+	     has no armor category, preserving the source weapon's armor-bypassing behavior. -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>APM_Siren_ChargeEmitter</defName>
+		<statBases>
+			<Mass>6.0</Mass>
+			<RangedWeapon_Cooldown>0.35</RangedWeapon_Cooldown>
+			<SightsEfficiency>1.1</SightsEfficiency>
+			<ShotSpread>0.04</ShotSpread>
+			<SwayFactor>0.88</SwayFactor>
+			<Bulk>9</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>0.92</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>APM_Proj_SirenChargeEmitter</defaultProjectile>
+			<warmupTime>1.2</warmupTime>
+			<range>44</range>
+			<burstShotCount>1</burstShotCount>
+			<soundCast>APM_SirenWeapon</soundCast>
+			<soundCastTail>GunTail_Medium</soundCastTail>
+			<muzzleFlashScale>9</muzzleFlashScale>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>20</magazineSize>
+			<reloadTime>4</reloadTime>
+		</AmmoUser>
+		<FireModes>
+			<aiAimMode>AimedShot</aiAimMode>
+		</FireModes>
+		<weaponTags>
+			<li>CE_AI_Rifle</li>
+			<li>NoSwitch</li>
+		</weaponTags>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="APM_Proj_SirenChargeEmitter"]</xpath>
+		<value>
+			<thingClass>CombatExtended.BulletCE</thingClass>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAttributeSet">
+		<xpath>Defs/ThingDef[defName="APM_Proj_SirenChargeEmitter"]/projectile</xpath>
+		<attribute>Class</attribute>
+		<value>CombatExtended.ProjectilePropertiesCE</value>
+	</Operation>
+
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[defName="APM_Proj_SirenChargeEmitter"]/projectile/armorPenetrationBase</xpath>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="APM_Proj_SirenChargeEmitter"]/projectile</xpath>
+		<value>
+			<armorPenetrationSharp>0</armorPenetrationSharp>
+			<armorPenetrationBlunt>30</armorPenetrationBlunt>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[defName="APM_Gun_Maul"]/verbs/li[verbClass="ApexMechanoids.Verb_ShootMultiple"]</xpath>
+	</Operation>
+
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>APM_Gun_Maul</defName>
+		<statBases>
+			<Mass>35</Mass>
+			<RangedWeapon_Cooldown>0.36</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.17</ShotSpread>
+			<SwayFactor>1.33</SwayFactor>
+			<Bulk>13</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>1.08</recoilAmount>
+			<verbClass>ApexMechanoids.CombatExtended.Verb_ShootMultipleCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>APM_CE_Bullet_MaulBlaster</defaultProjectile>
+			<warmupTime>1.2</warmupTime>
+			<range>75</range>
+			<ticksBetweenBurstShots>4</ticksBetweenBurstShots>
+			<burstShotCount>10</burstShotCount>
+			<soundCast>Shot_ChargeBlaster</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>9</muzzleFlashScale>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>100</magazineSize>
+			<reloadTime>4</reloadTime>
+			<ammoSet>AmmoSet_12x64mmMaul</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aimedBurstShotCount>5</aimedBurstShotCount>
+			<aiUseBurstMode>true</aiUseBurstMode>
+			<aiAimMode>SuppressFire</aiAimMode>
+		</FireModes>
+		<weaponTags>
+			<li>CE_AI_Suppressive</li>
+			<li>NoSwitch</li>
+		</weaponTags>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="APM_Gun_Vassal_SwordRifle"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>stock</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<armorPenetrationBlunt>1.45</armorPenetrationBlunt>
+					<power>9</power>
+					<cooldownTime>1.6</cooldownTime>
+					<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>blade</label>
+					<capacities>
+						<li>Poke</li>
+					</capacities>
+					<armorPenetrationSharp>10</armorPenetrationSharp>
+					<armorPenetrationBlunt>2.6</armorPenetrationBlunt>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<!-- Vassal sword rifle: standard CE charge-rifle ammunition, with the source weapon's
+	     single-shot, accurate role retained. -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>APM_Gun_Vassal_SwordRifle</defName>
+		<statBases>
+			<Mass>4.6</Mass>
+			<RangedWeapon_Cooldown>0.36</RangedWeapon_Cooldown>
+			<SightsEfficiency>1.10</SightsEfficiency>
+			<ShotSpread>0.05</ShotSpread>
+			<SwayFactor>1.00</SwayFactor>
+			<Bulk>8.5</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>1.46</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_6x22mmCharged</defaultProjectile>
+			<warmupTime>1.2</warmupTime>
+			<range>55</range>
+			<soundCast>Shot_ChargeRifle</soundCast>
+			<soundCastTail>GunTail_Medium</soundCastTail>
+			<muzzleFlashScale>9</muzzleFlashScale>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>15</magazineSize>
+			<reloadTime>4</reloadTime>
+			<ammoSet>AmmoSet_6x22mmCharged</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aiUseBurstMode>false</aiUseBurstMode>
+			<aiAimMode>AimedShot</aiAimMode>
+		</FireModes>
+		<weaponTags>
+			<li>CE_AI_Rifle</li>
+			<li>NoSwitch</li>
+		</weaponTags>
+	</Operation>
+
+	<!-- CE mechanoids receive four to six spare primary magazines. -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="APM_Mech_Conqueror_AR" or defName="APM_Mech_Conqueror_DMR" or defName="APM_Mech_Conqueror_SMG" or defName="APM_Mech_Dynamo" or defName="APM_Mech_Pulse" or defName="APM_Mech_Vassal" or defName="APM_Mech_Maul"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+					<min>4</min>
+					<max>6</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/DamageDef[defName="APM_SonicVibration"]</xpath>
+		<value>
+			<armorCategory>Blunt</armorCategory>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[@Name="APM_Weapon_CelerusVoltana_Base"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>handle</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<extraMeleeDamages />
+					<armorPenetrationBlunt>1.12</armorPenetrationBlunt>
+					<power>6</power>
+					<cooldownTime>1.8</cooldownTime>
+					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>tip</label>
+					<capacities>
+						<li>Stab</li>
+					</capacities>
+					<extraMeleeDamages />
+					<armorPenetrationBlunt>1.9</armorPenetrationBlunt>
+					<armorPenetrationSharp>45</armorPenetrationSharp>
+					<power>20</power>
+					<cooldownTime>1.4</cooldownTime>
+					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>blade</label>
+					<capacities>
+						<li>Cut</li>
+					</capacities>
+					<extraMeleeDamages />
+					<armorPenetrationBlunt>1.6</armorPenetrationBlunt>
+					<armorPenetrationSharp>30</armorPenetrationSharp>
+					<power>30</power>
+					<cooldownTime>0.9</cooldownTime>
+					<linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[@Name="APM_Weapon_CelerusVoltana_Base"]</xpath>
+		<value>
+			<equippedStatOffsets>
+				<MeleeParryChance>0.6</MeleeParryChance>
+				<MeleeCritChance>1</MeleeCritChance>
+				<MeleeDodgeChance>0.3</MeleeDodgeChance>
+			</equippedStatOffsets>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[@Name="APM_Weapon_CelerusVoltana_Base"]/statBases</xpath>
+		<value>
+			<Bulk>7</Bulk>
+			<ToughnessRating>11</ToughnessRating>
+			<MeleeCounterParryBonus>1.1</MeleeCounterParryBonus>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="APM_Weapon_CelerusApexVoltana" or defName="APM_Weapon_CelerusVoltana"]/weaponTags</xpath>
+		<value>
+			<li>CE_OneHandedWeapon</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[@Name="APM_Weapon_DominusMechlance_Base"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>handle</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<extraMeleeDamages />
+					<armorPenetrationBlunt>1.5</armorPenetrationBlunt>
+					<armorPenetrationSharp>0.2</armorPenetrationSharp>
+					<power>10</power>
+					<cooldownTime>1.3</cooldownTime>
+					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>blade</label>
+					<capacities>
+						<li>Stab</li>
+					</capacities>
+					<extraMeleeDamages />
+					<armorPenetrationBlunt>4.5</armorPenetrationBlunt>
+					<armorPenetrationSharp>30.2</armorPenetrationSharp>
+					<power>27</power>
+					<cooldownTime>1.3</cooldownTime>
+					<linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>edge</label>
+					<capacities>
+						<li>Cut</li>
+					</capacities>
+					<extraMeleeDamages />
+					<armorPenetrationBlunt>1.62</armorPenetrationBlunt>
+					<armorPenetrationSharp>22.3</armorPenetrationSharp>
+					<power>34</power>
+					<cooldownTime>1.6</cooldownTime>
+					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[@Name="APM_Weapon_DominusMechlance_Base"]</xpath>
+		<value>
+			<equippedStatOffsets>
+				<MeleeDodgeChance>0.15</MeleeDodgeChance>
+				<MeleeParryChance>0.4</MeleeParryChance>
+				<MeleeCritChance>0.8</MeleeCritChance>
+			</equippedStatOffsets>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[@Name="APM_Weapon_DominusMechlance_Base"]/statBases</xpath>
+		<value>
+			<Bulk>8</Bulk>
+			<ToughnessRating>16</ToughnessRating>
+			<MeleeCounterParryBonus>0.8</MeleeCounterParryBonus>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="APM_Weapon_DuelistsPsySpear"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>handle</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<extraMeleeDamages />
+					<armorPenetrationBlunt>4.26</armorPenetrationBlunt>
+					<power>8</power>
+					<cooldownTime>1.6</cooldownTime>
+					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>blade</label>
+					<capacities>
+						<li>Stab</li>
+					</capacities>
+					<extraMeleeDamages />
+					<armorPenetrationBlunt>4.45</armorPenetrationBlunt>
+					<armorPenetrationSharp>56</armorPenetrationSharp>
+					<power>32</power>
+					<cooldownTime>1.5</cooldownTime>
+					<linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>edge</label>
+					<capacities>
+						<li>Cut</li>
+					</capacities>
+					<extraMeleeDamages />
+					<armorPenetrationBlunt>2</armorPenetrationBlunt>
+					<armorPenetrationSharp>21</armorPenetrationSharp>
+					<power>18</power>
+					<cooldownTime>1.8</cooldownTime>
+					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="APM_Weapon_DuelistsPsySpear"]</xpath>
+		<value>
+			<equippedStatOffsets>
+				<MeleeParryChance>0.36</MeleeParryChance>
+				<MeleeCritChance>1</MeleeCritChance>
+				<MeleeDodgeChance>0.22</MeleeDodgeChance>
+			</equippedStatOffsets>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="APM_Weapon_DuelistsPsySpear"]/statBases</xpath>
+		<value>
+			<Flammability>1</Flammability>
+			<SellPriceFactor>0.2</SellPriceFactor>
+			<Bulk>9</Bulk>
+			<ToughnessRating>14</ToughnessRating>
+			<MeleeCounterParryBonus>0.7</MeleeCounterParryBonus>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="APM_Weapon_MechWhip" or defName="APM_Weapon_PlasmaWhip"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>whip</label>
+					<capacities>
+						<li>APM_Whip</li>
+					</capacities>
+					<extraMeleeDamages>
+						<li>
+							<def>EMP</def>
+							<amount>20</amount>
+							<chance>0.3</chance>
+						</li>
+					</extraMeleeDamages>
+					<armorPenetrationBlunt>6.3</armorPenetrationBlunt>
+					<armorPenetrationSharp>3.2</armorPenetrationSharp>
+					<power>14</power>
+					<cooldownTime>2.8</cooldownTime>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	<!-- Whips use a custom area verb rather than Verb_MeleeAttackCE. Route their primary hit
+	     through the CE adapter and give CE's sharp-to-blunt deflection path the matching blunt AP. -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="APM_Weapon_MechWhip" or defName="APM_Weapon_PlasmaWhip"]/verbs/li/verbClass</xpath>
+		<value>
+			<verbClass>ApexMechanoids.CombatExtended.Verb_WhipCE</verbClass>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/DamageDef[defName="APM_Whip"][not(defaultArmorPenetration)]</xpath>
+		<value>
+			<defaultArmorPenetration>2</defaultArmorPenetration>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="APM_Weapon_SeveringBlade"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>handle</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<extraMeleeDamages />
+					<armorPenetrationBlunt>5.2</armorPenetrationBlunt>
+					<power>12</power>
+					<cooldownTime>2.1</cooldownTime>
+					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>blade</label>
+					<capacities>
+						<li>Stab</li>
+					</capacities>
+					<extraMeleeDamages />
+					<armorPenetrationBlunt>6.1</armorPenetrationBlunt>
+					<armorPenetrationSharp>33</armorPenetrationSharp>
+					<power>24</power>
+					<cooldownTime>2.4</cooldownTime>
+					<linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>edge</label>
+					<capacities>
+						<li>Cut</li>
+					</capacities>
+					<extraMeleeDamages />
+					<armorPenetrationBlunt>4.6</armorPenetrationBlunt>
+					<armorPenetrationSharp>26</armorPenetrationSharp>
+					<power>35</power>
+					<cooldownTime>2.1</cooldownTime>
+					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="APM_Weapon_SeveringBlade"]/statBases</xpath>
+		<value>
+			<Flammability>1</Flammability>
+			<SellPriceFactor>0.2</SellPriceFactor>
+			<Bulk>10.03</Bulk>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="APM_Weapon_Skipblade"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>handle</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<extraMeleeDamages />
+					<armorPenetrationBlunt>1.1</armorPenetrationBlunt>
+					<power>5</power>
+					<cooldownTime>1.5</cooldownTime>
+					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>edge</label>
+					<capacities>
+						<li>Stab</li>
+					</capacities>
+					<extraMeleeDamages />
+					<armorPenetrationBlunt>3.2</armorPenetrationBlunt>
+					<armorPenetrationSharp>24</armorPenetrationSharp>
+					<power>20</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>edge</label>
+					<capacities>
+						<li>Cut</li>
+					</capacities>
+					<extraMeleeDamages />
+					<armorPenetrationBlunt>1.2</armorPenetrationBlunt>
+					<armorPenetrationSharp>17</armorPenetrationSharp>
+					<power>22</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="APM_Weapon_Skipblade"]</xpath>
+		<value>
+			<equippedStatOffsets>
+				<MeleeParryChance>0.65</MeleeParryChance>
+				<MeleeCritChance>1</MeleeCritChance>
+				<MeleeDodgeChance>0.36</MeleeDodgeChance>
+			</equippedStatOffsets>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="APM_Weapon_Skipblade"]/statBases</xpath>
+		<value>
+			<Bulk>10.03</Bulk>
+			<ToughnessRating>7.5</ToughnessRating>
+			<MeleeCounterParryBonus>1.4</MeleeCounterParryBonus>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="APM_Weapon_Skipblade"]/weaponTags</xpath>
+		<value>
+			<li>CE_OneHandedWeapon</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[@Name="APM_Weapon_TerminusExoblade_Base"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>handle</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<extraMeleeDamages />
+					<armorPenetrationBlunt>4.8</armorPenetrationBlunt>
+					<power>10</power>
+					<cooldownTime>1.3</cooldownTime>
+					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>point</label>
+					<capacities>
+						<li>Stab</li>
+					</capacities>
+					<extraMeleeDamages />
+					<armorPenetrationBlunt>7.2</armorPenetrationBlunt>
+					<armorPenetrationSharp>29</armorPenetrationSharp>
+					<power>34</power>
+					<cooldownTime>2.1</cooldownTime>
+					<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>blade</label>
+					<capacities>
+						<li>Cut</li>
+					</capacities>
+					<extraMeleeDamages />
+					<armorPenetrationBlunt>6.21</armorPenetrationBlunt>
+					<armorPenetrationSharp>26</armorPenetrationSharp>
+					<power>42</power>
+					<cooldownTime>1.7</cooldownTime>
+					<linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[@Name="APM_Weapon_TerminusExoblade_Base"]</xpath>
+		<value>
+			<equippedStatOffsets>
+				<MeleeParryChance>0.26</MeleeParryChance>
+				<MeleeCritChance>1.2</MeleeCritChance>
+				<MeleeDodgeChance>0.08</MeleeDodgeChance>
+			</equippedStatOffsets>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[@Name="APM_Weapon_TerminusExoblade_Base"]/statBases</xpath>
+		<value>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Flammability>0.5</Flammability>
+			<DeteriorationRate>2</DeteriorationRate>
+			<Beauty>-3</Beauty>
+			<SellPriceFactor>0.2</SellPriceFactor>
+			<MarketValue>2400</MarketValue>
+			<Mass>4.5</Mass>
+			<Bulk>10</Bulk>
+			<ToughnessRating>20</ToughnessRating>
+			<MeleeCounterParryBonus>0.4</MeleeCounterParryBonus>
+		</value>
+	</Operation>
+</Patch>
