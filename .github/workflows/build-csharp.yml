@@ -48,7 +48,7 @@ jobs:
         path: |
           ./1.6/Assemblies/
           ./1.7/Assemblies/
-          ./1.6/CombatExtended/Assemblies/
+          ./Mods/CombatExtended/Assemblies/
 
     - name: Commit rebuilt assembly
       if: |
@@ -65,7 +65,7 @@ jobs:
         git add -f ./1.6/Assemblies/ApexMechanoids.dll ./1.7/Assemblies/ApexMechanoids.dll
 
         # Only branches that carry the Combat Extended compat project build this one
-        CE_DLL=./1.6/CombatExtended/Assemblies/ApexMechanoidsCE.dll
+        CE_DLL=./Mods/CombatExtended/Assemblies/ApexMechanoidsCE.dll
         if [ -f "$CE_DLL" ]; then
           git add -f "$CE_DLL"
         fi

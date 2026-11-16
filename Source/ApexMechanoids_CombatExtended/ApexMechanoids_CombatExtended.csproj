@@ -14,10 +14,10 @@
 		<Platforms>AnyCPU</Platforms>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-		<OutputPath>../../1.6/CombatExtended/Assemblies/</OutputPath>
+		<OutputPath>../../Mods/CombatExtended/Assemblies/</OutputPath>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-		<OutputPath>../../1.6/CombatExtended/Assemblies/</OutputPath>
+		<OutputPath>../../Mods/CombatExtended/Assemblies/</OutputPath>
 		<DebugType>none</DebugType>
 		<DebugSymbols>false</DebugSymbols>
 	</PropertyGroup>
