@@ -1,0 +1,53 @@
+rwtest 1
+test "Ingestor recycles corpses by mode and mark, keeps its batch through a save" project="Apex Mechanoids" created=2026-09-26T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+spawn Pawn:APM_Mech_Ingestor at -20,0 faction=player name="Ingestor"
+spawn Pawn:Colonist at -18,0 faction=enemy name="Body"
+damage "Body" amount=999
+assert pawn "Body" dead expect=present
+assert thing Corpse_Human expect=present
+work "Ingestor" giver=APM_IngestorProcessCorpses on=Corpse_Human expect=allowed
+
+select "Ingestor"
+gizmo "Recycle all valid corpses" expect=absent
+gizmo "Use marked corpses only" expect=allowed
+gizmo "Enable stripping" expect=allowed
+assert text contains "APM_" expect=absent
+deselect
+
+work "Ingestor" giver=APM_IngestorProcessCorpses on=Corpse_Human expect=absent
+
+reload note="both settings are saved on the comp"
+select "Ingestor"
+gizmo "Use marked corpses only" expect=absent
+gizmo "Enable stripping" expect=absent
+deselect
+work "Ingestor" giver=APM_IngestorProcessCorpses on=Corpse_Human expect=absent
+
+select "Ingestor"
+gizmo "Mark for biomass recycling" expect=allowed
+assert text contains "APM_" expect=absent
+deselect
+designate Designator_IngestorAbsorbCorpse on=Corpse_Human
+work "Ingestor" giver=APM_IngestorProcessCorpses on=Corpse_Human expect=allowed
+
+select "Ingestor"
+gizmo "Recycle all valid corpses" expect=allowed
+gizmo "Disable stripping" expect=allowed
+deselect
+work "Ingestor" giver=APM_IngestorProcessCorpses on=Corpse_Human expect=allowed
+
+job "Ingestor" giver=APM_IngestorProcessCorpses on=Corpse_Human until=ended ticks=2000
+assert thing Corpse_Human expect=absent
+assert pawn "Ingestor" hediff=APM_AbsorbedThing expect=present
+
+spawn Pawn:Colonist at -18,2 faction=enemy name="Second body"
+damage "Second body" amount=999
+assert thing Corpse_Human expect=present
+work "Ingestor" giver=APM_IngestorProcessCorpses on=Corpse_Human expect=absent
+
+reload note="the pending chemfuel batch is saved on the hediff"
+assert pawn "Ingestor" hediff=APM_AbsorbedThing expect=present
+assert log clean
