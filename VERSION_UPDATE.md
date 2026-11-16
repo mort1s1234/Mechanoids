@@ -3,7 +3,7 @@ Game installed: 1.7.5005 rev1082 (unstable)   Refs: GameRefs/1.6 (1.6.4871 rev59
 Harmony: HarmonyRef/1.6 2.4.3.0 net472 (chain today: none, csproj uses NuGet Lib.Harmony 2.4.2 compile-only)   HarmonyRef/1.7 3.0.0.0 net10
 ManagedDir: D:\Steam\steamapps\common\RimWorld   Framework: net48 -> net10.0   Runtime: CoreCLR (Waylith)   GC: unverified
 UnityStubs.dll: yes   Toolchain changed: yes   SDK: 10.0.403
-Layout today: LoadFolders, two version folders, each with its own copy of Source, Defs, Patches   Missing 1.7 dependencies: Combat Extended (1.6 only, optional)
+Layout today: LoadFolders, two version folders, each with its own copy of Source, Defs, Patches   Missing 1.7 dependencies: none (Combat Extended lists only 1.6 in About.xml but runs on 1.7)
 1.6 after the update: one source, both built (decided by the user 2026-11-15: "1.6 und 1.7 supporten weiterhin, fixes/features in 1.7 auch in 1.6")
 Save surface vs last tag: no tag in the repo, nothing to compare; hotfix-1 hediff defNames equal the names 1.6 created at runtime, so 1.6 saves hold
 
@@ -15,7 +15,7 @@ Save surface vs last tag: no tag in the repo, nothing to compare; hotfix-1 hedif
   - 1.6 players have none of hotfix-1; 1.7 players have no debug actions.
 - The 1.7 DLL is a 1.6 build: `1.7/Source/ApexMechanoids/ApexMechanoids.csproj` is net48 against `Krafs.Rimworld.Ref 1.6.4871`. It was never compiled against 1.7.
 - `1.6/Patches` and `1.7/Patches` are identical; `1.7/Defs` = `1.6/Defs` + hotfix-1, plain XML that 1.6 can load (`BaseGun` parent).
-- `LoadFolders.xml` `<v1.7>` loads `1.6/CombatExtended` (net48 CE DLL built against CE 1.6). CE has no 1.7 release today; once it has one, that DLL would load into 1.7.
+- `LoadFolders.xml` `<v1.7>` loads `1.6/CombatExtended` (net48 CE DLL built against CE 1.6). CE's About.xml lists only 1.6, but CE runs on 1.7, so this line was needed.
 - References come from NuGet (`Krafs.Rimworld.Ref`, `Krafs.Publicizer` on Assembly-CSharp, `Lib.Harmony`) plus checked-in `ReferenceAssembly/VEF-reference.dll`, `PipeSystem.dll` (1.6 builds, identical in both copies). CI builds on ubuntu without a game, so the workspace pattern (`GameRefs/`, `HarmonyRef/`, `new_old_version_project.py`, explicit Compile list) cannot be used as is. NuGet has `Krafs.Rimworld.Ref 1.7.5005-unstable` (= installed game) and `Lib.Harmony 3.0.0-rc.5`.
 - `.github/workflows/build-csharp.yml`: .NET 9 (net10 needs 10.x), builds and commits only `1.6/...` DLLs, `rsync --exclude '1.6/Source/'`, PR comment says "Built against RimWorld <first supportedVersions entry>" (always 1.6).
 - Code: 39 Harmony patch classes, 54 attributes, 0 transpilers, no `#if`, no Prepatcher, no AssetBundles, only vanilla `ShaderDatabase` shaders, no string `GetHashCode`. 8 `AccessTools.Field/Method` lookups to probe.
@@ -24,8 +24,8 @@ Save surface vs last tag: no tag in the repo, nothing to compare; hotfix-1 hedif
 ## Pass A - One package layout
 - [x] `git mv 1.7/Source/ApexMechanoids` changes into the 1.6 tree: take the 1.7 version of `CompAbilityEffect_ConvertToBuilding.cs`, `CompMechWirelessCharger.cs`, `CompStatFactorsFromHealth.cs`; everything else from 1.6
 - [x] `git mv 1.6/Source Source` (repo root), `git rm -r 1.7/Source`
-- [x] `git mv 1.7/Defs Defs`, `git mv 1.7/Patches Patches`, `git rm -r 1.6/Defs 1.6/Patches`; version folders keep only `Assemblies` (+ `1.6/CombatExtended`)
-- [x] LoadFolders.xml `<v1.7>`: drop the `1.6/CombatExtended` line (re-add as `1.7/CombatExtended` once CE ships 1.7)
+- [x] `git mv 1.7/Defs Defs`, `git mv 1.7/Patches Patches`, `git rm -r 1.6/Defs 1.6/Patches`; version folders keep only `Assemblies`
+- [x] LoadFolders.xml `<v1.7>`: dropped the `1.6/CombatExtended` line on the wrong assumption that CE had no 1.7 release; this switched CE off on 1.7. Fixed upstream (`7b9f093` mort1s1234, `8d5d043` SaltyKarl): CE content lives in `Mods/CombatExtended`, loaded by `<v1.6>` and `<v1.7>`; `31968f0` points the CE project output and CI there and removes `1.6/CombatExtended` and the stale `1.7/CombatExtended`
 - [x] About.xml: unchanged (1.6 and 1.7 already listed)
 - [x] load_folders.py 1.6 and 1.7 without warnings
 ## Pass T - 1.7 toolchain (`Source/ApexMechanoids/ApexMechanoids.csproj`)
@@ -57,7 +57,7 @@ Save surface vs last tag: no tag in the repo, nothing to compare; hotfix-1 hedif
 - Compile items: the workspace wants an explicit list; this repo globs. Kept for the upstream contributors, both projects glob the same folder so the order matches.
 - References via NuGet instead of `GameRefs`/`HarmonyRef` (CI has no game). `Krafs.Rimworld.Ref` 1.7 tracks the unstable branch: bump it with every beta patch.
 - Contributors need VS 2026 / Rider 2026 for the net10 project; `dotnet build` works everywhere.
-- Versions block: decided 2026-11-15, only this file. One source: `Source/ApexMechanoids/` is built twice, `ApexMechanoids.csproj` for 1.7 (net10, `1.7/Assemblies`), `ApexMechanoids_1_6/ApexMechanoids_1_6.csproj` for 1.6 (net48, `RW_1_6`, `1.6/Assemblies`); CE project 1.6 only. API differences go into `#if RW_1_6 ... #else ... #endif` at the line that touches the game. Defs/Patches live at the root for both.
+- Versions block: decided 2026-11-15, only this file. One source: `Source/ApexMechanoids/` is built twice, `ApexMechanoids.csproj` for 1.7 (net10, `1.7/Assemblies`), `ApexMechanoids_1_6/ApexMechanoids_1_6.csproj` for 1.6 (net48, `RW_1_6`, `1.6/Assemblies`); CE project: one net48 build against `ApexMechanoids_1_6`, output `Mods/CombatExtended/Assemblies`, loaded on 1.6 and 1.7 (on 1.7 it binds to the net10 `ApexMechanoids.dll` by name: unverified, checked in game). API differences go into `#if RW_1_6 ... #else ... #endif` at the line that touches the game. Defs/Patches live at the root for both.
 - `WeaponTweakData/` is loaded by LoadFolders but excluded from the CI zip (older than this update).
 - Leftover untracked `1.6/Source`, `1.7/Source` (`.vs`, `obj`), locked by Visual Studio: delete after closing VS.
 - 1.6 is not installed here: tests in game on 1.6 need a second install or a Steam branch switch.
