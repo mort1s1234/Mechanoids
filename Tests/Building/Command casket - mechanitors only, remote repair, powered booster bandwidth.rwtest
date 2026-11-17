@@ -4,7 +4,7 @@ test "Command casket - mechanitors only, remote repair, powered booster bandwidt
 requires mod=Mortis.ApexMechanoids
 requires dlc=Biotech
 room size=17,15 roof=false name="casket yard"
-spawn Thing:WoodFiredGenerator at 0,-6 faction=player fueled=true
+spawn Thing:WoodFiredGenerator at -6,-5 faction=player fueled=true
 spawn Thing:APM_MechCommandCasket at 0,0 faction=player name="casket"
 spawn Pawn:Colonist at -5,-3 name="Mechanitor"
 spawn Pawn:Colonist at 5,-3 name="Plain"
