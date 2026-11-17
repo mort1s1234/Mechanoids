@@ -10,5 +10,7 @@
     <exclude>Tests</exclude>
     <exclude>out.tsv</exclude>
     <exclude>1.6\Source</exclude>
+    <exclude>1.7\Source</exclude>
+    <exclude>Source</exclude>
   </Excluded>
 </Configuration>

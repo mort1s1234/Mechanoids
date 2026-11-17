@@ -1,0 +1,49 @@
+rwtest 1
+test "Aegis shield charge stuns foes, a destroyed shield is rebuilt by the Aegis" project="Apex Mechanoids" created=2026-09-26T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+spawn Pawn:APM_Mech_Aegis at 0,0 faction=player name="Aegis"
+spawn Pawn:Colonist at -4,0 name="Mechanitor"
+draft "Mechanitor"
+give "Mechanitor" need=Food value=1
+overseer "Aegis" by="Mechanitor"
+draft "Aegis"
+spawn Thing:Sandbags at 3,3 name="sandbags"
+
+select "Aegis"
+gizmo "Shield Charge" expect=allowed
+target cell=3,3 expect=refused
+
+speed paused
+spawn Pawn:Colonist at 5,0 faction=none name="Raider"
+spawn Pawn:Colonist at 5,-1 faction=player name="Ally"
+draft "Ally"
+gizmo "Shield Charge" expect=allowed
+target "Raider" expect=allowed
+speed x1
+waitfor thing "Aegis" at 5,0 ticks=120 expect=present
+assert stun "Raider" ticks min=280 max=300 expect=present
+assert stun "Ally" expect=absent
+assert pawn "Ally" pain max=0 expect=present
+gizmo "Shield Charge" expect=disabled
+deselect
+
+speed paused
+spawn Pawn:APM_Mech_Aegis at -40,0 faction=player name="Rebuilt aegis"
+spawn Pawn:Colonist at -42,0 name="Rebuild mechanitor"
+overseer "Rebuilt aegis" by="Rebuild mechanitor" now=true
+
+damage "Rebuilt aegis" amount=10 kind=Burn part=APM_AegisShield
+work "Rebuild mechanitor" giver=RepairMech on="Rebuilt aegis" forced=true expect=allowed
+
+damage "Rebuilt aegis" amount=999 kind=Burn part=APM_AegisShield
+assert pawn "Rebuilt aegis" hediff=MissingBodyPart expect=present
+assert pawn "Rebuilt aegis" hediff=Burn expect=absent
+work "Rebuild mechanitor" giver=RepairMech on="Rebuilt aegis" forced=true expect=absent
+
+tick 3000 note="the Aegis waits 3600 ticks without a hit before it rebuilds"
+assert pawn "Rebuilt aegis" hediff=MissingBodyPart expect=present
+waitfor pawn "Rebuilt aegis" hediff=MissingBodyPart expect=absent ticks=1500
+assert pawn "Rebuilt aegis" hediff=Misc expect=present
+assert log clean

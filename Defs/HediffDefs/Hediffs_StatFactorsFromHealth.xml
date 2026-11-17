@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<HediffDef Name="APM_StatFactorFromHealthBase" Abstract="True">
+		<hediffClass>ApexMechanoids.Hediff_StatFactorFromHealth</hediffClass>
+		<defaultLabelColor>(0, 1, 1)</defaultLabelColor>
+		<isBad>false</isBad>
+		<stages>
+			<li>
+				<minSeverity>0.01</minSeverity>
+				<label>health affected</label>
+			</li>
+		</stages>
+	</HediffDef>
+
+	<HediffDef ParentName="APM_StatFactorFromHealthBase">
+		<defName>APM_StatFactor_MeleeCooldownFactor</defName>
+		<label>melee cooldown factor from low health</label>
+		<description>This mechanoid's melee cooldown factor is affected by its health condition.</description>
+	</HediffDef>
+
+	<HediffDef ParentName="APM_StatFactorFromHealthBase">
+		<defName>APM_StatFactor_RangedCooldownFactor</defName>
+		<label>ranged cooldown factor from low health</label>
+		<description>This mechanoid's ranged cooldown factor is affected by its health condition.</description>
+	</HediffDef>
+
+	<HediffDef ParentName="APM_StatFactorFromHealthBase">
+		<defName>APM_StatFactor_AimingDelayFactor</defName>
+		<label>aiming delay factor from low health</label>
+		<description>This mechanoid's aiming delay factor is affected by its health condition.</description>
+	</HediffDef>
+</Defs>

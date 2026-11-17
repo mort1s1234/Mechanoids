@@ -1,0 +1,67 @@
+rwtest 1
+test "Gazer emplacement gates, purifier mode and stasis container survive a save" project="Apex Mechanoids" created=2026-09-26T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+sky glow=1
+room at 10,-4 size=13,9 roof=false name="emplacement yard"
+spawn Thing:APM_GazerEmplacement in="emplacement yard" faction=player name="emplacement"
+select "emplacement"
+gizmo "Sun Ray" expect=disabled reason="No power." match=equals
+deselect
+
+spawn Thing:WoodFiredGenerator in="emplacement yard" faction=player fueled=true
+waitfor power "emplacement" ticks=250 expect=present
+select "emplacement"
+gizmo "Sun Ray" expect=disabled reason="Needs an operator." match=equals
+assert text contains "APM." expect=absent
+deselect
+assert inspect "emplacement" contains "Status: Ready" expect=present
+
+spawn Thing:APM_Building_ToxicPurifier at -20,20 faction=player name="purifier"
+assert inspect "purifier" contains "0 / 15" expect=present
+
+select "purifier"
+gizmo "Mode: Wastepacks only" expect=absent
+gizmo "Mode: Ground over wastepacks" expect=allowed
+menu "Wastepacks only" expect=allowed
+assert text contains "APM_" expect=absent
+select "purifier"
+gizmo "Mode: Ground over wastepacks" expect=absent
+gizmo "Mode: Wastepacks only" expect=allowed
+menu "Wastepacks only" expect=allowed
+deselect
+
+reload note="the purifier mode is saved on the comp"
+select "purifier"
+gizmo "Mode: Ground over wastepacks" expect=absent
+gizmo "Mode: Wastepacks only" expect=allowed
+menu "Wastepacks only" expect=allowed
+deselect
+
+room at 10,10 size=13,9 roof=false name="container yard"
+spawn Thing:APM_MechanoidContainer_Player in="container yard" faction=player name="container"
+spawn Pawn:APM_Mech_Lasher in="container yard" faction=player name="Lasher"
+assert inspect "container" contains "Contains nobody." expect=present
+
+select "container"
+gizmo "Choose mechanoid" expect=disabled reason="No power" match=equals
+deselect
+
+spawn Thing:WoodFiredGenerator in="container yard" faction=player fueled=true
+waitfor power "container" ticks=250 expect=present
+
+select "container"
+gizmo "Choose mechanoid" expect=allowed
+target "Lasher" expect=allowed
+assert text contains "APM." expect=absent
+deselect
+waitfor inspect "container" contains "Contains nobody." expect=absent ticks=1500
+assert inspect "container" contains "Contains" expect=present
+assert inspect "container" contains "unidentified" expect=absent
+
+reload note="the mech is kept in the container's saved innerContainer"
+assert inspect "container" contains "Contains nobody." expect=absent
+assert inspect "container" contains "Contains" expect=present
+
+assert log clean

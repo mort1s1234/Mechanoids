@@ -1,0 +1,24 @@
+rwtest 1
+test "Mech Work Tab - the five apex work types get their own columns" project="Apex Mechanoids" created=2026-11-17T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+requires mod=Spacemoth.MechTab
+spawn Pawn:Colonist at -4,0 name="Mechanitor" drafted=true
+spawn Pawn:APM_Mech_Tinker at 0,0 faction=player name="Tinker"
+spawn Pawn:APM_Mech_Siren at 2,0 faction=player name="Siren"
+overseer "Tinker" by="Mechanitor" now=true
+overseer "Siren" by="Mechanitor" now=true
+assert staticcollection GeneratedColumns count min=5 max=5 type=ApexMechanoids.MechWorkTabCompat
+
+maintab SM_MechWork
+window SM_MainTabWindow_MechsWork
+assert window SM_MainTabWindow_MechsWork contains "Tinker" expect=present
+assert window SM_MainTabWindow_MechsWork contains "Preserve" expect=present
+assert window SM_MainTabWindow_MechsWork contains "Ingest" expect=present
+assert window SM_MainTabWindow_MechsWork contains "Handle" expect=present
+assert window SM_MainTabWindow_MechsWork contains "Warden" expect=present
+assert window SM_MainTabWindow_MechsWork contains "Repair" expect=present
+assert text contains "APM_" expect=absent
+maintab SM_MechWork
+assert log clean

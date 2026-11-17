@@ -1,0 +1,17 @@
+rwtest 1
+test "Odyssey - mechamancer suit and helmet resist vacuum" project="Apex Mechanoids" created=2026-11-17T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+requires dlc=Odyssey
+spawn Pawn:Colonist name="Wearer" gear=none
+assert pawn "Wearer" stat=VacuumResistance max=0.01 expect=present
+
+wear "Wearer" apparel=APM_Apparel_MechamancerSuit
+assert pawn "Wearer" apparel=APM_Apparel_MechamancerSuit expect=present
+assert pawn "Wearer" stat=VacuumResistance min=0.29 max=0.31 expect=present
+
+wear "Wearer" apparel=APM_Apparel_ArmorHelmetMechamancerHelmet
+assert pawn "Wearer" apparel=APM_Apparel_ArmorHelmetMechamancerHelmet expect=present
+assert pawn "Wearer" stat=VacuumResistance min=0.97 max=0.99 expect=present
+assert log clean

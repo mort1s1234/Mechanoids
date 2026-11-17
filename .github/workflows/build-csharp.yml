@@ -29,23 +29,26 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '9.0.x'
+        dotnet-version: '10.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore ./1.6/Source/ApexMechanoids.sln
+      run: dotnet restore ./Source/ApexMechanoids.slnx
 
     - name: Build solution
-      run: dotnet build ./1.6/Source/ApexMechanoids.sln --no-restore
+      run: dotnet build ./Source/ApexMechanoids.slnx --no-restore
 
     - name: Run tests
       continue-on-error: true
-      run: dotnet test ./1.6/Source/ApexMechanoids.sln --no-restore
+      run: dotnet test ./Source/ApexMechanoids.slnx --no-restore
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: build-output
-        path: ./1.6/Assemblies/
+        path: |
+          ./1.6/Assemblies/
+          ./1.7/Assemblies/
+          ./Mods/CombatExtended/Assemblies/
 
     - name: Commit rebuilt assembly
       if: |
@@ -59,23 +62,35 @@ jobs:
         git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
         # -f bypasses .gitignore in case *.dll is ever ignored
-        git add -f ./1.6/Assemblies/ApexMechanoids.dll
+        git add -f ./1.6/Assemblies/ApexMechanoids.dll ./1.7/Assemblies/ApexMechanoids.dll
+
+        # Only branches that carry the Combat Extended compat project build this one
+        CE_DLL=./Mods/CombatExtended/Assemblies/ApexMechanoidsCE.dll
+        if [ -f "$CE_DLL" ]; then
+          git add -f "$CE_DLL"
+        fi
 
         if git diff --cached --quiet; then
-          echo "Assembly unchanged, nothing to commit."
+          echo "Assemblies unchanged, nothing to commit."
           exit 0
         fi
 
-        git commit -m "chore(assemblies): rebuild ApexMechanoids.dll [skip ci]"
+        git commit -m "chore(assemblies): rebuild ApexMechanoids.dll and ApexMechanoidsCE.dll [skip ci]"
+
+        # The build rewrites tracked assembly outputs, which would make the rebase below
+        # abort with "cannot pull with rebase: You have unstaged changes."
+        # Drop any leftover build-only modifications before rebasing.
+        git checkout -- .
+
         git pull --rebase origin "$BRANCH"
         git push origin HEAD:"$BRANCH"
 
     - name: Resolve game version
       id: version
       run: |
-        VERSION=$(python3 -c "import xml.etree.ElementTree as ET;r=ET.parse('About/About.xml').getroot();n=r.find('supportedVersions');print((n.find('li').text if n is not None and n.find('li') is not None else '1.6').strip())")
+        VERSION=$(python3 -c "import xml.etree.ElementTree as ET;r=ET.parse('About/About.xml').getroot();n=r.find('supportedVersions');print(', '.join(li.text.strip() for li in n.findall('li')) if n is not None else '1.6')")
         echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-        echo "zip=ApexMechanoids-${VERSION}-$(git rev-parse --short HEAD).zip" >> "$GITHUB_OUTPUT"
+        echo "zip=ApexMechanoids-$(git rev-parse --short HEAD).zip" >> "$GITHUB_OUTPUT"
 
     - name: Stage whole mod
       run: |
@@ -90,8 +105,7 @@ jobs:
           --exclude '.DS_Store' \
           --exclude 'artifact/' \
           --exclude 'ModInfographic/' \
-          --exclude 'WeaponTweakData/' \
-          --exclude '1.6/Source/' \
+          --exclude '/Source/' \
           --exclude 'obj/' \
           --exclude 'bin/' \
           --exclude '.gitignore' \

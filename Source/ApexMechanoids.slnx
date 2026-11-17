@@ -1,0 +1,10 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+  </Configurations>
+  <Project Path="ApexMechanoids_1_6/ApexMechanoids_1_6.csproj" />
+  <Project Path="ApexMechanoids/ApexMechanoids.csproj">
+    <BuildDependency Project="ApexMechanoids_1_6/ApexMechanoids_1_6.csproj" />
+  </Project>
+  <Project Path="ApexMechanoids_CombatExtended/ApexMechanoids_CombatExtended.csproj" />
+</Solution>

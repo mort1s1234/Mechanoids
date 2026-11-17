@@ -68,6 +68,7 @@
   <APM_NotMechanoid>Only mechanoids can be repaired here.</APM_NotMechanoid>
   <APM_RepairStation_CannotRepairSatellite>Satellites cannot be repaired in repair stations.</APM_RepairStation_CannotRepairSatellite>
   <APM_NotPlayerFaction>Only friendly mechanoids can be repaired.</APM_NotPlayerFaction>
+  <APM_Ability_TargetNotOwnFaction>Only allies of its own faction can be targeted.</APM_Ability_TargetNotOwnFaction>
   <APM_WrongSize>Mechanoid size must be {0} for this station.</APM_WrongSize>
   <APM_AutoRepairOrdered>Repair station scanning found {0}. Repairs ordered.</APM_AutoRepairOrdered>
   <APM_Gizmo_AutoRepair>Auto-Repair</APM_Gizmo_AutoRepair>

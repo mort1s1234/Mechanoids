@@ -109,6 +109,7 @@
 
   <!-- EN: Only friendly mechanoids can be repaired. -->
   <APM_NotPlayerFaction>Можно ремонтировать только дружественных механоидов.</APM_NotPlayerFaction>
+  <APM_Ability_TargetNotOwnFaction>Целью могут быть только союзники своей фракции.</APM_Ability_TargetNotOwnFaction>
 
   <!-- EN: Mechanoid size must be {0} for this station. -->
   <APM_WrongSize>Эту станцию могут использовать только механоиды размера {0}.</APM_WrongSize>

@@ -1,0 +1,85 @@
+rwtest 1
+test "Ravager starfall and shells pass a bullet shield and stop at a high-shield" project="Apex Mechanoids" created=2026-10-01T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+requires dlc=Royalty
+spawn Thing:ShieldGeneratorBullets at 12,6 faction=Mechanoid name="Bullet shield"
+spawn Thing:ShieldGeneratorMortar at 20,30 faction=Mechanoid name="High shield"
+spawn Pawn:APM_Mech_Ravager at -26,0 faction=player name="Ravager"
+spawn Pawn:APM_Mech_Ravager at -26,28 faction=player name="Ravager C"
+spawn Pawn:Colonist at 10,0 name="Target"
+draft "Target"
+spawn Pawn:Colonist at 18,28 name="Target C"
+draft "Target C"
+spawn Pawn:Colonist at -26,-8 name="Mechanitor"
+draft "Mechanitor"
+spawn Pawn:Colonist at -28,20 name="Mechanitor C"
+draft "Mechanitor C"
+give "Target" need=Food value=1
+give "Target C" need=Food value=1
+give "Mechanitor" need=Food value=1
+give "Mechanitor C" need=Food value=1
+overseer "Ravager" by="Mechanitor" now=true
+overseer "Ravager C" by="Mechanitor C" now=true
+draft "Ravager"
+draft "Ravager C"
+
+assert pawn "Target" hediff=Shredded expect=absent
+assert pawn "Target C" hediff=Shredded expect=absent
+
+select "Ravager"
+gizmo "Starfall" expect=allowed
+target cell=10,0 expect=allowed
+deselect
+select "Ravager C"
+gizmo "Starfall" expect=allowed
+target cell=18,28 expect=allowed
+deselect
+waitfor thing APM_StarfallCarrier ticks=400 expect=present
+waitfor thing APM_StarfallCarrier expect=absent ticks=250
+waitfor pawn "Target" hediff=Shredded ticks=300 expect=present
+tick 120 note="time for split fragments to reach the shield or the target and explode"
+
+assert casts "Ravager" ability=APM_Starfall min=1 max=1
+assert casts "Ravager C" ability=APM_Starfall min=1 max=1
+assert hit "Target" by="Ravager" min=1
+assert pawn "Target C" hediff=Shredded expect=absent
+assert hit "Target C" by="Ravager C" min=0 max=0
+
+spawn Pawn:APM_Mech_Ravager at -26,-60 faction=player name="Shell ravager"
+spawn Pawn:Colonist at -26,-68 name="Shell mechanitor"
+draft "Shell mechanitor"
+spawn Pawn:Colonist at 10,-60 name="Inside"
+draft "Inside"
+spawn Pawn:Colonist at 20,-80 name="Covered"
+draft "Covered"
+give "Shell mechanitor" need=Food value=1
+give "Inside" need=Food value=1
+give "Covered" need=Food value=1
+overseer "Shell ravager" by="Shell mechanitor" now=true
+assert pawn "Shell ravager" equipment=APM_Ravager_Artillery expect=present
+draft "Shell ravager"
+
+spawn Thing:ShieldGeneratorBullets at 12,-54 faction=Mechanoid name="Shell bullet shield"
+select "Shell ravager"
+gizmo "Starspewer" expect=allowed
+target "Inside" expect=allowed
+deselect
+waitfor shots "Shell ravager" min=1 ticks=400
+waitfor impact "Shell ravager" min=1 ticks=300
+assert impact "Shell ravager" blocked min=0 max=0
+assert hit "Inside" by="Shell ravager" min=1 max=1
+despawn Thing:ShieldGeneratorBullets
+
+spawn Thing:ShieldGeneratorMortar at 22,-76 faction=Mechanoid name="Shell high shield"
+tick 1400 note="Starspewer cooldown 22 s = 1320 ticks runs out before the second order"
+select "Shell ravager"
+gizmo "Starspewer" expect=allowed
+target "Covered" expect=allowed
+deselect
+waitfor shots "Shell ravager" min=2 ticks=400
+waitfor impact "Shell ravager" min=2 ticks=300
+assert impact "Shell ravager" blocked min=1 max=1
+assert hit "Covered" by="Shell ravager" min=0 max=0
+assert log clean
