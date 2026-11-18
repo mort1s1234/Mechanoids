@@ -16,8 +16,8 @@ spawn Pawn:Sheep at 0,-6 faction=player name="Woolly"
 work "Lasher" giver=APM_LasherTame on="Wild" expect=absent
 designate Designator_Tame on="Wild"
 work "Lasher" giver=APM_LasherTame on="Wild" expect=refused by=giver reason="not enough food" match=equals
-spawn Thing:Hay at 3,3 count=60
-assert foodsearch "Wild" getter="Lasher" on=Hay maxpref=RawTasty plants=false expect=passes
+spawn Thing:Kibble at 3,3 count=60
+assert foodsearch "Wild" getter="Lasher" on=Kibble maxpref=RawTasty plants=false expect=passes
 work "Lasher" giver=APM_LasherTame on="Wild" expect=allowed
 work "Lifter" giver=APM_LasherTame on="Wild" expect=disabled
 
