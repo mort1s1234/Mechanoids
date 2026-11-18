@@ -13,8 +13,8 @@ spawn Pawn:APM_Mech_Lasher faction=player name="Lasher"
 assert pawn "Siren" stat=SuppressionPower min=0.29 max=0.31 expect=present
 
 prisoner "Prisoner" will=5 mode=ReduceWill
-work "Siren" giver=APM_SirenChatWithPrisoner on="Prisoner" expect=allowed
-work "Lasher" giver=APM_SirenChatWithPrisoner on="Prisoner" expect=disabled
+work "Siren" giver=APM_SirenEnslavePrisoner on="Prisoner" expect=allowed
+work "Lasher" giver=APM_SirenEnslavePrisoner on="Prisoner" expect=disabled
 
 prisoner "Prisoner" will=0 mode=Enslave
 assert pawn "Prisoner" faction=player expect=absent

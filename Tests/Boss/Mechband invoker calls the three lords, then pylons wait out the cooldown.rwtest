@@ -32,6 +32,7 @@ menu "Summon celerus threat" expect=disabled reason="available in" match=contain
 reload note="the queued trio incident lives in the storyteller's saved incident queue"
 assert alert "Three Lords incoming" expect=present
 
+incidents keep=APM_IncidentDef_TrioBoss
 tick 25100 note="the trio is queued 10000 to 25000 ticks after the use; past the last tick it can land on"
 assert letter contains "Three Lords arrived" expect=present
 assert alert "Three Lords incoming" expect=absent
