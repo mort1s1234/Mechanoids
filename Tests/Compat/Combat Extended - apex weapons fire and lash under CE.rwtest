@@ -5,10 +5,12 @@ requires mod=Mortis.ApexMechanoids
 requires dlc=Biotech
 requires mod=CETeam.CombatExtended
 spawn Pawn:Colonist at -6,0 name="Mechanitor" drafted=true
-spawn Pawn:APM_Mech_Conqueror_AR at 0,0 faction=player name="Conqueror" drafted=true
-spawn Pawn:APM_Mech_Lasher at 0,-8 faction=player facing=east name="Lasher" drafted=true
+spawn Pawn:APM_Mech_Conqueror_AR at 0,0 faction=player name="Conqueror"
+spawn Pawn:APM_Mech_Lasher at 0,-8 faction=player facing=east name="Lasher"
 overseer "Conqueror" by="Mechanitor" now=true
 overseer "Lasher" by="Mechanitor" now=true
+draft "Conqueror"
+draft "Lasher"
 assert pawn "Conqueror" equipment=APM_Gun_Conqueror_AR expect=present
 assert pawn "Lasher" equipment=APM_Weapon_MechWhip expect=present
 

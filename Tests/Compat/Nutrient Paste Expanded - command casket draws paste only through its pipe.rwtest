@@ -5,7 +5,7 @@ requires mod=Mortis.ApexMechanoids
 requires dlc=Biotech
 requires mod=VanillaExpanded.VNutrientE
 room size=19,13 roof=false name="casket yard"
-spawn Thing:WoodFiredGenerator at 0,-5 faction=player fueled=true
+spawn Thing:WoodFiredGenerator at 0,-3 faction=player fueled=true
 spawn Thing:APM_MechCommandCasket at 0,0 faction=player name="casket"
 spawn Thing:VNPE_NutrientPastePipe at 3,0 faction=player
 spawn Thing:VNPE_NutrientPasteVat at 4,0 faction=player name="vat"
