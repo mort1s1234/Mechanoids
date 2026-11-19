@@ -11,13 +11,14 @@ overseer "Tinker" by="Mechanitor" now=true
 overseer "Patient" by="Mechanitor" now=true
 draft "Tinker"
 draft "Patient"
+comp "Patient" type=CompMechRepairable autoRepair=true
 damage "Patient" amount=10 kind=Blunt
 tick 600 note="a drafted Tinker without Search and Destroy takes no work; ten seconds of drafted idling"
 assert jobhistory "Tinker" job=APM_RepairMech expect=absent
 assert pawn "Patient" hediff=Crack expect=present
 
 select "Tinker"
-gizmo "Search and Destroy" expect=allowed
+gizmo "Search and Destroy (m)" expect=allowed
 deselect
 waitfor jobhistory "Tinker" job=APM_RepairMech ticks=1200 expect=present
 waitfor pawn "Patient" hediff=Crack expect=absent ticks=2500
@@ -25,9 +26,9 @@ waitfor pawn "Patient" hediff=Crack expect=absent ticks=2500
 spawn Pawn:APM_Mech_Celerus at 0,6 faction=player name="Celerus"
 overseer "Celerus" by="Mechanitor" now=true
 draft "Celerus"
-spawn Pawn:Mech_Militor at 10,6 faction=enemy name="Foe" drafted=true
+spawn Pawn:Mech_Militor at 10,6 faction=enemy name="Foe"
 select "Celerus"
-gizmo "Search and Destroy" expect=allowed
+gizmo "Search and Destroy (r)" expect=allowed
 deselect
 waitfor hit "Foe" by="Celerus" min=1 ticks=1500
 assert casts "Celerus" ability=APM_CelerusBlink min=0 max=0

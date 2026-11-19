@@ -13,6 +13,8 @@ overseer "Patient" by="Mechanitor" now=true
 overseer "Second patient" by="Mechanitor" now=true
 draft "Patient"
 draft "Second patient"
+comp "Patient" type=CompMechRepairable autoRepair=true
+comp "Second patient" type=CompMechRepairable autoRepair=true
 damage "Patient" amount=10 kind=Blunt
 
 workmode "Mechanitor" group=1 mode=SelfShutdown
