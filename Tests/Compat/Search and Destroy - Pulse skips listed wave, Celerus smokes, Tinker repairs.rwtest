@@ -1,5 +1,5 @@
 rwtest 1
-test "Search and Destroy - apex mechs skip listed abilities, Tinker keeps repairing" project="Apex Mechanoids" created=2026-11-17T00:00:00
+test "Search and Destroy - Pulse skips listed wave, Celerus smokes, Tinker repairs" project="Apex Mechanoids" created=2026-11-17T00:00:00
 
 requires mod=Mortis.ApexMechanoids
 requires dlc=Biotech
@@ -29,10 +29,26 @@ overseer "Celerus" by="Second mechanitor" now=true
 draft "Celerus"
 spawn Pawn:Mech_Militor at 10,6 faction=enemy name="Foe"
 select "Celerus"
-gizmo "Search and Destroy (r)" expect=allowed
+gizmo "Search and Destroy (m)" expect=allowed
 deselect
 waitfor hit "Foe" by="Celerus" min=1 ticks=1500
-assert casts "Celerus" ability=APM_CelerusBlink min=0 max=0
-assert casts "Celerus" ability=APM_Ability_SmokeScreen min=0 max=0
+assert casts "Celerus" ability=APM_Ability_SmokeScreen min=1
+
+spawn Pawn:Colonist at -10,-12 name="Third mechanitor" drafted=true
+spawn Pawn:APM_Mech_Pulse at 0,-12 faction=player name="Pulse"
+overseer "Pulse" by="Third mechanitor" now=true
+draft "Pulse"
+spawn Pawn:Colonist at 3,-12 faction=enemy name="Raider"
+select "Pulse"
+gizmo "Search and Destroy (r)" expect=allowed
+deselect
+waitfor hit "Raider" by="Pulse" min=1 ticks=1500
+assert casts "Pulse" ability=APM_PulseWave min=0 max=0
+
+undraft "Pulse"
+workmode "Third mechanitor" group=1 mode=Work
+teleport "Pulse" at 0,-12
+spawn Pawn:Colonist at 3,-11 faction=enemy name="Second raider"
+waitfor casts "Pulse" ability=APM_PulseWave min=1 ticks=900
 assert text contains "APM_" expect=absent
 assert log clean
