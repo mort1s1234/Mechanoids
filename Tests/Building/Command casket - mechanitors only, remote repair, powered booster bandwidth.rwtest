@@ -4,7 +4,7 @@ test "Command casket - mechanitors only, remote repair, powered booster bandwidt
 requires mod=Mortis.ApexMechanoids
 requires dlc=Biotech
 room size=17,15 roof=false name="casket yard"
-spawn Thing:WoodFiredGenerator at 0,-6 faction=player fueled=true
+spawn Thing:WoodFiredGenerator at -6,-5 faction=player fueled=true
 spawn Thing:APM_MechCommandCasket at 0,0 faction=player name="casket"
 spawn Pawn:Colonist at -5,-3 name="Mechanitor"
 spawn Pawn:Colonist at 5,-3 name="Plain"
@@ -52,7 +52,7 @@ assert power "booster" expect=absent
 assert pawn "Mechanitor" hediff=APM_MechCommandCasketBoost expect=absent
 assert pawn "Mechanitor" stat=MechBandwidth min=5.9 max=6.1 expect=present
 
-spawn Thing:WoodFiredGenerator at 3,5 faction=player fueled=true
+spawn Thing:WoodFiredGenerator at -4,-5 faction=player fueled=true
 waitfor power "booster" ticks=250 expect=present
 tick 130 note="two 60-tick casket looks with the booster powered"
 assert pawn "Mechanitor" hediff=APM_MechCommandCasketBoost expect=present

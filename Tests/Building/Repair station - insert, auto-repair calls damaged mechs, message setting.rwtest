@@ -40,7 +40,10 @@ draft "Drafted"
 damage "Called" amount=10 kind=Blunt
 damage "Held" amount=20 kind=Blunt
 damage "Drafted" amount=20 kind=Blunt
-select "Held"
+select "Called"
+gizmo "Auto-repair" expect=allowed
+deselect
+select "Drafted"
 gizmo "Auto-repair" expect=allowed
 deselect
 tick 5100 note="auto-repair is off: two full 2500-tick scan intervals in which the station must call nobody"
@@ -69,6 +72,9 @@ windowclose Dialog_ModSettings
 spawn Pawn:Mech_Lifter in="station yard" faction=player name="Announced"
 overseer "Announced" by="Mechanitor" now=true
 damage "Announced" amount=10 kind=Blunt
+select "Announced"
+gizmo "Auto-repair" expect=allowed
+deselect
 waitfor jobhistory "Announced" job=EnterBuilding ticks=2700 expect=present
 assert message contains "Repair station scanning found" expect=present
 assert jobhistory "Held" job=EnterBuilding expect=absent

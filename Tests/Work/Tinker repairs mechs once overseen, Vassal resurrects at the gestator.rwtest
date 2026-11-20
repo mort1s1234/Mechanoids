@@ -71,5 +71,5 @@ clock release
 
 wear "Gestator mechanitor" apparel=Apparel_AirwireHeadset
 assert pawn "Gestator mechanitor" stat=MechBandwidth min=9 max=9 expect=present
-waitfor jobhistory APM_Mech_Vassal job=DoBill ticks=2500 expect=present
+waitfor jobhistory "Vassal" job=DoBill ticks=2500 expect=present
 assert log clean

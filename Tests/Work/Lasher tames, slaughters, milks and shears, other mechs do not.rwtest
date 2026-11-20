@@ -10,13 +10,14 @@ overseer "Lasher" by="Mechanitor" now=true
 overseer "Lifter" by="Mechanitor" now=true
 spawn Pawn:Muffalo at 6,0 faction=none name="Wild"
 spawn Pawn:Muffalo at -6,0 faction=player name="Herd"
-spawn Pawn:Cow at 0,6 faction=player name="Milker"
+spawn Pawn:Cow at 0,6 faction=player name="Milker" gender=female
 spawn Pawn:Sheep at 0,-6 faction=player name="Woolly"
 
 work "Lasher" giver=APM_LasherTame on="Wild" expect=absent
 designate Designator_Tame on="Wild"
 work "Lasher" giver=APM_LasherTame on="Wild" expect=refused by=giver reason="not enough food" match=equals
-spawn Thing:Hay at 3,3 count=60
+spawn Thing:Kibble at 3,3 count=60
+assert foodsearch "Wild" getter="Lasher" on=Kibble maxpref=RawTasty plants=false expect=passes
 work "Lasher" giver=APM_LasherTame on="Wild" expect=allowed
 work "Lifter" giver=APM_LasherTame on="Wild" expect=disabled
 
@@ -35,6 +36,6 @@ assert thing Milk count min=1 expect=present
 work "Lasher" giver=APM_LasherShear on="Woolly" expect=absent
 comp "Woolly" type=CompShearable fullness=1
 work "Lifter" giver=APM_LasherShear on="Woolly" expect=disabled
-job "Lasher" on="Woolly" giver=APM_LasherShear until=done ticks=2500
+job "Lasher" on="Woolly" giver=APM_LasherShear until=done ticks=3500
 assert thing WoolSheep count min=1 expect=present
 assert log clean

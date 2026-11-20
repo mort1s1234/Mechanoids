@@ -95,7 +95,25 @@
 						</li>
 					</value>
 				</li>
-				
+
+				<li Class="PatchOperationConditional">
+					<xpath>Defs/ThingDef[@Name="MechGestatorBase"]/statBases</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>Defs/ThingDef[@Name="MechGestatorBase"]/statBases</xpath>
+						<value>
+							<APM_GestationFactor>1</APM_GestationFactor>
+						</value>
+					</match>
+					<nomatch Class="PatchOperationAdd">
+						<xpath>Defs/ThingDef[@Name="MechGestatorBase"]</xpath>
+						<value>
+							<statBases>
+								<APM_GestationFactor>1</APM_GestationFactor>
+							</statBases>
+						</value>
+					</nomatch>
+				</li>
+
 			</operations>
 		</match>
 	</Operation>
