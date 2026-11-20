@@ -15,9 +15,9 @@ draft "Patient"
 draft "Second patient"
 comp "Patient" type=CompMechRepairable autoRepair=true
 comp "Second patient" type=CompMechRepairable autoRepair=true
-damage "Patient" amount=10 kind=Blunt
 
 workmode "Mechanitor" group=1 mode=SelfShutdown
+damage "Patient" amount=10 kind=Blunt
 tick 1200 note="self-shutdown mode: the smart work branch is off, twenty seconds in which the Tinker must not repair"
 assert jobhistory "Tinker" job=APM_RepairMech expect=absent
 assert pawn "Patient" hediff=Crack expect=present

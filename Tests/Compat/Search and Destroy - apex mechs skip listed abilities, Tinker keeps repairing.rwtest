@@ -23,8 +23,9 @@ deselect
 waitfor jobhistory "Tinker" job=APM_RepairMech ticks=1200 expect=present
 waitfor pawn "Patient" hediff=Crack expect=absent ticks=2500
 
+spawn Pawn:Colonist at -6,6 name="Second mechanitor" drafted=true
 spawn Pawn:APM_Mech_Celerus at 0,6 faction=player name="Celerus"
-overseer "Celerus" by="Mechanitor" now=true
+overseer "Celerus" by="Second mechanitor" now=true
 draft "Celerus"
 spawn Pawn:Mech_Militor at 10,6 faction=enemy name="Foe"
 select "Celerus"
