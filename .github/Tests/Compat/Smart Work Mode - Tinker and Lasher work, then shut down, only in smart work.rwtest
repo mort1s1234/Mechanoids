@@ -1,0 +1,43 @@
+rwtest 1
+test "Smart Work Mode - Tinker and Lasher work, then shut down, only in smart work" project="Apex Mechanoids" created=2026-11-17T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+requires mod=smartworkmode.1trickPwnyta
+spawn Pawn:Colonist at -6,0 name="Mechanitor" drafted=true
+spawn Pawn:APM_Mech_Tinker at 0,0 faction=player name="Tinker"
+spawn Pawn:Mech_Lifter at 3,0 faction=player name="Patient"
+spawn Pawn:Mech_Lifter at 3,3 faction=player name="Second patient"
+overseer "Tinker" by="Mechanitor" now=true
+overseer "Patient" by="Mechanitor" now=true
+overseer "Second patient" by="Mechanitor" now=true
+draft "Patient"
+draft "Second patient"
+comp "Patient" type=CompMechRepairable autoRepair=true
+comp "Second patient" type=CompMechRepairable autoRepair=true
+
+workmode "Mechanitor" group=1 mode=SelfShutdown
+damage "Patient" amount=10 kind=Blunt
+tick 1200 note="self-shutdown mode: the smart work branch is off, twenty seconds in which the Tinker must not repair"
+assert jobhistory "Tinker" job=APM_RepairMech expect=absent
+assert pawn "Patient" hediff=Crack expect=present
+
+workmode "Mechanitor" group=1 mode=SmartWork
+waitfor jobhistory "Tinker" job=APM_RepairMech ticks=1200 expect=present
+waitfor pawn "Patient" hediff=Crack expect=absent ticks=2500
+waitfor jobhistory "Tinker" job=SelfShutdown ticks=1200 expect=present
+
+workmode "Mechanitor" group=1 mode=SelfShutdown
+damage "Second patient" amount=10 kind=Blunt
+tick 1200 note="back in self-shutdown mode, the second damaged mech must stay damaged"
+assert pawn "Second patient" hediff=Crack expect=present
+
+workmode "Mechanitor" group=1 mode=SmartWork
+spawn Pawn:APM_Mech_Lasher at -3,4 faction=player name="Lasher"
+overseer "Lasher" by="Mechanitor" now=true
+spawn Thing:Kibble at -3,6 count=60
+spawn Pawn:Muffalo at 8,4 faction=none name="Wild"
+waitfor jobhistory "Lasher" job=SelfShutdown ticks=1200 expect=present
+designate Designator_Tame on="Wild"
+waitfor jobhistory "Lasher" job=APM_LasherTame ticks=1200 expect=present
+assert log clean

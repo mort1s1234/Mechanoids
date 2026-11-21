@@ -1,0 +1,26 @@
+rwtest 1
+test "Ideology - Siren suppresses and enslaves, other mechs do not" project="Apex Mechanoids" created=2026-11-17T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+requires dlc=Ideology
+speed paused
+room size=5,5 prison=true name="cell"
+spawn Thing:Bed in="cell" faction=player
+spawn Pawn:Colonist in="cell" name="Prisoner"
+spawn Pawn:APM_Mech_Siren faction=player name="Siren"
+spawn Pawn:APM_Mech_Lasher faction=player name="Lasher"
+assert pawn "Siren" stat=SuppressionPower min=0.29 max=0.31 expect=present
+
+prisoner "Prisoner" will=5 mode=ReduceWill
+work "Siren" giver=APM_SirenEnslavePrisoner on="Prisoner" expect=allowed
+work "Lasher" giver=APM_SirenEnslavePrisoner on="Prisoner" expect=disabled
+
+prisoner "Prisoner" will=0 mode=Enslave
+assert pawn "Prisoner" faction=player expect=absent
+work "Siren" giver=APM_SirenEnslavePrisoner on="Prisoner" expect=allowed
+work "Lasher" giver=APM_SirenEnslavePrisoner on="Prisoner" expect=disabled
+speed x1
+job "Siren" giver=APM_SirenEnslavePrisoner on="Prisoner" until=done ticks=3000
+assert pawn "Prisoner" faction=player expect=present
+assert log clean

@@ -1,0 +1,41 @@
+rwtest 1
+test "Lasher tames, slaughters, milks and shears, other mechs do not" project="Apex Mechanoids" created=2026-11-17T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+spawn Pawn:APM_Mech_Lasher at 0,0 faction=player name="Lasher"
+spawn Pawn:Mech_Lifter at 0,-3 faction=player name="Lifter"
+spawn Pawn:Colonist at -3,-3 name="Mechanitor" drafted=true
+overseer "Lasher" by="Mechanitor" now=true
+overseer "Lifter" by="Mechanitor" now=true
+spawn Pawn:Muffalo at 6,0 faction=none name="Wild"
+spawn Pawn:Muffalo at -6,0 faction=player name="Herd"
+spawn Pawn:Cow at 0,6 faction=player name="Milker" gender=female
+spawn Pawn:Sheep at 0,-6 faction=player name="Woolly"
+
+work "Lasher" giver=APM_LasherTame on="Wild" expect=absent
+designate Designator_Tame on="Wild"
+work "Lasher" giver=APM_LasherTame on="Wild" expect=refused by=giver reason="not enough food" match=equals
+spawn Thing:Kibble at 3,3 count=60
+assert foodsearch "Wild" getter="Lasher" on=Kibble maxpref=RawTasty plants=false expect=passes
+work "Lasher" giver=APM_LasherTame on="Wild" expect=allowed
+work "Lifter" giver=APM_LasherTame on="Wild" expect=disabled
+
+work "Lasher" giver=APM_LasherSlaughter on="Herd" expect=absent
+designate Designator_Slaughter on="Herd"
+work "Lifter" giver=APM_LasherSlaughter on="Herd" expect=disabled
+job "Lasher" on="Herd" giver=APM_LasherSlaughter until=done ticks=2500
+assert pawn "Herd" dead expect=present
+
+work "Lasher" giver=APM_LasherMilk on="Milker" expect=absent
+comp "Milker" type=CompMilkable fullness=1
+work "Lifter" giver=APM_LasherMilk on="Milker" expect=disabled
+job "Lasher" on="Milker" giver=APM_LasherMilk until=done ticks=2500
+assert thing Milk count min=1 expect=present
+
+work "Lasher" giver=APM_LasherShear on="Woolly" expect=absent
+comp "Woolly" type=CompShearable fullness=1
+work "Lifter" giver=APM_LasherShear on="Woolly" expect=disabled
+job "Lasher" on="Woolly" giver=APM_LasherShear until=done ticks=3500
+assert thing WoolSheep count min=1 expect=present
+assert log clean

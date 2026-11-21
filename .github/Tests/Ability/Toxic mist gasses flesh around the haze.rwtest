@@ -1,0 +1,36 @@
+rwtest 1
+test "Toxic mist gasses flesh around the haze" project="Apex Mechanoids" created=2026-09-26T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+spawn Pawn:APM_Mech_Haze at 0,0 faction=player name="Haze"
+spawn Pawn:Colonist at 1,0 name="Near"
+draft "Near"
+spawn Pawn:Colonist at 12,0 name="Far"
+draft "Far"
+spawn Pawn:Colonist at -14,-14 name="Mechanitor"
+draft "Mechanitor"
+give "Near" need=Food value=1
+give "Far" need=Food value=1
+give "Mechanitor" need=Food value=1
+overseer "Haze" by="Mechanitor" now=true
+draft "Haze"
+
+assert pawn "Near" capacity=Breathing min=0.95 expect=present
+assert pawn "Near" hediff=ToxGasExposure expect=absent
+
+select "Haze"
+gizmo "Toxic Mist" expect=allowed
+waitfor pawn "Near" hediff=ToxGasExposure ticks=720 expect=present
+assert pawn "Near" capacity=Breathing max=0.86 expect=present
+assert pawn "Haze" hediff=ToxGasExposure expect=absent
+gizmo "Toxic Mist" expect=disabled
+deselect
+tick 480 note="past the end of the 360 tick emission, whatever the waitfor used"
+
+assert pawn "Far" hediff=ToxGasExposure expect=absent
+assert pawn "Far" capacity=Breathing min=0.95 expect=present
+assert pawn "Mechanitor" hediff=ToxGasExposure expect=absent
+assert log clean
+
+assert gas ToxGas at 0,0 density min=64 expect=present

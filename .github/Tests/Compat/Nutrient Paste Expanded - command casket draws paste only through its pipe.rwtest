@@ -1,0 +1,27 @@
+rwtest 1
+test "Nutrient Paste Expanded - command casket draws paste only through its pipe" project="Apex Mechanoids" created=2026-11-17T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+requires mod=VanillaExpanded.VNutrientE
+room size=19,13 roof=false name="casket yard"
+spawn Thing:WoodFiredGenerator at 0,-3 faction=player fueled=true
+spawn Thing:APM_MechCommandCasket at 0,0 faction=player name="casket"
+spawn Thing:VNPE_NutrientPastePipe at 3,0 faction=player
+spawn Thing:VNPE_NutrientPasteVat at 4,0 faction=player name="vat"
+spawn Thing:VNPE_NutrientPasteVat at -7,4 faction=player name="lone vat"
+comp "vat" type=PipeSystem.CompResourceStorage amountStored=20
+comp "lone vat" type=PipeSystem.CompResourceStorage amountStored=20
+spawn Pawn:Colonist at -5,-3 name="Mechanitor"
+spawn Pawn:Mech_Lifter at -6,-3 faction=player name="Lifter"
+overseer "Lifter" by="Mechanitor" now=true
+waitfor power "casket" ticks=250 expect=present
+
+ordermenu "Mechanitor" on="casket"
+menu "Enter command casket" expect=allowed
+waitfor inspect "casket" contains "Contains:" ticks=2500 expect=present
+tick 600 note="the casket pulls paste every 250 ticks; two pulls after the mechanitor is inside"
+assert comp "vat" amountStored min=6 max=10 type=PipeSystem.CompResourceStorage
+assert comp "lone vat" amountStored min=19.9 max=20.1 type=PipeSystem.CompResourceStorage
+assert text contains "APM." expect=absent
+assert log clean

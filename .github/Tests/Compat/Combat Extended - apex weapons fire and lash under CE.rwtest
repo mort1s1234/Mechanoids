@@ -1,0 +1,25 @@
+rwtest 1
+test "Combat Extended - apex weapons fire and lash under CE" project="Apex Mechanoids" created=2026-11-17T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+requires mod=CETeam.CombatExtended
+spawn Pawn:Colonist at -6,0 name="Mechanitor" drafted=true
+spawn Pawn:APM_Mech_Conqueror_AR at 0,0 faction=player name="Conqueror"
+spawn Pawn:APM_Mech_Lasher at 0,-8 faction=player facing=east name="Lasher"
+overseer "Conqueror" by="Mechanitor" now=true
+overseer "Lasher" by="Mechanitor" now=true
+draft "Conqueror"
+draft "Lasher"
+assert pawn "Conqueror" equipment=APM_Gun_Conqueror_AR expect=present
+assert pawn "Lasher" equipment=APM_Weapon_MechWhip expect=present
+
+spawn Pawn:Colonist at 12,0 faction=none name="Target"
+attack "Conqueror" target="Target"
+waitfor shots "Conqueror" min=1 ticks=600
+waitfor hit "Target" by="Conqueror" min=1 ticks=900
+
+spawn Pawn:Colonist at 4,-8 faction=none name="Whipped"
+attack "Lasher" target="Whipped"
+waitfor hit "Whipped" by="Lasher" min=1 ticks=900
+assert log clean

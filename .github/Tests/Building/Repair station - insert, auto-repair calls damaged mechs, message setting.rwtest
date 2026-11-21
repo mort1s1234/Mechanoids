@@ -1,0 +1,82 @@
+rwtest 1
+test "Repair station - insert, auto-repair calls damaged mechs, message setting" project="Apex Mechanoids" created=2026-11-17T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+staticsetting type=ApexMechanoids.ApexMechanoidsSettings showRepairStationAutoRepairMessages=true
+sky glow=1
+room size=15,11 roof=false name="station yard"
+spawn Thing:WoodFiredGenerator in="station yard" faction=player fueled=true
+spawn Thing:APM_RepairStation_Small in="station yard" faction=player name="station"
+spawn Pawn:Mech_Lifter in="station yard" faction=player name="Repairee"
+waitfor power "station" ticks=250 expect=present
+
+damage "Repairee" amount=10 kind=Blunt
+assert pawn "Repairee" hediff=Crack expect=present
+
+select "station"
+gizmo "Insert mech..." expect=allowed
+menu "Repairee" expect=allowed
+assert text contains "APM_" expect=absent
+deselect
+waitfor inspect "station" contains "Repairing" ticks=1500 expect=present
+waitfor pawn "Repairee" hediff=Crack expect=absent ticks=2500
+
+select "station"
+gizmo "Insert mech..." expect=allowed
+menu "Repairee" expect=absent
+menu "No mechs available." expect=disabled
+deselect
+
+spawn Pawn:Colonist in="station yard" name="Mechanitor"
+draft "Mechanitor"
+spawn Pawn:Mech_Lifter in="station yard" faction=player name="Called"
+spawn Pawn:Mech_Lifter in="station yard" faction=player name="Held"
+spawn Pawn:Mech_Lifter in="station yard" faction=player name="Drafted"
+overseer "Called" by="Mechanitor" now=true
+overseer "Held" by="Mechanitor" now=true
+overseer "Drafted" by="Mechanitor" now=true
+draft "Drafted"
+damage "Called" amount=10 kind=Blunt
+damage "Held" amount=20 kind=Blunt
+damage "Drafted" amount=20 kind=Blunt
+select "Called"
+gizmo "Auto-repair" expect=allowed
+deselect
+select "Drafted"
+gizmo "Auto-repair" expect=allowed
+deselect
+tick 5100 note="auto-repair is off: two full 2500-tick scan intervals in which the station must call nobody"
+assert jobhistory "Called" job=EnterBuilding expect=absent
+assert pawn "Called" hediff=Crack expect=present
+
+settingswindow "Apex Mechanoids"
+window Dialog_ModSettings
+assert window Dialog_ModSettings contains "Show repair station auto-repair messages" expect=present
+assert text contains "APM_Settings" expect=absent
+checkbox "Show repair station auto-repair messages" checked=false window=Dialog_ModSettings
+windowclose Dialog_ModSettings
+select "station"
+gizmo "Auto-Repair" expect=allowed
+deselect
+waitfor jobhistory "Called" job=EnterBuilding ticks=2700 expect=present
+assert jobhistory "Held" job=EnterBuilding expect=absent
+assert jobhistory "Drafted" job=EnterBuilding expect=absent
+assert message contains "Repair station scanning found" expect=absent
+waitfor pawn "Called" hediff=Crack expect=absent ticks=2500
+
+reload note="the station's auto-repair switch and its scan timer are saved on the building"
+settingswindow "Apex Mechanoids"
+checkbox "Show repair station auto-repair messages" checked=true window=Dialog_ModSettings
+windowclose Dialog_ModSettings
+spawn Pawn:Mech_Lifter in="station yard" faction=player name="Announced"
+overseer "Announced" by="Mechanitor" now=true
+damage "Announced" amount=10 kind=Blunt
+select "Announced"
+gizmo "Auto-repair" expect=allowed
+deselect
+waitfor jobhistory "Announced" job=EnterBuilding ticks=2700 expect=present
+assert message contains "Repair station scanning found" expect=present
+assert jobhistory "Held" job=EnterBuilding expect=absent
+assert jobhistory "Drafted" job=EnterBuilding expect=absent
+assert log clean

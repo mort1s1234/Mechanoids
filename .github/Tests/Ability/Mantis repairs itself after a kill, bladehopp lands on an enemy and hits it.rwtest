@@ -1,0 +1,49 @@
+rwtest 1
+test "Mantis repairs itself after a kill, bladehopp lands on an enemy and hits it" project="Apex Mechanoids" created=2026-09-26T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+speed paused
+spawn Pawn:APM_Mech_Mantis faction=player name="Hunter"
+spawn Pawn:APM_Mech_Mantis faction=player name="Idle"
+spawn Pawn:Mech_Scyther name="Prey" gear=none
+speed x1
+waitfor pawn "Hunter" hediff=APM_ApexMechanoid_HealOnKills ticks=60 expect=present
+waitfor pawn "Idle" hediff=APM_ApexMechanoid_HealOnKills ticks=60 expect=present
+speed paused
+damage "Prey" amount=999 kind=Burn by="Hunter"
+assert pawn "Prey" dead expect=present
+damage "Hunter" amount=100 kind=Burn
+damage "Idle" amount=100 kind=Burn
+assert pawn "Hunter" hediff=Burn severity min=99 max=101 expect=present
+assert pawn "Idle" hediff=Burn severity min=99 max=101 expect=present
+tick 300 note="5 repair pulses, one every 60 ticks, the first on the first tick"
+assert pawn "Hunter" hediff=Burn severity min=70 max=80 expect=present
+assert pawn "Idle" hediff=Burn severity min=99 max=101 expect=present
+reload note="the banked charges are saved on the hediff"
+tick 300 note="5 more repair pulses"
+assert pawn "Hunter" hediff=Burn severity min=45 max=55 expect=present
+assert pawn "Idle" hediff=Burn severity min=99 max=101 expect=present
+
+speed paused
+hold on
+spawn Pawn:APM_Mech_Mantis at 15,0 faction=player name="Mantis"
+spawn Pawn:Colonist at 11,0 name="Mechanitor" gear=none drafted=true
+give "Mechanitor" need=Food value=1
+overseer "Mantis" by="Mechanitor" now=true
+draft "Mantis"
+spawn Pawn:Colonist at 20,0 faction=enemy name="Raider"
+hold off
+assert pawn "Raider" pain max=0 expect=present
+
+select "Mantis"
+gizmo "Bladehopp" expect=allowed
+target "Raider" expect=allowed
+speed x1
+waitfor pawn "Raider" pain min=0.05 max=0.8 ticks=120 expect=present
+assert pawn "Mantis" near="Raider" max=1.5 expect=present
+assert thing "Mantis" at 20,0 expect=present
+assert pawn "Mechanitor" pain max=0 expect=present
+gizmo "Bladehopp" expect=disabled
+deselect
+assert log clean

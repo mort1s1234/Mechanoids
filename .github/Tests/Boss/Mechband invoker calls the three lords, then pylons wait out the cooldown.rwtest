@@ -1,0 +1,42 @@
+rwtest 1
+test "Mechband invoker calls the three lords, then pylons wait out the cooldown" project="Apex Mechanoids" created=2026-11-17T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+spawn Thing:APM_MechbandAntenna_United at -6,0 faction=player name="invoker"
+spawn Thing:APM_MechbandAntenna_Celerus at 6,0 faction=player name="pylon"
+spawn Pawn:Colonist at 0,-4 name="Mechanitor"
+spawn Pawn:Colonist at 0,4 name="Plain"
+spawn Pawn:Mech_Lifter at 2,-4 faction=player name="Lifter"
+overseer "Lifter" by="Mechanitor" now=true
+assert pawn "Mechanitor" hediff=MechlinkImplant expect=present
+assert alert "Three Lords incoming" expect=absent
+
+ordermenu "Plain" on="invoker"
+menu "Summon Three Lords threat" expect=disabled reason="requires mechanitor" match=contains
+ordermenu "Plain" on="pylon"
+menu "Summon celerus threat" expect=disabled reason="requires mechanitor" match=contains
+
+ordermenu "Mechanitor" on="invoker"
+menu "Summon Three Lords threat" expect=allowed
+window Dialog_MessageBox
+assert window Dialog_MessageBox contains "Three Lords" expect=present
+assert text contains "APM." expect=absent
+click "Confirm"
+waitfor thing "invoker" destroyed ticks=1500 expect=present
+assert alert "Three Lords incoming" expect=present
+
+ordermenu "Mechanitor" on="pylon"
+menu "Summon celerus threat" expect=disabled reason="available in" match=contains
+
+reload note="the queued trio incident lives in the storyteller's saved incident queue"
+assert alert "Three Lords incoming" expect=present
+
+incidents keep=APM_IncidentDef_TrioBoss
+tick 25100 note="the trio is queued 10000 to 25000 ticks after the use; past the last tick it can land on"
+assert letter contains "Three Lords arrived" expect=present
+assert alert "Three Lords incoming" expect=absent
+assert thing APM_Mech_TerminusB expect=present
+assert thing APM_Mech_DominusB expect=present
+assert thing APM_Mech_CelerusB expect=present
+assert log clean

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Apex Mechanoids</name>
+	<packageId>Mortis.ApexMechanoids</packageId>
+	<authors>
+		<li>Mortis</li>
+		<li>Aelflead Wayne</li>
+		<li>Elseud</li>
+		<li>DemonRoka</li>
+		<li>valzietine</li>
+		<li>MrHydralisk</li>
+		<li>BlackMarket420</li>
+		<li>Veltaris</li>
+		<li>B4ttl3m3d</li>
+		<li>GoGaTio</li>
+	</authors>
+	<url>https://github.com/Klon501/Mechanoids</url>
+	<supportedVersions>
+		<li>1.6</li>
+		<li>1.7</li>
+	</supportedVersions>
+	<description>Apex Mechanoids is a mod that aims to expand the roster of Rimworld’s mechanoids with new threats, weapons and bosses. This group of mechanoids is particularly bloodthirsty in their hate for organic life, and will use cruel and unusual tactics to see to your end. If you can handle their onslaught, you’ll be rewarded by being able to research some of their weapons, gear, equipment, buildings and mechanoids for your own colony and mechanitors to use.</description>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<downloadUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077</downloadUrl>
+		</li>
+		<li>
+			<packageId>Ludeon.RimWorld.Biotech</packageId>
+			<displayName>Biotech</displayName>
+			<downloadUrl>https://store.steampowered.com/app/1826140</downloadUrl>
+		</li>
+		<li>
+			<packageId>OskarPotocki.VanillaFactionsExpanded.Core</packageId>
+			<displayName>Vanilla Expanded Framework</displayName>
+			<downloadUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2023507013</downloadUrl>
+		</li>
+	</modDependencies>
+	<loadAfter>
+		<li>brrainz.harmony</li>
+		<li>Ludeon.RimWorld</li>
+		<li>Ludeon.RimWorld.Biotech</li>
+		<li>OskarPotocki.VanillaFactionsExpanded.Core</li>
+		<li>CETeam.CombatExtended</li>
+	</loadAfter>
+</ModMetaData>

@@ -1,0 +1,34 @@
+rwtest 1
+test "Starfall shreds its target and spares the bystander" project="Apex Mechanoids" created=2026-09-26T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+spawn Pawn:APM_Mech_Ravager at -10,0 faction=player name="Ravager"
+spawn Pawn:Colonist at 10,0 name="Target"
+draft "Target"
+spawn Pawn:Colonist at 10,12 name="Far"
+draft "Far"
+spawn Pawn:Colonist at -16,-10 name="Mechanitor"
+draft "Mechanitor"
+give "Target" need=Food value=1
+give "Far" need=Food value=1
+give "Mechanitor" need=Food value=1
+overseer "Ravager" by="Mechanitor" now=true
+draft "Ravager"
+
+assert pawn "Target" hediff=Shredded expect=absent
+assert pawn "Far" hediff=Shredded expect=absent
+
+select "Ravager"
+gizmo "Starfall" expect=allowed
+target cell=10,0 expect=allowed
+waitfor thing APM_StarfallCarrier ticks=400 expect=present
+waitfor pawn "Target" hediff=Shredded ticks=600 expect=present
+tick 120 note="let every fragment land and every explosion finish"
+
+assert pawn "Far" hediff=Shredded expect=absent
+assert pawn "Far" dead expect=absent
+assert pawn "Mechanitor" hediff=Shredded expect=absent
+gizmo "Starfall" expect=disabled
+deselect
+assert log clean

@@ -1,0 +1,84 @@
+rwtest 1
+test "Mechamancer gear renders in four facings and on children, mechs show finish" project="Apex Mechanoids" created=2026-09-26T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+speed paused
+spawn Pawn:Colonist at -6,0 name="South" facing=south
+spawn Pawn:Colonist at -2,0 name="East" facing=east
+spawn Pawn:Colonist at 2,0 name="North" facing=north
+spawn Pawn:Colonist at 6,0 name="West" facing=west
+spawn Thing:APM_Apparel_MechamancerSuit at -6,-1 name="South suit"
+wear "South" apparel="South suit"
+spawn Thing:APM_Apparel_ArmorHelmetMechamancerHelmet at -6,-1 name="South helmet"
+wear "South" apparel="South helmet"
+spawn Thing:APM_Apparel_MechamancerPack at -6,-1 name="South pack"
+wear "South" apparel="South pack"
+spawn Thing:APM_Apparel_MechamancerSuit at -1,0 name="East suit"
+wear "East" apparel="East suit"
+spawn Thing:APM_Apparel_ArmorHelmetMechamancerHelmet at -1,0 name="East helmet"
+wear "East" apparel="East helmet"
+spawn Thing:APM_Apparel_MechamancerPack at -1,0 name="East pack"
+wear "East" apparel="East pack"
+spawn Thing:APM_Apparel_MechamancerSuit at 2,1 name="North suit"
+wear "North" apparel="North suit"
+spawn Thing:APM_Apparel_ArmorHelmetMechamancerHelmet at 2,1 name="North helmet"
+wear "North" apparel="North helmet"
+spawn Thing:APM_Apparel_MechamancerPack at 2,1 name="North pack"
+wear "North" apparel="North pack"
+spawn Thing:APM_Apparel_MechamancerSuit at 5,0 name="West suit"
+wear "West" apparel="West suit"
+spawn Thing:APM_Apparel_ArmorHelmetMechamancerHelmet at 5,0 name="West helmet"
+wear "West" apparel="West helmet"
+spawn Thing:APM_Apparel_MechamancerPack at 5,0 name="West pack"
+wear "West" apparel="West pack"
+
+ask "mechamancer-facings" claim="the four pawns face south, east, north and west, and each wears the mechamancer suit, helmet and backpack; the helmet sits over the head, the pack sits on the back (behind the body from the south, in front of it from the north, beside it from east and west), nothing is cut off, stretched or pink"
+ask "mechamancer-masks" claim="on every piece only the panels take a grey tint and the rest keeps its painted colours; no piece is tinted over its whole surface, and no piece shows a pink or white square, in any of the four views"
+
+despawn Pawn:Colonist
+spawn Pawn:Colonist at -7,0 age=10 name="Child south" facing=south
+spawn Pawn:Colonist at -4,0 age=10 name="Child east" facing=east
+spawn Pawn:Colonist at -1,0 name="Adult east" facing=east
+spawn Pawn:Colonist at 2,0 age=10 name="Child west" facing=west
+spawn Pawn:Colonist at 5,0 name="Adult west" facing=west
+spawn Pawn:Colonist at 8,0 age=10 name="Child north" facing=north
+spawn Thing:APM_Apparel_MechamancerPack at -7,-1 name="Child south pack"
+wear "Child south" apparel="Child south pack"
+spawn Thing:APM_Apparel_MechamancerPack at -3,0 name="Child east pack"
+wear "Child east" apparel="Child east pack"
+spawn Thing:APM_Apparel_MechamancerPack at 0,0 name="Adult east pack"
+wear "Adult east" apparel="Adult east pack"
+spawn Thing:APM_Apparel_MechamancerPack at 1,0 name="Child west pack"
+wear "Child west" apparel="Child west pack"
+spawn Thing:APM_Apparel_MechamancerPack at 4,0 name="Adult west pack"
+wear "Adult west" apparel="Adult west pack"
+spawn Thing:APM_Apparel_MechamancerPack at 8,1 name="Child north pack"
+wear "Child north" apparel="Child north pack"
+assert pawn "Child south" apparel=APM_Apparel_MechamancerPack expect=present
+assert pawn "Child east" apparel=APM_Apparel_MechamancerPack expect=present
+assert pawn "Child west" apparel=APM_Apparel_MechamancerPack expect=present
+assert pawn "Child north" apparel=APM_Apparel_MechamancerPack expect=present
+
+ask "pack-child-visible" claim="all four children visibly wear the backpack: from the south it shows behind the body, from the north it covers the back, from east and west it hangs at the back; it is not missing, cut off, pink or oversized for the child"
+ask "pack-child-sides" claim="on both east and west children the backpack sits on the back, touching it, just like on the adult next to them; it does not float behind the child and does not overlap the child's front"
+despawn Pawn:Colonist
+
+spawn Pawn:APM_Mech_Dominus at -8,4 faction=player facing=south rolled=true
+spawn Pawn:APM_Mech_Terminus at -4,4 faction=player facing=south rolled=true
+spawn Pawn:APM_Mech_Celerus at 0,4 faction=player facing=south rolled=true
+spawn Pawn:APM_Mech_Siren at 4,4 faction=player facing=south rolled=true
+spawn Pawn:APM_Mech_Tinker at 8,4 faction=player facing=south rolled=true
+spawn Pawn:APM_Mech_Dominus at -8,-4 facing=south rolled=true
+spawn Pawn:APM_Mech_Terminus at -4,-4 facing=south rolled=true
+spawn Pawn:APM_Mech_Celerus at 0,-4 facing=south rolled=true
+spawn Pawn:APM_Mech_Siren at 4,-4 facing=south rolled=true
+spawn Pawn:APM_Mech_Tinker at 8,-4 facing=south rolled=true
+
+ask "mech-faction-tint" claim="the top row (colony mechs) and the middle row (hostile mechs) show the same five mech kinds, each holding its built-in weapon; in each column the two are the same body and differ at most in the tinted accent parts; no mech has a pink or magenta patch, and none is tinted over its whole body"
+
+spawn Pawn:APM_Mech_Dominus_Boss at -8,-10 facing=south rolled=true
+spawn Pawn:APM_Mech_Terminus_Boss at -4,-10 facing=south rolled=true
+spawn Pawn:APM_Mech_Celerus_Boss at 0,-10 facing=south rolled=true
+ask "mech-boss-finish" claim="the bottom row shows the boss Dominus, Terminus and Celerus; each looks clearly different from the regular one straight above it in the middle row - a boss finish, not the same texture - and none has pink patches or missing parts"
+assert log clean

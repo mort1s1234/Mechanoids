@@ -1,0 +1,75 @@
+rwtest 1
+test "Apex mechs and gear are offered only after their research" project="Apex Mechanoids" created=2026-11-17T00:00:00
+
+requires mod=Mortis.ApexMechanoids
+requires dlc=Biotech
+research BasicMechtech done=true
+research StandardMechtech done=true
+research AdvancedMechtech done=false
+research ApexMechtech done=false
+spawn Thing:LargeMechGestator at 0,0 faction=player name="large gestator"
+spawn Thing:MechGestator at -8,0 faction=player name="gestator"
+spawn Thing:FabricationBench at 8,0 faction=player name="bench"
+
+select "large gestator"
+tab "Bills"
+click "Add bill"
+menu "Gestate lasher" expect=absent
+menu "Gestate aegis" expect=absent
+menu "Gestate siren" expect=absent
+menu "Gestate tunneler" expect=allowed
+assert text contains "APM_" expect=absent
+select "gestator"
+tab "Bills"
+click "Add bill"
+menu "Gestate haze" expect=absent
+menu "Gestate lifter" expect=allowed
+select "bench"
+tab "Bills"
+click "Add bill"
+menu "Make plasma whip" expect=absent
+menu "Make mechamancer suit" expect=absent
+menu "Make skipblade" expect=absent
+deselect
+
+research AdvancedMechtech done=true
+select "large gestator"
+tab "Bills"
+click "Add bill"
+menu "Gestate aegis" expect=absent
+menu "Gestate siren" expect=absent
+menu "Gestate lasher" expect=allowed
+click "Add bill"
+menu "Gestate tinker" expect=allowed
+click "Add bill"
+menu "Gestate spitter conqueror" expect=allowed
+select "gestator"
+tab "Bills"
+click "Add bill"
+menu "Gestate haze" expect=allowed
+select "bench"
+tab "Bills"
+click "Add bill"
+menu "Make mechamancer suit" expect=absent
+menu "Make skipblade" expect=absent
+menu "Make plasma whip" expect=allowed
+deselect
+
+research ApexMechtech done=true
+select "large gestator"
+tab "Bills"
+click "Add bill"
+menu "Gestate aegis" expect=allowed
+click "Add bill"
+menu "Gestate siren" expect=allowed
+click "Add bill"
+menu "Gestate gazer" expect=allowed
+select "bench"
+tab "Bills"
+click "Add bill"
+menu "Make mechamancer suit" expect=allowed
+click "Add bill"
+menu "Make skipblade" expect=allowed
+assert text contains "APM_" expect=absent
+deselect
+assert log clean
