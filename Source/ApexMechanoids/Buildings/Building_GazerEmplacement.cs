@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -59,14 +59,14 @@ namespace ApexMechanoids
         private MoteDualAttached beamMote;
         private Effecter beamEndEffecter;
         private Sustainer beamSustainer;
-        private AbilityDef cachedSunRayAbility;
+        private static AbilityDef cachedSunRayAbility;
         private VerbTracker verbTracker;
         private List<VerbProperties> cachedVerbProperties;
         private bool compsCached;
 
         private DefModExtension_GazerEmplacement Props => def.GetModExtension<DefModExtension_GazerEmplacement>();
 
-        private AbilityDef SunRayAbilityDef
+        internal static AbilityDef SunRayAbilityDef
         {
             get
             {
@@ -620,9 +620,14 @@ namespace ApexMechanoids
             }
 
             Vector3 origin = BeamOriginWorld;
-            float radius = Range;
-            float startAngle = Rotation.AsAngle - FiringArcHalfAngle;
-            float endAngle = Rotation.AsAngle + FiringArcHalfAngle;
+            origin.y = AltitudeLayer.MetaOverlays.AltitudeFor();
+            DrawFiringArc(origin, Rotation, Range, FiringArcHalfAngle);
+        }
+
+        internal static void DrawFiringArc(Vector3 origin, Rot4 rotation, float radius, float halfAngle)
+        {
+            float startAngle = rotation.AsAngle - halfAngle;
+            float endAngle = rotation.AsAngle + halfAngle;
             const int segments = 18;
 
             Vector3 previous = origin + DirectionForAngle(startAngle) * radius;
@@ -1418,7 +1423,7 @@ namespace ApexMechanoids
             return new Vector3(-1f, 0f, 0f);
         }
 
-        private Vector3 DirectionForAngle(float angle)
+        private static Vector3 DirectionForAngle(float angle)
         {
             float radians = angle * 0.017453292f;
             return new Vector3(Mathf.Sin(radians), 0f, Mathf.Cos(radians));
