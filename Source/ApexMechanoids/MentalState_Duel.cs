@@ -100,12 +100,22 @@ namespace ApexMechanoids
                 attachedThing.Destroy(DestroyMode.KillFinalize);
             }
 
-            if (!pawn.DeadOrDowned && (pawn.drafter?.ShowDraftGizmo ?? false))
+            if (!pawn.DeadOrDowned && pawn.drafter != null)
             {
-                pawn.drafter.Drafted = true;
-                if (restoreSearchAndDestroy)
+                bool overseerDowned = DuelUtility.IsDominus(pawn)
+                    && pawn.GetOverseer()?.Downed == true;
+
+                if (overseerDowned)
                 {
-                    SearchAndDestroyCompatUtility.TrySetSearchAndDestroyEnabled(pawn, true);
+                    pawn.drafter.Drafted = false;
+                }
+                else if (pawn.drafter.ShowDraftGizmo)
+                {
+                    pawn.drafter.Drafted = true;
+                    if (restoreSearchAndDestroy)
+                    {
+                        SearchAndDestroyCompatUtility.TrySetSearchAndDestroyEnabled(pawn, true);
+                    }
                 }
             }
 
