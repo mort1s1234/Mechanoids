@@ -33,8 +33,7 @@ reload note="the queued trio incident lives in the storyteller's saved incident 
 assert alert "Three Lords incoming" expect=present
 
 incidents keep=APM_IncidentDef_TrioBoss
-tick 25100 note="the trio is queued 10000 to 25000 ticks after the use; past the last tick it can land on"
-assert letter contains "Three Lords arrived" expect=present
+waitfor letter contains "Three Lords arrived" expect=present ticks=25100
 assert alert "Three Lords incoming" expect=absent
 assert thing APM_Mech_TerminusB expect=present
 assert thing APM_Mech_DominusB expect=present

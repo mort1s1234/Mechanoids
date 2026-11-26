@@ -19,7 +19,7 @@ waitfor power "casket" ticks=250 expect=present
 
 ordermenu "Mechanitor" on="casket"
 menu "Enter command casket" expect=allowed
-waitfor inspect "casket" contains "Contains:" ticks=2500 expect=present
+waitfor thing "Mechanitor" held="casket" expect=present ticks=2500
 tick 600 note="the casket pulls paste every 250 ticks; two pulls after the mechanitor is inside"
 assert comp "vat" amountStored min=6 max=10 type=PipeSystem.CompResourceStorage
 assert comp "lone vat" amountStored min=19.9 max=20.1 type=PipeSystem.CompResourceStorage

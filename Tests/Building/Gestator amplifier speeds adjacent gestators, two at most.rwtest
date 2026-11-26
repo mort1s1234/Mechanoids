@@ -39,5 +39,4 @@ click "Add bill"
 menu "Gestate tunneler" expect=allowed
 deselect
 assert log clean
-requires assert=bill
 assert bill "large gestator" recipe=Tunneler workspeed min=1.39 max=1.41

@@ -23,10 +23,10 @@ give "Mechanitor" hediff=RemoteRepairerImplant severity=1 part=Brain
 
 ordermenu "Mechanitor" on="casket"
 menu "Enter command casket" expect=allowed
-waitfor inspect "casket" contains "Contains:" ticks=2500 expect=present
+waitfor thing "Mechanitor" held="casket" expect=present ticks=2500
 assert text contains "APM." expect=absent
 reload note="the casket user and its nutrition are saved"
-assert inspect "casket" contains "Contains:" expect=present
+assert thing "Mechanitor" held="casket" expect=present
 
 give "Aegis" need=MechEnergy value=0.5
 damage "Aegis" amount=20 kind=Burn
@@ -54,8 +54,7 @@ assert pawn "Mechanitor" stat=MechBandwidth min=5.9 max=6.1 expect=present
 
 spawn Thing:WoodFiredGenerator at -4,-5 faction=player fueled=true
 waitfor power "booster" ticks=250 expect=present
-tick 130 note="two 60-tick casket looks with the booster powered"
-assert pawn "Mechanitor" hediff=APM_MechCommandCasketBoost expect=present
+waitfor pawn "Mechanitor" hediff=APM_MechCommandCasketBoost expect=present ticks=130
 assert pawn "Mechanitor" stat=MechBandwidth min=13.9 max=14.1 expect=present
 
 reload note="the boost hediff keeps its bandwidth offset in the save"
@@ -63,7 +62,6 @@ assert pawn "Mechanitor" hediff=APM_MechCommandCasketBoost expect=present
 assert pawn "Mechanitor" stat=MechBandwidth min=13.9 max=14.1 expect=present
 
 despawn "booster"
-tick 130 note="two 60-tick casket looks without the booster"
-assert pawn "Mechanitor" hediff=APM_MechCommandCasketBoost expect=absent
+waitfor pawn "Mechanitor" hediff=APM_MechCommandCasketBoost expect=absent ticks=130
 assert pawn "Mechanitor" stat=MechBandwidth min=5.9 max=6.1 expect=present
 assert log clean

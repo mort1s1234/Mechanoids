@@ -5,8 +5,7 @@ requires mod=Mortis.ApexMechanoids
 requires dlc=Biotech
 spawn Pawn:APM_Mech_Conqueror_DMR name="DMR"
 pacify "DMR"
-tick 600 note="two 250 tick recount intervals from a random offset"
-assert pawn "DMR" hediff=APM_Hediff_Unity expect=present
+waitfor pawn "DMR" hediff=APM_Hediff_Unity expect=present ticks=600
 assert pawn "DMR" hediff=APM_Hediff_Unity severity max=0.05 expect=present
 assert pawn "DMR" stat=MoveSpeed min=4.25 max=4.32 expect=present
 
